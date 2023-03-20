@@ -2,6 +2,7 @@
 #include "UI.h"
 
 #include "Camera.h"
+#include "ViewMgr.h"
 #include "SelectGDI.h"
 
 #include "KeyMgr.h"
@@ -12,6 +13,7 @@ UI::UI(bool _bCamAff)
 	, m_bMouseOn{ false }
 	, m_bLbtnDown{ false }
 	, m_canTarget{ true }
+	, m_viewAffected{true}
 {
 }
 
@@ -22,6 +24,7 @@ UI::UI(const UI& _origin)
 	, m_bMouseOn{ false }
 	, m_bLbtnDown{ false }
 	, m_canTarget{ true }
+	, m_viewAffected{true}
 {
 	for (size_t i = 0; i < _origin.m_vecChildUI.size(); ++i) {
 		AddChild(_origin.m_vecChildUI[i]->Clone());
@@ -66,6 +69,11 @@ void UI::render(HDC _dc)
 
 	if (m_bCamAffected) {
 		vPos = Camera::GetInst()->GetRenderPos(vPos);
+	}
+
+	if (m_viewAffected) {
+		vPos = ViewMgr::GetInst()->GetViewPortPos(vPos);
+		vScale = ViewMgr::GetInst()->GetViewPortScale(vScale);
 	}
 
 	if (m_bLbtnDown) {

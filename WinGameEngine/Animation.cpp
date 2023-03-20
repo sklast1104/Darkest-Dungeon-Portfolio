@@ -9,6 +9,7 @@
 #include "TimeMgr.h"
 #include "Camera.h"
 #include "ResMgr.h"
+#include "ViewMgr.h"
 
 Animation::Animation()
 	: m_pAnimator{ nullptr }
@@ -50,10 +51,16 @@ void Animation::render(HDC _dc)
 {
 	Object* pObj = m_pAnimator->GetObj();
 	Vec2 vPos = pObj->GetPos();
+	Vec2 vScale = m_vecFrm[m_iCurFrm].vSlice;
+
 	vPos += m_vecFrm[m_iCurFrm].vOffset;// offset만큼 추가위치
 
 	// 렌더링 좌표로 변환
 	vPos = Camera::GetInst()->GetRenderPos(vPos);
+
+	// 뷰포트 좌표로 변환
+	vPos = ViewMgr::GetInst()->GetViewPortPos(vPos);
+	vScale = ViewMgr::GetInst()->GetViewPortScale(vScale);
 
 	BLENDFUNCTION bf = {};
 
@@ -63,16 +70,28 @@ void Animation::render(HDC _dc)
 	bf.SourceConstantAlpha = 255;
 
 	AlphaBlend(_dc
-		, (int)(vPos.x - m_vecFrm[m_iCurFrm].vSlice.x / 2.f)
-		, (int)(vPos.y - m_vecFrm[m_iCurFrm].vSlice.y / 2.f)
-		, (int)(m_vecFrm[m_iCurFrm].vSlice.x)
-		, (int)(m_vecFrm[m_iCurFrm].vSlice.y)
+		, (int)(vPos.x - vScale.x / 2.f)
+		, (int)(vPos.y - vScale.y / 2.f)
+		, (int)(vScale.x)
+		, (int)(vScale.y)
 		, m_pTex->GetDC()
 		, (int)(m_vecFrm[m_iCurFrm].vLT.x)
 		, (int)(m_vecFrm[m_iCurFrm].vLT.y)
 		, (int)(m_vecFrm[m_iCurFrm].vSlice.x)
 		, (int)(m_vecFrm[m_iCurFrm].vSlice.y)
 		, bf);
+
+	//AlphaBlend(_dc
+	//	, (int)(vPos.x - m_vecFrm[m_iCurFrm].vSlice.x / 2.f)
+	//	, (int)(vPos.y - m_vecFrm[m_iCurFrm].vSlice.y / 2.f)
+	//	, (int)(m_vecFrm[m_iCurFrm].vSlice.x)
+	//	, (int)(m_vecFrm[m_iCurFrm].vSlice.y)
+	//	, m_pTex->GetDC()
+	//	, (int)(m_vecFrm[m_iCurFrm].vLT.x)
+	//	, (int)(m_vecFrm[m_iCurFrm].vLT.y)
+	//	, (int)(m_vecFrm[m_iCurFrm].vSlice.x)
+	//	, (int)(m_vecFrm[m_iCurFrm].vSlice.y)
+	//	, bf);
 }
 
 void Animation::Create(Texture* _pTex, Vec2 _vLT, Vec2 _vSliceSize, Vec2 _vStep, float _fDuration, UINT _iFrameCount)

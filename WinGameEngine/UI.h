@@ -10,6 +10,7 @@ private :
 
     Vec2 m_vFinalPos;
     bool m_bCamAffected; // UI가 카메라 영향을 받는지
+    bool m_viewAffected; // View 변환을 받는지
     bool m_bMouseOn; // UI 위에 마유ㅜ스가 있는지
     bool m_bLbtnDown; // 다운된 적이 있는지
     bool m_canTarget; // 타게팅 될 수 있는지
@@ -26,7 +27,10 @@ public:
     bool IsMouseOn() { return m_bMouseOn; }
     bool IsLbtnDown() { return m_bLbtnDown; }
     bool IsCamEffected() { return m_bCamAffected; }
+    bool isViewEffected() { return m_viewAffected; }
     bool isCanTarget() { return m_canTarget; }
+
+    void SetViewAffected(bool _viewAffected) { m_viewAffected = _viewAffected; }
 
     void AddChild(UI* _pUI) { m_vecChildUI.push_back(_pUI); _pUI->m_pParentUI = this; }
     const vector<UI*>& GetChildUI() { return m_vecChildUI; }

@@ -4,6 +4,8 @@
 #include "Animator.h"
 #include "ImageModule.h"
 
+#include "ViewMgr.h"
+
 DivUI::DivUI()
 	: UI(false)
 	, iModule{ nullptr }
@@ -41,6 +43,11 @@ void DivUI::render(HDC _dc)
 			// View 변환 실행
 			// 카메라 영향을 받지 않는다면 항상 같은위치에 렌더링된다(일반적으로 생각하는 UI이다)
 			vPos = Camera::GetInst()->GetRenderPos(vPos);
+		}
+
+		if (isViewEffected()) {
+			vPos = ViewMgr::GetInst()->GetViewPortPos(vPos);
+			vScale = ViewMgr::GetInst()->GetViewPortScale(vScale);
 		}
 
 		iModule->SetPos(vPos);

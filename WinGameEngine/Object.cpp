@@ -5,6 +5,7 @@
 #include "Collider.h"
 
 #include "Camera.h"
+#include "ViewMgr.h"
 
 Object::Object()
 	: m_vPos{}
@@ -78,8 +79,11 @@ void Object::render(HDC _dc)
 {
 	Vec2 vRenderPos = Camera::GetInst()->GetRenderPos(m_vPos);
 
-	Rectangle(_dc, (int)(vRenderPos.x - m_vScale.x / 2.f), (int)(vRenderPos.y - m_vScale.y / 2.f),
-		(int)(vRenderPos.x + m_vScale.x / 2.f), (int)(vRenderPos.y + m_vScale.y / 2.f));
+	Vec2 vViewPos = ViewMgr::GetInst()->GetViewPortPos(vRenderPos);
+	Vec2 vViewScale = ViewMgr::GetInst()->GetViewPortScale(GetScale());
+
+	Rectangle(_dc, (int)(vRenderPos.x - vViewScale.x / 2.f), (int)(vRenderPos.y - vViewScale.y / 2.f),
+		(int)(vRenderPos.x + vViewScale.x / 2.f), (int)(vRenderPos.y + vViewScale.y / 2.f));
 
 	ComponentRender(_dc);
 }
