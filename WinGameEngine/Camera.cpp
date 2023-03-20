@@ -5,6 +5,7 @@
 #include "ResMgr.h"
 #include "KeyMgr.h"
 #include "TimeMgr.h"
+#include "ViewMgr.h"
 
 #include "Object.h"
 #include "Texture.h"
@@ -27,7 +28,7 @@ void Camera::init()
 {
 	Vec2 vResolution = Core::GetInst()->GetResolution();
 
-	m_vLookAt = Vec2(vResolution / 2);
+	m_vLookAt = ViewMgr::GetInst()->GetViewPortPos(Vec2(vResolution / 2));
 
 	m_pVeilTex = ResMgr::GetInst()->CreateTexutre(L"CameraVeil", (UINT)vResolution.x, (UINT)vResolution.y);
 }
@@ -40,7 +41,7 @@ void Camera::update()
 			m_pTargetObj = nullptr;
 		}
 		else {
-			m_vLookAt = m_pTargetObj->GetPos();
+			m_vLookAt = ViewMgr::GetInst()->GetViewPortPos(m_pTargetObj->GetPos());
 		}
 	}
 
@@ -113,7 +114,8 @@ void Camera::CalDiff()
 	m_fAccTime += fDT;
 
 	if (m_fTime <= m_fAccTime) {
-		m_vCurLookAt = m_vLookAt;
+		m_vCurLookAt = ViewMgr::GetInst()->GetViewPortPos( m_vLookAt );
+		//m_vCurLookAt = m_vLookAt;
 	}
 	else {
 		Vec2 vLookDir = m_vLookAt - m_vPrevLookAt;
@@ -124,7 +126,8 @@ void Camera::CalDiff()
 	}
 
 	Vec2 vResolution = Core::GetInst()->GetResolution();
-	Vec2 vCenter = vResolution / 2;
+	Vec2 vCenter = ViewMgr::GetInst()->GetViewPortPos(vResolution / 2);
+	//Vec2 vCenter = vResolution / 2.f;
 
 	m_vDiff = m_vCurLookAt - vCenter;
 	m_vPrevLookAt = m_vCurLookAt;

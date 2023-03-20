@@ -12,6 +12,7 @@
 #include "EventMgr.h"
 #include "UIMgr.h"
 #include "CollisionMgr.h"
+#include "ViewMgr.h"
 
 
 Core::Core()
@@ -58,6 +59,7 @@ int Core::init(HWND _hwnd, POINT _ptResolution)
 	TimeMgr::GetInst()->init();
 	KeyMgr::GetInst()->init();
 	Camera::GetInst()->init();
+	ViewMgr::GetInst()->init();
 	SceneMgr::GetInst()->init();
 
 	return S_OK;
@@ -69,6 +71,7 @@ void Core::progress()
 	TimeMgr::GetInst()->update();
 	KeyMgr::GetInst()->update();
 	Camera::GetInst()->update();
+	ViewMgr::GetInst()->update();
 
 	// ¾À ¾÷µ¥ÀÌÆ®
 	SceneMgr::GetInst()->update();

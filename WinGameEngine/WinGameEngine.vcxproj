@@ -148,6 +148,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="func.h" />
     <ClInclude Include="KeyMgr.h" />
+    <ClInclude Include="Mathf.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="PathMgr.h" />
     <ClInclude Include="CRectangle.h" />
@@ -168,6 +169,7 @@
     <ClInclude Include="TimeMgr.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="UIMgr.h" />
+    <ClInclude Include="ViewMgr.h" />
     <ClInclude Include="WinGameEngine.h" />
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +186,7 @@
     <ClCompile Include="func.cpp" />
     <ClCompile Include="KeyMgr.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mathf.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="PathMgr.cpp" />
     <ClCompile Include="CRectangle.cpp" />
@@ -200,6 +203,7 @@
     <ClCompile Include="TimeMgr.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UIMgr.cpp" />
+    <ClCompile Include="ViewMgr.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WinGameEngine.rc" />

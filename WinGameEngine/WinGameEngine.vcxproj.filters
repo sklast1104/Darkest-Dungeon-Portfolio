@@ -94,6 +94,9 @@
     <Filter Include="Engine\04.Object\UI\UI_Module">
       <UniqueIdentifier>{98a87487-3a27-4092-ae8c-5115f2b4e6cd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03.Manager\ViewMgr">
+      <UniqueIdentifier>{6232dddf-8743-4664-b726-6f5e4124d163}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -201,6 +204,12 @@
     <ClInclude Include="ImageModule.h">
       <Filter>Engine\04.Object\UI\UI_Module</Filter>
     </ClInclude>
+    <ClInclude Include="ViewMgr.h">
+      <Filter>Engine\03.Manager\ViewMgr</Filter>
+    </ClInclude>
+    <ClInclude Include="Mathf.h">
+      <Filter>Engine\01.Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -297,6 +306,12 @@
     </ClCompile>
     <ClCompile Include="ImageModule.cpp">
       <Filter>Engine\04.Object\UI\UI_Module</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewMgr.cpp">
+      <Filter>Engine\03.Manager\ViewMgr</Filter>
+    </ClCompile>
+    <ClCompile Include="Mathf.cpp">
+      <Filter>Engine\01.Header</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
