@@ -64,8 +64,8 @@ void UI::render(HDC _dc)
 	Vec2 vScale = GetScale();
 
 	SelectGDI brush(_dc, BRUSH_TYPE::HOLLOW);
-	SelectGDI pen(_dc, PEN_TYPE::RED);
-	//SelectGDI pen(_dc, PEN_TYPE::HOLLOW);
+	//SelectGDI pen(_dc, PEN_TYPE::RED);
+	SelectGDI pen(_dc, PEN_TYPE::HOLLOW);
 
 	if (m_bCamAffected) {
 		vPos = Camera::GetInst()->GetRenderPos(vPos);
@@ -141,6 +141,10 @@ void UI::MouseOnCheck()
 
 	if (m_bCamAffected) {
 		vMousePos = Camera::GetInst()->GetRealPos(vMousePos);
+	}
+
+	if (m_viewAffected) {
+		
 	}
 
 	if (m_vFinalPos.x <= vMousePos.x && vMousePos.x <= m_vFinalPos.x + vScale.x

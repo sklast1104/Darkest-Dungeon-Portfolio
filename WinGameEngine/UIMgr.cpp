@@ -131,7 +131,7 @@ UI* UIMgr::GetTargetedUI(UI* _pParentUI)
 		UI* pUI = queue.front();
 		queue.pop_front();
 
-		if (pUI->IsMouseOn()) {
+		if (pUI->IsMouseOn() && pUI->isCanTarget()) {
 
 			if (nullptr != pTargetUI) {
 				vecNoneTarget.push_back(pTargetUI);

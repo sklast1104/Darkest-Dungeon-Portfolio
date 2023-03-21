@@ -6,12 +6,25 @@
 using std::shared_ptr;
 using std::weak_ptr;
 
+#include <fstream>
+#include <sstream>
+
+using std::cout;
+using std::cerr;
+using std::endl;
+
 #include <windows.h>
 #include <Objbase.h>
 #include <gdiplus.h>
 #include <wincodec.h>
 #pragma comment (lib,"Gdiplus.lib")
 #pragma comment(lib, "Msimg32.lib")
+#pragma comment(lib, "windowscodecs.lib")
+
+#include <functional>
+using std::function;
+
+#include <algorithm>
 
 #include <mmsystem.h>
 #include <dsound.h>
@@ -39,6 +52,13 @@ using std::unordered_map;
 #include <string>
 using std::string;
 using std::wstring;
+
+#include <fstream>
+using std::ifstream;
+using std::istringstream;
+
+#include <locale>
+#include <codecvt>
 
 #include <math.h>
 #include <assert.h>

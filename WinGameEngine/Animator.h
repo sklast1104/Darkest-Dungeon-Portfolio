@@ -7,7 +7,7 @@ class Texture;
 class Animator
 {
 
-private:
+protected:
 
 	map<wstring, Animation*> m_mapAnim; // 모든 Animation
 	Animation* m_pCurAnim; // 현재 Animation
@@ -17,7 +17,7 @@ private:
 public:
 
 	Animator();
-	~Animator();
+	virtual ~Animator();
 
 	void CreateAnimation(const wstring& _strName, Texture* _pTex, Vec2 _vLT, Vec2 _vSliceSize, Vec2 _vStep, float _fDuration, UINT _iFrameCount);
 	virtual void LoadAnimation(const wstring& _strRelativePath);

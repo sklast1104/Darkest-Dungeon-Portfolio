@@ -35,7 +35,7 @@ enum class GROUP_TYPE {
 
 enum class SCENE_TYPE {
 
-	START,
+	TITLE,
 	TEST,
 	END,
 };

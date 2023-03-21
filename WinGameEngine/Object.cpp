@@ -61,6 +61,12 @@ void Object::CreateAnimator()
 	m_pAnimator->m_pOwner = this;
 }
 
+void Object::CreateAnimator(Animator* _animator)
+{
+	m_pAnimator = _animator;
+	m_pAnimator->m_pOwner = this;
+}
+
 void Object::CreateRigidBody()
 {
 }

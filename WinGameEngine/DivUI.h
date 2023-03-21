@@ -16,6 +16,8 @@ public :
 	DivUI();
 	~DivUI();
 
+	void SetSrcAlpha(int _alpha);
+
 	void InitImageModule(const wstring& _resourceKey, const wstring& _relativePath);
 
 	virtual void render(HDC _dc) override;

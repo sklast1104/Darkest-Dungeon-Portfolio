@@ -239,3 +239,7 @@ void Animation::Load(const wstring& _strRelativePath)
 
 	fclose(pFile);
 }
+
+void Animation::Load(const wstring& _strRelativePath, const wstring& _animName)
+{
+}

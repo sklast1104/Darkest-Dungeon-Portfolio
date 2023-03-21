@@ -2,6 +2,7 @@
 #include "SceneMgr.h"
 
 #include "Scene.h"
+#include "Scene_Title.h"
 #include "Scene_Test.h"
 
 SceneMgr::SceneMgr()
@@ -22,8 +23,9 @@ SceneMgr::~SceneMgr()
 void SceneMgr::init()
 {
 	m_arrScene[(size_t)SCENE_TYPE::TEST] = new Scene_Test;
+	m_arrScene[(size_t)SCENE_TYPE::TITLE] = new Scene_Title;
 
-	m_pCurScene = m_arrScene[(size_t)SCENE_TYPE::TEST];
+	m_pCurScene = m_arrScene[(size_t)SCENE_TYPE::TITLE];
 	m_pCurScene->Enter();
 }
 

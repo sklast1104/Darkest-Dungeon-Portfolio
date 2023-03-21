@@ -17,6 +17,13 @@ DivUI::~DivUI()
 	Safe_Delete<ImageModule*>(iModule);
 }
 
+void DivUI::SetSrcAlpha(int _alpha)
+{
+	if (nullptr != iModule) {
+		iModule->SetAlpha(_alpha);
+	}
+}
+
 void DivUI::InitImageModule(const wstring& _resourceKey, const wstring& _relativePath)
 {
 	if (nullptr == iModule) {

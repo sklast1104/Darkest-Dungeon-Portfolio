@@ -19,6 +19,8 @@ private :
 	// 크기
 	Vec2 vScale;
 
+	int sourceAlpha;
+
 public :
 
 	ImageModule(const wstring& _resourceKey, const wstring& _relativePath);
@@ -28,6 +30,7 @@ public :
 	void SetPos(Vec2 _vPos) { vPos = _vPos; }
 	// Local, World, Camera, Viewport 전부 끝난 Scale여야함
 	void SetScale(Vec2 _vScale) { vScale = _vScale; }
+	void SetAlpha(int _alpha) { sourceAlpha = _alpha; }
 
 	const wstring& GetResourceKey() const { return resourceKey; }
 	const wstring& GetRelativePath() const { return relativePath; }

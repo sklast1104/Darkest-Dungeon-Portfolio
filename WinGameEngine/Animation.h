@@ -14,7 +14,7 @@ struct tAnimFrm
 
 class Animation
 {
-private:
+protected:
 	wstring m_strName;
 	Animator* m_pAnimator;
 	Texture* m_pTex;
@@ -27,14 +27,15 @@ private:
 	
 public:
 	Animation();
-	~Animation();
+	virtual ~Animation();
 
-	void update();
-	void render(HDC _dc);
+	virtual void update();
+	virtual void render(HDC _dc);
 	void Create(Texture* _pTex, Vec2 _vLT, Vec2 _vSliceSize, Vec2 _vStep, float _fDuration, UINT _iFrameCount);
 
 	void Save(const wstring& _strRelativePath);
-	void Load(const wstring& _strRelativePath);
+	virtual void Load(const wstring& _strRelativePath);
+	virtual void Load(const wstring& _strRelativePath, const wstring& _animName);
 
 	const wstring& GetName() { return m_strName; }
 	bool IsFinish() { return m_bFinish; }
@@ -49,12 +50,16 @@ public:
 	}
 	UINT GetMaxFrame() { return (UINT)m_vecFrm.size(); }
 
+	virtual void SetAllFrameDuration(float fDuration) {}
+
+	virtual void SetAllFrameOffset(Vec2 offset) {}
+
 	void SetName(const wstring& _strName) {
 		m_strName = _strName;
 	}
 
 	void SetAnimator(Animator* _animator) { m_pAnimator = _animator; }
 
-	friend class CAnimator;
+	friend class Animator;
 };
 

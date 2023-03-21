@@ -97,6 +97,12 @@
     <Filter Include="Engine\03.Manager\ViewMgr">
       <UniqueIdentifier>{6232dddf-8743-4664-b726-6f5e4124d163}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\05.Scene\SceneList\Scene_Title">
+      <UniqueIdentifier>{57417302-95cd-44c4-a3e7-b05d6f300b5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04.Object\UI\01. TitleSceneUI">
+      <UniqueIdentifier>{f37af023-49f7-40c1-bc1c-3773ed64d043}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -210,6 +216,18 @@
     <ClInclude Include="Mathf.h">
       <Filter>Engine\01.Header</Filter>
     </ClInclude>
+    <ClInclude Include="Scene_Title.h">
+      <Filter>Engine\05.Scene\SceneList\Scene_Title</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatorDK.h">
+      <Filter>Engine\07.Component\01.Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimationDK.h">
+      <Filter>Engine\07.Component\01.Animator\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="BtnMOver.h">
+      <Filter>Engine\04.Object\UI\01. TitleSceneUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -313,10 +331,25 @@
     <ClCompile Include="Mathf.cpp">
       <Filter>Engine\01.Header</Filter>
     </ClCompile>
+    <ClCompile Include="Scene_Title.cpp">
+      <Filter>Engine\05.Scene\SceneList\Scene_Title</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatorDK.cpp">
+      <Filter>Engine\07.Component\01.Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimationDK.cpp">
+      <Filter>Engine\07.Component\01.Animator\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="BtnMOver.cpp">
+      <Filter>Engine\04.Object\UI\01. TitleSceneUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="WinGameEngine.rc">
       <Filter>Default</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Output\bin\content\resource\cursors\cursor.cur" />
   </ItemGroup>
 </Project>

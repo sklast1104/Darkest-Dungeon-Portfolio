@@ -12,12 +12,14 @@ private :
     BITMAP m_bitInfo;
 
     HBITMAP LoadPNG(const wstring& _filename);
+    HBITMAP InvertBitmapHorizontally(HBITMAP hBitmap);
 
 public :
     Texture();
     virtual ~Texture();
 
     void Load(const wstring& _strFilePath);
+    void LoadHorizonTalFlipped(const wstring& _strFilePath);
     void Create(UINT _iWidth, UINT _iHeight);
 
     UINT Width() { return m_bitInfo.bmWidth; }

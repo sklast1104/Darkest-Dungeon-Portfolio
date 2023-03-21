@@ -40,6 +40,7 @@ public :
 
 	void CreateCollider();
 	void CreateAnimator();
+	void CreateAnimator(Animator* _animator);
 	void CreateRigidBody();
 
 	virtual void OnCollision(Collider* _pOther) {}

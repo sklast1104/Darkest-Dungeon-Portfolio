@@ -13,6 +13,7 @@
 #include "UIMgr.h"
 #include "CollisionMgr.h"
 #include "ViewMgr.h"
+#include "SoundMgr.h"
 
 
 Core::Core()
@@ -58,6 +59,7 @@ int Core::init(HWND _hwnd, POINT _ptResolution)
 	PathMgr::GetInst()->init();
 	TimeMgr::GetInst()->init();
 	KeyMgr::GetInst()->init();
+	SoundMgr::GetInst()->init();
 	Camera::GetInst()->init();
 	ViewMgr::GetInst()->init();
 	SceneMgr::GetInst()->init();

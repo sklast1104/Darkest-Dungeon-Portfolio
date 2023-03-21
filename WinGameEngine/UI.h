@@ -31,6 +31,7 @@ public:
     bool isCanTarget() { return m_canTarget; }
 
     void SetViewAffected(bool _viewAffected) { m_viewAffected = _viewAffected; }
+    void CanTarget(bool _canTarget) { m_canTarget = _canTarget; }
 
     void AddChild(UI* _pUI) { m_vecChildUI.push_back(_pUI); _pUI->m_pParentUI = this; }
     const vector<UI*>& GetChildUI() { return m_vecChildUI; }

@@ -8,6 +8,7 @@ ImageModule::ImageModule(const wstring& _resourceKey, const wstring& _relativePa
 	: resourceKey{ _resourceKey }
 	, relativePath{ _relativePath }
 	, m_pTex{ ResMgr::GetInst()->LoadTexture(_resourceKey, _relativePath) }
+	, sourceAlpha{255}
 {
 }
 
@@ -27,7 +28,7 @@ void ImageModule::render(HDC _dc)
 	bf.BlendOp = AC_SRC_OVER;
 	bf.BlendFlags = 0;
 	bf.AlphaFormat = AC_SRC_ALPHA;
-	bf.SourceConstantAlpha = 255;
+	bf.SourceConstantAlpha = sourceAlpha;
 
 	AlphaBlend(_dc
 		, int(vPos.x)
