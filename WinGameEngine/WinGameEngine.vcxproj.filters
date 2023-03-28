@@ -103,6 +103,24 @@
     <Filter Include="Engine\04.Object\UI\01. TitleSceneUI">
       <UniqueIdentifier>{f37af023-49f7-40c1-bc1c-3773ed64d043}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\05.Scene\SceneList\Scene_Town">
+      <UniqueIdentifier>{433fdf38-2ab9-4c16-8e22-f121794a2789}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04.Object\UI\02. TownSceneUI">
+      <UniqueIdentifier>{48d079c0-13b0-4741-ad6b-c25b9c3928e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\07.Component\03.Command">
+      <UniqueIdentifier>{9d41fd9f-7466-42e7-ac5b-a527758c1793}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\07.Component\03.Command\01. TitleSceneCom">
+      <UniqueIdentifier>{deeb8e87-91f4-41e4-9ff8-ce10290b8435}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\07.Component\03.Command\02. TownSceneCom">
+      <UniqueIdentifier>{dac268ec-ecaa-4a6f-8e61-7b1db65e7243}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\09.Factory\01.UIFactory">
+      <UniqueIdentifier>{ee7ac429-ad45-428c-8231-2ce54aa01bf1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -228,6 +246,27 @@
     <ClInclude Include="BtnMOver.h">
       <Filter>Engine\04.Object\UI\01. TitleSceneUI</Filter>
     </ClInclude>
+    <ClInclude Include="TextModule.h">
+      <Filter>Engine\04.Object\UI\UI_Module</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_Town.h">
+      <Filter>Engine\05.Scene\SceneList\Scene_Town</Filter>
+    </ClInclude>
+    <ClInclude Include="BtnBuilding.h">
+      <Filter>Engine\04.Object\UI\02. TownSceneUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CCommand.h">
+      <Filter>Engine\07.Component\03.Command</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildingOverCom.h">
+      <Filter>Engine\07.Component\03.Command\02. TownSceneCom</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildingMouseOut.h">
+      <Filter>Engine\07.Component\03.Command\02. TownSceneCom</Filter>
+    </ClInclude>
+    <ClInclude Include="UIFactory.h">
+      <Filter>Engine\09.Factory\01.UIFactory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -342,6 +381,27 @@
     </ClCompile>
     <ClCompile Include="BtnMOver.cpp">
       <Filter>Engine\04.Object\UI\01. TitleSceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TextModule.cpp">
+      <Filter>Engine\04.Object\UI\UI_Module</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_Town.cpp">
+      <Filter>Engine\05.Scene\SceneList\Scene_Town</Filter>
+    </ClCompile>
+    <ClCompile Include="BtnBuilding.cpp">
+      <Filter>Engine\04.Object\UI\02. TownSceneUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CCommand.cpp">
+      <Filter>Engine\07.Component\03.Command</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildingOverCom.cpp">
+      <Filter>Engine\07.Component\03.Command\02. TownSceneCom</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildingMouseOut.cpp">
+      <Filter>Engine\07.Component\03.Command\02. TownSceneCom</Filter>
+    </ClCompile>
+    <ClCompile Include="UIFactory.cpp">
+      <Filter>Engine\09.Factory\01.UIFactory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

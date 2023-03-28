@@ -1,30 +1,28 @@
 #include "stdafx.h"
-#include "BtnMOver.h"
+#include "BtnBuilding.h"
 #include "KeyMgr.h"
+#include "CCommand.h"
 
-
-BtnMOver::BtnMOver()
-{
-	ZeroMemory(&lf, sizeof(lf));
-	lf.lfHeight = 40;
-	wcscpy_s(lf.lfFaceName, L"이순신 Bold");
-	text = L"캠페인";
-}
-
-BtnMOver::~BtnMOver()
+BtnBuilding::BtnBuilding(CCommand* _onMouseOut)
+	: onMouseOut{_onMouseOut}
 {
 }
 
-void BtnMOver::update()
+BtnBuilding::~BtnBuilding()
+{
+	Safe_Delete<CCommand*>(onMouseOut);
+}
+
+void BtnBuilding::update()
 {
 	UI::update();
 
 	// 렌더좌표인데 카메라 정방향 or 카메라 영향을 받지 않는 UI면 상관없음
 	Vec2 mousePos = MOUSE_POS;
-	
+
 	Vec2 myScale = GetScale();
 	Vec2 finalPos = GetFinalPos();
-	
+
 
 	if (finalPos.x <= mousePos.x && mousePos.x <= finalPos.x + myScale.x
 		&& finalPos.y <= mousePos.y && mousePos.y <= finalPos.y + myScale.y) {
@@ -32,13 +30,15 @@ void BtnMOver::update()
 	}
 	else {
 
-		SetSrcAlpha(180);
+		assert(onMouseOut);
+
+		onMouseOut->Execute();
 	}
 }
 
-// MouseOn은 존재하는데 MouseOut은 따로없음
-// Update에서 강제로 만들어줘보자
-void BtnMOver::MouseOn()
+void BtnBuilding::MouseOn()
 {
-	SetSrcAlpha(255);
+	assert(onMouseOver);
+
+	onMouseOver->Execute();
 }

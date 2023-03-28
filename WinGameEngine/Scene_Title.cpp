@@ -7,6 +7,7 @@
 #include "AnimatorDK.h"
 #include "ResMgr.h"
 #include "Sound.h"
+#include "UIMgr.h"
 
 Scene_Title::Scene_Title()
 {
@@ -33,7 +34,6 @@ void Scene_Title::Enter()
 	bg->CanTarget(false);
 	bg->InitImageModule(L"Darkest_Title_Bg", L"resource\\fe_flow\\title_bg.png");
 	bg->SetSrcAlpha(220);
-	bg->CanTarget(false);
 
 	DivUI* title = new DivUI;
 	title->CreateAnimator(new AnimatorDK);
@@ -75,21 +75,30 @@ void Scene_Title::Enter()
 	titleBtn->InitImageModule(L"Darkest_Title_btn", L"resource\\fe_flow\\start_button.png");
 	titleBtn->SetScale(Vec2(372.f, 92.f));
 	titleBtn->SetPos(Vec2(960.f - 186, 1060.f));
+	titleBtn->SetSrcAlpha(200);
+	titleBtn->InitTextModule(L"캠페인", 40);
+	titleBtn->SetTextColor(161, 145, 89);
 	bg->AddChild(titleBtn);
 
 	pseudoUI->AddChild(bg);
 
 	AddObject(pseudoUI, GROUP_TYPE::UI);
 
+	// 씬에 처음 들어왔을때 아무 클릭도 안된상태면 계속 포커싱이 안되므로 임의의 포커싱을 강제로 줌
+	UIMgr::GetInst()->SetFocusedUI(pseudoUI);
+
 #pragma endregion
 
-	// 사운드
+#pragma region Sound
 
+	// 사운드
 	ResMgr::GetInst()->LoadSound(L"TitleBgm", L"resource\\sound\\Music\\mus_theme_outro_loop.wav");
 	Sound* pTitleSound = ResMgr::GetInst()->FindSound(L"TitleBgm");
 
 	pTitleSound->SetVolume(20.f);
 	pTitleSound->Play(true);
+
+#pragma endregion
 
 }
 

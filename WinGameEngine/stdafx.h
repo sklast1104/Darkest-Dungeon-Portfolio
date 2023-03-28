@@ -57,6 +57,10 @@ using std::wstring;
 using std::ifstream;
 using std::istringstream;
 
+#include <functional>
+using std::function;
+
+
 #include <locale>
 #include <codecvt>
 

@@ -2,23 +2,22 @@
 
 #include "DivUI.h"
 
+class CCommand;
 
-class BtnMOver :
+class BtnBuilding :
 	public DivUI
 {
 private :
 
-	wstring text;
-	
-	LOGFONT lf;
-	UINT font_size;
+	CCommand* onMouseOut;
 
 public :
 
-	BtnMOver();
-	~BtnMOver();
+	BtnBuilding(CCommand* _onMouseOut);
+	~BtnBuilding();
 
 	virtual void update() override;
 	virtual void MouseOn() override;
+
 };
 

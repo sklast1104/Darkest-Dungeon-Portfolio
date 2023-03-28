@@ -139,8 +139,12 @@
     <ClInclude Include="AnimationDK.h" />
     <ClInclude Include="Animator.h" />
     <ClInclude Include="AnimatorDK.h" />
+    <ClInclude Include="BtnBuilding.h" />
     <ClInclude Include="BtnMOver.h" />
+    <ClInclude Include="BuildingMouseOut.h" />
+    <ClInclude Include="BuildingOverCom.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CCommand.h" />
     <ClInclude Include="ImageModule.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionMgr.h" />
@@ -162,6 +166,7 @@
     <ClInclude Include="SceneMgr.h" />
     <ClInclude Include="Scene_Test.h" />
     <ClInclude Include="Scene_Title.h" />
+    <ClInclude Include="Scene_Town.h" />
     <ClInclude Include="SelectGDI.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundMgr.h" />
@@ -169,9 +174,11 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="struct.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TextModule.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeMgr.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="UIFactory.h" />
     <ClInclude Include="UIMgr.h" />
     <ClInclude Include="ViewMgr.h" />
     <ClInclude Include="WinGameEngine.h" />
@@ -182,8 +189,12 @@
     <ClCompile Include="AnimationDK.cpp" />
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="AnimatorDK.cpp" />
+    <ClCompile Include="BtnBuilding.cpp" />
     <ClCompile Include="BtnMOver.cpp" />
+    <ClCompile Include="BuildingMouseOut.cpp" />
+    <ClCompile Include="BuildingOverCom.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CCommand.cpp" />
     <ClCompile Include="ImageModule.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionMgr.cpp" />
@@ -203,13 +214,16 @@
     <ClCompile Include="SceneMgr.cpp" />
     <ClCompile Include="Scene_Test.cpp" />
     <ClCompile Include="Scene_Title.cpp" />
+    <ClCompile Include="Scene_Town.cpp" />
     <ClCompile Include="SelectGDI.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SoundMgr.cpp" />
     <ClCompile Include="State.cpp" />
+    <ClCompile Include="TextModule.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeMgr.cpp" />
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="UIFactory.cpp" />
     <ClCompile Include="UIMgr.cpp" />
     <ClCompile Include="ViewMgr.cpp" />
   </ItemGroup>
