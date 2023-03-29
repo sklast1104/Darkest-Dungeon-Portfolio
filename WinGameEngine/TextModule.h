@@ -36,6 +36,7 @@ public :
 	}
 	void SetFormat(UINT _format) { format = _format; }
 
+	void SetFont(const wstring& _fontName);
 	void SetSecondFont();
 };
 

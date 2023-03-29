@@ -4,6 +4,8 @@
 #include "Animator.h"
 #include "ImageModule.h"
 #include "TextModule.h"
+#include "CCommand.h"
+#include "KeyMgr.h"
 
 #include "ViewMgr.h"
 
@@ -22,6 +24,7 @@ DivUI::~DivUI()
 	Safe_Delete<TextModule*>(tModule);
 
 	Safe_Delete<CCommand*>(onMouseOver);
+	Safe_Delete<CCommand*>(onMouseOut);
 	Safe_Delete<CCommand*>(onMouseClick);
 }
 
@@ -43,6 +46,13 @@ void DivUI::SetSecondFont()
 {
 	if (nullptr != tModule) {
 		tModule->SetSecondFont();
+	}
+}
+
+void DivUI::SetFont(const wstring& _fontName)
+{
+	if (nullptr != tModule) {
+		tModule->SetFont(_fontName);
 	}
 }
 
@@ -129,4 +139,34 @@ void DivUI::LoadAnimation(const wstring& _animName, const wstring& _atlasPath)
 		GetAnimator()->LoadAnimation(_atlasPath, _animName);
 		GetAnimator()->Play(_animName, true);
 	}	
+}
+
+void DivUI::update()
+{
+	UI::update();
+
+	// 렌더좌표인데 카메라 정방향 or 카메라 영향을 받지 않는 UI면 상관없음
+	Vec2 mousePos = MOUSE_POS;
+
+	Vec2 myScale = GetScale();
+	Vec2 finalPos = GetFinalPos();
+
+
+	if (finalPos.x <= mousePos.x && mousePos.x <= finalPos.x + myScale.x
+		&& finalPos.y <= mousePos.y && mousePos.y <= finalPos.y + myScale.y) {
+
+	}
+	else {
+
+		if (nullptr != onMouseOut) {
+			onMouseOut->Execute();
+		}		
+	}
+}
+
+void DivUI::MouseOn()
+{
+	if (nullptr != onMouseOver) {
+		onMouseOver->Execute();
+	}
 }

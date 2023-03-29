@@ -35,6 +35,11 @@ void TextModule::render(HDC _dc)
 	DeleteObject(hFont);
 }
 
+void TextModule::SetFont(const wstring& _fontName)
+{
+	wcscpy_s(lf.lfFaceName, _fontName.c_str());
+}
+
 void TextModule::SetSecondFont()
 {
 	wcscpy_s(lf.lfFaceName, L"이순신 돋움체 M");

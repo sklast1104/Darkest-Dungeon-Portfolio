@@ -33,6 +33,9 @@ using std::function;
 #pragma comment(lib, "winmm.lib")
 #pragma comment(lib, "dsound.lib")
 
+#include <array>
+using std::array;
+
 #include <vector>
 using std::vector;
 
