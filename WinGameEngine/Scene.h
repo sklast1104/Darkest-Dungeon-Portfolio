@@ -35,6 +35,6 @@ public :
 	virtual void render(HDC _hc);
 
 	virtual void Enter() = 0;
-	virtual void Exit() = 0;
+	virtual void Exit();
 };
 

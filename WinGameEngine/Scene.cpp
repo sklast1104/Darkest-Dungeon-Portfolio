@@ -51,6 +51,11 @@ void Scene::render(HDC _hc)
 	}
 }
 
+void Scene::Exit()
+{
+	DeleteAll();
+}
+
 void Scene::DeleteGroup(GROUP_TYPE _eTarget)
 {
 	Safe_Delete_Vec<Object*>(m_arrObj[(size_t)_eTarget]);

@@ -171,6 +171,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneMgr.h" />
+    <ClInclude Include="Scene_DSelect.h" />
     <ClInclude Include="Scene_Test.h" />
     <ClInclude Include="Scene_Title.h" />
     <ClInclude Include="Scene_Town.h" />
@@ -227,6 +228,7 @@
     <ClCompile Include="ResMgr.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneMgr.cpp" />
+    <ClCompile Include="Scene_DSelect.cpp" />
     <ClCompile Include="Scene_Test.cpp" />
     <ClCompile Include="Scene_Title.cpp" />
     <ClCompile Include="Scene_Town.cpp" />

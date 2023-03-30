@@ -133,6 +133,9 @@
     <Filter Include="Engine\03.Manager\GameMgr">
       <UniqueIdentifier>{56c941ef-dfd4-485b-9a8d-8e643dd6d2ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\05.Scene\SceneList\Scene_DSelect">
+      <UniqueIdentifier>{80fa3dcc-9e2e-404e-9095-e5e9f610c0d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -246,9 +249,6 @@
     <ClInclude Include="Mathf.h">
       <Filter>Engine\01.Header</Filter>
     </ClInclude>
-    <ClInclude Include="Scene_Title.h">
-      <Filter>Engine\05.Scene\SceneList\Scene_Title</Filter>
-    </ClInclude>
     <ClInclude Include="AnimatorDK.h">
       <Filter>Engine\07.Component\01.Animator</Filter>
     </ClInclude>
@@ -302,6 +302,12 @@
     </ClInclude>
     <ClInclude Include="TitleBtnClickCom.h">
       <Filter>Engine\07.Component\03.Command\01. TitleSceneCom</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_DSelect.h">
+      <Filter>Engine\05.Scene\SceneList\Scene_DSelect</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_Title.h">
+      <Filter>Engine\05.Scene\SceneList\Scene_Town</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -462,6 +468,9 @@
     </ClCompile>
     <ClCompile Include="TitleBtnClickCom.cpp">
       <Filter>Engine\07.Component\03.Command\01. TitleSceneCom</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_DSelect.cpp">
+      <Filter>Engine\05.Scene\SceneList\Scene_DSelect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
