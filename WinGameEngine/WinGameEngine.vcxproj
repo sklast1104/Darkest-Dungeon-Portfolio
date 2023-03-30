@@ -149,6 +149,7 @@
     <ClInclude Include="CCommand.h" />
     <ClInclude Include="CCrusader.h" />
     <ClInclude Include="CHero.h" />
+    <ClInclude Include="CHighwayMan.h" />
     <ClInclude Include="CSkill.h" />
     <ClInclude Include="GameMgr.h" />
     <ClInclude Include="ImageModule.h" />
@@ -183,6 +184,7 @@
     <ClInclude Include="TextModule.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeMgr.h" />
+    <ClInclude Include="TitleBtnClickCom.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="UIFactory.h" />
     <ClInclude Include="UIMgr.h" />
@@ -205,6 +207,7 @@
     <ClCompile Include="CCommand.cpp" />
     <ClCompile Include="CCrusader.cpp" />
     <ClCompile Include="CHero.cpp" />
+    <ClCompile Include="CHighwayMan.cpp" />
     <ClCompile Include="CSkill.cpp" />
     <ClCompile Include="GameMgr.cpp" />
     <ClCompile Include="ImageModule.cpp" />
@@ -234,6 +237,7 @@
     <ClCompile Include="TextModule.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeMgr.cpp" />
+    <ClCompile Include="TitleBtnClickCom.cpp" />
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="UIFactory.cpp" />
     <ClCompile Include="UIMgr.cpp" />

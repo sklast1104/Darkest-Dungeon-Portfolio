@@ -63,6 +63,13 @@ void DivUI::SetFormat(UINT _format)
 	}
 }
 
+void DivUI::SetBold(UINT _bold)
+{
+	if (nullptr != tModule) {
+		tModule->SetBold(_bold);
+	}
+}
+
 void DivUI::InitImageModule(const wstring& _resourceKey, const wstring& _relativePath)
 {
 	if (nullptr == iModule) {
@@ -76,6 +83,16 @@ void DivUI::InitTextModule(const wstring& _text, const UINT _textSize)
 	if (nullptr == tModule) {
 		tModule = new TextModule;
 		tModule->SetText(_text);
+		tModule->SetTextSize(_textSize);
+		canRendTxt = true;
+	}
+}
+
+void DivUI::InitTextModule(int _text, const UINT _textSize)
+{
+	if (nullptr == tModule) {
+		tModule = new TextModule;
+		tModule->SetText(to_wstring(_text));
 		tModule->SetTextSize(_textSize);
 		canRendTxt = true;
 	}
@@ -168,5 +185,12 @@ void DivUI::MouseOn()
 {
 	if (nullptr != onMouseOver) {
 		onMouseOver->Execute();
+	}
+}
+
+void DivUI::MouseLbtnClicked()
+{
+	if (nullptr != onMouseClick) {
+		onMouseClick->Execute();
 	}
 }

@@ -5,14 +5,17 @@
 CCrusader::CCrusader()
 {
 	key = L"Crusader Portrait";
+	path = L"resource\\heros\\crusader.png";
+
 	name = L"레이널드";
 	job_name = L"성전사";
 
 	curHp = 33;
 	hp = 33;
+	curExp = 3;
 
-	curStress = 1;
-	stress = 99;
+	curStress = 153;
+	stress = 200;
 
 	// 명중 보정
 	hitRate = 0;
@@ -32,6 +35,15 @@ CCrusader::CCrusader()
 
 CCrusader::~CCrusader()
 {
+	curSkillArray.fill(nullptr);
+
+	for (int i = 0; i < 7; i++) {
+		Safe_Delete<CSkill*>(skillArray[i]);
+	}
+
+	for (int i = 0; i < 4; i++) {
+		Safe_Delete<CSkill*>(curSkillArray[i]);
+	}
 }
 
 void CCrusader::InitSkill()
@@ -39,7 +51,8 @@ void CCrusader::InitSkill()
 	// 강타
 	CSkill* powerAttack = new CSkill;
 	powerAttack->SetSkillName(L"강타 1");
-	powerAttack->SetSkillPath(L"");
+	powerAttack->SetSkillPath(L"resource\\heros\\crusader\\ab1.png");
+	powerAttack->SetGraySkillPath(L"resource\\heros\\crusader\\ab1_gray.png");
 	powerAttack->GetSkillPos()[2] = true;
 	powerAttack->GetSkillPos()[3] = true;
 
@@ -54,7 +67,8 @@ void CCrusader::InitSkill()
 	// 광신적 고발
 	CSkill* denunciation = new CSkill;
 	denunciation->SetSkillName(L"광신적 고발 1");
-	denunciation->SetSkillPath(L"");
+	denunciation->SetSkillPath(L"resource\\heros\\crusader\\ab2.png");
+	denunciation->SetGraySkillPath(L"resource\\heros\\crusader\\ab2_gray.png");
 	denunciation->GetSkillPos()[2] = true;
 	denunciation->GetSkillPos()[3] = true;
 
@@ -71,7 +85,8 @@ void CCrusader::InitSkill()
 	// 기절의 일격
 	CSkill* stunAttack = new CSkill;
 	stunAttack->SetSkillName(L"기절의 일격 1");
-	stunAttack->SetSkillPath(L"");
+	stunAttack->SetSkillPath(L"resource\\heros\\crusader\\ab3.png");
+	stunAttack->SetGraySkillPath(L"resource\\heros\\crusader\\ab3_gray.png");
 	stunAttack->GetSkillPos()[2] = true;
 	stunAttack->GetSkillPos()[3] = true;
 
@@ -86,7 +101,8 @@ void CCrusader::InitSkill()
 	// 신앙의 방패
 	CSkill* shield = new CSkill;
 	shield->SetSkillName(L"신앙의 방패 1");
-	shield->SetSkillPath(L"");
+	shield->SetSkillPath(L"resource\\heros\\crusader\\ab4.png");
+	shield->SetGraySkillPath(L"resource\\heros\\crusader\\ab4_gray.png");
 	shield->GetSkillPos()[2] = true;
 	shield->GetSkillPos()[3] = true;
 
@@ -95,7 +111,8 @@ void CCrusader::InitSkill()
 	// 전투 치유
 	CSkill* battleHeal = new CSkill;
 	battleHeal->SetSkillName(L"전투 치유 1");
-	battleHeal->SetSkillPath(L"");
+	battleHeal->SetSkillPath(L"resource\\heros\\crusader\\ab5.png");
+	battleHeal->SetGraySkillPath(L"resource\\heros\\crusader\\ab5_gray.png");
 	battleHeal->GetSkillPos()[0] = true;
 	battleHeal->GetSkillPos()[1] = true;
 	battleHeal->GetSkillPos()[2] = true;
@@ -106,7 +123,8 @@ void CCrusader::InitSkill()
 	// 성스러운 돌격
 	CSkill* chargeAttack = new CSkill;
 	chargeAttack->SetSkillName(L"기절의 일격 1");
-	chargeAttack->SetSkillPath(L"");
+	chargeAttack->SetSkillPath(L"resource\\heros\\crusader\\ab6.png");
+	chargeAttack->SetGraySkillPath(L"resource\\heros\\crusader\\ab6_gray.png");
 	chargeAttack->GetSkillPos()[0] = true;
 	chargeAttack->GetSkillPos()[1] = true;
 
@@ -123,7 +141,8 @@ void CCrusader::InitSkill()
 	// 격려의 함성
 	CSkill* cheer = new CSkill;
 	cheer->SetSkillName(L"격려의 함성 1");
-	cheer->SetSkillPath(L"");
+	cheer->SetSkillPath(L"resource\\heros\\crusader\\ab7.png");
+	cheer->SetGraySkillPath(L"resource\\heros\\crusader\\ab7_gray.png");
 	cheer->GetSkillPos()[0] = true;
 	cheer->GetSkillPos()[1] = true;
 	cheer->GetSkillPos()[2] = true;

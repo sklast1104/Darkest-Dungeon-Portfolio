@@ -10,6 +10,10 @@
 #include "BtnOutCom.h"
 #include "UIMgr.h"
 #include "UIFactory.h"
+#include "Sound.h"
+#include "ResMgr.h"
+#include "Camera.h"
+#include "KeyMgr.h"
 
 Scene_Town::Scene_Town()
 {
@@ -17,6 +21,15 @@ Scene_Town::Scene_Town()
 
 Scene_Town::~Scene_Town()
 {
+}
+
+void Scene_Town::update()
+{
+	Scene::update();
+
+	if (KEY_TAP(KEY::ESC)) {
+		ChangeScene(SCENE_TYPE::TITLE);
+	}
 }
 
 void Scene_Town::Enter()
@@ -56,6 +69,12 @@ void Scene_Town::Enter()
 	towerbg->SetSrcAlpha(255);
 
 	pseudoUI->AddChild(towerbg);
+
+	// 타이틀
+	DivUI* estateTitle = UIFactory::CreateTitle();
+
+	pseudoUI->AddChild(estateTitle);
+
 
 #pragma endregion
 
@@ -262,154 +281,41 @@ void Scene_Town::Enter()
 
 #pragma region bottom_nav
 
-	DivUI* bottomNavUI = new DivUI;
-	bottomNavUI->SetScale(Vec2(1920.f, 138.f));
-	bottomNavUI->SetPos(Vec2(0.f, 955.f));
-	bottomNavUI->CanTarget(false);
-	bottomNavUI->InitImageModule(L"Botton_nav_bg", L"resource\\UI\\progression_bar.png");
-	
-#pragma region icon_list
-
-	// 돈 아이콘
-
-	DivUI* moneyIcon = new DivUI;
-	moneyIcon->SetScale(Vec2(88.f, 88.f));
-	moneyIcon->SetPos(Vec2(70.f, -5.f));
-	moneyIcon->CanTarget(false);
-	moneyIcon->InitImageModule(L"Money_Icon", L"resource\\UI\\currency.gold.large_icon.png");
-
-	bottomNavUI->AddChild(moneyIcon);
-
-	DivUI* moneyTxt = new DivUI;
-	moneyTxt->SetScale(Vec2(188.f, 108.f));
-	moneyTxt->SetPos(Vec2(170.f, 0.f));
-	moneyTxt->CanTarget(false);
-	moneyTxt->InitTextModule(L"21,690", 40);
-	moneyTxt->SetFormat(DT_LEFT | DT_VCENTER | DT_SINGLELINE);
-	moneyTxt->SetTextColor(201, 185, 129);
-
-	bottomNavUI->AddChild(moneyTxt);
-
-	// 흉상
-	DivUI* bust = new DivUI;
-	bust->SetScale(Vec2(40.f, 40.f));
-	bust->SetPos(Vec2(400.f, 35.f));
-	bust->CanTarget(false);
-	bust->InitImageModule(L"bust_Icon", L"resource\\UI\\currency.bust.icon.png");
-
-	bottomNavUI->AddChild(bust);
-
-	DivUI* bustTxt = new DivUI;
-	bustTxt->SetScale(Vec2(50.f, 40.f));
-	bustTxt->SetPos(Vec2(440.f, 35.f));
-	bustTxt->CanTarget(false);
-	bustTxt->InitTextModule(L"22", 20);
-	bustTxt->SetFormat(DT_LEFT | DT_VCENTER | DT_SINGLELINE);
-	bustTxt->SetTextColor(201, 185, 129);
-	bustTxt->SetFont(L"이순신 돋움체 B");
-
-	bottomNavUI->AddChild(bustTxt);
-
-	// 초상화
-	DivUI* portrait = new DivUI;
-	portrait->SetScale(Vec2(40.f, 40.f));
-	portrait->SetPos(Vec2(480.f, 35.f));
-	portrait->CanTarget(false);
-	portrait->InitImageModule(L"portrait_Icon", L"resource\\UI\\currency.portrait.icon.png");
-
-	bottomNavUI->AddChild(portrait);
-
-	DivUI* portraitTxt = new DivUI;
-	portraitTxt->SetScale(Vec2(50.f, 40.f));
-	portraitTxt->SetPos(Vec2(520.f, 35.f));
-	portraitTxt->CanTarget(false);
-	portraitTxt->InitTextModule(L"14", 20);
-	portraitTxt->SetFormat(DT_LEFT | DT_VCENTER | DT_SINGLELINE);
-	portraitTxt->SetTextColor(201, 185, 129);
-	portraitTxt->SetFont(L"이순신 돋움체 B");
-
-	bottomNavUI->AddChild(portraitTxt);
-
-	// 증서
-	DivUI* certificate = new DivUI;
-	certificate->SetScale(Vec2(40.f, 40.f));
-	certificate->SetPos(Vec2(560.f, 35.f));
-	certificate->CanTarget(false);
-	certificate->InitImageModule(L"certificate_Icon", L"resource\\UI\\currency.deed.icon.png");
-
-	bottomNavUI->AddChild(certificate);
-
-	DivUI* certificateTxt = new DivUI;
-	certificateTxt->SetScale(Vec2(50.f, 40.f));
-	certificateTxt->SetPos(Vec2(600.f, 35.f));
-	certificateTxt->CanTarget(false);
-	certificateTxt->InitTextModule(L"15", 20);
-	certificateTxt->SetFormat(DT_LEFT | DT_VCENTER | DT_SINGLELINE);
-	certificateTxt->SetTextColor(201, 185, 129);
-	certificateTxt->SetFont(L"이순신 돋움체 B");
-
-	bottomNavUI->AddChild(certificateTxt);
-
-	// 문장
-	DivUI* buckler = new DivUI;
-	buckler->SetScale(Vec2(40.f, 40.f));
-	buckler->SetPos(Vec2(640.f, 35.f));
-	buckler->CanTarget(false);
-	buckler->InitImageModule(L"crest_Icon", L"resource\\UI\\currency.crest.icon.png");
-
-	bottomNavUI->AddChild(buckler);
-
-	DivUI* bucklerTxt = new DivUI;
-	bucklerTxt->SetScale(Vec2(50.f, 40.f));
-	bucklerTxt->SetPos(Vec2(680.f, 35.f));
-	bucklerTxt->CanTarget(false);
-	bucklerTxt->InitTextModule(L"5", 20);
-	bucklerTxt->SetFormat(DT_LEFT | DT_VCENTER | DT_SINGLELINE);
-	bucklerTxt->SetTextColor(201, 185, 129);
-	bucklerTxt->SetFont(L"이순신 돋움체 B");
-
-	bottomNavUI->AddChild(bucklerTxt);
-
-#pragma endregion
-
-	// 출정 버튼
-
-	DivUI* forwardBtn = new DivUI;
-	forwardBtn->SetScale(Vec2(312.f, 52.f));
-	forwardBtn->SetPos(Vec2(810.f, 25.f));
-	forwardBtn->CanTarget(true);
-	forwardBtn->InitImageModule(L"forward_btn", L"resource\\UI\\foward_btn.png");
-	forwardBtn->InitTextModule(L"출정", 35);
-	forwardBtn->SetTextColor(184, 29, 11);
-	
-	bottomNavUI->AddChild(forwardBtn);
-
-	DivUI* forwardBtnOver = new DivUI;
-	forwardBtnOver->SetScale(Vec2(311.f, 24.f));
-	forwardBtnOver->SetPos(Vec2(810.f, 12.f));
-	forwardBtnOver->CanTarget(false);
-	forwardBtnOver->SetCanRend(false);
-	forwardBtnOver->InitImageModule(L"forward_btn_over", L"resource\\UI\\progression_forward_selected_overlay.png");
-
-	forwardBtn->InitOnMouseOver(new BtnOverCom(forwardBtnOver));
-	forwardBtn->InitOnMouseOut(new BtnOutCom(forwardBtnOver));
-
-	bottomNavUI->AddChild(forwardBtnOver);
-
-	// 하단 내비게이션
+	DivUI* bottomNavUI = UIFactory::CreateBottomNavUI();
 
 	pseudoUI->AddChild(bottomNavUI);
 
 #pragma endregion
 
+#pragma region side_nav
 
+	DivUI* heroSideNav = UIFactory::CreateSideNavUI();
+
+	pseudoUI->AddChild(heroSideNav);
+
+#pragma endregion
 
 	AddObject(pseudoUI, GROUP_TYPE::UI);
 
 	// 씬에 처음 들어왔을때 아무 클릭도 안된상태면 계속 포커싱이 안되므로 임의의 포커싱을 강제로 줌
 	UIMgr::GetInst()->SetFocusedUI(pseudoUI);
+
+#pragma region Sound
+
+	// 사운드
+	ResMgr::GetInst()->LoadSound(L"TownBgm", L"resource\\sound\\Music\\Town_Stereo_Mix_LOOP_2.wav");
+	Sound* pTitleSound = ResMgr::GetInst()->FindSound(L"TownBgm");
+
+	pTitleSound->SetVolume(20.f);
+	pTitleSound->PlayToBGM(true);
+
+#pragma endregion
+
+	// 효과
+	Camera::GetInst()->FadeIn(0.5f);
 }
 
 void Scene_Town::Exit()
 {
+	DeleteAll();
 }

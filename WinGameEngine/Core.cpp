@@ -14,6 +14,7 @@
 #include "CollisionMgr.h"
 #include "ViewMgr.h"
 #include "SoundMgr.h"
+#include "GameMgr.h"
 
 
 Core::Core()
@@ -56,6 +57,7 @@ int Core::init(HWND _hwnd, POINT _ptResolution)
 	CreateBrushPen();
 
 	// Manager ÃÊ±âÈ­
+	GameMgr::GetInst()->init();
 	PathMgr::GetInst()->init();
 	TimeMgr::GetInst()->init();
 	KeyMgr::GetInst()->init();

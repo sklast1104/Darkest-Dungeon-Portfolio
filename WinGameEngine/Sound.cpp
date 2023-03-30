@@ -147,6 +147,17 @@ void Sound::SetPosition(float _fPosition)
 	Play();
 }
 
+bool Sound::IsPlaying()
+{
+	if (!m_pSoundBuffer)
+		return false;
+
+	DWORD dwStatus;
+	m_pSoundBuffer->GetStatus(&dwStatus);
+
+	return (dwStatus & DSBSTATUS_PLAYING) != 0;
+}
+
 int Sound::GetDecibel(float _fVolume)
 {
 	if (_fVolume > 100.f)

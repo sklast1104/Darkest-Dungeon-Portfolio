@@ -41,6 +41,9 @@ protected :
 	// 레벨
 	UINT level;
 
+	// 경험치 무조건 최대 경험치 8이라고 가정
+	int curExp;
+
 	// 현재 스킬 리스트
 	array<CSkill*, 4> curSkillArray;
 
@@ -50,14 +53,27 @@ protected :
 	// 대장간 장비 이름 및 경로 (Enum으로 하는게 좋을수도 있음)
 	wstring equipKey;
 	wstring equipPath;
+	int equipLevel;
 
 	wstring armourKey;
 	wstring armourPath;
+	int armorLevel;
+
+	
 
 public :
 
 	CHero();
 	virtual ~CHero();
+
+	int GetCurExp() { return curExp; }
+	void SetExp(int _exp) { curExp = _exp; }
+
+	void SetEquipLevel(int _equipLevel) { equipLevel = _equipLevel; }
+	int GetEquipLevel() { return equipLevel; }
+
+	void SetArmorLevel(int _armorLevel) { armorLevel = _armorLevel; }
+	int GetArmorLevel() { return armorLevel; }
 
 	void SetEquipKey(const wstring& _equipKey) { equipKey = _equipKey; }
 	const wstring& GetEquipKey() { return equipKey; }

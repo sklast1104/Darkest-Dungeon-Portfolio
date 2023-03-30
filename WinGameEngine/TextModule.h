@@ -8,6 +8,7 @@ private :
 	LOGFONT lf;
 	UINT fontSize;
 	UINT format;
+	UINT bold;
 	wstring text;
 
 	int r, g, b;
@@ -35,6 +36,7 @@ public :
 		b = _b;
 	}
 	void SetFormat(UINT _format) { format = _format; }
+	void SetBold(UINT _bold);
 
 	void SetFont(const wstring& _fontName);
 	void SetSecondFont();

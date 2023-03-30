@@ -38,9 +38,11 @@ public :
 	void SetSecondFont();
 	void SetFont(const wstring& _fontName);
 	void SetFormat(UINT _format);
+	void SetBold(UINT _bold);
 
 	void InitImageModule(const wstring& _resourceKey, const wstring& _relativePath);
 	void InitTextModule(const wstring& _text, const UINT _textSize);
+	void InitTextModule(int _text, const UINT _textSize);
 
 	void InitOnMouseOver(CCommand* _onMouseOver) { onMouseOver = _onMouseOver; }
 	void InitOnMouseOut(CCommand* _onMouseOut) { onMouseOut = _onMouseOut; }
@@ -52,6 +54,7 @@ public :
 
 	virtual void update() override;
 	virtual void MouseOn() override;
+	virtual void MouseLbtnClicked() override;
 
 	CLONE(DivUI);
 };

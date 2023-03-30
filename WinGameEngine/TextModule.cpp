@@ -11,6 +11,7 @@ TextModule::TextModule()
 {
 	ZeroMemory(&lf, sizeof(lf));
 	lf.lfHeight = fontSize;
+
 	// 기본 폰트 설정
 	wcscpy_s(lf.lfFaceName, L"이순신 Bold");
 
@@ -33,6 +34,11 @@ void TextModule::render(HDC _dc)
 	DrawText(_dc, text.c_str(), -1, &rt, format);
 
 	DeleteObject(hFont);
+}
+
+void TextModule::SetBold(UINT _bold)
+{
+	lf.lfWeight = _bold;
 }
 
 void TextModule::SetFont(const wstring& _fontName)

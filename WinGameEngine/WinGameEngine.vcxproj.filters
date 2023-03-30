@@ -121,9 +121,6 @@
     <Filter Include="Engine\09.Factory\01.UIFactory">
       <UniqueIdentifier>{ee7ac429-ad45-428c-8231-2ce54aa01bf1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\03.Manager\01. GameMgr">
-      <UniqueIdentifier>{56c941ef-dfd4-485b-9a8d-8e643dd6d2ff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\10.DataModel">
       <UniqueIdentifier>{334d6e66-3ab0-4610-be88-7933fe96f20a}</UniqueIdentifier>
     </Filter>
@@ -132,6 +129,9 @@
     </Filter>
     <Filter Include="Engine\10.DataModel\03.Skill">
       <UniqueIdentifier>{ca5c31d0-134f-4d50-8bff-2163a2f5317a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03.Manager\GameMgr">
+      <UniqueIdentifier>{56c941ef-dfd4-485b-9a8d-8e643dd6d2ff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -286,7 +286,7 @@
       <Filter>Engine\07.Component\03.Command\02. TownSceneCom</Filter>
     </ClInclude>
     <ClInclude Include="GameMgr.h">
-      <Filter>Engine\03.Manager\01. GameMgr</Filter>
+      <Filter>Engine\03.Manager\GameMgr</Filter>
     </ClInclude>
     <ClInclude Include="CHero.h">
       <Filter>Engine\10.DataModel\01.Hero</Filter>
@@ -296,6 +296,12 @@
     </ClInclude>
     <ClInclude Include="CSkill.h">
       <Filter>Engine\10.DataModel\03.Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="CHighwayMan.h">
+      <Filter>Engine\10.DataModel\01.Hero</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleBtnClickCom.h">
+      <Filter>Engine\07.Component\03.Command\01. TitleSceneCom</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -440,7 +446,7 @@
       <Filter>Engine\07.Component\03.Command\02. TownSceneCom</Filter>
     </ClCompile>
     <ClCompile Include="GameMgr.cpp">
-      <Filter>Engine\03.Manager\01. GameMgr</Filter>
+      <Filter>Engine\03.Manager\GameMgr</Filter>
     </ClCompile>
     <ClCompile Include="CHero.cpp">
       <Filter>Engine\10.DataModel\01.Hero</Filter>
@@ -450,6 +456,12 @@
     </ClCompile>
     <ClCompile Include="CSkill.cpp">
       <Filter>Engine\10.DataModel\03.Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="CHighwayMan.cpp">
+      <Filter>Engine\10.DataModel\01.Hero</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleBtnClickCom.cpp">
+      <Filter>Engine\07.Component\03.Command\01. TitleSceneCom</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

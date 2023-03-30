@@ -8,6 +8,8 @@ private :
 	wstring skillName;
 	// 스킬 경로
 	wstring skillPath;
+	// 그레이스케일 스킬 경로
+	wstring graySkillPath;
 
 	// 공격 대상 배열 4개의 true, false로 정하자
 	array<bool, 4> skillRange;
@@ -36,6 +38,9 @@ public :
 
 	const wstring& GetSkillPath() { return skillPath; }
 	void SetSkillPath(const wstring& _skillPath) { skillPath = _skillPath; }
+
+	const wstring& GetGraySkillPath() { return graySkillPath; }
+	void SetGraySkillPath(const wstring& _graySkillPath) { graySkillPath = _graySkillPath; }
 
 	array<bool, 4>& GetSkillRange() { return skillRange; }
 	array<bool, 4>& GetSkillPos() { return skillPos; }

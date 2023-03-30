@@ -8,6 +8,8 @@
 #include "ResMgr.h"
 #include "Sound.h"
 #include "UIMgr.h"
+#include "TitleBtnClickCom.h"
+#include "Camera.h"
 
 Scene_Title::Scene_Title()
 {
@@ -78,6 +80,7 @@ void Scene_Title::Enter()
 	titleBtn->SetSrcAlpha(200);
 	titleBtn->InitTextModule(L"Ä·ÆäÀÎ", 40);
 	titleBtn->SetTextColor(161, 145, 89);
+	titleBtn->InitOnMouseClick(new TitleBtnClickCom);
 	bg->AddChild(titleBtn);
 
 	pseudoUI->AddChild(bg);
@@ -96,12 +99,15 @@ void Scene_Title::Enter()
 	Sound* pTitleSound = ResMgr::GetInst()->FindSound(L"TitleBgm");
 
 	pTitleSound->SetVolume(20.f);
-	pTitleSound->Play(true);
+	pTitleSound->PlayToBGM(true);
 
 #pragma endregion
 
+	// È¿°ú
+	Camera::GetInst()->FadeIn(0.5f);
 }
 
 void Scene_Title::Exit()
 {
+	DeleteAll();
 }

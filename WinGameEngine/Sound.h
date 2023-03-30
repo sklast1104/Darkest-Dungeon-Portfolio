@@ -26,7 +26,8 @@ public:
 	void SetVolume(float _fVolume);
 	// 음악파일 위치 조정
 	void SetPosition(float _fPosition);
-
+	// 현재 재생중인지
+	bool IsPlaying();
 
 
 };

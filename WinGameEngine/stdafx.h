@@ -56,6 +56,8 @@ using std::unordered_map;
 using std::string;
 using std::wstring;
 
+using std::to_wstring;
+
 #include <fstream>
 using std::ifstream;
 using std::istringstream;
