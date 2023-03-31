@@ -39,6 +39,7 @@ public :
 	void SetFont(const wstring& _fontName);
 	void SetFormat(UINT _format);
 	void SetBold(UINT _bold);
+	void SetText(const wstring& _text);
 
 	void InitImageModule(const wstring& _resourceKey, const wstring& _relativePath);
 	void InitTextModule(const wstring& _text, const UINT _textSize);

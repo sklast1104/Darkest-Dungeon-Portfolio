@@ -2,6 +2,7 @@
 #include "func.h"
 
 #include "EventMgr.h"
+#include "UI.h"
 
 void CreateObject(Object* _pObj, GROUP_TYPE _eGroup)
 {
@@ -39,6 +40,23 @@ void ChangeState(AI* _ai, wstring _stateKey)
 	//evn._stateKey = _stateKey;
 
 	//CEventMgr::GetInst()->AddEvent(evn);
+}
+
+UI* FindUIByName(UI* _parentUI, wstring _name)
+{
+	if (_parentUI->GetName() == _name) {
+		return _parentUI;
+	}
+
+	for (int i = 0; i < _parentUI->GetChildUI().size(); i++) {
+
+		UI* result = FindUIByName(_parentUI->GetChildUI()[i], _name);
+
+		if (nullptr != result) return result;
+
+	}
+
+	return nullptr;
 }
 
 void FScanf(char* _pOutBuff, FILE* _pFile)

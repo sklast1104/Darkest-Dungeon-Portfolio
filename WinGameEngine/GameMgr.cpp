@@ -35,4 +35,6 @@ void GameMgr::init()
 	bucklerCnt = 14;
 
 	moneyCnt = 10070;
+
+
 }

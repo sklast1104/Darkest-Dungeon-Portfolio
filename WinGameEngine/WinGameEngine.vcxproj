@@ -148,9 +148,12 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CCommand.h" />
     <ClInclude Include="CCrusader.h" />
+    <ClInclude Include="CDungeon.h" />
     <ClInclude Include="CHero.h" />
     <ClInclude Include="CHighwayMan.h" />
+    <ClInclude Include="CQuest.h" />
     <ClInclude Include="CSkill.h" />
+    <ClInclude Include="ForwardBtnClick.h" />
     <ClInclude Include="GameMgr.h" />
     <ClInclude Include="ImageModule.h" />
     <ClInclude Include="Collider.h" />
@@ -166,6 +169,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="PathMgr.h" />
     <ClInclude Include="CRectangle.h" />
+    <ClInclude Include="RadioBtnClickCom.h" />
     <ClInclude Include="Res.h" />
     <ClInclude Include="ResMgr.h" />
     <ClInclude Include="Resource.h" />
@@ -207,9 +211,12 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CCommand.cpp" />
     <ClCompile Include="CCrusader.cpp" />
+    <ClCompile Include="CDungeon.cpp" />
     <ClCompile Include="CHero.cpp" />
     <ClCompile Include="CHighwayMan.cpp" />
+    <ClCompile Include="CQuest.cpp" />
     <ClCompile Include="CSkill.cpp" />
+    <ClCompile Include="ForwardBtnClick.cpp" />
     <ClCompile Include="GameMgr.cpp" />
     <ClCompile Include="ImageModule.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -224,6 +231,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="PathMgr.cpp" />
     <ClCompile Include="CRectangle.cpp" />
+    <ClCompile Include="RadioBtnClickCom.cpp" />
     <ClCompile Include="Res.cpp" />
     <ClCompile Include="ResMgr.cpp" />
     <ClCompile Include="Scene.cpp" />

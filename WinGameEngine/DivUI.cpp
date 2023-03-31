@@ -70,6 +70,13 @@ void DivUI::SetBold(UINT _bold)
 	}
 }
 
+void DivUI::SetText(const wstring& _text)
+{
+	if (nullptr != tModule) {
+		tModule->SetText(_text);
+	}
+}
+
 void DivUI::InitImageModule(const wstring& _resourceKey, const wstring& _relativePath)
 {
 	if (nullptr == iModule) {

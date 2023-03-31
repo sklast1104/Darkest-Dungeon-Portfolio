@@ -2,11 +2,13 @@
 
 class Object;
 class AI;
+class UI;
 
 void CreateObject(Object* _pObj, GROUP_TYPE _eGroup);
 void DeleteObject(Object* _pObj);
 void ChangeScene(SCENE_TYPE _eNext);
 void ChangeState(AI* _ai, wstring _stateKey);
+UI* FindUIByName(UI* _parentUI, wstring _name);
 
 template<typename T>
 void	Safe_Delete(T& Temp)
@@ -22,8 +24,10 @@ template<typename T>
 void Safe_Delete_Vec(vector<T>& _vec) {
 
 	for (size_t i = 0; i < _vec.size(); ++i) {
-		if (nullptr != _vec[i])
+		if (nullptr != _vec[i]) {
 			delete _vec[i];
+			_vec[i] = nullptr;
+		}
 	}
 	_vec.clear();
 }

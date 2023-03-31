@@ -23,6 +23,10 @@ private :
 	// 현재 스쿼드
 	array<CHero*, 4> curSquad;
 
+	// 던전 리스트
+
+
+
 public :
 
 	void init();

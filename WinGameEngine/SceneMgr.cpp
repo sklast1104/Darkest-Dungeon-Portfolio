@@ -27,7 +27,9 @@ void SceneMgr::init()
 	m_arrScene[(size_t)SCENE_TYPE::TEST] = new Scene_Test;
 	m_arrScene[(size_t)SCENE_TYPE::TITLE] = new Scene_Title;
 	m_arrScene[(size_t)SCENE_TYPE::TOWN] = new Scene_Town;
+	m_arrScene[(size_t)SCENE_TYPE::TOWN]->SetName(L"Scene_Town");
 	m_arrScene[(size_t)SCENE_TYPE::DSELECT] = new Scene_DSelect;
+	m_arrScene[(size_t)SCENE_TYPE::DSELECT]->SetName(L"Scene_DSelect");
 
 	m_pCurScene = m_arrScene[(size_t)SCENE_TYPE::DSELECT];
 	m_pCurScene->Enter();
