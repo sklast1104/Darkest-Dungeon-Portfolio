@@ -16,6 +16,13 @@ ImageModule::~ImageModule()
 {
 }
 
+void ImageModule::Load(const wstring& _resourceKey, const wstring& _relativePath)
+{
+	resourceKey = _resourceKey;
+	relativePath = _relativePath;
+	m_pTex = ResMgr::GetInst()->LoadTexture(_resourceKey, _relativePath);
+}
+
 void ImageModule::render(HDC _dc)
 {
 	int texWidth = m_pTex->Width();

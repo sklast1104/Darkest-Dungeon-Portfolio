@@ -10,9 +10,15 @@
 #include "KeyMgr.h"
 #include "Camera.h"
 
-Scene_DSelect::Scene_DSelect()
-{
+#include "DRendererUp.h"
+#include "SlotUp.h"
+#include "SlotDown.h"
+#include "GameMgr.h"
 
+Scene_DSelect::Scene_DSelect()
+	: scState{DSCENE_STATE::Idle}
+{
+	
 }
 
 Scene_DSelect::~Scene_DSelect()
@@ -36,6 +42,12 @@ void Scene_DSelect::InitDungeon()
 
 void Scene_DSelect::Enter()
 {
+	// 드래그 되는 오브젝트
+	dragRenderer = new DivUI;
+	dragRenderer->SetScale(Vec2(68.f, 68.f));
+	dragRenderer->SetPos(Vec2(960.f, 540.f));
+	dragRenderer->CanTarget(false);
+
 	InitDungeon();
 
 	Vec2 vResolution = Core::GetInst()->GetResolution();
@@ -190,20 +202,9 @@ void Scene_DSelect::Enter()
 
 #pragma region squad_slot
 
-	DivUI* slotRect = new DivUI;
-	slotRect->SetScale(Vec2(340.f, 85.f));
-	slotRect->SetPos(Vec2(960.f - 170.f, 890.f));
+	DivUI* slotRect = UIFactory::CreateSlotContainer(Vec2(960.f - 170.f, 890.f), dragRenderer);
 	
 	pseudoUI->AddChild(slotRect);
-
-	for (int i = 0; i < 4; i++) {
-		DivUI* slot = new DivUI;
-		slot->SetScale(Vec2(85.f, 85.f));
-		slot->SetPos(Vec2(0.f + (i * 85.f), 0.f));
-		slot->InitImageModule(L"slot_bg", L"resource\\roster\\slot1.png");
-
-		slotRect->AddChild(slot);
-	}
 
 #pragma endregion
 
@@ -225,6 +226,8 @@ void Scene_DSelect::Enter()
 
 	pseudoUI->AddChild(estateTitle);
 
+	pseudoUI->AddChild(dragRenderer);
+	
 	AddObject(pseudoUI, GROUP_TYPE::UI);
 
 	// 씬에 처음 들어왔을때 아무 클릭도 안된상태면 계속 포커싱이 안되므로 임의의 포커싱을 강제로 줌
@@ -243,14 +246,33 @@ void Scene_DSelect::Exit()
 	Safe_Delete(ruin);
 	Safe_Delete(court);
 	Safe_Delete(bay);
+
+	GameMgr::GetInst()->CleanSqaud();
 }
 
 void Scene_DSelect::update()
 {
+	// 전역 상태 변환 취급
 	Scene::update();
 
 	if (KEY_TAP(KEY::ESC)) {
 		ChangeScene(SCENE_TYPE::TOWN);
+	}
+
+	Vec2 mPos = MOUSE_POS;
+	Vec2 dScale = dragRenderer->GetScale();
+
+	dragRenderer->SetPos(mPos - dScale / 2.f);
+
+	if (KEY_AWAY(KEY::LBTN)) {
+		dragRenderer->SetCanRend(false);
+	}
+
+	if (scState == DSCENE_STATE::Idle) {
+
+	}
+	else if (scState == DSCENE_STATE::HeroDrag) {
+
 	}
 }
 

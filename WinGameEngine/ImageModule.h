@@ -35,6 +35,8 @@ public :
 	const wstring& GetResourceKey() const { return resourceKey; }
 	const wstring& GetRelativePath() const { return relativePath; }
 
+	void Load(const wstring& _resourceKey, const wstring& _relativePath);
+
 	void render(HDC _dc);
 };
 

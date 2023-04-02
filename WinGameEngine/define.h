@@ -28,8 +28,8 @@ enum class GROUP_TYPE {
 	MONSTER,
 	PROJ_PLAYER,
 	PROJ_MONSTER,
-
-	UI = 31,
+	UI = 30,
+	UI_OVER = 31,
 	END = 32,
 };
 
@@ -38,6 +38,7 @@ enum class SCENE_TYPE {
 	TITLE,
 	TOWN,
 	DSELECT,
+	SHOP,
 	TEST,
 	END,
 };

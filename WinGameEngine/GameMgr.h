@@ -1,6 +1,7 @@
 #pragma once
 
 class CHero;
+class CItem;
 
 class GameMgr
 {
@@ -23,9 +24,8 @@ private :
 	// 현재 스쿼드
 	array<CHero*, 4> curSquad;
 
-	// 던전 리스트
-
-
+	// 인벤토리 관리
+	array<CItem*, 16> curItems;
 
 public :
 
@@ -48,6 +48,25 @@ public :
 
 	const vector<CHero*>& GetCurLoster() { return curHeros; }
 
+	// 로스터에서 찾는 함수
+	CHero* FindHeroByName(const wstring& _heroName);
+	
+	// 스쿼드에서 찾는 함수
+	int FindIndexByName(const wstring& _heroName);
+	void MakeEmpySlot(int _index) { curSquad[_index] = nullptr; }
+	void AddSquad(int _index, const wstring& _heroName);
+	bool isSlotEmpty(int _index);
+
+	void SwapSquad(int _from, int _to);
+	void CleanSqaud();
+	CHero* GetHeroBySquad(int _index);
+
+	// 인벤토리 관리 함수
+	array<CItem*, 16>& GetInventory() { return curItems; }
+	void CreateItem(wstring _key, int _index);
+	void MoveInventory(int _from, int _to);
+	void SwapInventory(int _from, int _to);
+	void RemoveItem(int _index);
 public :
 	SINGLE(GameMgr);
 };

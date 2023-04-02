@@ -6,6 +6,7 @@
 #include "Scene_Test.h"
 #include "Scene_Town.h"
 #include "Scene_DSelect.h"
+#include "Scene_Shop.h"
 
 SceneMgr::SceneMgr()
 	: m_arrScene{}
@@ -30,8 +31,10 @@ void SceneMgr::init()
 	m_arrScene[(size_t)SCENE_TYPE::TOWN]->SetName(L"Scene_Town");
 	m_arrScene[(size_t)SCENE_TYPE::DSELECT] = new Scene_DSelect;
 	m_arrScene[(size_t)SCENE_TYPE::DSELECT]->SetName(L"Scene_DSelect");
+	m_arrScene[(size_t)SCENE_TYPE::SHOP] = new Scene_Shop;
+	m_arrScene[(size_t)SCENE_TYPE::SHOP]->SetName(L"Scene_Shop");
 
-	m_pCurScene = m_arrScene[(size_t)SCENE_TYPE::DSELECT];
+	m_pCurScene = m_arrScene[(size_t)SCENE_TYPE::SHOP];
 	m_pCurScene->Enter();
 }
 

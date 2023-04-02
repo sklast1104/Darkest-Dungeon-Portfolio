@@ -10,6 +10,16 @@
 #include "CQuest.h"
 #include "RadioBtnClickCom.h"
 #include "ForwardBtnClick.h"
+#include "HeroBtnClick.h"
+#include "SceneMgr.h"
+#include "Scene.h"
+#include "SlotUp.h"
+#include "SlotDown.h"
+#include "ShopItemClick.h"
+#include "BottomNavUpdate.h"
+#include "InvItemClick.h"
+#include "InvItemDown.h"
+#include "InvItemUp.h"
 
 DivUI* UIFactory::CreateTitle()
 {
@@ -84,6 +94,8 @@ DivUI* UIFactory::CreateBottomNavUI()
 	bottomNavUI->SetPos(Vec2(0.f, 955.f));
 	bottomNavUI->CanTarget(false);
 	bottomNavUI->InitImageModule(L"Botton_nav_bg", L"resource\\UI\\progression_bar.png");
+	bottomNavUI->InitUpdateValue(new BottomNavUpdate(bottomNavUI));
+	bottomNavUI->SetName(L"bottom_nav");
 
 #pragma region icon_list
 
@@ -251,7 +263,8 @@ DivUI* UIFactory::CreateSideNavUI()
 		heroPanel->SetScale(Vec2(355.f, 104.f));
 		heroPanel->SetPos(Vec2(0.f, 0 + i * (105.f) ) );
 		heroPanel->InitImageModule(L"hero_roster_panel_bg", L"resource\\roster\\roster_bg.png");
-
+		heroPanel->InitOneMouseDown(new HeroBtnClick(hero));
+		
 		DivUI* heroPortrait = new DivUI;
 		heroPortrait->SetScale(Vec2(85.f, 85.f));
 		heroPortrait->SetPos(Vec2(20.f, 8.f));
@@ -385,6 +398,33 @@ DivUI* UIFactory::CreateSideNavUI()
 	return heroSideNav;
 }
 
+DivUI* UIFactory::CreateSlotContainer(Vec2 _vPos, DivUI* _dragRenderer)
+{
+	DivUI* slotRect = new DivUI;
+	slotRect->SetScale(Vec2(340.f, 85.f));
+	slotRect->SetPos(_vPos);
+
+	for (int i = 0; i < 4; i++) {
+		DivUI* slot = new DivUI;
+		slot->SetScale(Vec2(85.f, 85.f));
+		slot->SetPos(Vec2(0.f + (i * 85.f), 0.f));
+		slot->InitImageModule(L"slot_bg", L"resource\\roster\\slot1.png");
+
+		slotRect->AddChild(slot);
+
+		DivUI* heroPortrait = new DivUI;
+		heroPortrait->SetScale(Vec2(68.f, 68.f));
+		heroPortrait->SetPos(Vec2(9.f, 9.f));
+		heroPortrait->InitOnMouseUp(new SlotUp(heroPortrait, _dragRenderer, i, slotRect));
+		heroPortrait->InitOneMouseDown(new SlotDown(heroPortrait, _dragRenderer, i));
+		heroPortrait->SetCanRendImg(false);
+
+		slot->AddChild(heroPortrait);
+	}
+
+	return slotRect;
+}
+
 DivUI* UIFactory::DungeonPgPanel(Vec2 _vPos, CDungeon* _dungeon, Scene_DSelect* _dScene)
 {
 	DivUI* dunProgBar = new DivUI;
@@ -449,4 +489,79 @@ DivUI* UIFactory::DungeonPgPanel(Vec2 _vPos, CDungeon* _dungeon, Scene_DSelect* 
 	}
 
 	return dunProgBar;
+}
+
+DivUI* UIFactory::CreateShopItem(Vec2 _vPos, wstring _key, wstring _path, int _count, int _cost, DivUI* shopInvPanel)
+{
+	DivUI* itContainer = new DivUI;
+	itContainer->SetScale(Vec2(72.f, 170.f));
+	itContainer->SetPos(_vPos);
+	itContainer->CanTarget(false);
+
+	DivUI* foodIt = new DivUI;
+	foodIt->SetScale(Vec2(72.f, 144.f));
+	foodIt->SetPos(Vec2(0.f, 0.f));
+	foodIt->InitImageModule(_key, _path);
+	foodIt->InitOnMouseClick(new ShopItemClick(foodIt, shopInvPanel, _cost));
+
+	itContainer->AddChild(foodIt);
+
+	DivUI* foodCount = new DivUI;
+	foodCount->SetScale(Vec2(40.f, 40.f));
+	foodCount->SetPos(Vec2(8.f, 0.f));
+	foodCount->InitTextModule(to_wstring(_count), 25);
+	foodCount->SetTextColor(194, 174, 107);
+	foodCount->SetFormat(DT_LEFT | DT_VCENTER | DT_SINGLELINE);
+	foodCount->CanTarget(false);
+
+	foodIt->AddChild(foodCount);
+
+	DivUI* goldIcon = new DivUI;
+	goldIcon->SetScale(Vec2(24.f, 24.f));
+	goldIcon->SetPos(Vec2(0.f, 150.f));
+	goldIcon->InitImageModule(L"gold_icon", L"resource\\items\\goldicon.png");
+	goldIcon->CanTarget(false);
+
+	itContainer->AddChild(goldIcon);
+
+	DivUI* countText = new DivUI;
+	countText->SetScale(Vec2(36.f, 20.f));
+	countText->SetPos(Vec2(30.f, 150.f));
+	countText->InitTextModule(to_wstring(_cost), 20);
+	countText->SetFormat(DT_LEFT | DT_VCENTER | DT_SINGLELINE);
+	countText->SetFont(L"이순신 돋움체 B");
+	countText->SetTextColor(194, 174, 107);
+	countText->CanTarget(false);
+
+	itContainer->AddChild(countText);
+
+	return itContainer;
+}
+
+DivUI* UIFactory::CreateInvItem(Vec2 _vPos, wstring _key, wstring _path, int _index)
+{
+	DivUI* invItem = new DivUI;
+	invItem->SetScale(Vec2(72.f, 144.f));
+	invItem->SetPos(_vPos);
+	invItem->CanTarget(true);
+	
+
+	if (SceneMgr::GetInst()->GetCurScene()->GetName() == L"Scene_Shop") {
+		invItem->InitOneMouseDown(new InvItemDown(invItem, _index));
+		invItem->InitOnMouseClick(new InvItemClick(invItem, _index));
+		invItem->InitOnMouseUp(new InvItemUp(invItem, _index));
+	}
+
+	DivUI* invCount = new DivUI;
+	invCount->SetScale(Vec2(40.f, 40.f));
+	invCount->SetPos(Vec2(8.f, 0.f));
+	invCount->InitTextModule(to_wstring(_index), 25);
+	invCount->SetTextColor(194, 174, 107);
+	invCount->SetFormat(DT_LEFT | DT_VCENTER | DT_SINGLELINE);
+	invCount->CanTarget(false);
+	invCount->SetCanRend(false);
+
+	invItem->AddChild(invCount);
+
+	return invItem;
 }

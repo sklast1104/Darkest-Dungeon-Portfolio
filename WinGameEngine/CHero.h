@@ -10,7 +10,9 @@ protected :
 	wstring name;
 	// 직업
 	wstring job_name;
+	// 초상화 키
 	wstring key;
+	// 초상화 경로
 	wstring path;
 
 	// 현재 체력

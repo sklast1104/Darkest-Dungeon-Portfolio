@@ -4,12 +4,21 @@
 class DivUI;
 class CDungeon;
 
+enum class DSCENE_STATE {
+
+	Idle,
+	HeroDrag,
+};
 
 class Scene_DSelect :
 	public Scene
 {
 
 private :
+
+	DSCENE_STATE scState;
+
+	DivUI* dragRenderer;
 
 	vector<DivUI*> radioBtns;
 
@@ -43,6 +52,8 @@ public :
 	virtual void update() override;
 
 	void turnOffRadioBtn();
+
+	DivUI* GetRenderer() { return dragRenderer; }
 
 	friend class UIFactory;
 	friend class RadioBtnClickCom;

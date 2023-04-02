@@ -15,6 +15,7 @@ DivUI::DivUI()
 	, canRendImg{false}
 	, canRendTxt{false}
 	, canRend{true}
+	, id{0}
 {
 }
 
@@ -25,7 +26,11 @@ DivUI::~DivUI()
 
 	Safe_Delete<CCommand*>(onMouseOver);
 	Safe_Delete<CCommand*>(onMouseOut);
+	Safe_Delete<CCommand*>(onMouseUp);
+	Safe_Delete<CCommand*>(onMouseDown);
 	Safe_Delete<CCommand*>(onMouseClick);
+	
+	Safe_Delete<CCommand*>(onUpdateValue);
 }
 
 void DivUI::SetSrcAlpha(int _alpha)
@@ -82,13 +87,22 @@ void DivUI::InitImageModule(const wstring& _resourceKey, const wstring& _relativ
 	if (nullptr == iModule) {
 		iModule = new ImageModule(_resourceKey, _relativePath);
 		canRendImg = true;
-	}	
+	}
+	else {
+		// 이미 있을경우
+		iModule->Load(_resourceKey, _relativePath);
+	}
 }
 
 void DivUI::InitTextModule(const wstring& _text, const UINT _textSize)
 {
 	if (nullptr == tModule) {
 		tModule = new TextModule;
+		tModule->SetText(_text);
+		tModule->SetTextSize(_textSize);
+		canRendTxt = true;
+	}
+	else {
 		tModule->SetText(_text);
 		tModule->SetTextSize(_textSize);
 		canRendTxt = true;
@@ -178,6 +192,10 @@ void DivUI::update()
 
 	if (finalPos.x <= mousePos.x && mousePos.x <= finalPos.x + myScale.x
 		&& finalPos.y <= mousePos.y && mousePos.y <= finalPos.y + myScale.y) {
+		
+		if (nullptr != onMouseOver) {
+			onMouseOver->Execute();
+		}
 
 	}
 	else {
@@ -195,9 +213,30 @@ void DivUI::MouseOn()
 	}
 }
 
+void DivUI::MouseLbtnUp()
+{
+	if (nullptr != onMouseUp) {
+		onMouseUp->Execute();
+	}
+}
+
+void DivUI::MouseLbtnDown()
+{
+	if (nullptr != onMouseDown) {
+		onMouseDown->Execute();
+	}
+}
+
 void DivUI::MouseLbtnClicked()
 {
 	if (nullptr != onMouseClick) {
 		onMouseClick->Execute();
+	}
+}
+
+void DivUI::updateValue()
+{
+	if (nullptr != onUpdateValue) {
+		onUpdateValue->Execute();
 	}
 }
