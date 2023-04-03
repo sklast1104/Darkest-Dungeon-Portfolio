@@ -56,6 +56,7 @@ public :
 	void MakeEmpySlot(int _index) { curSquad[_index] = nullptr; }
 	void AddSquad(int _index, const wstring& _heroName);
 	bool isSlotEmpty(int _index);
+	const array<CHero*, 4>& GetSquad() { return curSquad; }
 
 	void SwapSquad(int _from, int _to);
 	void CleanSqaud();
@@ -67,6 +68,7 @@ public :
 	void MoveInventory(int _from, int _to);
 	void SwapInventory(int _from, int _to);
 	void RemoveItem(int _index);
+	void ClearInventory();
 public :
 	SINGLE(GameMgr);
 };

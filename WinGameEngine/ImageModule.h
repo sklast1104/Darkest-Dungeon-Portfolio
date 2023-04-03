@@ -26,6 +26,8 @@ public :
 	ImageModule(const wstring& _resourceKey, const wstring& _relativePath);
 	~ImageModule();
 
+	void SetResourceKey(const wstring& _rKey) { resourceKey = _rKey; }
+
 	// Local, World, Camera, Viewport 전부 끝난 Pos여야함
 	void SetPos(Vec2 _vPos) { vPos = _vPos; }
 	// Local, World, Camera, Viewport 전부 끝난 Scale여야함

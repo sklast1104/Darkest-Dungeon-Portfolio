@@ -3,6 +3,7 @@
 class DivUI;
 class CDungeon;
 class Scene_DSelect;
+class CInvItem;
 
 class UIFactory
 {
@@ -23,5 +24,6 @@ public :
 	static DivUI* CreateShopItem(Vec2 _vPos, wstring _key, wstring _path, int _count, int _cost, DivUI* shopInvPanel);
 	static DivUI* CreateInvItem(Vec2 _vPos, wstring _key, wstring _path, int _count);
 
+	static DivUI* CreateToolTip(Vec2 _vPos, CInvItem* _invItem);
 };
 

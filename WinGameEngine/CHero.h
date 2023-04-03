@@ -6,6 +6,11 @@ class CHero
 {
 protected :
 
+	// primary key 역할을 하는 변수
+	static int id ;
+
+	int pKey;
+
 	// 이름
 	wstring name;
 	// 직업
@@ -14,6 +19,11 @@ protected :
 	wstring key;
 	// 초상화 경로
 	wstring path;
+
+	// 그레이 스케일 초상화 키
+	wstring grayKey;
+	// 그레이 스케일 초상화 경로
+	wstring grayPath;
 
 	// 현재 체력
 	UINT curHp;
@@ -60,13 +70,16 @@ protected :
 	wstring armourKey;
 	wstring armourPath;
 	int armorLevel;
-
-	
-
+\
 public :
 
 	CHero();
 	virtual ~CHero();
+
+	const wstring& GetGrayKey() { return grayKey; }
+	const wstring& GetGrayPath() { return grayPath; }
+
+	int GetPKey() { return pKey; }
 
 	int GetCurExp() { return curExp; }
 	void SetExp(int _exp) { curExp = _exp; }

@@ -6,6 +6,10 @@ CHighwayMan::CHighwayMan()
 {
 	key = L"Highwayman Portrait";
 	path = L"resource\\heros\\highwayman.png";
+
+	grayKey = L"Highwayman Portrait Gray";
+	grayPath = L"resource\\heros\\highwayman_gray.png";
+
 	name = L"디스마스";
 	job_name = L"노상강도";
 

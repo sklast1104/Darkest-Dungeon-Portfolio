@@ -20,6 +20,8 @@
 #include "InvItemClick.h"
 #include "InvItemDown.h"
 #include "InvItemUp.h"
+#include "CInvItem.h"
+#include "SideNavUpdateVal.h"
 
 DivUI* UIFactory::CreateTitle()
 {
@@ -250,6 +252,9 @@ DivUI* UIFactory::CreateSideNavUI()
 	heroSideNav->SetScale(Vec2(355.f, 832.f));
 	heroSideNav->SetPos(Vec2(1565.f, 100.f));
 	heroSideNav->CanTarget(true);
+	heroSideNav->InitUpdateValue(new SideNavUpdateVal(heroSideNav));
+	heroSideNav->SetName(L"heroSideNav");
+	heroSideNav->CanTarget(false);
 
 	const vector<CHero*>& curLoster = GameMgr::GetInst()->GetCurLoster();
 
@@ -264,6 +269,8 @@ DivUI* UIFactory::CreateSideNavUI()
 		heroPanel->SetPos(Vec2(0.f, 0 + i * (105.f) ) );
 		heroPanel->InitImageModule(L"hero_roster_panel_bg", L"resource\\roster\\roster_bg.png");
 		heroPanel->InitOneMouseDown(new HeroBtnClick(hero));
+		heroPanel->SetId(hero->GetPKey());
+		heroPanel->SetName(L"heroPanel");
 		
 		DivUI* heroPortrait = new DivUI;
 		heroPortrait->SetScale(Vec2(85.f, 85.f));
@@ -395,6 +402,8 @@ DivUI* UIFactory::CreateSideNavUI()
 
 	}
 
+	heroSideNav->updateValue();
+
 	return heroSideNav;
 }
 
@@ -404,20 +413,34 @@ DivUI* UIFactory::CreateSlotContainer(Vec2 _vPos, DivUI* _dragRenderer)
 	slotRect->SetScale(Vec2(340.f, 85.f));
 	slotRect->SetPos(_vPos);
 
+	const array<CHero*, 4> squad = GameMgr::GetInst()->GetSquad();
+
 	for (int i = 0; i < 4; i++) {
 		DivUI* slot = new DivUI;
 		slot->SetScale(Vec2(85.f, 85.f));
 		slot->SetPos(Vec2(0.f + (i * 85.f), 0.f));
 		slot->InitImageModule(L"slot_bg", L"resource\\roster\\slot1.png");
+		slot->CanTarget(false);
 
 		slotRect->AddChild(slot);
 
+		// 던전 선택 씬에서만 이벤트 등록해줘야 할 수도 있음
 		DivUI* heroPortrait = new DivUI;
 		heroPortrait->SetScale(Vec2(68.f, 68.f));
 		heroPortrait->SetPos(Vec2(9.f, 9.f));
-		heroPortrait->InitOnMouseUp(new SlotUp(heroPortrait, _dragRenderer, i, slotRect));
-		heroPortrait->InitOneMouseDown(new SlotDown(heroPortrait, _dragRenderer, i));
+
+		if (SceneMgr::GetInst()->GetCurScene()->GetName() == L"Scene_DSelect") {
+			heroPortrait->InitOnMouseUp(new SlotUp(heroPortrait, _dragRenderer, i, slotRect));
+			heroPortrait->InitOneMouseDown(new SlotDown(heroPortrait, _dragRenderer, i));
+		}
+
 		heroPortrait->SetCanRendImg(false);
+
+		if (nullptr != squad[i]) {
+			heroPortrait->InitImageModule(squad[i]->GetKey(), squad[i]->GetPath());
+			heroPortrait->SetCanRendImg(true);
+			heroPortrait->SetName(squad[i]->GetName());
+		}
 
 		slot->AddChild(heroPortrait);
 	}
@@ -564,4 +587,36 @@ DivUI* UIFactory::CreateInvItem(Vec2 _vPos, wstring _key, wstring _path, int _in
 	invItem->AddChild(invCount);
 
 	return invItem;
+}
+
+DivUI* UIFactory::CreateToolTip(Vec2 _vPos, CInvItem* _invItem)
+{
+	DivUI* toolTip = new DivUI;
+	toolTip->SetPos(_vPos);
+	toolTip->SetScale(Vec2(220.f, 40.f + _invItem->GetRowNum() * 23.f));
+	toolTip->InitImageModule(L"toolTip_Image", L"resource\\Background\\tooltip_crop.png");
+	toolTip->SetSrcAlpha(215);
+	toolTip->CanTarget(true);
+	toolTip->SetCanRend(false);
+
+	DivUI* toolTipTitle = new DivUI;
+	toolTipTitle->SetPos(Vec2(0.f, 10.f));
+	toolTipTitle->SetScale(Vec2(220.f, 22.f));
+	toolTipTitle->InitTextModule(_invItem->GetTitle(), 22);
+	toolTipTitle->SetFont(L"이순신 돋움체 M");
+	toolTipTitle->SetTextColor(194, 174, 107);
+
+	toolTip->AddChild(toolTipTitle);
+
+	DivUI* toolTipDisc = new DivUI;
+	toolTipDisc->SetPos(Vec2(0.f, 35.f));
+	toolTipDisc->SetScale(Vec2(220.f, 150.f));
+	toolTipDisc->InitTextModule(_invItem->GetDisc(), 22);
+	toolTipDisc->SetFont(L"이순신 돋움체 M");
+	toolTipDisc->SetTextColor(172, 170, 160);
+	toolTipDisc->SetFormat(DT_CENTER | DT_EDITCONTROL);
+
+	toolTip->AddChild(toolTipDisc);
+
+	return toolTip;
 }

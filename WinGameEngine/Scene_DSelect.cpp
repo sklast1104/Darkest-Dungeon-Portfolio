@@ -14,6 +14,7 @@
 #include "SlotUp.h"
 #include "SlotDown.h"
 #include "GameMgr.h"
+#include "ImageModule.h"
 
 Scene_DSelect::Scene_DSelect()
 	: scState{DSCENE_STATE::Idle}
@@ -52,7 +53,7 @@ void Scene_DSelect::Enter()
 
 	Vec2 vResolution = Core::GetInst()->GetResolution();
 
-	DivUI* pseudoUI = new DivUI;
+	pseudoUI = new DivUI;
 	pseudoUI->SetScale(vResolution);
 	pseudoUI->SetPos(Vec2(0.f, 0.f));
 	pseudoUI->CanTarget(false);
@@ -247,7 +248,8 @@ void Scene_DSelect::Exit()
 	Safe_Delete(court);
 	Safe_Delete(bay);
 
-	GameMgr::GetInst()->CleanSqaud();
+	// 이제 스쿼드 클리어 하지 말고 스쿼드 기반 렌더링으로 변경
+	//GameMgr::GetInst()->CleanSqaud();
 }
 
 void Scene_DSelect::update()

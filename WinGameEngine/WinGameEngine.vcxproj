@@ -193,6 +193,7 @@
     <ClInclude Include="ShopItemClick.h" />
     <ClInclude Include="ShopItemOut.h" />
     <ClInclude Include="ShopItemOver.h" />
+    <ClInclude Include="SideNavUpdateVal.h" />
     <ClInclude Include="SlotDown.h" />
     <ClInclude Include="SlotUp.h" />
     <ClInclude Include="Sound.h" />
@@ -269,6 +270,7 @@
     <ClCompile Include="ShopItemClick.cpp" />
     <ClCompile Include="ShopItemOut.cpp" />
     <ClCompile Include="ShopItemOver.cpp" />
+    <ClCompile Include="SideNavUpdateVal.cpp" />
     <ClCompile Include="SlotDown.cpp" />
     <ClCompile Include="SlotUp.cpp" />
     <ClCompile Include="Sound.cpp" />

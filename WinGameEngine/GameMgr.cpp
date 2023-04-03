@@ -153,3 +153,19 @@ void GameMgr::RemoveItem(int _index)
 		Safe_Delete<CItem*>(curItems[_index]);
 	}
 }
+
+void GameMgr::ClearInventory()
+{
+	for (int i = 0; i < 16; i++) {
+		if (nullptr != curItems[i]) {
+
+			// 코스트도 아이템에 추가해야할듯
+			CInvItem* item = (CInvItem*)curItems[i];
+			int cashBack = item->GetCost() * item->GetCurCount();
+
+			moneyCnt += cashBack;
+
+			Safe_Delete<CItem*>(curItems[i]);
+		}
+	}
+}

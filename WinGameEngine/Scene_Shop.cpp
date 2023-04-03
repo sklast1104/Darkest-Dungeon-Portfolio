@@ -11,6 +11,7 @@
 #include "ShopInvUpdateVal.h"
 #include "ShopItemOver.h"
 #include "ShopItemOut.h"
+#include "GameMgr.h"
 
 Scene_Shop::Scene_Shop()
 	: dragRenderer{nullptr}
@@ -200,38 +201,13 @@ void Scene_Shop::Enter()
 
 		Vec2 siContainerPos = Vec2(790.f, 35.f) + Vec2(150.f, 130.f);
 
-		DivUI* toolTipTest = new DivUI;
-		toolTipTest->SetPos(Vec2(80.f + siContainerPos.x + (coord_x) , siContainerPos.y + coord_y));
-		toolTipTest->SetScale(Vec2(220.f, 40.f + shopItems[i]->GetRowNum() * 23.f));
-		toolTipTest->InitImageModule(L"toolTip_Image", L"resource\\Background\\tooltip_crop.png");
-		toolTipTest->SetSrcAlpha(215);
-		toolTipTest->CanTarget(true);
-		toolTipTest->SetCanRend(false);
-
-		AddObject(toolTipTest, GROUP_TYPE::UI_OVER);
-
-		DivUI* toolTipTitle = new DivUI;
-		toolTipTitle->SetPos(Vec2(0.f, 10.f));
-		toolTipTitle->SetScale(Vec2(220.f, 22.f));
-		toolTipTitle->InitTextModule(shopItems[i]->GetTitle(), 22);
-		toolTipTitle->SetFont(L"이순신 돋움체 M");
-		toolTipTitle->SetTextColor(194, 174, 107);
-
-		toolTipTest->AddChild(toolTipTitle);
-
-		DivUI* toolTipDisc = new DivUI;
-		toolTipDisc->SetPos(Vec2(0.f, 35.f));
-		toolTipDisc->SetScale(Vec2(220.f, 150.f));
-		toolTipDisc->InitTextModule(shopItems[i]->GetDisc(), 22);
-		toolTipDisc->SetFont(L"이순신 돋움체 M");
-		toolTipDisc->SetTextColor(172, 170, 160);
-		toolTipDisc->SetFormat(DT_CENTER | DT_EDITCONTROL);
-
-		toolTipTest->AddChild(toolTipDisc);
+		DivUI* toolTip = UIFactory::CreateToolTip(Vec2(80.f + siContainerPos.x + (coord_x), siContainerPos.y + coord_y), shopItems[i]);
+			
+		AddObject(toolTip, GROUP_TYPE::UI_OVER);
 
 		DivUI* shopItem = UIFactory::CreateShopItem(Vec2(coord_x, coord_y), shopItems[i]->GetName(), shopItems[i]->GetPath(), shopItems[i]->GetCurCount(), shopItems[i]->GetCost(), shopInvPanel);
-		shopItem->InitOnMouseOver(new ShopItemOver(toolTipTest));
-		shopItem->InitOnMouseOut(new ShopItemOut(toolTipTest));
+		shopItem->InitOnMouseOver(new ShopItemOver(toolTip));
+		shopItem->InitOnMouseOut(new ShopItemOut(toolTip));
 
 		siContainer->AddChild(shopItem);
 	}
@@ -275,6 +251,9 @@ void Scene_Shop::update()
 
 	if (KEY_TAP(KEY::ESC)) {
 		ChangeScene(SCENE_TYPE::DSELECT);
+		//GameMgr::GetInst()->CleanSqaud();
+		// 돈 복구를 해주던가 인벤토리 유지를 해주던가 해야함
+		GameMgr::GetInst()->ClearInventory();
 	}
 
 	Vec2 mPos = MOUSE_POS;

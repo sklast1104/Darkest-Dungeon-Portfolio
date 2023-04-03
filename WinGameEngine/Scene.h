@@ -1,6 +1,7 @@
 #pragma once
 
 class Object;
+class DivUI;
 
 class Scene
 {
@@ -8,6 +9,10 @@ private :
 
 	vector<Object*> m_arrObj[(size_t)GROUP_TYPE::END];
 	wstring m_strName;
+
+protected :
+
+	DivUI* pseudoUI;
 
 public :
 
@@ -36,5 +41,7 @@ public :
 
 	virtual void Enter() = 0;
 	virtual void Exit();
+
+	DivUI* GetPseudoUI() { return pseudoUI; }
 };
 

@@ -7,6 +7,9 @@ CCrusader::CCrusader()
 	key = L"Crusader Portrait";
 	path = L"resource\\heros\\crusader.png";
 
+	grayKey = L"Crusader Portrait Gray";
+	grayPath = L"resource\\heros\\crusader_gray.png";
+
 	name = L"레이널드";
 	job_name = L"성전사";
 

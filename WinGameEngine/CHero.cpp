@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "CHero.h"
 
+int CHero::id = 0;
+
 CHero::CHero()
 	: name{ L"" }, key{ L"" }, path{ L"" }
 	, hp{ 0 }, hitRate{ 0 }, avoidanceRate{ 0 }, criticalHitRate{ 0 }
@@ -9,6 +11,8 @@ CHero::CHero()
 {
 	skillArray.fill(nullptr);
 	curSkillArray.fill(nullptr);
+	id += 1;
+	pKey = id;
 }
 
 CHero::~CHero()

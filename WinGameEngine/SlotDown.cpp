@@ -4,6 +4,8 @@
 #include "DivUI.h"
 #include "ImageModule.h"
 #include "GameMgr.h"
+#include "SceneMgr.h"
+#include "Scene.h"
 
 SlotDown::SlotDown(DivUI* _heroPortrait, DivUI* _dragRenderer, int _slotIndex)
 	: heroPortrait{_heroPortrait}, dragRenderer{_dragRenderer}, slotIndex{_slotIndex}
@@ -16,19 +18,33 @@ SlotDown::~SlotDown()
 
 void SlotDown::Execute()
 {
+	DivUI* pseudoUI = SceneMgr::GetInst()->GetCurScene()->GetPseudoUI();
+	DivUI* sideNavUI = (DivUI*)FindUIByName((UI*)pseudoUI, L"heroSideNav");
+
+	const array<CHero*, 4> squad = GameMgr::GetInst()->GetSquad();
+
 	// 슬롯을 상점씬이랑 던전 선택씬만 쓸텐데 두개다 이 로직을 사용할 확률이 높음
+	// 실제로 슬롯에 히어로가 있을때만 동작해야함
 
-	if (nullptr != heroPortrait->GetIModule()) {
-		wstring key = heroPortrait->GetIModule()->GetResourceKey();
-		wstring path = heroPortrait->GetIModule()->GetRelativePath();
+	if (nullptr != squad[slotIndex]) {
 
-		dragRenderer->InitImageModule(key, path);
-		dragRenderer->SetName(heroPortrait->GetName());
-		dragRenderer->SetId(slotIndex);
-		dragRenderer->SetCanRend(true);
-		heroPortrait->SetCanRendImg(false);
+		if (nullptr != heroPortrait->GetIModule()) {
 
-		heroPortrait->SetName(L"");
-		GameMgr::GetInst()->MakeEmpySlot(slotIndex);
+			wstring key = heroPortrait->GetIModule()->GetResourceKey();
+			wstring path = heroPortrait->GetIModule()->GetRelativePath();
+
+			// 씬에서 렌더링해줄떄 히어로 포트레잇에도 이름 붙여줘야함
+			dragRenderer->InitImageModule(key, path);
+			dragRenderer->SetName(heroPortrait->GetName());
+			dragRenderer->SetId(slotIndex);
+			dragRenderer->SetCanRend(true);
+			heroPortrait->SetCanRendImg(false);
+
+			//heroPortrait->SetName(L"");
+			GameMgr::GetInst()->MakeEmpySlot(slotIndex);
+			sideNavUI->updateValue();
+
+		}
 	}
+	
 }

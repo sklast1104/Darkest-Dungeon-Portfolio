@@ -12,6 +12,6 @@ void ForwardBtnClick::Execute()
 		ChangeScene(SCENE_TYPE::DSELECT);
 	}
 	else if (curScene->GetName() == L"Scene_DSelect") {
-
+		ChangeScene(SCENE_TYPE::SHOP);
 	}
 }
