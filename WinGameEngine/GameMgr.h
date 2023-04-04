@@ -2,6 +2,7 @@
 
 class CHero;
 class CItem;
+class DarkestMachine;
 
 class GameMgr
 {
@@ -26,6 +27,9 @@ private :
 
 	// 인벤토리 관리
 	array<CItem*, 16> curItems;
+
+	// 상태머신
+	DarkestMachine* machine;
 
 public :
 
@@ -61,6 +65,7 @@ public :
 	void SwapSquad(int _from, int _to);
 	void CleanSqaud();
 	CHero* GetHeroBySquad(int _index);
+	int GetSquadNum();
 
 	// 인벤토리 관리 함수
 	array<CItem*, 16>& GetInventory() { return curItems; }
@@ -69,6 +74,9 @@ public :
 	void SwapInventory(int _from, int _to);
 	void RemoveItem(int _index);
 	void ClearInventory();
+
+	// 상태머신 관련
+	DarkestMachine* GetMachine() { return machine; }
 public :
 	SINGLE(GameMgr);
 };

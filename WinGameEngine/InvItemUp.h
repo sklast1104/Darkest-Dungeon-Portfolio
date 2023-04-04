@@ -2,7 +2,7 @@
 #include "CCommand.h"
 
 class DivUI;
-class Scene_Shop;
+class Scene;
 class GameMgr;
 
 class InvItemUp :
@@ -11,7 +11,7 @@ class InvItemUp :
 private :
 
 	DivUI* myItem;
-	Scene_Shop* scene;
+	Scene* scene;
 	GameMgr* mgr;
 	int index;
 

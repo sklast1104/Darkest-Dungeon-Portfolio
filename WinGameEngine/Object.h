@@ -5,7 +5,7 @@ class Animator;
 
 class Object
 {
-private:
+protected:
 	wstring m_strName;
 
 	Vec2 m_vPos;
@@ -39,7 +39,7 @@ public :
 	bool isDead() { return !m_bAlive; }
 
 	void CreateCollider();
-	void CreateAnimator();
+	virtual void CreateAnimator();
 	void CreateAnimator(Animator* _animator);
 	void CreateRigidBody();
 

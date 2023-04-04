@@ -574,6 +574,10 @@ DivUI* UIFactory::CreateInvItem(Vec2 _vPos, wstring _key, wstring _path, int _in
 		invItem->InitOnMouseClick(new InvItemClick(invItem, _index));
 		invItem->InitOnMouseUp(new InvItemUp(invItem, _index));
 	}
+	else if (SceneMgr::GetInst()->GetCurScene()->GetName() == L"Scene_Droom") {
+		invItem->InitOneMouseDown(new InvItemDown(invItem, _index));
+		invItem->InitOnMouseUp(new InvItemUp(invItem, _index));
+	}
 
 	DivUI* invCount = new DivUI;
 	invCount->SetScale(Vec2(40.f, 40.f));

@@ -367,8 +367,8 @@ void AnimationDK::render(HDC _dc)
 		bf.SourceConstantAlpha = 255;
 
 		AlphaBlend(_dc
-			, (int)(vPos.x - vScale.x / 2.f + vOffset.x)
-			, (int)(vPos.y - vScale.y / 2.f + vOffset.y)
+			, (int)(vPos.x  + vOffset.x)
+			, (int)(vPos.y + vOffset.y)
 			, (int)(vecDKFrm[m_iCurFrm].vSize.x)
 			, (int)(vecDKFrm[m_iCurFrm].vSize.y)
 			, texMap[vecDKFrm[m_iCurFrm].texKey]->GetDC()

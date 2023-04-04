@@ -134,7 +134,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="AI.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AnimationDK.h" />
     <ClInclude Include="Animator.h" />
@@ -151,11 +150,18 @@
     <ClInclude Include="CCrusader.h" />
     <ClInclude Include="CDungeon.h" />
     <ClInclude Include="CHero.h" />
+    <ClInclude Include="CHeroDiv.h" />
     <ClInclude Include="CHighwayMan.h" />
+    <ClInclude Include="CIdleState.h" />
     <ClInclude Include="CInvItem.h" />
     <ClInclude Include="CItem.h" />
     <ClInclude Include="CQuest.h" />
+    <ClInclude Include="CSelectedOverlay.h" />
     <ClInclude Include="CSkill.h" />
+    <ClInclude Include="CSquadDiv.h" />
+    <ClInclude Include="CState.h" />
+    <ClInclude Include="CStMachine.h" />
+    <ClInclude Include="DarkestMachine.h" />
     <ClInclude Include="DRendererUp.h" />
     <ClInclude Include="ForwardBtnClick.h" />
     <ClInclude Include="GameMgr.h" />
@@ -183,6 +189,7 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneMgr.h" />
+    <ClInclude Include="Scene_Droom.h" />
     <ClInclude Include="Scene_DSelect.h" />
     <ClInclude Include="Scene_Shop.h" />
     <ClInclude Include="Scene_Test.h" />
@@ -198,7 +205,6 @@
     <ClInclude Include="SlotUp.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="SoundMgr.h" />
-    <ClInclude Include="State.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="struct.h" />
     <ClInclude Include="targetver.h" />
@@ -213,7 +219,6 @@
     <ClInclude Include="WinGameEngine.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AI.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AnimationDK.cpp" />
     <ClCompile Include="Animator.cpp" />
@@ -230,11 +235,18 @@
     <ClCompile Include="CCrusader.cpp" />
     <ClCompile Include="CDungeon.cpp" />
     <ClCompile Include="CHero.cpp" />
+    <ClCompile Include="CHeroDiv.cpp" />
     <ClCompile Include="CHighwayMan.cpp" />
+    <ClCompile Include="CIdleState.cpp" />
     <ClCompile Include="CInvItem.cpp" />
     <ClCompile Include="CItem.cpp" />
     <ClCompile Include="CQuest.cpp" />
+    <ClCompile Include="CSelectedOverlay.cpp" />
     <ClCompile Include="CSkill.cpp" />
+    <ClCompile Include="CSquadDiv.cpp" />
+    <ClCompile Include="CState.cpp" />
+    <ClCompile Include="CStMachine.cpp" />
+    <ClCompile Include="DarkestMachine.cpp" />
     <ClCompile Include="DRendererUp.cpp" />
     <ClCompile Include="ForwardBtnClick.cpp" />
     <ClCompile Include="GameMgr.cpp" />
@@ -260,6 +272,7 @@
     <ClCompile Include="ResMgr.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneMgr.cpp" />
+    <ClCompile Include="Scene_Droom.cpp" />
     <ClCompile Include="Scene_DSelect.cpp" />
     <ClCompile Include="Scene_Shop.cpp" />
     <ClCompile Include="Scene_Test.cpp" />
@@ -275,7 +288,6 @@
     <ClCompile Include="SlotUp.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="SoundMgr.cpp" />
-    <ClCompile Include="State.cpp" />
     <ClCompile Include="TextModule.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeMgr.cpp" />

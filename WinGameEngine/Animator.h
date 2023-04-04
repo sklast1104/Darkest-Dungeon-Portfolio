@@ -34,6 +34,10 @@ public:
 	void finalupdate();
 	void render(HDC _dc);
 
+	void SetOwnerObject(Object* owner) {
+		m_pOwner = owner;
+	}
+
 	Object* GetObj() { return m_pOwner; }
 
 	friend class Object;

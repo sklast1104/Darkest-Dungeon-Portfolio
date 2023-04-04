@@ -30,6 +30,7 @@ public:
     bool isViewEffected() { return m_viewAffected; }
     bool isCanTarget() { return m_canTarget; }
 
+    void SetCamAffected(bool _m_bCamAffected) { m_bCamAffected  = _m_bCamAffected;}
     void SetViewAffected(bool _viewAffected) { m_viewAffected = _viewAffected; }
     void CanTarget(bool _canTarget) { m_canTarget = _canTarget; }
 

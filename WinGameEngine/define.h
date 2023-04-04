@@ -39,6 +39,7 @@ enum class SCENE_TYPE {
 	TOWN,
 	DSELECT,
 	SHOP,
+	DROOM,
 	TEST,
 	END,
 };

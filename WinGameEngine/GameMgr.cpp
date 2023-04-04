@@ -6,12 +6,13 @@
 #include "CHighwayMan.h"
 
 #include "CInvItem.h"
+#include "DarkestMachine.h"
 
 GameMgr::GameMgr() 
 	: moneyCnt{0}, bustCnt{0}
 	, portraitCnt{0}, certCnt{0}
 	, bucklerCnt{0}, curHeros{}
-	, curSquad{}
+	, curSquad{}, machine{nullptr}
 {
 	for (int i = 0; i < 4; i++) {
 		curSquad[i] = nullptr;
@@ -30,6 +31,8 @@ GameMgr::~GameMgr() {
 	for (int i = 0; i < 16; i++) {
 		Safe_Delete<CItem*>(curItems[i]);
 	}
+
+	Safe_Delete(machine);
 }
 
 void GameMgr::init()
@@ -48,7 +51,7 @@ void GameMgr::init()
 
 	moneyCnt = 10070;
 
-
+	machine = new DarkestMachine;
 }
 
 CHero* GameMgr::FindHeroByName(const wstring& _heroName)
@@ -119,6 +122,19 @@ CHero* GameMgr::GetHeroBySquad(int _index)
 	int a = 3;
 
 	return hero;
+}
+
+int GameMgr::GetSquadNum()
+{
+	int num = 0;
+
+	for (int i = 0; i < 4; i++) {
+		if (nullptr != curSquad[i]) {
+			num += 1;
+		}
+	}
+
+	return num;
 }
 
 void GameMgr::CreateItem(wstring _key, int _index)

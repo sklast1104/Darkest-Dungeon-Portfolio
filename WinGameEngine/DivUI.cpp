@@ -166,9 +166,9 @@ void DivUI::render(HDC _dc)
 		tModule->render(_dc);
 	}
 
-	UI::render(_dc);
-
 	ComponentRender(_dc);
+
+	UI::render(_dc);
 }
 
 void DivUI::LoadAnimation(const wstring& _animName, const wstring& _atlasPath)
