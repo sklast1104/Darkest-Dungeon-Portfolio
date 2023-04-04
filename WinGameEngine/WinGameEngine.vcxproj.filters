@@ -136,6 +136,36 @@
     <Filter Include="Engine\05.Scene\SceneList\Scene_DSelect">
       <UniqueIdentifier>{80fa3dcc-9e2e-404e-9095-e5e9f610c0d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\10.DataModel\04.item">
+      <UniqueIdentifier>{3c5fe032-5a30-48d6-a55f-92cb09646a95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\10.DataModel\05.Quest">
+      <UniqueIdentifier>{f0db8d4d-c7f5-4302-9ef5-8064323d8ecb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\07.Component\03.Command\99. Commoncom">
+      <UniqueIdentifier>{53f95a06-391d-4b89-ba76-a77dce0e5705}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\05.Scene\SceneList\Scene_Shop">
+      <UniqueIdentifier>{4eed97a0-1b1d-487a-9a5d-373368ab0483}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\05.Scene\SceneList\Scene_Droom">
+      <UniqueIdentifier>{63d2184c-d809-45a9-b078-a933289fcda7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\07.Component\03.Command\04. ShopScenecom">
+      <UniqueIdentifier>{8c1a110a-08c0-427f-9ea2-2b56d448b45b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\07.Component\03.Command\03. DSelectcom">
+      <UniqueIdentifier>{c7641f6b-932f-4140-b434-5e45541f3345}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\08.Module\State\DarkestStates">
+      <UniqueIdentifier>{3618d91e-76d6-4933-a860-20cab2344f20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\10.DataModel\06.Dungeon">
+      <UniqueIdentifier>{c152c05a-092c-48fb-b6db-ea79459ca219}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04.Object\UI\04. DungeonUI">
+      <UniqueIdentifier>{dfc58e98-bce3-4a2c-a286-cf6cc05c8774}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -225,12 +255,6 @@
     <ClInclude Include="Sound.h">
       <Filter>Engine\06.Resource\02.Sound</Filter>
     </ClInclude>
-    <ClInclude Include="AI.h">
-      <Filter>Engine\08.Module\AI</Filter>
-    </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Engine\08.Module\State</Filter>
-    </ClInclude>
     <ClInclude Include="Scene_Test.h">
       <Filter>Engine\05.Scene\SceneList</Filter>
     </ClInclude>
@@ -308,6 +332,90 @@
     </ClInclude>
     <ClInclude Include="Scene_Title.h">
       <Filter>Engine\05.Scene\SceneList\Scene_Town</Filter>
+    </ClInclude>
+    <ClInclude Include="CInvItem.h">
+      <Filter>Engine\10.DataModel\04.item</Filter>
+    </ClInclude>
+    <ClInclude Include="CItem.h">
+      <Filter>Engine\10.DataModel\04.item</Filter>
+    </ClInclude>
+    <ClInclude Include="CQuest.h">
+      <Filter>Engine\10.DataModel\05.Quest</Filter>
+    </ClInclude>
+    <ClInclude Include="SlotUp.h">
+      <Filter>Engine\07.Component\03.Command\99. Commoncom</Filter>
+    </ClInclude>
+    <ClInclude Include="SideNavUpdateVal.h">
+      <Filter>Engine\07.Component\03.Command\99. Commoncom</Filter>
+    </ClInclude>
+    <ClInclude Include="SlotDown.h">
+      <Filter>Engine\07.Component\03.Command\99. Commoncom</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopItemOver.h">
+      <Filter>Engine\07.Component\03.Command\04. ShopScenecom</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopItemOut.h">
+      <Filter>Engine\07.Component\03.Command\04. ShopScenecom</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopItemClick.h">
+      <Filter>Engine\07.Component\03.Command\04. ShopScenecom</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopInvUpdateVal.h">
+      <Filter>Engine\07.Component\03.Command\04. ShopScenecom</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_Shop.h">
+      <Filter>Engine\05.Scene\SceneList\Scene_Shop</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_Droom.h">
+      <Filter>Engine\05.Scene\SceneList\Scene_Droom</Filter>
+    </ClInclude>
+    <ClInclude Include="RadioBtnClickCom.h">
+      <Filter>Engine\07.Component\03.Command\03. DSelectcom</Filter>
+    </ClInclude>
+    <ClInclude Include="InvItemClick.h">
+      <Filter>Engine\07.Component\03.Command\99. Commoncom</Filter>
+    </ClInclude>
+    <ClInclude Include="InvItemDown.h">
+      <Filter>Engine\07.Component\03.Command\99. Commoncom</Filter>
+    </ClInclude>
+    <ClInclude Include="InvItemUp.h">
+      <Filter>Engine\07.Component\03.Command\99. Commoncom</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardBtnClick.h">
+      <Filter>Engine\07.Component\03.Command\99. Commoncom</Filter>
+    </ClInclude>
+    <ClInclude Include="HeroBtnClick.h">
+      <Filter>Engine\07.Component\03.Command\99. Commoncom</Filter>
+    </ClInclude>
+    <ClInclude Include="DRendererUp.h">
+      <Filter>Engine\07.Component\03.Command\99. Commoncom</Filter>
+    </ClInclude>
+    <ClInclude Include="DarkestMachine.h">
+      <Filter>Engine\08.Module\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="CStMachine.h">
+      <Filter>Engine\08.Module\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="CState.h">
+      <Filter>Engine\08.Module\State</Filter>
+    </ClInclude>
+    <ClInclude Include="CIdleState.h">
+      <Filter>Engine\08.Module\State\DarkestStates</Filter>
+    </ClInclude>
+    <ClInclude Include="CDungeon.h">
+      <Filter>Engine\10.DataModel\06.Dungeon</Filter>
+    </ClInclude>
+    <ClInclude Include="BottomNavUpdate.h">
+      <Filter>Engine\07.Component\03.Command\99. Commoncom</Filter>
+    </ClInclude>
+    <ClInclude Include="CSquadDiv.h">
+      <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CHeroDiv.h">
+      <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CSelectedOverlay.h">
+      <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -388,12 +496,6 @@
     <ClCompile Include="Sound.cpp">
       <Filter>Engine\06.Resource\02.Sound</Filter>
     </ClCompile>
-    <ClCompile Include="AI.cpp">
-      <Filter>Engine\08.Module\AI</Filter>
-    </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>Engine\08.Module\State</Filter>
-    </ClCompile>
     <ClCompile Include="Scene_Test.cpp">
       <Filter>Engine\05.Scene\SceneList</Filter>
     </ClCompile>
@@ -471,6 +573,90 @@
     </ClCompile>
     <ClCompile Include="Scene_DSelect.cpp">
       <Filter>Engine\05.Scene\SceneList\Scene_DSelect</Filter>
+    </ClCompile>
+    <ClCompile Include="CInvItem.cpp">
+      <Filter>Engine\10.DataModel\04.item</Filter>
+    </ClCompile>
+    <ClCompile Include="CItem.cpp">
+      <Filter>Engine\10.DataModel\04.item</Filter>
+    </ClCompile>
+    <ClCompile Include="CQuest.cpp">
+      <Filter>Engine\10.DataModel\05.Quest</Filter>
+    </ClCompile>
+    <ClCompile Include="SideNavUpdateVal.cpp">
+      <Filter>Engine\07.Component\03.Command\99. Commoncom</Filter>
+    </ClCompile>
+    <ClCompile Include="SlotDown.cpp">
+      <Filter>Engine\07.Component\03.Command\99. Commoncom</Filter>
+    </ClCompile>
+    <ClCompile Include="SlotUp.cpp">
+      <Filter>Engine\07.Component\03.Command\99. Commoncom</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopItemOver.cpp">
+      <Filter>Engine\07.Component\03.Command\04. ShopScenecom</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopItemOut.cpp">
+      <Filter>Engine\07.Component\03.Command\04. ShopScenecom</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopItemClick.cpp">
+      <Filter>Engine\07.Component\03.Command\04. ShopScenecom</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopInvUpdateVal.cpp">
+      <Filter>Engine\07.Component\03.Command\04. ShopScenecom</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_Shop.cpp">
+      <Filter>Engine\05.Scene\SceneList\Scene_Shop</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_Droom.cpp">
+      <Filter>Engine\05.Scene\SceneList\Scene_Droom</Filter>
+    </ClCompile>
+    <ClCompile Include="RadioBtnClickCom.cpp">
+      <Filter>Engine\07.Component\03.Command\03. DSelectcom</Filter>
+    </ClCompile>
+    <ClCompile Include="InvItemClick.cpp">
+      <Filter>Engine\07.Component\03.Command\99. Commoncom</Filter>
+    </ClCompile>
+    <ClCompile Include="InvItemDown.cpp">
+      <Filter>Engine\07.Component\03.Command\99. Commoncom</Filter>
+    </ClCompile>
+    <ClCompile Include="InvItemUp.cpp">
+      <Filter>Engine\07.Component\03.Command\99. Commoncom</Filter>
+    </ClCompile>
+    <ClCompile Include="ForwardBtnClick.cpp">
+      <Filter>Engine\07.Component\03.Command\99. Commoncom</Filter>
+    </ClCompile>
+    <ClCompile Include="HeroBtnClick.cpp">
+      <Filter>Engine\07.Component\03.Command\99. Commoncom</Filter>
+    </ClCompile>
+    <ClCompile Include="DRendererUp.cpp">
+      <Filter>Engine\07.Component\03.Command\99. Commoncom</Filter>
+    </ClCompile>
+    <ClCompile Include="DarkestMachine.cpp">
+      <Filter>Engine\08.Module\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="CStMachine.cpp">
+      <Filter>Engine\08.Module\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="CState.cpp">
+      <Filter>Engine\08.Module\State</Filter>
+    </ClCompile>
+    <ClCompile Include="CIdleState.cpp">
+      <Filter>Engine\08.Module\State\DarkestStates</Filter>
+    </ClCompile>
+    <ClCompile Include="CDungeon.cpp">
+      <Filter>Engine\10.DataModel\06.Dungeon</Filter>
+    </ClCompile>
+    <ClCompile Include="BottomNavUpdate.cpp">
+      <Filter>Engine\07.Component\03.Command\99. Commoncom</Filter>
+    </ClCompile>
+    <ClCompile Include="CHeroDiv.cpp">
+      <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CSelectedOverlay.cpp">
+      <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CSquadDiv.cpp">
+      <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
