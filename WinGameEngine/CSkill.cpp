@@ -8,6 +8,7 @@ CSkill::CSkill()
 	, skillPos{}
 	, hitRate{ 0 }
 	, multiAttack{false}
+	, isAlive{false}
 {
 }
 

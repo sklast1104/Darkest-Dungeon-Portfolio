@@ -36,6 +36,15 @@ UI::~UI()
 	Safe_Delete_Vec(m_vecChildUI);
 }
 
+void UI::AllCanTarget(bool _canTarget)
+{
+	m_canTarget = _canTarget;
+
+	for (auto child : m_vecChildUI) {
+		child->AllCanTarget(_canTarget);
+	}
+}
+
 void UI::update()
 {
 	update_child();

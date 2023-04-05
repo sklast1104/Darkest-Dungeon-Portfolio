@@ -45,6 +45,10 @@ void Animator::LoadAnimation(const wstring& _strRelativePath, bool _isHorizontal
 {
 }
 
+void Animator::LoadAnimation(const wstring& _strRelativePath, bool _isHorizontalFlip, const wstring& _animName)
+{
+}
+
 void Animator::LoadAnimation(const wstring& _strRelativePath, float fDuration)
 {
 }

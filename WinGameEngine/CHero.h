@@ -1,8 +1,11 @@
 #pragma once
 
+#include "CTurnPlayer.h"
+
 class CSkill;
 
-class CHero
+class CHero :
+	public CTurnPlayer
 {
 protected :
 
@@ -70,11 +73,13 @@ protected :
 	wstring armourKey;
 	wstring armourPath;
 	int armorLevel;
-\
+
 public :
 
 	CHero();
 	virtual ~CHero();
+
+	const array<CSkill*, 4> GetCurSkills() { return curSkillArray; }
 
 	const wstring& GetGrayKey() { return grayKey; }
 	const wstring& GetGrayPath() { return grayPath; }

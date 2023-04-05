@@ -9,6 +9,10 @@ private :
 	DivUI* dragRenderer;
 	DivUI* itemDragger;
 
+	// 테스트용 임시 변수
+	float elapseTime;
+	bool debug;
+
 public :
 
 	Scene_Droom();

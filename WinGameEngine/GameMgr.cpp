@@ -5,6 +5,8 @@
 #include "CCrusader.h"
 #include "CHighwayMan.h"
 
+#include "CBoneSoldier.h"
+
 #include "CInvItem.h"
 #include "DarkestMachine.h"
 
@@ -13,6 +15,7 @@ GameMgr::GameMgr()
 	, portraitCnt{0}, certCnt{0}
 	, bucklerCnt{0}, curHeros{}
 	, curSquad{}, machine{nullptr}
+	, focusIndex{3}
 {
 	for (int i = 0; i < 4; i++) {
 		curSquad[i] = nullptr;
@@ -33,12 +36,20 @@ GameMgr::~GameMgr() {
 	}
 
 	Safe_Delete(machine);
+
+	// 여기서 일단 임시로 몬스터 스쿼드 해제함
+	for (int i = 0; i < 4; i++) {
+		if (monSquad[i]) {
+			delete monSquad[i];
+			monSquad[i] = nullptr;
+		}
+	}
 }
 
 void GameMgr::init()
 {
 	// 게임 시작할떄 로스터 기본 영웅으로 성전사와 노상강도를 둠
-	CHero* cru = new CCrusader;
+	CHero* cru = new CCrusader;;
 	curHeros.push_back(cru);
 
 	CHero* hMan = new CHighwayMan;
@@ -52,6 +63,13 @@ void GameMgr::init()
 	moneyCnt = 10070;
 
 	machine = new DarkestMachine;
+
+	// 여기서 일단 임시로 스쿼드는 만들어 놓는데 나중에 지울것
+	for (int i = 0; i < 4; i++) {
+		CDarkMonster* boneSolider = new CBoneSoldier;
+		monSquad[i] = boneSolider;
+	}
+	
 }
 
 CHero* GameMgr::FindHeroByName(const wstring& _heroName)
@@ -101,6 +119,26 @@ bool GameMgr::isSlotEmpty(int _index)
 	return false;
 }
 
+void GameMgr::MoveSquadRight()
+{
+	int nextNonNullIndex = curSquad.size() - 1;
+
+	for (int i = curSquad.size() - 1; i >= 0; i--)
+	{
+		if (curSquad[i] != nullptr)
+		{
+			curSquad[nextNonNullIndex] = curSquad[i];
+			nextNonNullIndex--;
+		}
+	}
+
+	while (nextNonNullIndex >= 0)
+	{
+		curSquad[nextNonNullIndex] = nullptr;
+		nextNonNullIndex--;
+	}
+}
+
 void GameMgr::SwapSquad(int _from, int _to)
 {
 	CHero* temp = curSquad[_to];
@@ -130,6 +168,19 @@ int GameMgr::GetSquadNum()
 
 	for (int i = 0; i < 4; i++) {
 		if (nullptr != curSquad[i]) {
+			num += 1;
+		}
+	}
+
+	return num;
+}
+
+int GameMgr::GetMonSquadNum()
+{
+	int num = 0;
+
+	for (int i = 0; i < 4; i++) {
+		if (nullptr != monSquad[i]) {
 			num += 1;
 		}
 	}
@@ -184,4 +235,11 @@ void GameMgr::ClearInventory()
 			Safe_Delete<CItem*>(curItems[i]);
 		}
 	}
+}
+
+CHero* GameMgr::GetFocusedHero()
+{
+	assert(curSquad[focusIndex]);
+
+	return curSquad[focusIndex];
 }

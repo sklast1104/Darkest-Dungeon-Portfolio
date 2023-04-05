@@ -37,7 +37,7 @@ void SceneMgr::init()
 	m_arrScene[(size_t)SCENE_TYPE::DROOM] = new Scene_Droom;
 	m_arrScene[(size_t)SCENE_TYPE::DROOM]->SetName(L"Scene_Droom");
 
-	m_pCurScene = m_arrScene[(size_t)SCENE_TYPE::DROOM];
+	m_pCurScene = m_arrScene[(size_t)SCENE_TYPE::TITLE];
 	m_pCurScene->Enter();
 }
 

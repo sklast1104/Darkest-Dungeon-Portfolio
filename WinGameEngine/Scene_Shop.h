@@ -10,14 +10,11 @@ class Scene_Shop :
 private :
 
 	DivUI* dragRenderer;
-
 	DivUI* itemDragger;
 
 	vector<CInvItem*> shopItems;
 
 	void InitShopItems();
-
-	DivUI* pseudoUI;
 
 public :
 
@@ -28,7 +25,6 @@ public :
 	virtual void update() override;
 	virtual void Exit() override;
 
-	DivUI* GetPseudoUI() { return pseudoUI; }
 	const vector<CInvItem*>& GetShopItems() { return shopItems; }
 };
 

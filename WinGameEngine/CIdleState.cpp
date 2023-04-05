@@ -48,6 +48,8 @@ void CIdleState::Update()
 	else {
 		hero->PlayHeroIdleAnim();
 	}
+
+
 }
 
 void CIdleState::Exit()

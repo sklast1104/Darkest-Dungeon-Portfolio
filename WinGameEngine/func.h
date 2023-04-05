@@ -3,11 +3,13 @@
 class Object;
 class AI;
 class UI;
+class CStMachine;
 
 void CreateObject(Object* _pObj, GROUP_TYPE _eGroup);
 void DeleteObject(Object* _pObj);
 void ChangeScene(SCENE_TYPE _eNext);
-void ChangeState(AI* _ai, wstring _stateKey);
+void ChangeState(CStMachine* _stMachine, wstring _stateKey);
+
 UI* FindUIByName(UI* _parentUI, wstring _name);
 
 template<typename T>

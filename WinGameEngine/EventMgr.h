@@ -7,6 +7,7 @@ struct tEvent
 	EVENT_TYPE eEven;
 	DWORD_PTR IParam;
 	DWORD_PTR wParam;
+	wstring wstrParam;
 };
 
 class EventMgr

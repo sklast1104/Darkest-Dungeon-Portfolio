@@ -9,7 +9,7 @@
 
 CSelectedOverlay::CSelectedOverlay() 
 	: UI(true), overlayTex{ ResMgr::GetInst()->LoadTexture(L"Selected_Overlay", L"resource\\overay\\selected_1_crop.png") }
-	, isGrowing{true}
+	, isGrowing{true}, canRend{true}
 {
 }
 
@@ -49,6 +49,8 @@ void CSelectedOverlay::update()
 
 void CSelectedOverlay::render(HDC _dc)
 {
+	if (!canRend) return;
+
 	Vec2 vPos = GetFinalPos();
 	Vec2 vScale = GetScale();
 

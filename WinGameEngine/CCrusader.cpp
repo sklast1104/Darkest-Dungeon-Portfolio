@@ -13,7 +13,13 @@ CCrusader::CCrusader()
 	name = L"레이널드";
 	job_name = L"성전사";
 
-	curHp = 33;
+	equipKey = job_name + L"_weapon";
+	equipPath = L"resource\\heros\\crusader\\sword1.png";
+
+	armourKey = job_name + L"_armor";
+	armourPath = L"resource\\heros\\crusader\\armour1.png";
+
+	curHp = 25;
 	hp = 33;
 	curExp = 3;
 
@@ -125,7 +131,7 @@ void CCrusader::InitSkill()
 
 	// 성스러운 돌격
 	CSkill* chargeAttack = new CSkill;
-	chargeAttack->SetSkillName(L"기절의 일격 1");
+	chargeAttack->SetSkillName(L"성스러운 돌격 1");
 	chargeAttack->SetSkillPath(L"resource\\heros\\crusader\\ab6.png");
 	chargeAttack->SetGraySkillPath(L"resource\\heros\\crusader\\ab6_gray.png");
 	chargeAttack->GetSkillPos()[0] = true;

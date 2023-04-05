@@ -1,6 +1,7 @@
 #pragma once
 
 class CHero;
+class CDarkMonster;
 class CItem;
 class DarkestMachine;
 
@@ -25,11 +26,17 @@ private :
 	// 현재 스쿼드
 	array<CHero*, 4> curSquad;
 
+	// 몬스터 스쿼드도 겜매에서 관리하자
+	array< CDarkMonster*, 4> monSquad;
+
 	// 인벤토리 관리
 	array<CItem*, 16> curItems;
 
 	// 상태머신
 	DarkestMachine* machine;
+
+	// 현재 포커싱 상태인 스쿼드 인덱스
+	int focusIndex;
 
 public :
 
@@ -61,11 +68,16 @@ public :
 	void AddSquad(int _index, const wstring& _heroName);
 	bool isSlotEmpty(int _index);
 	const array<CHero*, 4>& GetSquad() { return curSquad; }
+	void MoveSquadRight();
 
 	void SwapSquad(int _from, int _to);
 	void CleanSqaud();
 	CHero* GetHeroBySquad(int _index);
 	int GetSquadNum();
+	
+	// 몬스터 스쿼드 관련 함수
+	const array<CDarkMonster*, 4>& GetMonSquad() { return monSquad; }
+	int GetMonSquadNum();
 
 	// 인벤토리 관리 함수
 	array<CItem*, 16>& GetInventory() { return curItems; }
@@ -77,6 +89,10 @@ public :
 
 	// 상태머신 관련
 	DarkestMachine* GetMachine() { return machine; }
+	int GetFocusIndex() { return focusIndex;}
+	CHero* GetFocusedHero();
+	void SetFocusIndex(int _focusIndex) { focusIndex = _focusIndex; }
+
 public :
 	SINGLE(GameMgr);
 };

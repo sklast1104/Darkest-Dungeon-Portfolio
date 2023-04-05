@@ -117,6 +117,11 @@ void DivUI::InitTextModule(int _text, const UINT _textSize)
 		tModule->SetTextSize(_textSize);
 		canRendTxt = true;
 	}
+	else {
+		tModule->SetText(to_wstring(_text));
+		tModule->SetTextSize(_textSize);
+		canRendTxt = true;
+	}
 }
 
 void DivUI::render(HDC _dc)

@@ -14,4 +14,7 @@ void ForwardBtnClick::Execute()
 	else if (curScene->GetName() == L"Scene_DSelect") {
 		ChangeScene(SCENE_TYPE::SHOP);
 	}
+	else if (curScene->GetName() == L"Scene_Shop") {
+		ChangeScene(SCENE_TYPE::DROOM);
+	}
 }

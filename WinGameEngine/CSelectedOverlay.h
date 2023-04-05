@@ -10,6 +10,8 @@ private :
 	Texture* overlayTex;
 	bool isGrowing;
 
+	bool canRend;
+
 public :
 
 	CSelectedOverlay();
@@ -17,6 +19,9 @@ public :
 
 	virtual void update() override;
 	virtual void render(HDC _dc) override;
+
+	void SetCanRend(bool _canRend) { canRend = _canRend; }
+	bool GetCanRend() { return canRend; }
 
 	CLONE(CSelectedOverlay);
 

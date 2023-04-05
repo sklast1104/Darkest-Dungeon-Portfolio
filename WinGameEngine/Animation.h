@@ -23,11 +23,14 @@ protected:
 	float m_fAccTime; // 시간 누적
 
 	bool m_bFinish;
-
+	// 
+	float frameHeight;
 	
 public:
 	Animation();
 	virtual ~Animation();
+
+	float GetFrameHeight() { return frameHeight; }
 
 	virtual void update();
 	virtual void render(HDC _dc);

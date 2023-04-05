@@ -166,6 +166,15 @@
     <Filter Include="Engine\04.Object\UI\04. DungeonUI">
       <UniqueIdentifier>{dfc58e98-bce3-4a2c-a286-cf6cc05c8774}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\07.Component\03.Command\05. DungeonCom">
+      <UniqueIdentifier>{6b883686-19ce-4ea1-9181-6a43a137f0bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\10.DataModel\02.Monster">
+      <UniqueIdentifier>{9462e98b-d1c2-4179-a485-35c7dee84187}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\10.DataModel\00.Common">
+      <UniqueIdentifier>{01c8d96a-9e95-4da4-93ac-d35dafd23ae1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -417,6 +426,48 @@
     <ClInclude Include="CSelectedOverlay.h">
       <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
     </ClInclude>
+    <ClInclude Include="MapBtnClick.h">
+      <Filter>Engine\07.Component\03.Command\05. DungeonCom</Filter>
+    </ClInclude>
+    <ClInclude Include="InvBtnClick.h">
+      <Filter>Engine\07.Component\03.Command\05. DungeonCom</Filter>
+    </ClInclude>
+    <ClInclude Include="MainLeftUpdateCom.h">
+      <Filter>Engine\07.Component\03.Command\05. DungeonCom</Filter>
+    </ClInclude>
+    <ClInclude Include="HeroDivClick.h">
+      <Filter>Engine\07.Component\03.Command\05. DungeonCom</Filter>
+    </ClInclude>
+    <ClInclude Include="CBStartState.h">
+      <Filter>Engine\08.Module\State\DarkestStates</Filter>
+    </ClInclude>
+    <ClInclude Include="CWaitState.h">
+      <Filter>Engine\08.Module\State\DarkestStates</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerTurn.h">
+      <Filter>Engine\08.Module\State\DarkestStates</Filter>
+    </ClInclude>
+    <ClInclude Include="CEnemyTurn.h">
+      <Filter>Engine\08.Module\State\DarkestStates</Filter>
+    </ClInclude>
+    <ClInclude Include="CCutScene.h">
+      <Filter>Engine\08.Module\State\DarkestStates</Filter>
+    </ClInclude>
+    <ClInclude Include="CDarkMonster.h">
+      <Filter>Engine\10.DataModel\02.Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CTurnPlayer.h">
+      <Filter>Engine\10.DataModel\00.Common</Filter>
+    </ClInclude>
+    <ClInclude Include="CBoneSoldier.h">
+      <Filter>Engine\10.DataModel\02.Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonSquad.h">
+      <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonDiv.h">
+      <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -656,6 +707,48 @@
       <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
     </ClCompile>
     <ClCompile Include="CSquadDiv.cpp">
+      <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MapBtnClick.cpp">
+      <Filter>Engine\07.Component\03.Command\05. DungeonCom</Filter>
+    </ClCompile>
+    <ClCompile Include="InvBtnClick.cpp">
+      <Filter>Engine\07.Component\03.Command\05. DungeonCom</Filter>
+    </ClCompile>
+    <ClCompile Include="MainLeftUpdateCom.cpp">
+      <Filter>Engine\07.Component\03.Command\05. DungeonCom</Filter>
+    </ClCompile>
+    <ClCompile Include="HeroDivClick.cpp">
+      <Filter>Engine\07.Component\03.Command\05. DungeonCom</Filter>
+    </ClCompile>
+    <ClCompile Include="CBStartState.cpp">
+      <Filter>Engine\08.Module\State\DarkestStates</Filter>
+    </ClCompile>
+    <ClCompile Include="CWaitState.cpp">
+      <Filter>Engine\08.Module\State\DarkestStates</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerTurn.cpp">
+      <Filter>Engine\08.Module\State\DarkestStates</Filter>
+    </ClCompile>
+    <ClCompile Include="CEnemyTurn.cpp">
+      <Filter>Engine\08.Module\State\DarkestStates</Filter>
+    </ClCompile>
+    <ClCompile Include="CCutScene.cpp">
+      <Filter>Engine\08.Module\State\DarkestStates</Filter>
+    </ClCompile>
+    <ClCompile Include="CDarkMonster.cpp">
+      <Filter>Engine\10.DataModel\02.Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CTurnPlayer.cpp">
+      <Filter>Engine\10.DataModel\00.Common</Filter>
+    </ClCompile>
+    <ClCompile Include="CBoneSoldier.cpp">
+      <Filter>Engine\10.DataModel\02.Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonSquad.cpp">
+      <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonDiv.cpp">
       <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
     </ClCompile>
   </ItemGroup>

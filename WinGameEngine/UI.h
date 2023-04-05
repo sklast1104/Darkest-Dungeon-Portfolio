@@ -33,6 +33,7 @@ public:
     void SetCamAffected(bool _m_bCamAffected) { m_bCamAffected  = _m_bCamAffected;}
     void SetViewAffected(bool _viewAffected) { m_viewAffected = _viewAffected; }
     void CanTarget(bool _canTarget) { m_canTarget = _canTarget; }
+    void AllCanTarget(bool _canTarget);
 
     void AddChild(UI* _pUI) { m_vecChildUI.push_back(_pUI); _pUI->m_pParentUI = this; }
     const vector<UI*>& GetChildUI() { return m_vecChildUI; }

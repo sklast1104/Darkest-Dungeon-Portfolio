@@ -41,7 +41,7 @@ void Scene_Title::Enter()
 	title->CreateAnimator(new AnimatorDK);
 	title->LoadAnimation(L"Title_Animation", L"resource\\animations\\title_anim\\titles.sprite-torch_loop.atlas");
 	title->SetScale(Vec2(500.f, 500.f));
-	title->SetPos(Vec2(960.f - 250.f, 360.f));
+	title->SetPos(Vec2(960.f - 500.f, 360 - 250.f));
 	title->CanTarget(false);
 	bg->AddChild(title);
 	

@@ -23,6 +23,7 @@ public:
 	virtual void LoadAnimation(const wstring& _strRelativePath);
 	virtual void LoadAnimation(const wstring& _strRelativePath, const wstring& _animName);
 	virtual void LoadAnimation(const wstring& _strRelativePath, bool _isHorizontalFlip);
+	virtual void LoadAnimation(const wstring& _strRelativePath, bool _isHorizontalFlip, const wstring& _animName);
 	virtual void LoadAnimation(const wstring& _strRelativePath, float fDuration);
 	virtual void LoadAnimation(const wstring& _strRelativePath, float fDuration, Vec2 fOffset);
 	// 좌우 반전된 텍스쳐를 사용하는지

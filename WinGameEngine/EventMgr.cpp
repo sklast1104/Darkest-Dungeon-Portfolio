@@ -6,6 +6,7 @@
 #include "UIMgr.h"
 
 #include "Object.h"
+#include "CStMachine.h"
 
 EventMgr::EventMgr() {
 
@@ -51,10 +52,15 @@ void EventMgr::Execute(const tEvent& _eve)
 			UIMgr::GetInst()->SetFocusedUI(nullptr);
 			break;
 		}
-		case EVENT_TYPE::CHANGE_AI_STATE:
+		case EVENT_TYPE::STATE_CHANGE:
 		{
-			// IParam : AI
-			// wParam : Next Type
+			// IParam : CStMachine*
+			// wstrParam : Next Type (wstring)
+
+			CStMachine* stMachine = (CStMachine*)_eve.IParam;
+
+			stMachine->ChangeState(_eve.wstrParam);
+
 			break;
 		}
 	}

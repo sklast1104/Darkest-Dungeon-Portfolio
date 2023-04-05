@@ -28,6 +28,10 @@ private :
 	// 치명타 보정
 	float criticalRate;
 
+	// 활성화 상태인지
+	bool isAlive;
+
+	
 public :
 
 	CSkill();
@@ -57,5 +61,7 @@ public :
 	float GetCritRate() { return criticalRate; }
 	void SetCritRate(float _criticalRate) { criticalRate = _criticalRate; }
 
+	void SetSkillAlive(bool _isAlive) { isAlive = _isAlive; }
+	bool IsAlive() { return isAlive; }
 };
 

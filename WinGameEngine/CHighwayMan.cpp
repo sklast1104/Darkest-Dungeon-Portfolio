@@ -13,7 +13,13 @@ CHighwayMan::CHighwayMan()
 	name = L"디스마스";
 	job_name = L"노상강도";
 
-	curHp = 23;
+	equipKey = job_name + L"_weapon";
+	equipPath = L"resource\\heros\\highwayman\\weapon0.png";
+
+	armourKey = job_name + L"_armor";
+	armourPath = L"resource\\heros\\highwayman\\armour0.png";
+
+	curHp = 15;
 	hp = 23;
 
 	curStress = 60;

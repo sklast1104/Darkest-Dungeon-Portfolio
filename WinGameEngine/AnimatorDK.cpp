@@ -46,6 +46,23 @@ void AnimatorDK::LoadAnimation(const wstring& _strRelativePath, bool _isHorizont
 	}
 }
 
+void AnimatorDK::LoadAnimation(const wstring& _strRelativePath, bool _isHorizontalFlip, const wstring& _animName)
+{
+	if (!_isHorizontalFlip) {
+		LoadAnimation(_strRelativePath);
+	}
+	else {
+		// 이제 텍스쳐가 반전됬다고 가정하는것이 아니라 정방향 텍스쳐에서
+		// 좌우 반전한 텍스쳐를 가져오자
+		AnimationDK* dkAnim = new AnimationDK;
+		dkAnim->SetHorizontalFlip();
+		dkAnim->LoadFlippedTex(_strRelativePath);
+
+		dkAnim->m_pAnimator = this;
+		m_mapAnim.insert(make_pair(_animName, dkAnim));
+	}
+}
+
 void AnimatorDK::LoadAnimation(const wstring& _strRelativePath, float fDuration)
 {
 	AnimationDK* dkAnim = new AnimationDK;

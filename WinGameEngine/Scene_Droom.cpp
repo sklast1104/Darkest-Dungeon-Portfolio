@@ -11,9 +11,23 @@
 #include "CHeroDiv.h"
 #include "CSelectedOverlay.h"
 #include "KeyMgr.h"
+#include "CHero.h"
+#include "CSkill.h"
+#include "MapBtnClick.h"
+#include "InvBtnClick.h"
+#include "MainLeftUpdateCom.h"
+#include "HeroDivClick.h"
+#include "CMonSquad.h"
+#include "CMonDiv.h"
+#include "TimeMgr.h"
+#include "SoundMgr.h"
+#include "Sound.h"
+#include "ResMgr.h"
 
 Scene_Droom::Scene_Droom()
 {
+	elapseTime = 0.f;
+	debug = true;
 }
 
 Scene_Droom::~Scene_Droom()
@@ -50,8 +64,12 @@ void Scene_Droom::Enter()
 #pragma region Hero
 
 	GameMgr* mgr = GameMgr::GetInst();
-	//int squadNum = mgr->GetSquadNum();
-	int squadNum = 2;
+	mgr->MoveSquadRight();
+
+	const array<CHero*, 4> curSquad = mgr->GetSquad();
+
+
+	int squadNum = mgr->GetSquadNum();
 	float heroXOffset = 200.f;
 
 	// 스케일은 인원수 비례해서 커지고
@@ -65,9 +83,19 @@ void Scene_Droom::Enter()
 
 	for (int i = 0; i < squadNum; i++) {
 
-		CHeroDiv* hero = new CHeroDiv;
+		int realIndex = i + (curSquad.size() - squadNum);
+
+		CHero* heroVal = curSquad[i + (curSquad.size() - squadNum)];
+
+		CHeroDiv* hero = new CHeroDiv(heroVal);
 		hero->SetPos(Vec2(i * heroXOffset, 0.f));
 		hero->SetScale(Vec2(heroXOffset, 500.f));
+		hero->SetId(realIndex);
+
+		// 클릭당하면 현재 인덱스로 게임매니저 포커싱을 바꾸고 셀렉티드 오버레이도 켜주고
+		// MainLeftPanel도 업데이트해줌 MainLeftPanel은 그냥 pseudoUI로부터 가져오자
+		hero->InitOnMouseClick(new HeroDivClick(squad, realIndex));
+
 		squad->AddChild(hero);
 		squad->AddHero(hero);
 
@@ -75,6 +103,13 @@ void Scene_Droom::Enter()
 		heroOverlay->SetPos(Vec2(93.f, 485.f));
 		heroOverlay->SetScale(Vec2(175.f, 72.f));
 		heroOverlay->SetScale(heroOverlay->GetScale() * 0.9f);
+		heroOverlay->SetCanRend(false);
+
+		if (i + (curSquad.size() - squadNum) == mgr->GetFocusIndex()) {
+			heroOverlay->SetCanRend(true);
+		}
+
+		hero->SetOverlay(heroOverlay);
 		hero->AddChild(heroOverlay);
 
 		Vec2 overlaybase = Vec2(40.f, 505.f);
@@ -89,7 +124,11 @@ void Scene_Droom::Enter()
 
 		DivUI* curHp = new DivUI;
 		curHp->SetPos(Vec2(overlaybase.x, overlaybase.y - 15.f));
-		curHp->SetScale(Vec2(60.f, 10.f));
+		// 스케일이 체력 비율에 따라 변화해야 하며 기준 스케일은 100
+
+		float hpPercent = heroVal->GetCurHp() / (float)heroVal->GetHp();
+
+		curHp->SetScale(Vec2(100.f * hpPercent, 10.f));
 		curHp->InitImageModule(L"HP_BASEBAR_BG", L"resource\\overay\\health_pip_full.png");
 		curHp->SetCamAffected(true);
 
@@ -108,7 +147,10 @@ void Scene_Droom::Enter()
 			hero->AddChild(stressUI);
 		}
 
-		for (int i = 0; i < 6; i++) {
+		int curStress = heroVal->GetCurStress();
+		if (curStress > 100) curStress = 100;
+
+		for (int i = 0; i < curStress / 10; i++) {
 			DivUI* stressFullUI = new DivUI;
 			stressFullUI->SetScale(Vec2(9.f, 10.f));
 			stressFullUI->SetScale(stressFullUI->GetScale() * 1.0f);
@@ -120,7 +162,12 @@ void Scene_Droom::Enter()
 			hero->AddChild(stressFullUI);
 		}
 		
-		for (int i = 0; i < 4; i++) {
+		int curStress2 = heroVal->GetCurStress();
+		if (curStress2 <= 100) curStress2 = 0;
+
+		curStress2 = curStress2 - 100;
+
+		for (int i = 0; i < curStress2 / 10; i++) {
 			DivUI* stressOverUI = new DivUI;
 			stressOverUI->SetScale(Vec2(9.f, 10.f));
 			stressOverUI->SetScale(stressOverUI->GetScale() * 1.0f);
@@ -131,14 +178,81 @@ void Scene_Droom::Enter()
 
 			hero->AddChild(stressOverUI);
 		}
-		// 오버레이랑 hp, stressbar 붙여야됨
-		// 오버레이는 UI가 아니라 애매하네
+		
 	}
-	//
+	
+#pragma endregion
+
+#pragma region Monster
+
+	const array<CDarkMonster*, 4> monSquad = mgr->GetMonSquad();
+
+	//int monSquadNum = mgr->GetMonSquadNum();
+	int monSquadNum = 4;
+
+	float monsterXOffset = 200.f;
+
+	// 스케일 포지션 비례 커지고
+	// 포지션은 monSquad의 경우 항상 같은위치
+	CMonSquad* monSquadDiv = new CMonSquad;
+	monSquadDiv->SetScale(Vec2(monsterXOffset* monSquadNum, 500.f));
+	monSquadDiv->SetPos(Vec2(1000.f, 200.f));
+	monSquadDiv->SetName(L"CMonSquad");
+	monSquadDiv->SetCanRend(false);
+
+	pseudoUI->AddChild(monSquadDiv);
+
+	for (int i = 0; i < monSquadNum; i++) {
+
+		// 임시 테스트에서는 nullptr일수 있음
+		CDarkMonster* monster = monSquad[i];
+
+		CMonDiv* monDiv = new CMonDiv(monster);
+		monDiv->SetPos(Vec2(i* monsterXOffset, 0.f));
+		monDiv->SetScale(Vec2(monsterXOffset, 500.f));
+		// 몬스터 Div는 왼쪽방향을 바라보기때문에 인덱스 순서가 일치함
+		monDiv->SetId(i);
+
+		monSquadDiv->AddMonster(monDiv);
+		monSquadDiv->AddChild(monDiv);
+
+		Vec2 overlaybase = Vec2(40.f, 505.f);
+
+		DivUI* focusedOverlay = new DivUI;
+		focusedOverlay->SetPos(Vec2(overlaybase.x - 5.f, overlaybase.y - 72.f));
+		focusedOverlay->SetScale(Vec2(113.f, 76.f));
+		focusedOverlay->InitImageModule(L"Attack_focused", L"resource\\overay\\target_1_crop.png");
+		focusedOverlay->SetCamAffected(true);
+
+		monDiv->AddChild(focusedOverlay);
+
+		DivUI* hpBar = new DivUI;
+		hpBar->SetPos(Vec2(overlaybase.x, overlaybase.y - 15.f));
+		hpBar->SetScale(Vec2(100.f, 10.f));
+		hpBar->InitImageModule(L"HP_EMPTYBAR_BG", L"resource\\overay\\stress_pip_empty copy.png");
+		hpBar->SetCamAffected(true);
+
+		monDiv->AddChild(hpBar);
+
+		DivUI* curHp = new DivUI;
+		curHp->SetPos(Vec2(overlaybase.x, overlaybase.y - 15.f));
+		// 스케일이 체력 비율에 따라 변화해야 하며 기준 스케일은 100
+
+		//float hpPercent = heroVal->GetCurHp() / (float)heroVal->GetHp();
+		float hpPercent = 0.6f;
+
+		curHp->SetScale(Vec2(100.f * hpPercent, 10.f));
+		curHp->InitImageModule(L"HP_BASEBAR_BG", L"resource\\overay\\health_pip_full.png");
+		curHp->SetCamAffected(true);
+
+		monDiv->AddChild(curHp);
+	}
 
 #pragma endregion
 
 #pragma region DungeonPanel
+
+	CHero* heroVal = curSquad[mgr->GetFocusIndex()];
 
 	DivUI* panel = new DivUI;
 	panel->SetPos(Vec2(0.f, 720.f));
@@ -172,6 +286,10 @@ void Scene_Droom::Enter()
 	DivUI* mainLeftPanel = new DivUI;
 	mainLeftPanel->SetScale(Vec2(710.f, 360.f));
 	mainLeftPanel->SetPos(Vec2(0.f, 0.f));
+	mainLeftPanel->SetName(L"mainLeftPanel");
+	// 업데이트는 그냥 자기 자신에서 처리하고 히어로는 현재 포커싱된 인덱스 기반으로
+	// 게임 매니저에서 가져오자
+	mainLeftPanel->InitUpdateValue(new MainLeftUpdateCom(mainLeftPanel));
 
 	mainPanel->AddChild(mainLeftPanel);
 
@@ -187,26 +305,29 @@ void Scene_Droom::Enter()
 	DivUI* heroPortrait = new DivUI;
 	heroPortrait->SetScale(Vec2(85.f, 85.f));
 	heroPortrait->SetPos(Vec2(23.f, 33.f));
-	heroPortrait->InitImageModule(L"Crusader Portrait", L"resource\\heros\\crusader.png");
+	heroPortrait->InitImageModule(heroVal->GetKey(), heroVal->GetPath());
+	heroPortrait->SetName(L"heroPortrait");
 
 	skillPanel->AddChild(heroPortrait);
 
 	DivUI* heroName = new DivUI;
 	heroName->SetScale(Vec2(125.f, 25.f));
 	heroName->SetPos(Vec2(125.f, 45.f));
-	heroName->InitTextModule(L"레이널드", 25);
+	heroName->InitTextModule(heroVal->GetName(), 25);
 	heroName->SetFormat(DT_RIGHT);
 	heroName->SetTextColor(177, 161, 108);
+	heroName->SetName(L"heroName");
 
 	skillPanel->AddChild(heroName);
 
 	DivUI* heroJob = new DivUI;
 	heroJob->SetScale(Vec2(100.f, 20.f));
 	heroJob->SetPos(Vec2(150.f, 75.f));
-	heroJob->InitTextModule(L"성전사", 20);
+	heroJob->InitTextModule(heroVal->GetJobName(), 20);
 	heroJob->SetFormat(DT_RIGHT);
 	heroJob->SetTextColor(106, 105, 98);
 	heroJob->SetFont(L"이순신 돋움체 M");
+	heroJob->SetName(L"heroJob");
 
 	skillPanel->AddChild(heroJob);
 
@@ -215,17 +336,33 @@ void Scene_Droom::Enter()
 	DivUI* skillContainer = new DivUI;
 	skillContainer->SetPos(Vec2(270.f, 35.f));
 	skillContainer->SetScale(Vec2(380.f, 72.f));
+	skillContainer->SetName(L"skillContainer");
 	
 	skillPanel->AddChild(skillContainer);
 
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 4; i++) {
 		DivUI* skill1 = new DivUI;
 		skill1->SetScale(Vec2(72.f, 72.f));
 		skill1->SetPos(Vec2((i * 76.f), 0.f));
-		skill1->InitImageModule(L"강타 1 gray", L"resource\\heros\\crusader\\ab1_gray.png");
+
+		CSkill* heroSkill = heroVal->GetCurSkills()[i];
+
+		if (heroSkill->IsAlive()) {
+			skill1->InitImageModule(heroSkill->GetSkillName(), heroSkill->GetSkillPath());
+		}
+		else {
+			skill1->InitImageModule(heroSkill->GetSkillName() + L"_gray", heroSkill->GetGraySkillPath());
+		}
 
 		skillContainer->AddChild(skill1);
 	}
+
+	DivUI* skill = new DivUI;
+	skill->SetScale(Vec2(72.f, 72.f));
+	skill->SetPos(Vec2((4 * 76.f), 0.f));
+	skill->InitImageModule(L"hero_skill_move", L"resource\\heros\\ability\\ability_move.png");
+
+	skillContainer->AddChild(skill);
 
 	DivUI* skipBtn = new DivUI;
 	skipBtn->SetScale(Vec2(20.f, 72.f));
@@ -255,11 +392,13 @@ void Scene_Droom::Enter()
 	DivUI* curHp = new DivUI;
 	curHp->SetScale(Vec2(60.f, 30.f));
 	curHp->SetPos(Vec2(70.f, 0.f));
-	curHp->InitTextModule(L"33", 20);
+
+	curHp->InitTextModule(heroVal->GetCurHp(), 20);
 	curHp->SetFormat(DT_RIGHT | DT_SINGLELINE | DT_VCENTER);
 	curHp->SetTextColor(179, 0, 0);
 	curHp->SetFont(L"이순신 돋움체 B");
 	curHp->SetBold(200);
+	curHp->SetName(L"curHp");
 
 	statusPanel->AddChild(curHp);
 
@@ -267,22 +406,24 @@ void Scene_Droom::Enter()
 
 	maxHp->SetScale(Vec2(80.f, 30.f));
 	maxHp->SetPos(Vec2(130.f, 0.f));
-	maxHp->InitTextModule(L" / 33", 20);
+	maxHp->InitTextModule(L" / " + to_wstring(heroVal->GetHp()), 20);
 	maxHp->SetFormat(DT_LEFT | DT_SINGLELINE | DT_VCENTER);
 	maxHp->SetTextColor(179, 0, 0);
 	maxHp->SetFont(L"이순신 돋움체 B");
 	maxHp->SetBold(200);
+	maxHp->SetName(L"maxHp");
 
 	statusPanel->AddChild(maxHp);
 
 	DivUI* curStress = new DivUI;
 	curStress->SetScale(Vec2(60.f, 30.f));
 	curStress->SetPos(Vec2(70.f, 30.f));
-	curStress->InitTextModule(L"21", 20);
+	curStress->InitTextModule(heroVal->GetCurStress(), 20);
 	curStress->SetFormat(DT_RIGHT | DT_SINGLELINE | DT_VCENTER);
 	curStress->SetTextColor(148, 148, 148);
 	curStress->SetFont(L"이순신 돋움체 B");
 	curStress->SetBold(200);
+	curStress->SetName(L"curStress");
 
 	statusPanel->AddChild(curStress);
 
@@ -317,11 +458,12 @@ void Scene_Droom::Enter()
 	DivUI* hitRateVal = new DivUI;
 	hitRateVal->SetScale(Vec2(50.f, 23.f));
 	hitRateVal->SetPos(Vec2(160.f, 65.f));
-	hitRateVal->InitTextModule(L"0", textSize_y);
+	hitRateVal->InitTextModule(heroVal->GetHitRate(), textSize_y);
 	hitRateVal->SetFormat(DT_LEFT | DT_SINGLELINE | DT_VCENTER);
 	hitRateVal->SetTextColor(172, 170, 160);
 	hitRateVal->SetFont(L"이순신 돋움체 M");
 	hitRateVal->SetBold(100);
+	hitRateVal->SetName(L"hitRateVal");
 
 	statusPanel->AddChild(hitRateVal);
 
@@ -340,11 +482,12 @@ void Scene_Droom::Enter()
 	DivUI* critRateVal = new DivUI;
 	critRateVal->SetScale(Vec2(50.f, 23.f));
 	critRateVal->SetPos(Vec2(160.f, 65.f + (yOffset_second * 1)));
-	critRateVal->InitTextModule(L"5.0%", textSize_y);
+	critRateVal->InitTextModule(to_wstring(heroVal->GetCriticalHitRate()) + L".0%", textSize_y);
 	critRateVal->SetFormat(DT_LEFT | DT_SINGLELINE | DT_VCENTER);
 	critRateVal->SetTextColor(172, 170, 160);
 	critRateVal->SetFont(L"이순신 돋움체 M");
 	critRateVal->SetBold(500);
+	critRateVal->SetName(L"critRateVal");
 
 	statusPanel->AddChild(critRateVal);
 
@@ -365,11 +508,17 @@ void Scene_Droom::Enter()
 	DivUI* damageVal = new DivUI;
 	damageVal->SetScale(Vec2(50.f, 23.f));
 	damageVal->SetPos(Vec2(160.f, 65.f + (yOffset_second * 2)));
-	damageVal->InitTextModule(L"5-10", textSize_y);
+
+	wstring minDam = to_wstring(heroVal->GetDamageLower());
+	wstring maxDam = to_wstring(heroVal->GetDamageUppder());
+	wstring damageStr = minDam + L"-" + maxDam;
+
+	damageVal->InitTextModule(damageStr, textSize_y);
 	damageVal->SetFormat(DT_LEFT | DT_SINGLELINE | DT_VCENTER);
 	damageVal->SetTextColor(172, 170, 160);
 	damageVal->SetFont(L"이순신 돋움체 M");
 	damageVal->SetBold(500);
+	damageVal->SetName(L"damageVal");
 
 	statusPanel->AddChild(damageVal);
 
@@ -388,11 +537,12 @@ void Scene_Droom::Enter()
 	DivUI* avoidVal = new DivUI;
 	avoidVal->SetScale(Vec2(50.f, 23.f));
 	avoidVal->SetPos(Vec2(160.f, 65.f + (yOffset_second * 3)));
-	avoidVal->InitTextModule(L"14", textSize_y);
+	avoidVal->InitTextModule(heroVal->GetAvoidanceRate(), textSize_y);
 	avoidVal->SetFormat(DT_LEFT | DT_SINGLELINE | DT_VCENTER);
 	avoidVal->SetTextColor(172, 170, 160);
 	avoidVal->SetFont(L"이순신 돋움체 M");
 	avoidVal->SetBold(500);
+	avoidVal->SetName(L"avoidVal");
 
 	statusPanel->AddChild(avoidVal);
 
@@ -411,11 +561,12 @@ void Scene_Droom::Enter()
 	DivUI* shieldVal = new DivUI;
 	shieldVal->SetScale(Vec2(50.f, 23.f));
 	shieldVal->SetPos(Vec2(160.f, 65.f + (yOffset_second * 4)));
-	shieldVal->InitTextModule(L"0%", textSize_y);
+	shieldVal->InitTextModule(to_wstring(heroVal->GetDefenseRate()) + L"%", textSize_y);
 	shieldVal->SetFormat(DT_LEFT | DT_SINGLELINE | DT_VCENTER);
 	shieldVal->SetTextColor(172, 170, 160);
 	shieldVal->SetFont(L"이순신 돋움체 M");
 	shieldVal->SetBold(500);
+	shieldVal->SetName(L"shieldVal");
 
 	statusPanel->AddChild(shieldVal);
 
@@ -434,11 +585,12 @@ void Scene_Droom::Enter()
 	DivUI* speedVal = new DivUI;
 	speedVal->SetScale(Vec2(50.f, 23.f));
 	speedVal->SetPos(Vec2(160.f, 65.f + (yOffset_second * 5)));
-	speedVal->InitTextModule(L"7", textSize_y);
+	speedVal->InitTextModule(heroVal->GetSpeed(), textSize_y);
 	speedVal->SetFormat(DT_LEFT | DT_SINGLELINE | DT_VCENTER);
 	speedVal->SetTextColor(172, 170, 160);
 	speedVal->SetFont(L"이순신 돋움체 M");
 	speedVal->SetBold(500);
+	speedVal->SetName(L"speedVal");
 
 	statusPanel->AddChild(speedVal);
 
@@ -471,16 +623,18 @@ void Scene_Droom::Enter()
 	// 장비 그림
 
 	DivUI* weaponPortrait = new DivUI;
-	weaponPortrait->InitImageModule(L"Crusader Weapon", L"resource\\heros\\crusader\\sword1.png");
+	weaponPortrait->InitImageModule(heroVal->GetEquipKey(), heroVal->GetEquipPath());
 	weaponPortrait->SetScale(Vec2(72.f, 144.f));
 	weaponPortrait->SetPos(Vec2(271.f, 53.f));
+	weaponPortrait->SetName(L"weaponPortrait");
 
 	equipPanel->AddChild(weaponPortrait);
 
 	DivUI* shieldPortrait = new DivUI;
-	shieldPortrait->InitImageModule(L"Crusader Armour", L"resource\\heros\\crusader\\armour1.png");
+	shieldPortrait->InitImageModule(heroVal->GetArmourKey(), heroVal->GetArmourPath());
 	shieldPortrait->SetScale(Vec2(72.f, 144.f));
 	shieldPortrait->SetPos(Vec2(362.f, 53.f));
+	shieldPortrait->SetName(L"shieldPortrait");
 
 	equipPanel->AddChild(shieldPortrait);
 
@@ -488,6 +642,7 @@ void Scene_Droom::Enter()
 	DivUI* mainRightPanel = new DivUI;
 	mainRightPanel->SetScale(Vec2(710.f, 360.f));
 	mainRightPanel->SetPos(Vec2(710.f, 0.f));
+	mainRightPanel->CanTarget(false);
 
 	mainPanel->AddChild(mainRightPanel);
 
@@ -498,7 +653,7 @@ void Scene_Droom::Enter()
 	inventoryPanel->InitImageModule(L"D_INV_Panle", L"resource\\panels\\panel_inventory.png");
 	inventoryPanel->SetName(L"shopInvPanel");
 	inventoryPanel->InitUpdateValue(new ShopInvUpdateVal(inventoryPanel));
-
+	
 	mainRightPanel->AddChild(inventoryPanel);
 
 	Vec2 startPos = Vec2(64.f, 30.f);
@@ -517,6 +672,8 @@ void Scene_Droom::Enter()
 		inventoryPanel->AddChild(invItem);
 	}
 
+	inventoryPanel->updateValue();
+
 	DivUI* mapPanel = new DivUI;
 	mapPanel->SetScale(Vec2(720.f, 360.f));
 	mapPanel->SetPos(Vec2(0.f, 0.f));
@@ -531,6 +688,9 @@ void Scene_Droom::Enter()
 	DivUI* mapBtn = new DivUI;
 	mapBtn->SetScale(Vec2(44.f, 80.f));
 	mapBtn->SetPos(Vec2(673.f, 160.f));
+	// 맵 패널 및 자식 오브젝트를 모두 캔타겟 트루 및 캔 렌더
+	// 인벤토리 패널 및 자식 오브젝트들 모두 캔 타겟 펄스 및 캔 렌더 펄스
+	mapBtn->InitOnMouseClick(new MapBtnClick(mapPanel, inventoryPanel));
 
 	mainRightPanel->AddChild(mapBtn);
 
@@ -538,6 +698,7 @@ void Scene_Droom::Enter()
 	DivUI* invBtn = new DivUI;
 	invBtn->SetScale(Vec2(44.f, 82.f));
 	invBtn->SetPos(Vec2(673.f, 244.f));
+	invBtn->InitOnMouseClick(new InvBtnClick(inventoryPanel, mapPanel));
 
 	mainRightPanel->AddChild(invBtn);
 
@@ -550,13 +711,37 @@ void Scene_Droom::Enter()
 
 	// 효과
 	Camera::GetInst()->FadeIn(0.5f);
+
+	// 사운드
+
+	ResMgr::GetInst()->LoadSound(L"RuinsLevel1Bgm", L"resource\\sound\\Music\\Explore_Vaults_Level_1_Loop {a2068a43-0914-44b6-b2ec-e3cc8160dab9}.wav");
+	Sound* pTitleSound = ResMgr::GetInst()->FindSound(L"RuinsLevel1Bgm");
+
+	pTitleSound->SetVolume(20.f);
+	pTitleSound->PlayToBGM(true);
 }
 
 void Scene_Droom::update()
 {
+	elapseTime += fDT;
+
+	if (elapseTime >= 6.f && debug) {
+		debug = false;
+		ChangeState((CStMachine*)GameMgr::GetInst()->GetMachine(), L"CBStartState");
+	}
+
 	Scene::update();
 
 	if (KEY_TAP(KEY::ESC)) {
 		ChangeScene(SCENE_TYPE::SHOP);
+	}
+
+	Vec2 mPos = MOUSE_POS;
+	Vec2 iScale = itemDragger->GetScale();
+
+	itemDragger->SetPos(mPos - iScale / 2.f);
+
+	if (KEY_AWAY(KEY::LBTN)) {
+		itemDragger->SetCanRend(false);
 	}
 }

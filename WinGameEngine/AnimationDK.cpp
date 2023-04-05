@@ -207,6 +207,8 @@ void AnimationDK::Load(const wstring& _strRelativePath, const wstring& _animName
 					s2 >> sub >> x >> sub >> y;
 
 					dFrm.vSize = Vec2(x, y);
+					// 프레임 헤이트 주는 로직 추가
+					frameHeight = y;
 
 					std::getline(file, line); // orig 
 					std::getline(file, line); // offset
@@ -366,6 +368,7 @@ void AnimationDK::render(HDC _dc)
 		bf.AlphaFormat = AC_SRC_ALPHA;
 		bf.SourceConstantAlpha = 255;
 
+		// DK Animation은 모두 UI좌표로 다룰 예정이라서 vPos를 Left Top 취급함
 		AlphaBlend(_dc
 			, (int)(vPos.x  + vOffset.x)
 			, (int)(vPos.y + vOffset.y)

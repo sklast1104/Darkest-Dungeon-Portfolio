@@ -32,14 +32,14 @@ void ChangeScene(SCENE_TYPE _eNext)
 	EventMgr::GetInst()->AddEvent(evn);
 }
 
-void ChangeState(AI* _ai, wstring _stateKey)
+void ChangeState(CStMachine* _stMachine, wstring _stateKey)
 {
-	//tEvent evn = {};
-	//evn.eEven = EVENT_TYPE::CHANGE_AI_STATE;
-	//evn.IParam = (DWORD_PTR)_ai;
-	//evn._stateKey = _stateKey;
+	tEvent evn = {};
+	evn.eEven = EVENT_TYPE::STATE_CHANGE;
+	evn.IParam = (DWORD_PTR)_stMachine;
+	evn.wstrParam = _stateKey;
 
-	//CEventMgr::GetInst()->AddEvent(evn);
+	EventMgr::GetInst()->AddEvent(evn);
 }
 
 UI* FindUIByName(UI* _parentUI, wstring _name)
