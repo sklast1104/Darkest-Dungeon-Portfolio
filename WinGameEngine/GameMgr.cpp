@@ -355,3 +355,10 @@ CDarkMonster* GameMgr::GetFocusedMonster()
 
 	return monSquad[monFocusIdx];
 }
+
+CDarkMonster* GameMgr::GetMonsterByIdx(int _idx)
+{
+	assert(monSquad[_idx]);
+
+	return monSquad[_idx];
+}

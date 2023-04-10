@@ -48,7 +48,7 @@ void Scene_Droom::render(HDC _dc)
 {
 	Scene::render(_dc);
 
-	TextOutA(_dc, 20, 20, camCoordText.c_str(), camCoordText.length());
+	/*TextOutA(_dc, 20, 20, camCoordText.c_str(), camCoordText.length());
 
 	TextOutA(_dc, 20, 40, playerCoordText.c_str(), playerCoordText.length());
 
@@ -56,7 +56,7 @@ void Scene_Droom::render(HDC _dc)
 	std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
 	std::string str = conv.to_bytes(stateName);
 
-	TextOutA(_dc, 20, 80, str.c_str(), str.length());
+	TextOutA(_dc, 20, 80, str.c_str(), str.length());*/
 }
 
 void Scene_Droom::Enter()

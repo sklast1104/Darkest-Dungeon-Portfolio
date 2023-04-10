@@ -24,8 +24,8 @@ void CSquadCol::render(HDC _dc)
 	Vec2 vViewPos = ViewMgr::GetInst()->GetViewPortPos(vRenderPos);
 	Vec2 vViewScale = ViewMgr::GetInst()->GetViewPortScale(GetScale());
 
-	Rectangle(_dc, (int)(vRenderPos.x - vViewScale.x / 2.f), (int)(vRenderPos.y - vViewScale.y / 2.f),
-		(int)(vRenderPos.x + vViewScale.x / 2.f), (int)(vRenderPos.y + vViewScale.y / 2.f));
+	/*Rectangle(_dc, (int)(vRenderPos.x - vViewScale.x / 2.f), (int)(vRenderPos.y - vViewScale.y / 2.f),
+		(int)(vRenderPos.x + vViewScale.x / 2.f), (int)(vRenderPos.y + vViewScale.y / 2.f));*/
 
 	//ComponentRender(_dc);
 }

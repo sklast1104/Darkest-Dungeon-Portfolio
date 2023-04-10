@@ -18,6 +18,7 @@
 
 #include "CHero.h"
 #include "CDarkMonster.h"
+#include "CSkill.h"
 
 CRestoreState::CRestoreState()
 	: CState(L"CRestoreState")
@@ -37,9 +38,24 @@ void CRestoreState::Enter()
 
 	int heroIdx = mgr->GetFocusIndex() - (4 - mgr->GetSquadNum());
 	int skillIdx = mgr->GetSIndex();
-	int monIdx = mgr->GetMonFocusIdx() ;
-	int realIdx = mgr->GetMonFocusIdx();
 
+	CHero* chero = mgr->GetFocusedHero();
+	CSkill* hSkill = chero->GetCurSkills()[skillIdx];
+
+	int monIdx = mgr->GetMonFocusIdx();
+	int realIdx = mgr->GetMonFocusIdx();
+	vector<int>& mulMonIdxes = mgr->GetMulMonIdx();
+
+	if (!hSkill->GetMulti()) {
+		monIdx = mgr->GetMonFocusIdx();
+		realIdx = mgr->GetMonFocusIdx();
+	}
+	else {
+
+	}
+
+	
+	
 	
 
 	ViewMgr::GetInst()->animateZoom(1.0f, 0.3f);
@@ -51,21 +67,42 @@ void CRestoreState::Enter()
 	// 플레이어 벡터 상대인덱스와 150을 곱한값
 	pEPos = Vec2(150.f * heroIdx, 0.f);
 
-	mSPos = monster->GetPos();
-
-	const array<CDarkMonster*, 4>& monSquad = mgr->GetMonSquad();
-
-	for (int i = 0; i < monIdx; i++) {
-		if (nullptr != monSquad[i]) {
-			if (monSquad[i]->IsDead()) {
-				realIdx -= 1;
-			}
-		}
+	for (int i = 0; i < monsters.size(); i++) {
+		mSPos = monsters[i]->GetPos();
+		mSPoses.push_back(monsters[i]->GetPos());
 	}
 
+	//mSPos = monster->GetPos();
 
-	mEPos = Vec2(150.f * realIdx, 0.f);
-	
+	if (!hSkill->GetMulti()) {
+		for (int i = 0; i < monsters.size(); i++) {
+			const array<CDarkMonster*, 4>& monSquad = mgr->GetMonSquad();
+
+
+
+			for (int i = 0; i < monIdx; i++) {
+				if (nullptr != monSquad[i]) {
+					if (monSquad[i]->IsDead()) {
+						realIdx -= 1;
+					}
+				}
+			}
+
+			mEPos = Vec2(150.f * realIdx, 0.f);
+			mEPoses.push_back(mEPos);
+		}
+	}
+	else {
+
+
+		// 문제 생길 여지 있음 일단 스킵
+		for (int i = 0; i < monsters.size(); i++) {
+
+			mEPos = Vec2(150.f * i, 0.f);
+			mEPoses.push_back(mEPos);
+
+		}
+	}
 	canCg = true;
 }
 
@@ -76,7 +113,12 @@ void CRestoreState::Update()
 	if (curTime >= lerpTime) {
 		curTime = lerpTime;
 		player->PlayHeroCombatAnim();
-		monster->PlayCombatAnim();
+
+		for (int i = 0; i < monsters.size(); i++) {
+			monsters[i]->PlayCombatAnim();
+		}
+
+		//monster->PlayCombatAnim();
 	}
 
 	if (curTime == lerpTime && canCg) {
@@ -104,7 +146,12 @@ void CRestoreState::Update()
 
 	// 되돌려야 될 수치는 플레이어좌표, 몬스터 좌표, 애니메이션 크기 비율
 	player->SetPos( Mathf::Lerp(pSPos, pEPos, t) );
-	monster->SetPos(Mathf::Lerp(mSPos, mEPos, t));
+
+	for (int i = 0; i < monsters.size(); i++) {
+		monsters[i]->SetPos(Mathf::Lerp(mSPoses[i], mEPoses[i], t));
+	}
+
+	
 
 }
 
@@ -119,4 +166,8 @@ void CRestoreState::Exit()
 	// 체력바, 스트레스바만 켜보자
 	heroSquad->EnableAllDivChildUI(true);
 	monSquad->EnableAllDivChildUI(true);
+
+	//monsters.clear();
+	mSPoses.clear();
+	mEPoses.clear();
 }

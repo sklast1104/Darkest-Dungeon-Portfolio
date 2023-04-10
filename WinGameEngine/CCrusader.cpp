@@ -19,8 +19,8 @@ CCrusader::CCrusader()
 	armourKey = job_name + L"_armor";
 	armourPath = L"resource\\heros\\crusader\\armour1.png";
 
-	curHp = 33;
-	hp = 33;
+	curHp = 66;
+	hp = 66;
 	curExp = 3;
 
 	curStress = 153;

@@ -34,10 +34,10 @@ CHighwayMan::CHighwayMan()
 	criticalHitRate = 5;
 	// 데미지 하한
 	damageLower = 5;
-	damageLower = 25;
+	//damageLower = 25;
 	// 데미지 상한
 	damageUpper = 10;
-	damageUpper = 30;
+	//damageUpper = 30;
 	// 속도
 	speed = 5;
 
@@ -89,13 +89,13 @@ void CHighwayMan::InitSkill()
 	pistolShot->GetSkillPos()[1] = true;
 	pistolShot->GetSkillPos()[2] = true;
 
-	pistolShot->SetMultiAttack(true);
+	pistolShot->SetMultiAttack(false);
 	pistolShot->GetSkillRange()[1] = true;
 	pistolShot->GetSkillRange()[2] = true;
 	pistolShot->GetSkillRange()[3] = true;
 
 	pistolShot->SetHitRate(85);
-	pistolShot->SetAttackRate(-15);
+	pistolShot->SetAttackRate(100);
 	pistolShot->SetCritRate(7.5f);
 
 	pistolShot->SetSkillAnimName(L"권총 사격");

@@ -8,6 +8,9 @@
 #include "GameMgr.h"
 #include "CMonDiv.h"
 #include "TimeMgr.h"
+#include "CSkill.h"
+#include "CHero.h"
+#include "CDarkMonster.h"
 
 CMonDead::CMonDead()
 	: CState(L"CMonDead")
@@ -32,16 +35,79 @@ void CMonDead::Enter()
 	int skillIdx = mgr->GetSIndex();
 	int monIdx = mgr->GetMonFocusIdx();
 
-	for (int i = 0; i < monSquad->GetMonDivs().size(); i++) {
+	CHero* chero = mgr->GetFocusedHero();
+	CSkill* hSkill = chero->GetCurSkills()[skillIdx];
 
-		if (monSquad->GetMonDivs()[i]->GetId() > monIdx) {
-			//int newId = monSquad->GetMonDivs()[i]->GetId() - monIdx;
-			//monSquad->GetMonDivs()[i]->SetId(newId);
-			moveDiv.push_back(monSquad->GetMonDivs()[i]);
-			startPos.push_back(monSquad->GetMonDivs()[i]->GetPos());
-			toPos.push_back(monSquad->GetMonDivs()[i]->GetPos() + Vec2(-150.f, 0.f));
+	if (!hSkill->GetMulti()) {
+		for (int i = 0; i < monSquad->GetMonDivs().size(); i++) {
+
+			if (monSquad->GetMonDivs()[i]->GetId() > monIdx) {
+				//int newId = monSquad->GetMonDivs()[i]->GetId() - monIdx;
+				//monSquad->GetMonDivs()[i]->SetId(newId);
+				moveDiv.push_back(monSquad->GetMonDivs()[i]);
+				startPos.push_back(monSquad->GetMonDivs()[i]->GetPos());
+				toPos.push_back(monSquad->GetMonDivs()[i]->GetPos() + Vec2(-150.f, 0.f));
+			}
 		}
 	}
+	else {
+
+		int checker = 0;
+
+		for (int i = 0; i < hSkill->GetSkillRange().size(); i++) {
+			if (hSkill->GetSkillRange()[i]) checker += 1;
+		}
+
+		for (int i = 0; i < monSquad->GetMonDivs().size(); i++) {
+
+			if (monSquad->GetMonDivs()[i]->GetId() >= checker) {
+				//int newId = monSquad->GetMonDivs()[i]->GetId() - monIdx;
+				//monSquad->GetMonDivs()[i]->SetId(newId);
+				moveDiv.push_back(monSquad->GetMonDivs()[i]);
+				startPos.push_back(monSquad->GetMonDivs()[i]->GetPos());
+
+				int deadCount = 0;
+
+				const array<CDarkMonster*, 4>& mSquad = mgr->GetMonSquad();
+				for (int j = 0; j < i; j++) {
+
+					if (nullptr != mSquad[j]) {
+						if (mSquad[j]->IsDead()) {
+							deadCount += 1;
+						}
+					}
+
+				}
+
+				Vec2 toPoss = monSquad->GetMonDivs()[i]->GetPos() + Vec2(-150.f, 0.f) * (deadCount);
+				toPos.push_back(monSquad->GetMonDivs()[i]->GetPos() + Vec2(-150.f, 0.f) * (deadCount));
+			}
+		}
+
+		/*if (hSkill->GetSkillRange()[i]) {
+			moveDiv.push_back(monSquad->GetMonDivByIdx(i));
+			startPos.push_back(monSquad->GetMonDivs()[i]->GetPos());
+		}
+
+		for (int i = 0; i < moveDiv.size(); i++) {
+
+			Vec2 monPos = moveDiv[i]->GetPos();
+			int realIdx = monIdx;
+			const array<CDarkMonster*, 4>& monSquad = mgr->GetMonSquad();
+
+			for (int i = 0; i < monIdx; i++) {
+				if (nullptr != monSquad[i]) {
+					if (monSquad[i]->IsDead()) {
+						realIdx -= 1;
+					}
+				}
+			}
+			toPos.push_back(moveDiv[i]->GetPos() + Vec2(-150.f * realIdx, 0.f));
+		}*/
+
+	}
+
+	
 
 	canCg = true;
 }
@@ -74,5 +140,9 @@ void CMonDead::Update()
 
 void CMonDead::Exit()
 {
+	moveDiv.clear();
+	startPos.clear();
+	toPos.clear();
+
 	elapsedTime = 0.f;
 }

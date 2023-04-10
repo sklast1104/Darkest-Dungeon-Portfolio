@@ -43,7 +43,7 @@ void CIdleState::Enter()
 	pTitleSound->PlayToBGM(true);
 
 	// 씬 상태에 따라 달리 처리할 필요 있을수 있음
-	Camera::GetInst()->SetCurLookAt(Vec2(960.f, 540.f) + Vec2(300.f, 0.f));
+	//Camera::GetInst()->SetCurLookAt(Vec2(960.f, 540.f) + Vec2(300.f, 0.f));
 
 	sName = SceneMgr::GetInst()->GetCurScene()->GetName();
 }

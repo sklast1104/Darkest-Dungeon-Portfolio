@@ -610,6 +610,7 @@ DivUI* UIFactory::CreateInvItem(Vec2 _vPos, wstring _key, wstring _path, int _in
 	invCount->SetFormat(DT_LEFT | DT_VCENTER | DT_SINGLELINE);
 	invCount->CanTarget(false);
 	invCount->SetCanRend(false);
+	invCount->SetViewAffected(false);
 
 	invItem->AddChild(invCount);
 
@@ -662,6 +663,7 @@ CSquadDiv* UIFactory::CreateSquadDiv()
 	squad->SetScale(Vec2(heroXOffset * squadNum, 500.f));
 	squad->SetPos(Vec2(800.f - (squadNum * heroXOffset), 170.f));
 	squad->SetName(L"CSquadDiv");
+	squad->SetCamAffected(true);
 
 	for (int i = 0; i < squadNum; i++) {
 
@@ -832,6 +834,7 @@ CMonSquad* UIFactory::CreateMonSquadDiv()
 		focusedOverlay->SetCamAffected(true);
 		focusedOverlay->SetName(L"focusedOverlay_monster");
 		focusedOverlay->SetCanRend(false);
+		focusedOverlay->SetId(i);
 
 		monDiv->AddChild(focusedOverlay);
 
@@ -1533,6 +1536,7 @@ void UIFactory::MakeRoomUI(Vec2 pos, DMapUI* mapPanel, CNode* node)
 	Vec2 newPos = mapScale * 0.5f + pos;
 
 	int nodeId = node->GetId();
+
 
 	if (CRoom* roomNode = dynamic_cast<CRoom*>(node)) {
 

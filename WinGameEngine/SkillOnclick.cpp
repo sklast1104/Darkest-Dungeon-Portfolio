@@ -62,11 +62,16 @@ void SkillOnclick::Execute()
 		((DivUI*)focusedMonOverlays[i])->SetCanRend(false);
 	}
 
+	vector<int>& mulMonIdxes = mgr->GetMulMonIdx();
+	mulMonIdxes.clear();
+
 	for (int i = 0; i < curSkill->GetSkillRange().size(); i++) {
 
 		if (curSkill->GetSkillRange()[i]) {
 			if (i < nfocusedMonOverlays.size()) {
+				int id = ((DivUI*)nfocusedMonOverlays[i])->GetId();
 				((DivUI*)nfocusedMonOverlays[i])->SetCanRend(true);
+				mulMonIdxes.push_back(id);
 			}	
 		}
 	}

@@ -19,14 +19,10 @@ private :
 	// 몬스터 스쿼드
 	CMonSquad* monSquad;
 
-	// 공격자
-	CTurnPlayer* attacker;
-
-	// 피격자
-	CTurnPlayer* victim;
-
 	CHeroDiv* player;
-	CMonDiv* monster;
+	//CMonDiv* monster;
+
+	vector<CMonDiv*> monsters;
 
 	bool isPlayerAttack;
 	bool moveBack;

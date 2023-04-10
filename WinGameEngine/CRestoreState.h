@@ -10,13 +10,18 @@ class CRestoreState :
 private :
 
 	CHeroDiv* player;
-	CMonDiv* monster;
+	//CMonDiv* monster;
+
+	vector<CMonDiv*> monsters;
 
 	float curTime;
 	float lerpTime;
 
 	Vec2 pSPos;
 	Vec2 pEPos;
+
+	vector<Vec2> mSPoses;
+	vector<Vec2> mEPoses;
 
 	Vec2 mSPos;
 	Vec2 mEPos;
@@ -33,6 +38,7 @@ public :
 	virtual void Exit() override;
 
 	void SetPlayer(CHeroDiv* _player) { player = _player; }
-	void SetMonster(CMonDiv* _monster) { monster = _monster; }
+	//void SetMonster(CMonDiv* _monster) { monster = _monster; }
+	void SetMonsters(vector<CMonDiv*> _monsters) { monsters = _monsters; }
 };
 

@@ -48,6 +48,9 @@ private :
 	// 카메라 쉐이킹 영향을 안받는 이전에 저장했던 카메라 좌표
 	Vec2 rLookAt;
 
+	// 멀티어텍 포커싱용
+	vector<int> mulMonIdx;
+
 	// 던전 맵
 	CMap* map;
 	int curNodeIdx;
@@ -115,6 +118,7 @@ public :
 	void SetMonFocusIdx(int _focusIdx) { monFocusIdx = _focusIdx; }
 	int GetMonFocusIdx() { return monFocusIdx; }
 	CDarkMonster* GetFocusedMonster();
+	CDarkMonster* GetMonsterByIdx(int _idx);
 
 	void SetSIndex(int _sIndex) { sIndex = _sIndex; }
 	int GetSIndex() { return sIndex; }
@@ -128,7 +132,7 @@ public :
 	void SetCurNodeIdx(int _idx) { curNodeIdx = _idx; }
 	int GetCurNodeIdx() { return curNodeIdx; }
 
-
+	vector<int>& GetMulMonIdx() { return mulMonIdx;}
 public :
 	SINGLE(GameMgr);
 };
