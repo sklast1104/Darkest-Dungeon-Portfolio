@@ -65,6 +65,11 @@ int Core::init(HWND _hwnd, POINT _ptResolution)
 	Camera::GetInst()->init();
 	ViewMgr::GetInst()->init();
 	SceneMgr::GetInst()->init();
+	
+
+	// 시드 값 초기화
+	// 현재 시간을 시드값으로 사용
+	std::srand(std::time(NULL));
 
 	return S_OK;
 }

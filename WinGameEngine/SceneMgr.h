@@ -16,6 +16,7 @@ public :
 	void render(HDC _dc);
 
 	Scene* GetCurScene() { return m_pCurScene; }
+	Scene* GetSceneByName(const wstring& _name);
 
 	void ChangeScene(SCENE_TYPE _eNext);
 

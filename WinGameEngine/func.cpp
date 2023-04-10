@@ -59,6 +59,22 @@ UI* FindUIByName(UI* _parentUI, wstring _name)
 	return nullptr;
 }
 
+vector<UI*> FindUIsByName(UI* parentUI, const std::wstring& name)
+{
+	std::vector<UI*> result;
+
+	if (parentUI->GetName() == name) {
+		result.push_back(parentUI);
+	}
+
+	for (const auto& childUI : parentUI->GetChildUI()) {
+		std::vector<UI*> childResult = FindUIsByName(childUI, name);
+		result.insert(result.end(), childResult.begin(), childResult.end());
+	}
+
+	return result;
+}
+
 void FScanf(char* _pOutBuff, FILE* _pFile)
 {
 	int i = 0;

@@ -26,6 +26,7 @@ enum class GROUP_TYPE {
 	TILE,
 	PLAYER,
 	MONSTER,
+	OBSTACLE,
 	PROJ_PLAYER,
 	PROJ_MONSTER,
 	UI = 30,
@@ -40,6 +41,7 @@ enum class SCENE_TYPE {
 	DSELECT,
 	SHOP,
 	DROOM,
+	PATH,
 	TEST,
 	END,
 };

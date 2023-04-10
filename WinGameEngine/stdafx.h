@@ -2,6 +2,9 @@
 
 #include <iostream>
 #include <memory>
+#include <cstdlib>
+#include <ctime>
+#include <random>
 
 using std::shared_ptr;
 using std::weak_ptr;
@@ -76,3 +79,4 @@ using std::function;
 #include "define.h"
 #include "func.h"
 #include "Mathf.h"
+

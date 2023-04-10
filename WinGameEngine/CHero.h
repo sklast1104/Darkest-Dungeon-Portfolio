@@ -29,9 +29,9 @@ protected :
 	wstring grayPath;
 
 	// 현재 체력
-	UINT curHp;
+	int curHp;
 	// 총 체력
-	UINT hp;
+	int hp;
 
 	// 현재 스트레스
 	UINT curStress;
@@ -41,20 +41,20 @@ protected :
 	// 명중률
 	int hitRate;
 	// 회피율
-	UINT avoidanceRate;
+	int avoidanceRate;
 	// 치명율
-	UINT criticalHitRate;
+	int criticalHitRate;
 	// 방어율
-	UINT defenseRate;
+	int defenseRate;
 	// 데미지 하한
-	UINT damageLower;
+	int damageLower;
 	//데미지 상한
-	UINT damageUpper;
+	int damageUpper;
 	// 속도
-	UINT speed;
+	int speed;
 
 	// 레벨
-	UINT level;
+	int level;
 
 	// 경험치 무조건 최대 경험치 8이라고 가정
 	int curExp;
@@ -107,14 +107,14 @@ public :
 	void SetArmourPath(const wstring& _armourPath) { armourPath = _armourPath; }
 	const wstring& GetArmourPath() { return armourPath; }
 
-	void SetCurStress(UINT _curStress) { curStress = _curStress; }
-	UINT GetCurStress() { return curStress; }
+	void SetCurStress(int _curStress) { curStress = _curStress; }
+	int GetCurStress() { return curStress; }
 
-	void SetStress(UINT _stress) { stress = _stress; }
-	UINT GetStress() { return stress; }
+	void SetStress(int _stress) { stress = _stress; }
+	int GetStress() { return stress; }
 
-	void SetCurHp(UINT _curHP) { curHp = _curHP; }
-	UINT GetCurHp() { return curHp; }
+	void SetCurHp(int _curHP) { curHp = _curHP; }
+	int GetCurHp() { return curHp; }
 
 	void SetName(const wstring& name) {
 		this->name = name;
@@ -142,15 +142,15 @@ public :
 		return path;
 	}
 
-	void SetHp(UINT hp) {
+	void SetHp(int hp) {
 		this->hp = hp;
 	}
 
-	UINT GetHp() {
+	int GetHp() {
 		return hp;
 	}
 
-	void SetHitRate(UINT hitRate) {
+	void SetHitRate(int hitRate) {
 		this->hitRate = hitRate;
 	}
 
@@ -158,59 +158,59 @@ public :
 		return hitRate;
 	}
 
-	void SetAvoidanceRate(UINT avoidanceRate) {
+	void SetAvoidanceRate(int avoidanceRate) {
 		this->avoidanceRate = avoidanceRate;
 	}
 
-	UINT GetAvoidanceRate() {
+	int GetAvoidanceRate() {
 		return avoidanceRate;
 	}
 
-	void SetCriticalHitRate(UINT criticalHitRate) {
+	void SetCriticalHitRate(int criticalHitRate) {
 		this->criticalHitRate = criticalHitRate;
 	}
 
-	UINT GetCriticalHitRate() {
+	int GetCriticalHitRate() {
 		return criticalHitRate;
 	}
 
-	void SetDefenseRate(UINT defenseRate) {
+	void SetDefenseRate(int defenseRate) {
 		this->defenseRate = defenseRate;
 	}
 
-	UINT GetDefenseRate() {
+	int GetDefenseRate() {
 		return defenseRate;
 	}
 
-	void SetDamageLower(UINT lowerDamage) {
+	void SetDamageLower(int lowerDamage) {
 		this->damageLower = lowerDamage;
 	}
 
-	UINT GetDamageLower() {
+	int GetDamageLower() {
 		return damageLower;
 	}
 
-	void SetDamageUppder(UINT upperDamage) {
+	void SetDamageUppder(int upperDamage) {
 		this->damageUpper = upperDamage;
 	}
 
-	UINT GetDamageUppder() {
+	int GetDamageUppder() {
 		return damageUpper;
 	}
 
-	void SetSpeed(UINT speed) {
+	void SetSpeed(int speed) {
 		this->speed = speed;
 	}
 
-	UINT GetSpeed() {
+	int GetSpeed() {
 		return speed;
 	}
 
-	void SetLevel(UINT level) {
+	void SetLevel(int level) {
 		this->level = level;
 	}
 
-	UINT GetLevel() {
+	int GetLevel() {
 		return level;
 	}
 

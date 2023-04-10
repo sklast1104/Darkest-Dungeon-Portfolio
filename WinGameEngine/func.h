@@ -11,6 +11,7 @@ void ChangeScene(SCENE_TYPE _eNext);
 void ChangeState(CStMachine* _stMachine, wstring _stateKey);
 
 UI* FindUIByName(UI* _parentUI, wstring _name);
+vector<UI*> FindUIsByName(UI* parentUI, const std::wstring& name);
 
 template<typename T>
 void	Safe_Delete(T& Temp)

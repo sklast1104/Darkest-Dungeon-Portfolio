@@ -31,11 +31,21 @@ private :
 	// 활성화 상태인지
 	bool isAlive;
 
-	
+	// 스킬 애니메이션 이름
+	wstring skillAnimName;
+	// 스킬 애니메이션 경로
+	wstring skillAnimPath;
+
 public :
 
 	CSkill();
 	~CSkill();
+
+	const wstring& GetSkilAnimName() { return skillAnimName; }
+	void SetSkillAnimName(const wstring& _skilName) { skillAnimName = _skilName; }
+
+	const wstring& GetAnimPath() { return skillAnimPath; }
+	void SetAnimPath(const wstring& _animPath) { skillAnimPath = _animPath; }
 
 	const wstring& GetSkillName() { return skillName; }
 	void SetSkillName(const wstring& _skillName) { skillName = _skillName; }

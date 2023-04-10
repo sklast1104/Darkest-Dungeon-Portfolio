@@ -41,6 +41,9 @@ void UI::AllCanTarget(bool _canTarget)
 	m_canTarget = _canTarget;
 
 	for (auto child : m_vecChildUI) {
+
+		if (child->GetName() == L"indicator") continue;
+
 		child->AllCanTarget(_canTarget);
 	}
 }

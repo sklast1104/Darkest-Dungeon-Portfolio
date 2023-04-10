@@ -175,6 +175,24 @@
     <Filter Include="Engine\10.DataModel\00.Common">
       <UniqueIdentifier>{01c8d96a-9e95-4da4-93ac-d35dafd23ae1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\10.DataModel\07.Map">
+      <UniqueIdentifier>{aa3d85f2-0dce-4539-acdf-847ef03784ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\05.Scene\SceneList\Scene_Path">
+      <UniqueIdentifier>{71f92e11-e7ce-477a-8bd6-9c262b332b33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04.Object\Objects\01.PathObj">
+      <UniqueIdentifier>{0eb02ad5-c642-45d2-b496-0ed009ac5538}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\04.Object\UI\05. MapUI">
+      <UniqueIdentifier>{9e32d6c8-9ed5-411d-87bc-dc292c362be5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\07.Component\03.Command\06. MapCom">
+      <UniqueIdentifier>{3c23bed2-87ff-4d00-bfd1-22600a03d94e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\07.Component\03.Command\07. PathCom">
+      <UniqueIdentifier>{15250a55-3b54-46ff-b490-90665925ac11}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -468,6 +486,60 @@
     <ClInclude Include="CMonDiv.h">
       <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
     </ClInclude>
+    <ClInclude Include="SkillContainerUpdate.h">
+      <Filter>Engine\07.Component\03.Command\05. DungeonCom</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillOnclick.h">
+      <Filter>Engine\07.Component\03.Command\05. DungeonCom</Filter>
+    </ClInclude>
+    <ClInclude Include="MonDivOnClick.h">
+      <Filter>Engine\07.Component\03.Command\05. DungeonCom</Filter>
+    </ClInclude>
+    <ClInclude Include="CRestoreState.h">
+      <Filter>Engine\08.Module\State\DarkestStates</Filter>
+    </ClInclude>
+    <ClInclude Include="CMonDead.h">
+      <Filter>Engine\08.Module\State\DarkestStates</Filter>
+    </ClInclude>
+    <ClInclude Include="CMap.h">
+      <Filter>Engine\10.DataModel\07.Map</Filter>
+    </ClInclude>
+    <ClInclude Include="CNode.h">
+      <Filter>Engine\10.DataModel\07.Map</Filter>
+    </ClInclude>
+    <ClInclude Include="CPathNode.h">
+      <Filter>Engine\10.DataModel\07.Map</Filter>
+    </ClInclude>
+    <ClInclude Include="CRoom.h">
+      <Filter>Engine\10.DataModel\07.Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene_Path.h">
+      <Filter>Engine\05.Scene\SceneList\Scene_Path</Filter>
+    </ClInclude>
+    <ClInclude Include="CBattleTrigger.h">
+      <Filter>Engine\04.Object\Objects\01.PathObj</Filter>
+    </ClInclude>
+    <ClInclude Include="CSquadCol.h">
+      <Filter>Engine\04.Object\Objects\01.PathObj</Filter>
+    </ClInclude>
+    <ClInclude Include="DroomUI.h">
+      <Filter>Engine\04.Object\UI\05. MapUI</Filter>
+    </ClInclude>
+    <ClInclude Include="DpathUI.h">
+      <Filter>Engine\04.Object\UI\05. MapUI</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomUIClick.h">
+      <Filter>Engine\07.Component\03.Command\06. MapCom</Filter>
+    </ClInclude>
+    <ClInclude Include="CMoveTrigger.h">
+      <Filter>Engine\04.Object\Objects\01.PathObj</Filter>
+    </ClInclude>
+    <ClInclude Include="DMapUI.h">
+      <Filter>Engine\04.Object\UI\05. MapUI</Filter>
+    </ClInclude>
+    <ClInclude Include="DoorClick.h">
+      <Filter>Engine\07.Component\03.Command\07. PathCom</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -750,6 +822,60 @@
     </ClCompile>
     <ClCompile Include="CMonDiv.cpp">
       <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="SkillContainerUpdate.cpp">
+      <Filter>Engine\07.Component\03.Command\05. DungeonCom</Filter>
+    </ClCompile>
+    <ClCompile Include="SkillOnclick.cpp">
+      <Filter>Engine\07.Component\03.Command\05. DungeonCom</Filter>
+    </ClCompile>
+    <ClCompile Include="MonDivOnClick.cpp">
+      <Filter>Engine\07.Component\03.Command\05. DungeonCom</Filter>
+    </ClCompile>
+    <ClCompile Include="CRestoreState.cpp">
+      <Filter>Engine\08.Module\State\DarkestStates</Filter>
+    </ClCompile>
+    <ClCompile Include="CMonDead.cpp">
+      <Filter>Engine\08.Module\State\DarkestStates</Filter>
+    </ClCompile>
+    <ClCompile Include="CMap.cpp">
+      <Filter>Engine\10.DataModel\07.Map</Filter>
+    </ClCompile>
+    <ClCompile Include="CNode.cpp">
+      <Filter>Engine\10.DataModel\07.Map</Filter>
+    </ClCompile>
+    <ClCompile Include="CPathNode.cpp">
+      <Filter>Engine\10.DataModel\07.Map</Filter>
+    </ClCompile>
+    <ClCompile Include="CRoom.cpp">
+      <Filter>Engine\10.DataModel\07.Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene_Path.cpp">
+      <Filter>Engine\05.Scene\SceneList\Scene_Path</Filter>
+    </ClCompile>
+    <ClCompile Include="CBattleTrigger.cpp">
+      <Filter>Engine\04.Object\Objects\01.PathObj</Filter>
+    </ClCompile>
+    <ClCompile Include="CSquadCol.cpp">
+      <Filter>Engine\04.Object\Objects\01.PathObj</Filter>
+    </ClCompile>
+    <ClCompile Include="DroomUI.cpp">
+      <Filter>Engine\04.Object\UI\05. MapUI</Filter>
+    </ClCompile>
+    <ClCompile Include="DpathUI.cpp">
+      <Filter>Engine\04.Object\UI\05. MapUI</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomUIClick.cpp">
+      <Filter>Engine\07.Component\03.Command\06. MapCom</Filter>
+    </ClCompile>
+    <ClCompile Include="CMoveTrigger.cpp">
+      <Filter>Engine\04.Object\Objects\01.PathObj</Filter>
+    </ClCompile>
+    <ClCompile Include="DMapUI.cpp">
+      <Filter>Engine\04.Object\UI\05. MapUI</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorClick.cpp">
+      <Filter>Engine\07.Component\03.Command\07. PathCom</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

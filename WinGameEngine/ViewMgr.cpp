@@ -10,6 +10,8 @@ ViewMgr::ViewMgr()
 	, lerpTime{0.000001f}
 	, startZoomRatio{0.f}
 	, endZoomRatio{0.f}
+	, startLookAt{ Camera::GetInst()->GetLookAt() }
+	, endLookAt{ Camera::GetInst()->GetLookAt() }
 {
 
 }
@@ -35,11 +37,15 @@ void ViewMgr::update()
 	float t = currentTime / lerpTime;
 
 	zoomRatio = Mathf::Lerp(startZoomRatio, endZoomRatio, t);
+	//Camera::GetInst()->update();
+
 }
 
 void ViewMgr::SetZoomRatio(float _zoomRatio)
 {
 	zoomRatio = _zoomRatio;
+	startZoomRatio = zoomRatio;
+	endZoomRatio = zoomRatio;
 }
 
 void ViewMgr::animateZoom(float _endzoomRatio, float _lerpTime)
@@ -48,4 +54,15 @@ void ViewMgr::animateZoom(float _endzoomRatio, float _lerpTime)
 	lerpTime = _lerpTime;
 	startZoomRatio = zoomRatio;
 	endZoomRatio = _endzoomRatio;
+}
+
+void ViewMgr::animateZoomView(float _endzoomRatio, Vec2 _toLookAt, float _timer)
+{
+	currentTime = 0.f;
+	lerpTime = _timer;
+	startZoomRatio = zoomRatio;
+	endZoomRatio = _endzoomRatio;
+
+	startLookAt = Camera::GetInst()->GetLookAt();
+	endLookAt = _toLookAt;
 }

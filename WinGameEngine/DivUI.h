@@ -81,6 +81,8 @@ public :
 
 	virtual void updateValue();
 
+	void SendToBack(const wstring& _name);
+
 	CLONE(DivUI);
 };
 

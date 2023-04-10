@@ -18,40 +18,52 @@ protected:
 	wstring monsterType;
 
 	// 현재 체력
-	size_t curHp;
+	int curHp;
 	// 총 체력
-	size_t maxHp;
+	int maxHp;
 
 	// 방어율
-	size_t shieldRate;
+	int shieldRate;
 	// 회피율
-	size_t avoidRate;
+	int avoidRate;
 	// 속도
-	size_t speed;
+	int speed;
 	// 데미지 하한
-	UINT damageLower;
+	int damageLower;
 	//데미지 상한
-	UINT damageUpper;
+	int damageUpper;
 
 	// 저항력
 	// 기절 저항력
-	size_t faintResist;
+	int faintResist;
 	// 중독 저항력
-	size_t toxinResist;
+	int toxinResist;
 	// 출혈 저항력
-	size_t bleedResist;
+	int bleedResist;
 	// 약화 저항력
-	size_t weakResist;
+	int weakResist;
 	// 이동 저항력
-	size_t moveResist;
+	int moveResist;
 
 	// 스킬 이름은 최대 4개까지, 1~3개일수도 있음
 	array<CSkill*, 4> curSkillArray;
+
+	// 피격 애니메이션 이름
+	wstring attackedAnimName;
+
+	// 피격 애니메이션 경로
+	wstring attackedAnimPath;
 
 public :
 
 	CDarkMonster();
 	virtual ~CDarkMonster();
+
+	const wstring& GetAttackedAnimName() { return attackedAnimName; }
+	void SetAttackedAnimName(const wstring& _attackedAnimName) { attackedAnimName = _attackedAnimName; }
+
+	const wstring& GetAttackedAnimPath() { return attackedAnimPath; }
+	void SetAttackedAnimPath(const wstring& _attackedAnimPath) { attackedAnimPath = _attackedAnimPath; }
 
 	const array<CSkill*, 4> GetCurSkills() { return curSkillArray; }
 
@@ -64,42 +76,42 @@ public :
 	const wstring& GetMonType() { return monsterType; }
 	void SetMonType(const wstring& _monType) { monsterType = _monType; }
 
-	size_t GetCurHp() { return curHp; }
-	void SetCurHp(size_t _hp) { curHp = _hp; }
-	size_t GetMaxHp() { return maxHp; }
-	void SetMaxHp(size_t _maxHp) { maxHp = _maxHp; }
+	int GetCurHp() { return curHp; }
+	void SetCurHp(int _hp) { curHp = _hp; }
+	int GetMaxHp() { return maxHp; }
+	void SetMaxHp(int _maxHp) { maxHp = _maxHp; }
 
-	size_t GetShieldRate() { return shieldRate; }
-	void SetShieldRate(size_t _shieldRate) { shieldRate = _shieldRate; }
-	size_t GetAvoidRate() { return avoidRate; }
-	void SetAvoidRate(size_t _avoidRate) { avoidRate = _avoidRate; }
-	size_t GetSpeed() { return speed; }
-	void SetSpeed(size_t _speed) { speed = _speed; }
+	int GetShieldRate() { return shieldRate; }
+	void SetShieldRate(int _shieldRate) { shieldRate = _shieldRate; }
+	int GetAvoidRate() { return avoidRate; }
+	void SetAvoidRate(int _avoidRate) { avoidRate = _avoidRate; }
+	int GetSpeed() { return speed; }
+	void SetSpeed(int _speed) { speed = _speed; }
 
-	size_t GetFaintResist() { return faintResist; }
-	void SetFaintResist(size_t _faintResist) { faintResist = _faintResist; }
-	size_t GetToxinResist() { return toxinResist; }
-	void SetToxinResist(size_t _toxinResist) { toxinResist = _toxinResist; }
-	size_t GetBleedResist() { return bleedResist; }
-	void SetBleedResist(size_t _bleedResist) { bleedResist = _bleedResist; }
-	size_t GetWeakResist() { return weakResist; }
-	void SetWeakResist(size_t _weakResist) { weakResist = _weakResist; }
-	size_t GetMoveResist() { return moveResist; }
-	void SetMoveResist(size_t _moveResist) { moveResist = _moveResist; }
+	int GetFaintResist() { return faintResist; }
+	void SetFaintResist(int _faintResist) { faintResist = _faintResist; }
+	int GetToxinResist() { return toxinResist; }
+	void SetToxinResist(int _toxinResist) { toxinResist = _toxinResist; }
+	int GetBleedResist() { return bleedResist; }
+	void SetBleedResist(int _bleedResist) { bleedResist = _bleedResist; }
+	int GetWeakResist() { return weakResist; }
+	void SetWeakResist(int _weakResist) { weakResist = _weakResist; }
+	int GetMoveResist() { return moveResist; }
+	void SetMoveResist(int _moveResist) { moveResist = _moveResist; }
 
-	void SetDamageLower(UINT lowerDamage) {
+	void SetDamageLower(int lowerDamage) {
 		this->damageLower = lowerDamage;
 	}
 
-	UINT GetDamageLower() {
+	int GetDamageLower() {
 		return damageLower;
 	}
 
-	void SetDamageUppder(UINT upperDamage) {
+	void SetDamageUppder(int upperDamage) {
 		this->damageUpper = upperDamage;
 	}
 
-	UINT GetDamageUppder() {
+	int GetDamageUppder() {
 		return damageUpper;
 	}
 };

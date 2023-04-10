@@ -37,6 +37,11 @@ CState* CStMachine::GetState(wstring stateKey)
     return iter->second;
 }
 
+const wstring& CStMachine::GetCurStateName()
+{
+    return curState->GetStateKey();
+}
+
 void CStMachine::SetCurState(wstring stateKey)
 {
     curState = GetState(stateKey);

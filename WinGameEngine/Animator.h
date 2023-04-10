@@ -29,6 +29,7 @@ public:
 	// 좌우 반전된 텍스쳐를 사용하는지
 	virtual void LoadAnimation(const wstring& _strRelativePath, float fDuration, Vec2 fOffset, bool _isHorizontalFlip);
 	Animation* FindAnimation(const wstring& _strName);
+	Animation* GetCurAnimation() { return m_pCurAnim; }
 	void Play(const wstring& _strName, bool _bRepeat);
 
 	void update();

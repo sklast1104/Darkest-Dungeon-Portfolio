@@ -25,19 +25,21 @@ void CPlayerTurn::Enter()
 	monSquad = (CMonSquad*)FindUIByName(pseudoUI, L"CMonSquad");
 	curHeroIndex = GameMgr::GetInst()->GetFocusIndex();
 
-	// wait에서 계산되어 와야되는데 지금은 아직 계산 안하므로 3으로 해놓고 테스트
-	curHeroIndex = 3;
-	GameMgr::GetInst()->SetFocusIndex(3);
+	// 현재 턴인 캐릭터만 포커싱
 
-	heroSquad->PlayHeroCombatAnim();
-	monSquad->SetCanRend(true);
 	heroSquad->EnableFocus(curHeroIndex);
 
-	ResMgr::GetInst()->LoadSound(L"BattleBgm", L"resource\\sound\\Music\\Combat_Level1_Loop1 {1ba3a4b1-3a73-424c-abaa-3f7520bfb535}.wav");
-	Sound* pTitleSound = ResMgr::GetInst()->FindSound(L"BattleBgm");
+	// 현재위치에서 사용 가능한 스킬 활성화 및 비활성화
+	heroSquad->EnableSkill(curHeroIndex);
 
-	pTitleSound->SetVolume(20.f);
-	pTitleSound->PlayToBGM(true);
+	// 스킬 포커스 UI도 비활성화 해두자
+	vector<UI*> vec = FindUIsByName(pseudoUI, L"skillSelected");
+	for (int i = 0; i < vec.size(); i++) {
+		((DivUI*)(vec[i]))->SetCanRend(false);
+	}
+
+	monSquad->SortChildUI();
+	// 플레이어 턴일떄 항상 몬스터 스쿼드 렌더도 다시 정렬시켜줘야함
 }
 
 void CPlayerTurn::Update()

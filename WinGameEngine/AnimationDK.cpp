@@ -350,6 +350,7 @@ void AnimationDK::render(HDC _dc)
 		Vec2 vPos = pUI->GetFinalPos();
 		Vec2 vScale = pUI->GetScale();
 		Vec2 vOffset = Vec2(vecDKFrm[m_iCurFrm].vOffset.x, vecDKFrm[m_iCurFrm].vOffset.y);
+		Vec2 vFrameScale = Vec2(vecDKFrm[m_iCurFrm].vSize);
 
 		vPos = Camera::GetInst()->GetRenderPos(vPos);
 
@@ -359,6 +360,8 @@ void AnimationDK::render(HDC _dc)
 			vPos = ViewMgr::GetInst()->GetViewPortPos(vPos);
 			vScale = ViewMgr::GetInst()->GetViewPortScale(vScale);
 			vOffset = ViewMgr::GetInst()->GetViewPortPos(vOffset);
+
+			vFrameScale = ViewMgr::GetInst()->GetViewPortPos(vFrameScale);
 		}
 
 		BLENDFUNCTION bf = {};
@@ -372,8 +375,8 @@ void AnimationDK::render(HDC _dc)
 		AlphaBlend(_dc
 			, (int)(vPos.x  + vOffset.x)
 			, (int)(vPos.y + vOffset.y)
-			, (int)(vecDKFrm[m_iCurFrm].vSize.x)
-			, (int)(vecDKFrm[m_iCurFrm].vSize.y)
+			, (int)(vFrameScale.x * mulScale)
+			, (int)(vFrameScale.y * mulScale)
 			, texMap[vecDKFrm[m_iCurFrm].texKey]->GetDC()
 			, (int)(vecDKFrm[m_iCurFrm].vLT.x)
 			, (int)(vecDKFrm[m_iCurFrm].vLT.y)
@@ -404,8 +407,18 @@ void AnimationDK::InvertedRender(HDC _dc)
 	UI* pUI = (UI*)pObj;
 
 	Vec2 vPos = pUI->GetFinalPos();
+	Vec2 frameScale = vecDKFrm[m_iCurFrm].vSize;
+	Vec2 vOffset = Vec2(vecDKFrm[m_iCurFrm].vOffset.x, vecDKFrm[m_iCurFrm].vOffset.y);
 
 	vPos = Camera::GetInst()->GetRenderPos(vPos);
+
+	if (pUI->isViewEffected()) {
+		// 프레임 오프셋 크기도 늘려줘야 할 수도 있음
+
+		vPos = ViewMgr::GetInst()->GetViewPortPos(vPos);
+		frameScale = ViewMgr::GetInst()->GetViewPortScale(frameScale);
+		vOffset = ViewMgr::GetInst()->GetViewPortPos(vOffset);
+	}
 
 	BLENDFUNCTION bf = {};
 
@@ -422,10 +435,10 @@ void AnimationDK::InvertedRender(HDC _dc)
 	int newY = height - (vecDKFrm[m_iCurFrm].vLT.y) - (vecDKFrm[m_iCurFrm].vSize.y);
 
 	AlphaBlend(_dc
-		, (int)(vPos.x + vecDKFrm[m_iCurFrm].vOffset.x)
-		, (int)(vPos.y + vecDKFrm[m_iCurFrm].vOffset.y)
-		, (int)(vecDKFrm[m_iCurFrm].vSize.x)
-		, (int)(vecDKFrm[m_iCurFrm].vSize.y)
+		, (int)(vPos.x + vOffset.x)
+		, (int)(vPos.y + vOffset.y)
+		, (int)(frameScale.x * mulScale)
+		, (int)(frameScale.y * mulScale)
 		, texMap[vecDKFrm[m_iCurFrm].texKey]->GetDC()
 		, (int)(newX)
 		, (int)(vecDKFrm[m_iCurFrm].vLT.y)

@@ -4,6 +4,10 @@ class DivUI;
 class CDungeon;
 class Scene_DSelect;
 class CInvItem;
+class CSquadDiv;
+class CMonSquad;
+class CNode;
+class DMapUI;
 
 class UIFactory
 {
@@ -11,6 +15,9 @@ private :
 
 	UIFactory() {}
 	~UIFactory() {}
+
+	static void MakeBFSMap(DMapUI* _mapPanel);
+	static void MakeRoomUI(Vec2 pos, DMapUI* mapPanel, CNode* node);
 
 public :
 
@@ -25,5 +32,10 @@ public :
 	static DivUI* CreateInvItem(Vec2 _vPos, wstring _key, wstring _path, int _count);
 
 	static DivUI* CreateToolTip(Vec2 _vPos, CInvItem* _invItem);
+	static CSquadDiv* CreateSquadDiv();
+	static CMonSquad* CreateMonSquadDiv();
+	static DivUI* CreateDungeonPanel();
+
+	
 };
 

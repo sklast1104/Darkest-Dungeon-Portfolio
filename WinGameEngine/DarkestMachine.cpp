@@ -5,6 +5,9 @@
 #include "CPlayerTurn.h"
 #include "CEnemyTurn.h"
 #include "CBStartState.h"
+#include "CCutScene.h"
+#include "CRestoreState.h"
+#include "CMonDead.h"
 
 DarkestMachine::DarkestMachine()
 	: player{ nullptr }
@@ -24,6 +27,10 @@ void DarkestMachine::Init()
 	this->AddState(new CWaitState);
 	this->AddState(new CBStartState);
 	this->AddState(new CPlayerTurn);
+	this->AddState(new CEnemyTurn);
+	this->AddState(new CCutScene);
+	this->AddState(new CRestoreState);
+	this->AddState(new CMonDead);
 
 	this->SetCurState(L"CIdleState");
 }

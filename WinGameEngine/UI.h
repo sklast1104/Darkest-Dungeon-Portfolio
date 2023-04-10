@@ -36,7 +36,7 @@ public:
     void AllCanTarget(bool _canTarget);
 
     void AddChild(UI* _pUI) { m_vecChildUI.push_back(_pUI); _pUI->m_pParentUI = this; }
-    const vector<UI*>& GetChildUI() { return m_vecChildUI; }
+    vector<UI*>& GetChildUI() { return m_vecChildUI; }
 
     virtual void update() override;
     virtual void finalupdate() override;

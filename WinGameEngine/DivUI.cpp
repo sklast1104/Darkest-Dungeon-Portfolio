@@ -245,3 +245,16 @@ void DivUI::updateValue()
 		onUpdateValue->Execute();
 	}
 }
+
+void DivUI::SendToBack(const wstring& _name)
+{
+	vector<UI*>& vec = GetChildUI();
+
+	auto it = std::find_if(vec.begin(), vec.end(), [&](UI* obj) {
+		return obj->GetName() == _name;
+		});
+
+	if (it != vec.end()) {
+		std::rotate(it, it + 1, vec.end());
+	}
+}

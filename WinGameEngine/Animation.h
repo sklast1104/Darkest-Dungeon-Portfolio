@@ -25,6 +25,9 @@ protected:
 	bool m_bFinish;
 	// 
 	float frameHeight;
+
+	// 애니메이션 크기를 비율에 맞게 곱해줄 멀티플라이어
+	float mulScale;
 	
 public:
 	Animation();
@@ -62,6 +65,8 @@ public:
 	}
 
 	void SetAnimator(Animator* _animator) { m_pAnimator = _animator; }
+
+	void SetMulScale(float _mulScale) { mulScale = _mulScale; }
 
 	friend class Animator;
 };

@@ -4,6 +4,7 @@ class CHero;
 class CDarkMonster;
 class CItem;
 class DarkestMachine;
+class CMap;
 
 class GameMgr
 {
@@ -37,6 +38,19 @@ private :
 
 	// 현재 포커싱 상태인 스쿼드 인덱스
 	int focusIndex;
+
+	// 현재 포커싱 상태인 스킬 인덱스
+	int sIndex;
+
+	// 현재 포커싱 상태인 몬스터 스쿼드 인덱스
+	int monFocusIdx;
+
+	// 카메라 쉐이킹 영향을 안받는 이전에 저장했던 카메라 좌표
+	Vec2 rLookAt;
+
+	// 던전 맵
+	CMap* map;
+	int curNodeIdx;
 
 public :
 
@@ -74,10 +88,13 @@ public :
 	void CleanSqaud();
 	CHero* GetHeroBySquad(int _index);
 	int GetSquadNum();
+	void MakeSquadAlive();
 	
 	// 몬스터 스쿼드 관련 함수
 	const array<CDarkMonster*, 4>& GetMonSquad() { return monSquad; }
 	int GetMonSquadNum();
+	bool checkMonDead();
+	void MakeTurnAlive();
 
 	// 인벤토리 관리 함수
 	array<CItem*, 16>& GetInventory() { return curItems; }
@@ -87,11 +104,30 @@ public :
 	void RemoveItem(int _index);
 	void ClearInventory();
 
+	void CheckCanTurn();
+
 	// 상태머신 관련
 	DarkestMachine* GetMachine() { return machine; }
 	int GetFocusIndex() { return focusIndex;}
 	CHero* GetFocusedHero();
 	void SetFocusIndex(int _focusIndex) { focusIndex = _focusIndex; }
+
+	void SetMonFocusIdx(int _focusIdx) { monFocusIdx = _focusIdx; }
+	int GetMonFocusIdx() { return monFocusIdx; }
+	CDarkMonster* GetFocusedMonster();
+
+	void SetSIndex(int _sIndex) { sIndex = _sIndex; }
+	int GetSIndex() { return sIndex; }
+
+	// 회복 카메라 좌표 관련
+	void SetRLook(Vec2 _vLook) { rLookAt = _vLook; }
+	Vec2 GetRLook() { return rLookAt; }
+
+	// 맵 관련 함수
+	CMap* GetMap() { return map; }
+	void SetCurNodeIdx(int _idx) { curNodeIdx = _idx; }
+	int GetCurNodeIdx() { return curNodeIdx; }
+
 
 public :
 	SINGLE(GameMgr);

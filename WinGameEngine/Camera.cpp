@@ -12,10 +12,11 @@
 
 Camera::Camera()
 	: m_pTargetObj{ nullptr }
-	, m_fTime{ 0.5f }
+	, m_fTime{0.3f }
 	, m_fSpeed(0.f)
 	, m_fAccTime(0.5f)
 	, m_pVeilTex(nullptr)
+	, isShake{false}
 {
 
 }
@@ -55,6 +56,10 @@ void Camera::update()
 		m_vLookAt.x += 500.f * fDT;
 
 	// 화면 중앙좌표와 카메라 LookAt 좌표간의 차이값 계산
+	if (isShake) {
+		Shake();
+	}
+	
 	CalDiff();
 }
 
@@ -107,6 +112,17 @@ void Camera::render(HDC _dc)
 	}
 }
 
+void Camera::Shake()
+{
+	int shakeAmount = 3;
+	int shakeX = rand() % (2 * shakeAmount + 1) - shakeAmount;
+	//int shakeY = rand() % (2 * shakeAmount + 1) - shakeAmount;
+
+	m_vCurLookAt = m_vCurLookAt + Vec2(shakeX, 0);
+	m_vLookAt = m_vCurLookAt + Vec2(shakeX, 0);
+
+}
+
 void Camera::CalDiff()
 {
 	// 이전 LookAt과 현재 Look의 차이값을 보정해서 현재의 LookAt 을 구한다
@@ -114,8 +130,8 @@ void Camera::CalDiff()
 	m_fAccTime += fDT;
 
 	if (m_fTime <= m_fAccTime) {
-		m_vCurLookAt = ViewMgr::GetInst()->GetViewPortPos( m_vLookAt );
-		//m_vCurLookAt = m_vLookAt;
+		//m_vCurLookAt = ViewMgr::GetInst()->GetViewPortPos( m_vLookAt );
+		m_vCurLookAt = m_vLookAt;
 	}
 	else {
 		Vec2 vLookDir = m_vLookAt - m_vPrevLookAt;
@@ -126,8 +142,9 @@ void Camera::CalDiff()
 	}
 
 	Vec2 vResolution = Core::GetInst()->GetResolution();
-	Vec2 vCenter = ViewMgr::GetInst()->GetViewPortPos(vResolution / 2);
-	//Vec2 vCenter = vResolution / 2.f;
+
+	//Vec2 vCenter = ViewMgr::GetInst()->GetViewPortPos(vResolution / 2);
+	Vec2 vCenter = vResolution / 2.f;
 
 	m_vDiff = m_vCurLookAt - vCenter;
 	m_vPrevLookAt = m_vCurLookAt;

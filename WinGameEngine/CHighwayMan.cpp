@@ -19,7 +19,7 @@ CHighwayMan::CHighwayMan()
 	armourKey = job_name + L"_armor";
 	armourPath = L"resource\\heros\\highwayman\\armour0.png";
 
-	curHp = 15;
+	curHp = 23;
 	hp = 23;
 
 	curStress = 60;
@@ -34,8 +34,10 @@ CHighwayMan::CHighwayMan()
 	criticalHitRate = 5;
 	// 데미지 하한
 	damageLower = 5;
+	damageLower = 25;
 	// 데미지 상한
 	damageUpper = 10;
+	damageUpper = 30;
 	// 속도
 	speed = 5;
 
@@ -73,6 +75,9 @@ void CHighwayMan::InitSkill()
 	evilBlade->SetAttackRate(15);
 	evilBlade->SetCritRate(5.f);
 
+	evilBlade->SetSkillAnimName(L"사악한 칼질");
+	evilBlade->SetAnimPath(L"resource\\animations\\hero\\Highwayman\\Sprite\\highway_man_attack_slice\\highwayman.sprite.attack_slice-attack_slice.atlas");
+
 	skillArray[0] = evilBlade;
 
 	// 권총 사격 1
@@ -92,6 +97,9 @@ void CHighwayMan::InitSkill()
 	pistolShot->SetHitRate(85);
 	pistolShot->SetAttackRate(-15);
 	pistolShot->SetCritRate(7.5f);
+
+	pistolShot->SetSkillAnimName(L"권총 사격");
+	pistolShot->SetAnimPath(L"resource\\animations\\hero\\Highwayman\\Sprite\\highway_man_attack_pistol\\highwayman.sprite.attack_pistol-attack_pistol.atlas");
 
 	skillArray[1] = pistolShot;
 
@@ -118,14 +126,17 @@ void CHighwayMan::InitSkill()
 	grapeShot->GetSkillPos()[1] = true;
 	grapeShot->GetSkillPos()[2] = true;
 
-	pistolShot->SetMultiAttack(true);
-	pistolShot->GetSkillRange()[0] = true;
-	pistolShot->GetSkillRange()[1] = true;
-	pistolShot->GetSkillRange()[2] = true;
+	grapeShot->SetMultiAttack(true);
+	grapeShot->GetSkillRange()[0] = true;
+	grapeShot->GetSkillRange()[1] = true;
+	grapeShot->GetSkillRange()[2] = true;
 
-	pistolShot->SetHitRate(75);
-	pistolShot->SetAttackRate(-50);
-	pistolShot->SetCritRate(-9.f);
+	grapeShot->SetHitRate(75);
+	grapeShot->SetAttackRate(-50);
+	grapeShot->SetCritRate(-9.f);
+
+	grapeShot->SetSkillAnimName(L"포도탄 발사");
+	grapeShot->SetAnimPath(L"resource\\animations\\hero\\Highwayman\\Sprite\\highway_man_attack_pistol\\highwayman.sprite.attack_pistol-attack_pistol.atlas");
 
 	skillArray[3] = grapeShot;
 
@@ -166,6 +177,9 @@ void CHighwayMan::InitSkill()
 	advanceAttack->SetHitRate(90);
 	advanceAttack->SetAttackRate(-20);
 	advanceAttack->SetCritRate(5.f);
+
+	advanceAttack->SetSkillAnimName(L"결투가의 진격");
+	advanceAttack->SetAnimPath(L"resource\\animations\\hero\\Highwayman\\Sprite\\highway_man_attack_lunge\\highwayman.sprite.attack_lunge-attack_lunge.atlas");
 
 	skillArray[5] = advanceAttack;
 

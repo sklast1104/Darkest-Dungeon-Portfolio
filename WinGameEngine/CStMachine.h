@@ -19,6 +19,7 @@ public :
 
 	void AddState(CState* state);
 	CState* GetState(wstring stateKey);
+	const wstring& GetCurStateName();
 
 	void SetCurState(wstring stateKey);
 	void ChangeState(wstring stateKey);

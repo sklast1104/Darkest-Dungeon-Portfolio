@@ -43,8 +43,8 @@ public:
 	}
 
 	void operator -= (Vec2 _vOther) {
-		x += _vOther.x;
-		y += _vOther.y;
+		x -= _vOther.x;
+		y -= _vOther.y;
 	}
 
 	void operator - (float _f) {

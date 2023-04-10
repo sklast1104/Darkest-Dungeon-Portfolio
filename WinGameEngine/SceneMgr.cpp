@@ -8,6 +8,7 @@
 #include "Scene_DSelect.h"
 #include "Scene_Shop.h"
 #include "Scene_Droom.h"
+#include "Scene_Path.h"
 
 SceneMgr::SceneMgr()
 	: m_arrScene{}
@@ -36,8 +37,10 @@ void SceneMgr::init()
 	m_arrScene[(size_t)SCENE_TYPE::SHOP]->SetName(L"Scene_Shop");
 	m_arrScene[(size_t)SCENE_TYPE::DROOM] = new Scene_Droom;
 	m_arrScene[(size_t)SCENE_TYPE::DROOM]->SetName(L"Scene_Droom");
+	m_arrScene[(size_t)SCENE_TYPE::PATH] = new Scene_Path;
+	m_arrScene[(size_t)SCENE_TYPE::PATH]->SetName(L"Scene_Path");
 
-	m_pCurScene = m_arrScene[(size_t)SCENE_TYPE::TITLE];
+	m_pCurScene = m_arrScene[(size_t)SCENE_TYPE::DSELECT];
 	m_pCurScene->Enter();
 }
 
@@ -52,6 +55,18 @@ void SceneMgr::update()
 void SceneMgr::render(HDC _dc)
 {
 	m_pCurScene->render(_dc);
+}
+
+Scene* SceneMgr::GetSceneByName(const wstring& _name)
+{
+	for (int i = 0; i < (UINT)SCENE_TYPE::END; i++) {
+
+		if (m_arrScene[i]->GetName() == _name) {
+			return m_arrScene[i];
+		}
+	}
+
+	return nullptr;
 }
 
 void SceneMgr::ChangeScene(SCENE_TYPE _eNext)

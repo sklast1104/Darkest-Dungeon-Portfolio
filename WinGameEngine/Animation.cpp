@@ -17,6 +17,7 @@ Animation::Animation()
 	, m_iCurFrm{ 0 }
 	, m_fAccTime{ 0.f }
 	, m_bFinish{ false }
+	, mulScale{1.f}
 {
 }
 

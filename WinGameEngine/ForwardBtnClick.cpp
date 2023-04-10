@@ -3,6 +3,8 @@
 
 #include "Scene.h"
 #include "SceneMgr.h"
+#include "GameMgr.h"
+#include "CMap.h"
 
 void ForwardBtnClick::Execute()
 {
@@ -15,6 +17,11 @@ void ForwardBtnClick::Execute()
 		ChangeScene(SCENE_TYPE::SHOP);
 	}
 	else if (curScene->GetName() == L"Scene_Shop") {
+
+		// 여기서만 현재노드를 시작노드로 바꿔야함
+		CMap* map = GameMgr::GetInst()->GetMap();
+		map->SetCurNode(map->getStartRoom());
+
 		ChangeScene(SCENE_TYPE::DROOM);
 	}
 }

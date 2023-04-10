@@ -42,8 +42,13 @@ CBoneSoldier::CBoneSoldier()
 	slash->SetHitRate(82);
 	slash->SetCritRate(6);
 	slash->SetAttackRate(0);
+	slash->SetSkillAnimName(L"묘지 가르기");
+	slash->SetAnimPath(L"resource\\animations\\monster\\Bone Soldier\\Sprite\\attack\\pack.atlas");
 
 	curSkillArray[0] = slash;
+
+	attackedAnimName = L"해골 병사 피격";
+	attackedAnimPath = L"resource\\animations\\monster\\Bone Soldier\\Sprite\\defend\\pack.atlas";
 }
 
 CBoneSoldier::~CBoneSoldier()

@@ -32,19 +32,33 @@ private :
 	list<tCamEffect> m_listCamEffect;
 	Texture* m_pVeilTex; // 카메라 가림막 텍스쳐
 
+	bool isShake;
+
 	void CalDiff();
 public :
 
 	void init();
 	void update();
 	void render(HDC _dc);
+	void Shake();
+
+	void EnableShake(bool _isEnable) {
+		isShake = _isEnable;
+	}
 
 	void SetLookAt(Vec2 _vLook) {
 		m_vLookAt = _vLook;
 		float fMoveDist = (m_vLookAt - m_vPrevLookAt).Length();
 		m_fSpeed = fMoveDist / m_fTime;
+		//m_fSpeed /= 4.f;
 		m_fAccTime = 0.f;
 	}
+
+	void SetCurLookAt(Vec2 _vLook) {
+		m_vCurLookAt = _vLook;
+		m_vLookAt = _vLook;
+	}
+
 	void SetTarget(Object* _pTarget) { m_pTargetObj = _pTarget; }
 	Vec2 GetLookAt() { return m_vCurLookAt; }
 	Vec2 GetRenderPos(Vec2 _vObjPos) { return _vObjPos - m_vDiff; }

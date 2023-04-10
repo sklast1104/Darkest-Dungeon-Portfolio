@@ -19,7 +19,7 @@ CCrusader::CCrusader()
 	armourKey = job_name + L"_armor";
 	armourPath = L"resource\\heros\\crusader\\armour1.png";
 
-	curHp = 25;
+	curHp = 33;
 	hp = 33;
 	curExp = 3;
 
@@ -33,9 +33,11 @@ CCrusader::CCrusader()
 	// 치명율
 	criticalHitRate = 3;
 	// 데미지 하한
-	damageLower = 6;
+	//damageLower = 6;
+	damageLower = 30;
 	// 데미지 상한
-	damageUpper = 12;
+	//damageUpper = 12;
+	damageUpper = 42;
 	// 속도
 	speed = 1;
 
@@ -71,6 +73,9 @@ void CCrusader::InitSkill()
 	powerAttack->SetHitRate(85);
 	powerAttack->SetAttackRate(15);
 
+	powerAttack->SetSkillAnimName(L"강타");
+	powerAttack->SetAnimPath(L"resource\\animations\\hero\\Crusader\\Sprite\\crusader_attack_sword\\crusader.sprite.attack_sword-attack_sword.atlas");
+
 	skillArray[0] = powerAttack;
 
 	// 광신적 고발
@@ -89,6 +94,9 @@ void CCrusader::InitSkill()
 	denunciation->SetAttackRate(-40);
 	denunciation->SetCritRate(-4);
 
+	denunciation->SetSkillAnimName(L"광신적 고발");
+	denunciation->SetAnimPath(L"resource\\animations\\hero\\Crusader\\Sprite\\crusader_attaack_scroll\\crusader.sprite.attack_scroll-attack_scroll.atlas");
+
 	skillArray[1] = denunciation;
 
 	// 기절의 일격
@@ -104,6 +112,9 @@ void CCrusader::InitSkill()
 
 	stunAttack->SetHitRate(90);
 	stunAttack->SetAttackRate(-50);
+
+	stunAttack->SetSkillAnimName(L"기절의 일격");
+	stunAttack->SetAnimPath(L"resource\\animations\\hero\\Crusader\\Sprite\\crusader_attack_stun\\crusader.sprite.attack_sword-attack_sword.atlas");
 
 	skillArray[2] = stunAttack;
 
@@ -144,6 +155,9 @@ void CCrusader::InitSkill()
 	chargeAttack->SetHitRate(85);
 	chargeAttack->SetAttackRate(15);
 	chargeAttack->SetCritRate(6.5f);
+
+	chargeAttack->SetSkillName(L"성스러운 돌격");
+	chargeAttack->SetAnimPath(L"resource\\animations\\hero\\Crusader\\Sprite\\crusader_attack_charge\\crusader.sprite.attack_charge-attack_charge.atlas");
 
 	skillArray[5] = chargeAttack;
 

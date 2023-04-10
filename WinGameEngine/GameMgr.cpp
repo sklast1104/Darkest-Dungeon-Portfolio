@@ -9,6 +9,8 @@
 
 #include "CInvItem.h"
 #include "DarkestMachine.h"
+#include "CMap.h"
+#include "CNode.h"
 
 GameMgr::GameMgr() 
 	: moneyCnt{0}, bustCnt{0}
@@ -24,6 +26,8 @@ GameMgr::GameMgr()
 	for (int i = 0; i < 16; i++) {
 		curItems[i] = nullptr;
 	}
+
+	
 }
 
 GameMgr::~GameMgr() {
@@ -44,6 +48,8 @@ GameMgr::~GameMgr() {
 			monSquad[i] = nullptr;
 		}
 	}
+
+	Safe_Delete<CMap*>(map);
 }
 
 void GameMgr::init()
@@ -70,6 +76,11 @@ void GameMgr::init()
 		monSquad[i] = boneSolider;
 	}
 	
+	// ¸Ê ÃÊ±âÈ­
+	map = new CMap;
+	map->DefineDefaultMap();
+
+	curNodeIdx = map->getStartRoom()->GetId();
 }
 
 CHero* GameMgr::FindHeroByName(const wstring& _heroName)
@@ -175,6 +186,17 @@ int GameMgr::GetSquadNum()
 	return num;
 }
 
+void GameMgr::MakeSquadAlive()
+{
+	for (int i = 0; i < 4; i++) {
+		if (nullptr != monSquad[i]) {
+			monSquad[i]->SetAlive();
+			monSquad[i]->SetCurHp(monSquad[i]->GetMaxHp());
+		}
+	}
+
+}
+
 int GameMgr::GetMonSquadNum()
 {
 	int num = 0;
@@ -237,9 +259,99 @@ void GameMgr::ClearInventory()
 	}
 }
 
+void GameMgr::CheckCanTurn()
+{
+	bool allFalse = true;
+
+	for (int i = 0; i < 4; i++) {
+		if (nullptr != curSquad[i] && !curSquad[i]->IsDead()) {
+			if (curSquad[i]->GetCanTurn()) {
+				allFalse = false;
+				break;
+			}
+		}
+	}
+
+	for (int i = 0; i < 4; i++) {
+		if (nullptr != monSquad[i] && !monSquad[i]->IsDead()) {
+			if (monSquad[i]->GetCanTurn()) {
+				allFalse = false;
+				break;
+			}
+		}
+	}
+
+	//for (int i = 0; i < 4; i++) {
+	//	if (nullptr != curSquad[i]) {
+
+	//		if (curSquad[i]->IsDead()) curSquad[i]->SetCanTurn(false);
+
+	//		cout << curSquad[i]->GetCanTurn() << " ";
+	//	}
+	//}
+	//cout << "\n";
+
+	//for (int i = 0; i < 4; i++) {
+	//	if (nullptr != monSquad[i]) {
+
+	//		if (monSquad[i]->IsDead()) monSquad[i]->SetCanTurn(false);
+
+	//		cout << monSquad[i]->GetCanTurn() << " ";
+	//	}
+	//}
+	//cout << "\n";
+
+
+	if (allFalse) {
+
+		for (int i = 0; i < 4; i++) {
+			if (nullptr != curSquad[i]) {
+				curSquad[i]->SetCanTurn(true);
+			}
+		}
+
+		for (int i = 0; i < 4; i++) {
+			if (nullptr != monSquad[i]) {
+				monSquad[i]->SetCanTurn(true);
+			}
+		}
+
+	}
+}
+
+bool GameMgr::checkMonDead()
+{
+	bool allFalse = true;
+
+	for (int i = 0; i < 4; i++) {
+		if (nullptr != monSquad[i] && !monSquad[i]->IsDead()) {
+			allFalse = false;
+			break;
+		}
+	}
+
+	return allFalse;
+}
+
+void GameMgr::MakeTurnAlive()
+{
+	for (int i = 0; i < 4; i++) {
+		if (nullptr != monSquad[i]) {
+			monSquad[i]->SetCanTurn(true);
+		}
+	}
+}
+
 CHero* GameMgr::GetFocusedHero()
 {
 	assert(curSquad[focusIndex]);
 
 	return curSquad[focusIndex];
+}
+
+CDarkMonster* GameMgr::GetFocusedMonster()
+{
+	assert(monSquad[monFocusIdx]);
+
+	return monSquad[monFocusIdx];
 }
