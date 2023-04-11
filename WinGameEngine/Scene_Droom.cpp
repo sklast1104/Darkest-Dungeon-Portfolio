@@ -32,6 +32,7 @@
 #include "CMap.h"
 #include "CRoom.h"
 #include "DMapUI.h"
+#include "AnimatorDK.h"
 
 Scene_Droom::Scene_Droom()
 	: firstVisit{true}
@@ -122,6 +123,31 @@ void Scene_Droom::Enter()
 
 #pragma endregion
 
+#pragma region SkillTitle
+
+	// 비네트 효과
+	DivUI* vignBg = UIFactory::CreateVignBg();
+
+	pseudoUI->AddChild(vignBg);
+
+	DivUI* skilTitle = UIFactory::CreateSkilTitle();
+
+	pseudoUI->AddChild(skilTitle);
+
+	DivUI* bStartAnim = UIFactory::CreateBStartDiv();
+
+	pseudoUI->AddChild(bStartAnim);
+
+	DivUI* bloodSplatLeftFx = UIFactory::CreateLeftBlood();
+
+	pseudoUI->AddChild(bloodSplatLeftFx);
+
+	DivUI* bloodSplatRightFx = UIFactory::CreateRightBlood();
+
+	pseudoUI->AddChild(bloodSplatRightFx);
+
+#pragma endregion
+
 	pseudoUI->AddChild(itemDragger);
 
 	if (firstVisit) {
@@ -147,12 +173,16 @@ void Scene_Droom::Enter()
 	// 효과
 	Camera::GetInst()->FadeIn(0.5f);
 
-	// 사운드
-	ResMgr::GetInst()->LoadSound(L"RuinsLevel1Bgm", L"resource\\sound\\Music\\Explore_Vaults_Level_1_Loop {a2068a43-0914-44b6-b2ec-e3cc8160dab9}.wav");
-	Sound* pTitleSound = ResMgr::GetInst()->FindSound(L"RuinsLevel1Bgm");
+	
+		// 사운드
+		ResMgr::GetInst()->LoadSound(L"RuinsLevel1Bgm", L"resource\\sound\\Music\\Explore_Vaults_Level_4_Loop {c2d13f7b-ed1b-4b6a-ae0f-92809d15b7c7}.wav");
+		Sound* pTitleSound = ResMgr::GetInst()->FindSound(L"RuinsLevel1Bgm");
 
-	pTitleSound->SetVolume(20.f);
-	pTitleSound->PlayToBGM(true);
+		pTitleSound->SetVolume(20.f);
+		pTitleSound->PlayToBGM(true);
+	
+
+	
 }
 
 void Scene_Droom::update()

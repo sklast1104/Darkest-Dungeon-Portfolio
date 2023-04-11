@@ -352,7 +352,9 @@ void AnimationDK::render(HDC _dc)
 		Vec2 vOffset = Vec2(vecDKFrm[m_iCurFrm].vOffset.x, vecDKFrm[m_iCurFrm].vOffset.y);
 		Vec2 vFrameScale = Vec2(vecDKFrm[m_iCurFrm].vSize);
 
-		vPos = Camera::GetInst()->GetRenderPos(vPos);
+		if (pUI->IsCamEffected()) {
+			vPos = Camera::GetInst()->GetRenderPos(vPos);
+		}
 
 		if (pUI->isViewEffected()) {
 			// 프레임 오프셋 크기도 늘려줘야 할 수도 있음
@@ -410,7 +412,9 @@ void AnimationDK::InvertedRender(HDC _dc)
 	Vec2 frameScale = vecDKFrm[m_iCurFrm].vSize;
 	Vec2 vOffset = Vec2(vecDKFrm[m_iCurFrm].vOffset.x, vecDKFrm[m_iCurFrm].vOffset.y);
 
-	vPos = Camera::GetInst()->GetRenderPos(vPos);
+	if (pUI->IsCamEffected()) {
+		vPos = Camera::GetInst()->GetRenderPos(vPos);
+	}
 
 	if (pUI->isViewEffected()) {
 		// 프레임 오프셋 크기도 늘려줘야 할 수도 있음

@@ -89,7 +89,7 @@ void UI::render(HDC _dc)
 	}
 
 	if (m_bLbtnDown) {
-		//SelectGDI select(_dc, PEN_TYPE::GREEN);
+		SelectGDI select(_dc, PEN_TYPE::GREEN);
 
 		Rectangle(_dc
 			, int(vPos.x)

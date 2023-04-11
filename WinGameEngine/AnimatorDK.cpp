@@ -49,7 +49,7 @@ void AnimatorDK::LoadAnimation(const wstring& _strRelativePath, bool _isHorizont
 void AnimatorDK::LoadAnimation(const wstring& _strRelativePath, bool _isHorizontalFlip, const wstring& _animName)
 {
 	if (!_isHorizontalFlip) {
-		LoadAnimation(_strRelativePath);
+		LoadAnimation(_strRelativePath, _animName);
 	}
 	else {
 		// 이제 텍스쳐가 반전됬다고 가정하는것이 아니라 정방향 텍스쳐에서

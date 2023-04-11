@@ -54,10 +54,22 @@ protected:
 	// 피격 애니메이션 경로
 	wstring attackedAnimPath;
 
+	// 피격 사운드 이름
+	wstring attackedSoundName;
+
+	// 피격 사운드 경로
+	wstring attackedSoundPath;
+
 public :
 
 	CDarkMonster();
 	virtual ~CDarkMonster();
+
+	const wstring& GetASName() { return attackedSoundName; }
+	void SetASName(const wstring& _sName) { attackedSoundName = _sName; }
+
+	const wstring& GetASPath() { return attackedSoundPath; }
+	void SetASPath(const wstring& _sPath) { attackedSoundPath = _sPath; }
 
 	const wstring& GetAttackedAnimName() { return attackedAnimName; }
 	void SetAttackedAnimName(const wstring& _attackedAnimName) { attackedAnimName = _attackedAnimName; }

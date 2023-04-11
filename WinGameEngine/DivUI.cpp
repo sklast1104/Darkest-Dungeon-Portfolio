@@ -6,8 +6,8 @@
 #include "TextModule.h"
 #include "CCommand.h"
 #include "KeyMgr.h"
-
 #include "ViewMgr.h"
+#include "AnimatorDK.h"
 
 DivUI::DivUI()
 	: UI(false)
@@ -182,6 +182,24 @@ void DivUI::LoadAnimation(const wstring& _animName, const wstring& _atlasPath)
 		GetAnimator()->LoadAnimation(_atlasPath, _animName);
 		GetAnimator()->Play(_animName, true);
 	}	
+}
+
+void DivUI::LoadAnimation(const wstring& _animName, const wstring& _atlasPath, bool _isLoop)
+{
+	if (nullptr != GetAnimator()) {
+		GetAnimator()->LoadAnimation(_atlasPath, _animName);
+		GetAnimator()->Play(_animName, _isLoop);
+	}
+}
+
+void DivUI::LoadAnimation(const wstring& _strRelativePath, bool _isHorizontalFlip, const wstring& _animName, bool _isLoop)
+{
+	if (nullptr != GetAnimator()) {
+
+		AnimatorDK* dkAnimator = (AnimatorDK*)GetAnimator();
+		dkAnimator->LoadAnimation(_strRelativePath, true, _animName);
+		dkAnimator->Play(_animName, _isLoop);
+	}
 }
 
 void DivUI::update()

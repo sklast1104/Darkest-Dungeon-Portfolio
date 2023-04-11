@@ -72,6 +72,8 @@ public :
 	virtual void render(HDC _dc) override;
 
 	void LoadAnimation(const wstring& _animName, const wstring& _atlasPath);
+	void LoadAnimation(const wstring& _animName, const wstring& _atlasPath, bool _isLoop);
+	void LoadAnimation(const wstring& _strRelativePath, bool _isHorizontalFlip, const wstring& _animName, bool _isLoop);
 
 	virtual void update() override;
 	virtual void MouseOn() override;

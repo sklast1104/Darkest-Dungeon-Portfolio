@@ -13,6 +13,9 @@ public :
 	int init(void);
 	LPDIRECTSOUND8 GetSoundDevice() { return m_pSound; }
 	void RegisterToBGM(Sound* _pSound);
+
+	Sound* GetCurBgm() { return m_pBGM; }
+
 public :
 
 	SINGLE(SoundMgr);

@@ -40,7 +40,7 @@ void SceneMgr::init()
 	m_arrScene[(size_t)SCENE_TYPE::PATH] = new Scene_Path;
 	m_arrScene[(size_t)SCENE_TYPE::PATH]->SetName(L"Scene_Path");
 
-	m_pCurScene = m_arrScene[(size_t)SCENE_TYPE::TITLE];
+	m_pCurScene = m_arrScene[(size_t)SCENE_TYPE::DSELECT];
 	m_pCurScene->Enter();
 }
 

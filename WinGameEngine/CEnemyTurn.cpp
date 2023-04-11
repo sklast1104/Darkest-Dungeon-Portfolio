@@ -14,6 +14,8 @@
 #include "TimeMgr.h"
 #include "CCutScene.h"
 #include "DarkestMachine.h"
+#include "ResMgr.h"
+#include "Sound.h"
 
 CEnemyTurn::CEnemyTurn()
 	: CState(L"CEnemyTurn")
@@ -83,6 +85,19 @@ void CEnemyTurn::Enter()
 		}
 	}
 
+	skilTitleUI =  (DivUI*)FindUIByName(pseudoUI, L"skilTitle");
+	wstring skilName = curSkil->GetSkillName();
+	skilTitleUI->InitTextModule(skilName, 40);
+	skilTitleUI->SetCanRend(true);
+
+	// 사운드 재생
+	ResMgr::GetInst()->LoadSound(L"EnemyTurnStartBgm", L"resource\\sound\\General\\gen_char_enemyturn {18396ce1-185d-44b3-bf2b-5ff32f0b9209}.wav");
+	Sound* pTitleSound = ResMgr::GetInst()->FindSound(L"EnemyTurnStartBgm");
+
+	pTitleSound->SetVolume(20.f);
+	pTitleSound->Play(false);
+
+
 	// 사용 가능한 스킬과 피격대상인 영웅을 찾았으므로 게임매니저에서 해당 영웅을 포커싱해주고
 	// 이떄 인덱스는 게임매니저인덱스(실제인덱스임)
 	mgr->SetFocusIndex(heroIdx);
@@ -100,7 +115,7 @@ void CEnemyTurn::Update()
 {
 	elapsedTime += fDT;
 
-	if (elapsedTime >= 2.f && canCg) {
+	if (elapsedTime >= 3.f && canCg) {
 
 		canCg = false;
 
@@ -116,6 +131,8 @@ void CEnemyTurn::Update()
 
 void CEnemyTurn::Exit()
 {
+	skilTitleUI->SetCanRend(false);
+
 	elapsedTime = 0.f;
 }
 

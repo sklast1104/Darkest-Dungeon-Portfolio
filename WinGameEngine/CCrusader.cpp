@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "CCrusader.h"
 #include "CSkill.h"
+#include "Sound.h"
+#include "ResMgr.h"
 
 CCrusader::CCrusader()
 {
@@ -40,6 +42,7 @@ CCrusader::CCrusader()
 	damageUpper = 42;
 	// 속도
 	speed = 1;
+	speed = 8;
 
 	InitSkill();
 }
@@ -96,6 +99,12 @@ void CCrusader::InitSkill()
 
 	denunciation->SetSkillAnimName(L"광신적 고발");
 	denunciation->SetAnimPath(L"resource\\animations\\hero\\Crusader\\Sprite\\crusader_attaack_scroll\\crusader.sprite.attack_scroll-attack_scroll.atlas");
+
+	denunciation->SetRealAnimName(L"jealous_anim_cru_crusader");
+	denunciation->SetRealAnimPath(L"resource\\animations\\hero\\Crusader\\Sprite\\jealous_anim\\crusader_jealous_anim.atlas");
+
+	denunciation->SetSoundName(L"denuSound");
+	denunciation->SetSoundPath(L"resource\\sound\\Heroes\\Crusader\\char_al_cru_zealousacc {6de675fd-595f-4da1-87d4-ac46c16747b6}.wav");
 
 	skillArray[1] = denunciation;
 

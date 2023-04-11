@@ -540,6 +540,15 @@
     <ClInclude Include="DoorClick.h">
       <Filter>Engine\07.Component\03.Command\07. PathCom</Filter>
     </ClInclude>
+    <ClInclude Include="HEffectDiv.h">
+      <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
+    </ClInclude>
+    <ClInclude Include="MEffectDiv.h">
+      <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageDiv.h">
+      <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -876,6 +885,15 @@
     </ClCompile>
     <ClCompile Include="DoorClick.cpp">
       <Filter>Engine\07.Component\03.Command\07. PathCom</Filter>
+    </ClCompile>
+    <ClCompile Include="HEffectDiv.cpp">
+      <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MEffectDiv.cpp">
+      <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageDiv.cpp">
+      <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

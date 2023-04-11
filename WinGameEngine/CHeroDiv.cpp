@@ -8,6 +8,7 @@
 #include "SceneMgr.h"
 #include "Scene.h"
 #include "CSkill.h"
+#include "HEffectDiv.h"
 
 CHeroDiv::CHeroDiv(CHero* _hero)
 	: hero{_hero}
@@ -67,9 +68,21 @@ CHeroDiv::CHeroDiv(CHero* _hero)
 			skillAnim->SetAllFrameOffset(Vec2(0.f, heightFloat - animHeight));
 			skillAnim->SetMulScale(1.2f);
 
+			wstring realAnimName = skill->GetRealAnimName();
+			wstring realAnimPath = skill->GetRealAnimPath();
+
+			if (L"" != realAnimName) {
+
+				m_pAnimator->LoadAnimation(realAnimPath, realAnimName);
+			}
 		}
 
-		m_pAnimator->Play(idleAnimName, true);
+		CSkill* renu = hero->GetCurSkills()[1];
+		wstring realAnimName = renu->GetRealAnimName();
+
+
+		//m_pAnimator->Play(realAnimName, true);
+		//m_pAnimator->Play(idleAnimName, true);
 	}
 	else if (hero->GetJobName() == L"노상강도") {
 
@@ -140,11 +153,16 @@ void CHeroDiv::PlayHeroCombatAnim()
 void CHeroDiv::PlayCurSkillByIdx(int _idx)
 {
 	m_pAnimator->Play(hero->GetCurSkills()[_idx]->GetSkilAnimName(), true);
+	if (nullptr != effect) {
+		effect->PlaySkillAnim(hero->GetCurSkills()[_idx]);
+	}
+	
 }
 
 void CHeroDiv::PlayAttackedAnim()
 {
 	m_pAnimator->Play(attackedAnimName, true);
+	effect->PlayDamagedAnim(3);
 }
 
 void CHeroDiv::EnableOverlay(bool _isEnable)
@@ -200,6 +218,9 @@ void CHeroDiv::EnableAllChildUI(bool _enable)
 		for (int i = 0; i < vec.size(); i++) {
 			DivUI* div = dynamic_cast<DivUI*>(vec[i]);
 			if (div) {
+				if (div->GetName() == L"heroEffect") {
+					continue;
+				}
 				div->SetCanRend(_enable);
 			}
 		}

@@ -1,4 +1,5 @@
 #pragma once
+
 class CSkill
 {
 
@@ -36,10 +37,29 @@ private :
 	// 스킬 애니메이션 경로
 	wstring skillAnimPath;
 
+	// 위에껀 모션이고 아래는 이거는 진짜 애니메이션 이름
+	wstring skilRealAnimName;
+	wstring skilRealAnimPath;
+
+	wstring soundName;
+	wstring soundPath;
+
 public :
 
 	CSkill();
 	~CSkill();
+
+	const wstring& GetSoundName() { return soundName; }
+	void SetSoundName(const wstring& _name) { soundName = _name; }
+
+	const wstring& GetSoundPath() { return soundPath; }
+	void SetSoundPath(const wstring& _path) { soundPath = _path; }
+
+	const wstring& GetRealAnimName() { return skilRealAnimName; }
+	void SetRealAnimName(const wstring& _name) { skilRealAnimName = _name; }
+
+	const wstring& GetRealAnimPath() { return skilRealAnimPath; }
+	void SetRealAnimPath(const wstring& _path) { skilRealAnimPath = _path; }
 
 	const wstring& GetSkilAnimName() { return skillAnimName; }
 	void SetSkillAnimName(const wstring& _skilName) { skillAnimName = _skilName; }

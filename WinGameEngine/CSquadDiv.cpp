@@ -132,6 +132,7 @@ void CSquadDiv::MoveToBackRender(int _idx)
 void CSquadDiv::EnableAllDivChildUI(bool _isEnable)
 {
 	for (int i = 0; i < heros.size(); i++) {
+
 		heros[i]->EnableAllChildUI(_isEnable);
 	}
 }

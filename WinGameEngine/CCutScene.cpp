@@ -18,7 +18,12 @@
 #include "CStMachine.h"
 #include "CRestoreState.h"
 #include "CSkill.h"
-
+#include "HEffectDiv.h"
+#include "Sound.h"
+#include "ResMgr.h"
+#include "Animator.h"
+#include "Animation.h"
+#include "DamageDiv.h"
 
 CCutScene::CCutScene()
 	: CState(L"CCutScene")
@@ -75,6 +80,14 @@ void CCutScene::Enter()
 			heroSquad->MoveToBackRender(heroIdx);
 			// 현재 스킬 애니메이션 재생
 			player->PlayCurSkillByIdx(skillIdx);
+			// 스킬 사운드 재생
+
+			wstring soundName = hSkill->GetSoundName();
+			wstring soundPath = hSkill->GetSoundPath();
+
+			ResMgr::GetInst()->LoadSound(soundName, soundPath);
+			Sound* denuSound = ResMgr::GetInst()->FindSound(soundName);
+			denuSound->Play(false);
 
 			monsters.push_back(monSquad->GetMonDivByIdx(monIdx));
 
@@ -83,7 +96,20 @@ void CCutScene::Enter()
 			monSquad->MoveToBackRender(monIdx);
 			// 피격 애니메이션 재생
 			monsters[0]->PlayAttackedAnim();
+			// 피격 사운드 재생
+			monsters[0]->PlayMonAttackedSoud();
 			// 피 공격자는 피격 이펙트 재생
+
+			// 화면 피 터지는 이펙트 재생
+			DivUI* bloodSplatLeftFx = (DivUI*)FindUIByName(pseudoUI, L"bloodSplatLeftFx");
+			bloodSplatLeftFx->SetCanRend(true);
+			bloodSplatLeftFx->GetAnimator()->GetCurAnimation()->SetAllFrameDuration(0.14f);
+			bloodSplatLeftFx->GetAnimator()->GetCurAnimation()->SetFrame(0);
+
+			DivUI* bloodSplatRightFx = (DivUI*)FindUIByName(pseudoUI, L"bloodSplatRightFx");
+			bloodSplatRightFx->SetCanRend(true);
+			bloodSplatRightFx->GetAnimator()->GetCurAnimation()->SetAllFrameDuration(0.14f);
+			bloodSplatRightFx->GetAnimator()->GetCurAnimation()->SetFrame(0);
 
 			// 공격자랑 피격자 위치를 강제로 렌더화면 중앙쪽으로 고정시켜야됨..
 			Vec2 playerPos = player->GetPos();
@@ -114,12 +140,16 @@ void CCutScene::Enter()
 			int heroDmg = chero->GetDamageLower();
 			heroDmg = heroDmg + heroDmg * (hSkill->GetAttackRate() / 100.f);
 
+			monDmgUIs[0]->InitTextModule(heroDmg, 55);
+			monDmgUIs[0]->StartMove();
+
 			cMon->SetCurHp(cMon->GetCurHp() - heroDmg);
 
 			if (cMon->GetCurHp() <= 0) {
 				cMon->SetDead();
 				GameMgr::GetInst()->CheckCanTurn();
 			}
+
 		}
 		else {
 			ViewMgr::GetInst()->SetZoomRatio(1.3f);
@@ -135,6 +165,25 @@ void CCutScene::Enter()
 			player = heroSquad->GetHeroDivByIdx(heroIdx - (4 - heroSquad->GetSquadNum()));
 			heroSquad->MoveToBackRender(heroIdx);
 			player->PlayCurSkillByIdx(skillIdx);
+			// 스킬 사운드 재생
+
+			wstring soundName = hSkill->GetSoundName();
+			wstring soundPath = hSkill->GetSoundPath();
+
+			ResMgr::GetInst()->LoadSound(soundName, soundPath);
+			Sound* skilSound = ResMgr::GetInst()->FindSound(soundName);
+			skilSound->Play(false);
+
+			// 화면 피 터지는 이펙트 재생
+			DivUI* bloodSplatLeftFx = (DivUI*)FindUIByName(pseudoUI, L"bloodSplatLeftFx");
+			bloodSplatLeftFx->SetCanRend(true);
+			bloodSplatLeftFx->GetAnimator()->GetCurAnimation()->SetAllFrameDuration(0.14f);
+			bloodSplatLeftFx->GetAnimator()->GetCurAnimation()->SetFrame(0);
+
+			DivUI* bloodSplatRightFx = (DivUI*)FindUIByName(pseudoUI, L"bloodSplatRightFx");
+			bloodSplatRightFx->SetCanRend(true);
+			bloodSplatRightFx->GetAnimator()->GetCurAnimation()->SetAllFrameDuration(0.14f);
+			bloodSplatRightFx->GetAnimator()->GetCurAnimation()->SetFrame(0);
 
 			vector<int>& mulMonIdxes = mgr->GetMulMonIdx();
 
@@ -157,6 +206,9 @@ void CCutScene::Enter()
 
 			for (int i = 0; i < monsters.size(); i++) {
 				monsters[i]->PlayAttackedAnim();
+				monsters[i]->PlayMonAttackedSoud();
+				// 여기서 사운드 재생
+				
 			}
 			
 			for (int i = 0; i < monsters.size(); i++) {
@@ -185,6 +237,9 @@ void CCutScene::Enter()
 				int heroDmg = chero->GetDamageLower();
 				heroDmg = heroDmg + heroDmg * (hSkill->GetAttackRate() / 100.f);
 
+				monDmgUIs[i]->InitTextModule(heroDmg, 55);
+				monDmgUIs[i]->StartMove();
+
 				cMon->SetCurHp(cMon->GetCurHp() - heroDmg);
 
 				if (cMon->GetCurHp() <= 0) {
@@ -192,6 +247,8 @@ void CCutScene::Enter()
 					GameMgr::GetInst()->CheckCanTurn();
 				}
 			}
+
+			//monDmgUIs.clear();
 		}
 
 		
@@ -220,6 +277,16 @@ void CCutScene::Enter()
 
 		player = heroSquad->GetHeroDivByIdx(heroIdx - (4 - heroSquad->GetSquadNum()));
 		player->PlayAttackedAnim();
+
+		DivUI* bloodSplatLeftFx = (DivUI*)FindUIByName(pseudoUI, L"bloodSplatLeftFx");
+		bloodSplatLeftFx->SetCanRend(true);
+		bloodSplatLeftFx->GetAnimator()->GetCurAnimation()->SetAllFrameDuration(0.14f);
+		bloodSplatLeftFx->GetAnimator()->GetCurAnimation()->SetFrame(0);
+
+		DivUI* bloodSplatRightFx = (DivUI*)FindUIByName(pseudoUI, L"bloodSplatRightFx");
+		bloodSplatRightFx->SetCanRend(true);
+		bloodSplatRightFx->GetAnimator()->GetCurAnimation()->SetAllFrameDuration(0.14f);
+		bloodSplatRightFx->GetAnimator()->GetCurAnimation()->SetFrame(0);
 
 		// 몬스터 스쿼드 y소팅 해야함
 		heroSquad->MoveToBackRender(heroIdx);
@@ -253,6 +320,10 @@ void CCutScene::Enter()
 
 		int monDmg = cMon->GetDamageLower();
 		monDmg = monDmg + monDmg * (hSkill->GetAttackRate() / 100.f);
+
+		// 데미지 애니메이션
+		heroDmgUI->InitTextModule(monDmg, 55);
+		heroDmgUI->StartMove();
 
 		chero->SetCurHp(chero->GetCurHp() - monDmg);
 
@@ -292,6 +363,7 @@ void CCutScene::Update()
 			float speed = 40.f;
 
 			player->SetPos(Vec2(playerPos.x + (fDT * speed), playerPos.y));
+			//player->GetEffect()->SetPos(Vec2(playerPos.x + (fDT * speed), playerPos.y));
 
 			DivUI* pseudoUI = SceneMgr::GetInst()->GetCurScene()->GetPseudoUI();
 			pseudoUI->SendToBack(L"CSquadDiv");
@@ -378,17 +450,9 @@ void CCutScene::Exit()
 		}
 	}
 
-	//if (cMon->IsDead()) {
-
-	//	for (int i = 0; i < monsters.size(); i++) {
-	//		monsters[i]->SetCanRend(false);
-	//		monsters[i]->CanTarget(false);
-	//	}
-
-	//	int monIdx = mgr->GetMonFocusIdx();
-	//}
-
 	monsters.clear();
+
+	cout << player->GetEffect()->GetCanRend();
 }
 
 

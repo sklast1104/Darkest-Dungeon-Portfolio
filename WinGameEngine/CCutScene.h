@@ -6,6 +6,7 @@ class CMonSquad;
 class CTurnPlayer;
 class CHeroDiv;
 class CMonDiv;
+class DamageDiv;
 
 class CCutScene :
 	public CState
@@ -24,6 +25,9 @@ private :
 
 	vector<CMonDiv*> monsters;
 
+	DamageDiv* heroDmgUI;
+	vector<DamageDiv*> monDmgUIs;
+
 	bool isPlayerAttack;
 	bool moveBack;
 
@@ -38,6 +42,13 @@ public :
 	CCutScene();
 	~CCutScene();
 
+	void SetHeroDmgUI(DamageDiv* ui) { heroDmgUI = ui; }
+	void AddMonDmgUIs(DamageDiv* ui) { monDmgUIs.push_back(ui);}
+
 	void IsPlayerAttack(bool _isPlayerAttack) { isPlayerAttack = _isPlayerAttack; }
+	vector<DamageDiv*>& GetDamageDivs() {
+		return monDmgUIs
+			;
+	}
 };
 

@@ -35,7 +35,12 @@ public :
 	static CSquadDiv* CreateSquadDiv();
 	static CMonSquad* CreateMonSquadDiv();
 	static DivUI* CreateDungeonPanel();
-
+	static DivUI* CreateSkilTitle();
+	static DivUI* CreateBStartDiv();
+	static DivUI* CreateLeftBlood();
+	static DivUI* CreateRightBlood();
 	
+	static DivUI* CreateVignBg();
+
 };
 

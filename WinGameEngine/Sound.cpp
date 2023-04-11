@@ -115,6 +115,14 @@ void Sound::Play(bool _bLoop)
 
 void Sound::PlayToBGM(bool _bLoop)
 {
+	if (nullptr != SoundMgr::GetInst()->GetCurBgm()) {
+		if (SoundMgr::GetInst()->GetCurBgm()->GetKey() == GetKey()) {
+			return;
+		}
+	}
+
+	
+
 	SoundMgr::GetInst()->RegisterToBGM(this);
 
 	if (_bLoop)

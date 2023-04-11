@@ -45,6 +45,10 @@
 #include "DpathUI.h"
 #include "RoomUIClick.h"
 #include "DMapUI.h"
+#include "AnimatorDK.h"
+#include "HEffectDiv.h"
+#include "MEffectDiv.h"
+#include "DamageDiv.h"
 
 DivUI* UIFactory::CreateTitle()
 {
@@ -684,6 +688,20 @@ CSquadDiv* UIFactory::CreateSquadDiv()
 		squad->AddChild(hero);
 		squad->AddHero(hero);
 
+		HEffectDiv* heroEffect = new HEffectDiv(heroVal);
+		heroEffect->SetPos(Vec2(0.f, 0.f));
+		heroEffect->SetScale(hero->GetScale());
+		heroEffect->SetId(realIndex);
+		heroEffect->SetCamAffected(true);
+		//heroEffect->SetViewAffected(true);
+		heroEffect->CanTarget(false);
+		heroEffect->CreateAnimator(new AnimatorDK);
+		heroEffect->Init();
+		heroEffect->SetName(L"heroEffect");
+
+		hero->SetEffect(heroEffect);
+		hero->AddChild(heroEffect);
+
 		CSelectedOverlay* heroOverlay = new CSelectedOverlay;
 		heroOverlay->SetPos(Vec2(93.f, 515.f));
 		heroOverlay->SetScale(Vec2(175.f, 72.f));
@@ -815,6 +833,22 @@ CMonSquad* UIFactory::CreateMonSquadDiv()
 
 		monSquadDiv->AddMonster(monDiv);
 		monSquadDiv->AddChild(monDiv);
+
+		MEffectDiv* mEffect = new MEffectDiv(monster);
+		mEffect->SetPos(Vec2(0.f, 0.f));
+		mEffect->SetScale(monDiv->GetScale());
+		mEffect->SetId(i);
+		mEffect->SetCamAffected(true);
+		//heroEffect->SetViewAffected(true);
+		mEffect->CanTarget(false);
+		mEffect->CreateAnimator(new AnimatorDK);
+		mEffect->Init();
+		mEffect->SetName(L"mEffect");
+
+		monDiv->SetEffect(mEffect);
+		monDiv->AddChild(mEffect);
+
+
 
 		Vec2 overlaybase = Vec2(55.f, 535.f);
 
@@ -1384,6 +1418,79 @@ DivUI* UIFactory::CreateDungeonPanel()
 
 
 	return panel;
+}
+
+DivUI* UIFactory::CreateSkilTitle()
+{
+	DivUI* skilTitle = new DivUI;
+	skilTitle->SetPos(Vec2(1150.f, 90.f));
+	skilTitle->SetScale(Vec2(619.f, 136.f));
+	skilTitle->InitImageModule(L"skill_title_ui", L"resource\\panels\\quest_complete_choice_shared_frame.png");
+	skilTitle->SetName(L"skilTitle");
+
+	skilTitle->InitTextModule(L"±«ÀÌÇÑ ¹ÐÄ§", 40);
+	skilTitle->SetTextColor(202, 186, 122);
+	skilTitle->SetBold(700);
+	skilTitle->SetCanRend(false);
+
+	return skilTitle;
+}
+
+DivUI* UIFactory::CreateBStartDiv()
+{
+	DivUI* bStartAnim = new DivUI;
+	bStartAnim->SetScale(Vec2(448.f, 436.f));
+	bStartAnim->SetPos(Vec2(960.f, 540.f) - (bStartAnim->GetScale() / 2.f) - Vec2(0.f, 200.f));
+	bStartAnim->CreateAnimator(new AnimatorDK);
+	//bStartAnim->LoadAnimation(L"combat_start_Animation", L"resource\\animations\\combatAnim\\combat.sprite-start.atlas", true);
+	bStartAnim->SetCanRend(false);
+	bStartAnim->SetName(L"bStartAnim");
+	bStartAnim->SetCamAffected(false);
+
+	return bStartAnim;
+}
+
+DivUI* UIFactory::CreateLeftBlood()
+{
+	DivUI* bloodSplatLeftFx = new DivUI;
+	bloodSplatLeftFx->SetScale(Vec2(500.f, 721.f));
+	bloodSplatLeftFx->SetPos(Vec2(0.f, 0.f));
+	bloodSplatLeftFx->CreateAnimator(new AnimatorDK);
+	bloodSplatLeftFx->LoadAnimation(L"resource\\animations\\fx\\attacked_hit\\attack_overlay.sprite-hit.atlas", true, L"bloodSplatAnim", false);
+	bloodSplatLeftFx->SetCamAffected(false);
+	bloodSplatLeftFx->SetName(L"bloodSplatLeftFx");
+	bloodSplatLeftFx->SetViewAffected(false);
+	bloodSplatLeftFx->SetCanRend(false);
+
+	return bloodSplatLeftFx;
+}
+
+DivUI* UIFactory::CreateRightBlood()
+{
+	DivUI* bloodSplatRightFx = new DivUI;
+	bloodSplatRightFx->SetScale(Vec2(500.f, 721.f));
+	bloodSplatRightFx->SetPos(Vec2(1420.f, 0.f));
+	bloodSplatRightFx->CreateAnimator(new AnimatorDK);
+	bloodSplatRightFx->LoadAnimation(L"bloodSplatRightAnim", L"resource\\animations\\fx\\attacked_hit_right\\attack_overlay.sprite-hit_right.atlas", false);
+	bloodSplatRightFx->SetCamAffected(false);
+	bloodSplatRightFx->SetName(L"bloodSplatRightFx");
+	bloodSplatRightFx->SetViewAffected(false);
+	bloodSplatRightFx->SetCanRend(false);
+
+	return bloodSplatRightFx;
+}
+
+DivUI* UIFactory::CreateVignBg()
+{
+	DivUI* vignBg = new DivUI;
+	vignBg->SetScale(Vec2(1920.f, 720.f));
+	vignBg->InitImageModule(L"vignBg", L"resource\\Background\\vignBg2.png");
+	vignBg->SetPos(Vec2(0.f, 0.f));
+	vignBg->SetSrcAlpha(255);
+	vignBg->SetViewAffected(false);
+	
+
+	return vignBg;
 }
 
 void UIFactory::MakeBFSMap(DMapUI* mapPanel)

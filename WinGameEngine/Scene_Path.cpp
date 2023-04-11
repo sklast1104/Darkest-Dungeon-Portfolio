@@ -23,6 +23,8 @@
 #include "CRoom.h"
 #include "DoorClick.h"
 #include "DMapUI.h"
+#include "DamageDiv.h"
+#include "CCutScene.h"
 
 Scene_Path::Scene_Path()
 {
@@ -278,6 +280,74 @@ void Scene_Path::Enter()
 	DivUI* panel = UIFactory::CreateDungeonPanel();
 
 	pseudoUI->AddChild(panel);
+
+#pragma endregion
+
+#pragma region SkillTitle
+
+	// 비네트 효과
+	DivUI* vignBg = UIFactory::CreateVignBg();
+
+	pseudoUI->AddChild(vignBg);
+
+	DivUI* skilTitle = UIFactory::CreateSkilTitle();
+
+	pseudoUI->AddChild(skilTitle);
+
+	DivUI* bStartAnim = UIFactory::CreateBStartDiv();
+
+	pseudoUI->AddChild(bStartAnim);
+
+	DivUI* bloodSplatLeftFx = UIFactory::CreateLeftBlood();
+
+	pseudoUI->AddChild(bloodSplatLeftFx);
+
+	DivUI* bloodSplatRightFx = UIFactory::CreateRightBlood();
+
+	pseudoUI->AddChild(bloodSplatRightFx);
+
+	DamageDiv* damageLeftUI = new DamageDiv;
+	damageLeftUI->SetScale(Vec2(50.f, 50.f));
+	damageLeftUI->InitTextModule(11, 55);
+	damageLeftUI->SetPos(Vec2(600.f, 420.f));
+	damageLeftUI->SetCamAffected(false);
+	damageLeftUI->SetViewAffected(false);
+	damageLeftUI->SetTextColor(249, 29, 0);
+	damageLeftUI->SetBold(900);
+	damageLeftUI->SetCanRend(false);
+	damageLeftUI->SetOriginPos(Vec2(600.f, 370.f));
+	//damageLeftUI->StartMove();
+	
+	CCutScene* cutSt = (CCutScene*)GameMgr::GetInst()->GetMachine()->GetState(L"CCutScene");
+	cutSt->SetHeroDmgUI(damageLeftUI);
+
+	AddObject(damageLeftUI, GROUP_TYPE::UI_OVER);
+
+	vector<DamageDiv*>& ddivs = cutSt->GetDamageDivs();
+	ddivs.clear();
+
+	if (ddivs.size() < 4) {
+		for (int i = 0; i < 4; i++) {
+			DamageDiv* damageRightUI = new DamageDiv;
+			damageRightUI->SetScale(Vec2(50.f, 50.f));
+			damageRightUI->InitTextModule(11, 55);
+			damageRightUI->SetPos(Vec2(1100.f + (i * 150.f), 420.f));
+			damageRightUI->SetCamAffected(false);
+			damageRightUI->SetViewAffected(false);
+			damageRightUI->SetTextColor(249, 29, 0);
+			damageRightUI->SetBold(900);
+			damageRightUI->SetCanRend(false);
+			damageRightUI->SetOriginPos(Vec2(1100.f + (i * 150.f), 420.f));
+			//damageLeftUI->StartMove();
+
+			cutSt->AddMonDmgUIs(damageRightUI);
+			AddObject(damageRightUI, GROUP_TYPE::UI_OVER);
+		}
+	}
+
+	
+
+	
 
 #pragma endregion
 

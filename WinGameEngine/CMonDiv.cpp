@@ -5,6 +5,10 @@
 #include "Animation.h"
 #include "CSelectedOverlay.h"
 #include "CSkill.h"
+#include "ResMgr.h"
+#include "Sound.h"
+#include "MEffectDiv.h"
+
 
 CMonDiv::CMonDiv(CDarkMonster* _monster)
 	: monster{_monster}
@@ -47,8 +51,9 @@ CMonDiv::CMonDiv(CDarkMonster* _monster)
 		}
 	}
 
-	PlayCombatAnim();
 	//PlayCurSkilByIdx(0);
+	PlayCombatAnim();
+	
 }
 
 void CMonDiv::CreateAnimator()
@@ -66,12 +71,31 @@ void CMonDiv::PlayCombatAnim()
 void CMonDiv::PlayAttackedAnim()
 {
 	m_pAnimator->Play(monster->GetAttackedAnimName(), true);
+	effect->PlayDamagedAnim(3);
 }
 
 void CMonDiv::PlayCurSkilByIdx(int _idx)
 {
 	wstring animName = monster->GetCurSkills()[_idx]->GetSkilAnimName();
+
+	wstring soundName = monster->GetCurSkills()[_idx]->GetSoundName();
+	wstring soundPath = monster->GetCurSkills()[_idx]->GetSoundPath();
+
+	ResMgr::GetInst()->LoadSound(soundName, soundPath);
+	Sound* skilSound = ResMgr::GetInst()->FindSound(soundName);
+	skilSound->Play(false);
+
 	m_pAnimator->Play(animName, true);
+}
+
+void CMonDiv::PlayMonAttackedSoud()
+{
+	wstring attackedSName = monster->GetASName();
+	wstring attackedSPath = monster->GetASPath();
+
+	ResMgr::GetInst()->LoadSound(attackedSName, attackedSPath);
+	Sound* attackedSound = ResMgr::GetInst()->FindSound(attackedSName);
+	attackedSound->Play(false);
 }
 
 void CMonDiv::EnableAllChildUI(bool _enable)
@@ -95,6 +119,9 @@ void CMonDiv::EnableAllChildUI(bool _enable)
 		for (int i = 0; i < vec.size(); i++) {
 			DivUI* div = dynamic_cast<DivUI*>(vec[i]);
 			if (div) {
+				if (div->GetName() == L"mEffect") {
+					continue;
+				}
 				div->SetCanRend(_enable);
 			}
 		}

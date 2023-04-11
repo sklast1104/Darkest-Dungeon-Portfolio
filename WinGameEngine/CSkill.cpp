@@ -9,6 +9,8 @@ CSkill::CSkill()
 	, hitRate{ 0 }
 	, multiAttack{false}
 	, isAlive{false}
+	, skilRealAnimName{L""}
+	, skilRealAnimPath{L""}
 {
 }
 
