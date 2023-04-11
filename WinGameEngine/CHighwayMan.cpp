@@ -100,6 +100,7 @@ void CHighwayMan::InitSkill()
 
 	pistolShot->SetSkillAnimName(L"권총 사격");
 	pistolShot->SetAnimPath(L"resource\\animations\\hero\\Highwayman\\Sprite\\highway_man_attack_pistol\\highwayman.sprite.attack_pistol-attack_pistol.atlas");
+	pistolShot->SetOwnerJobName(L"노상강도");
 
 	skillArray[1] = pistolShot;
 
@@ -137,6 +138,13 @@ void CHighwayMan::InitSkill()
 
 	grapeShot->SetSkillAnimName(L"포도탄 발사");
 	grapeShot->SetAnimPath(L"resource\\animations\\hero\\Highwayman\\Sprite\\highway_man_attack_pistol\\highwayman.sprite.attack_pistol-attack_pistol.atlas");
+
+	grapeShot->SetRealAnimName(L"grape_shot_high_highwayman");
+	grapeShot->SetRealAnimPath(L"resource\\animations\\hero\\Highwayman\\Sprite\\highwayman.sprite.grape_shot_blast-grape_shot_blast.atlas");
+
+	grapeShot->SetAttackedName(L"포도탄 발사 피격 effect");
+	grapeShot->SetAttackedPath(L"resource\\animations\\hero\\Highwayman\\Sprite\\highwayman.sprite.grape_shot_blast_target-grape_shot_blast_target.atlas");
+	grapeShot->SetOwnerJobName(L"노상강도");
 
 	skillArray[3] = grapeShot;
 

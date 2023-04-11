@@ -44,10 +44,26 @@ private :
 	wstring soundName;
 	wstring soundPath;
 
+	// 스킬을 맞으면 피격당하는 애니메이션 이름 및 경로
+	wstring skAttackedAnimName;
+	wstring skAttackedAnimPath;
+
+	// 스킬 주인 직업
+	wstring ownerJobName;
+
 public :
 
 	CSkill();
 	~CSkill();
+
+	const wstring& GetOwnerJobName() { return ownerJobName; }
+	void SetOwnerJobName(const wstring& _jobName) { ownerJobName = _jobName; }
+
+	const wstring& GetAttackedName() { return skAttackedAnimName; }
+	void SetAttackedName(const wstring& _name) { skAttackedAnimName = _name; }
+
+	const wstring& GetAttackedPath() { return skAttackedAnimPath; }
+	void SetAttackedPath(const wstring& _path) { skAttackedAnimPath = _path; }
 
 	const wstring& GetSoundName() { return soundName; }
 	void SetSoundName(const wstring& _name) { soundName = _name; }

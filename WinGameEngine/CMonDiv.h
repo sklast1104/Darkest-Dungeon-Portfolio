@@ -5,6 +5,8 @@ class CDarkMonster;
 class CSelectedOverlay;
 class DivUI;
 class MEffectDiv;
+class MonAtEffect;
+class CSkill;
 
 class CMonDiv :
 	public DivUI
@@ -16,6 +18,7 @@ private :
 	CSelectedOverlay* overlay;
 	DivUI* curHpBar;
 	MEffectDiv* effect;
+	MonAtEffect* atEffect;
 
 	wstring combatAnimName;
 
@@ -26,7 +29,7 @@ public :
 
 	virtual void CreateAnimator() override;
 	void PlayCombatAnim();
-	void PlayAttackedAnim();
+	void PlayAttackedAnim(CSkill* _heroSkill);
 	void PlayCurSkilByIdx(int _idx);
 	void PlayMonAttackedSoud();
 
@@ -38,6 +41,7 @@ public :
 	void UpdateHpBar();
 
 	void SetEffect(MEffectDiv* _effect) { effect = _effect; }
+	void SetAtEffect(MonAtEffect* _effect) { atEffect = _effect; }
 
 	CLONE(CMonDiv);
 };

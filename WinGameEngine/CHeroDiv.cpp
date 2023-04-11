@@ -77,9 +77,13 @@ CHeroDiv::CHeroDiv(CHero* _hero)
 			}
 		}
 
-		CSkill* renu = hero->GetCurSkills()[1];
+		/*CSkill* renu = hero->GetCurSkills()[3];
 		wstring realAnimName = renu->GetRealAnimName();
 
+		Animation* skillAnim = m_pAnimator->FindAnimation(realAnimName);
+		float animHeight = skillAnim->GetFrameHeight();
+		skillAnim->SetAllFrameOffset(Vec2(0.f, 100.f));*/
+		//skillAnim->SetMulScale(1.2f);
 
 		//m_pAnimator->Play(realAnimName, true);
 		//m_pAnimator->Play(idleAnimName, true);

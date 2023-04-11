@@ -31,10 +31,111 @@ void HEffectDiv::PlayDamagedAnim(int damage)
 
 void HEffectDiv::Init()
 {
-	for (int i = 0; i < 4; i++) {
+	/*for (int i = 0; i < 4; i++) {
 		CSkill* skill = hero->GetCurSkills()[i];
 		wstring realAnimName = skill->GetRealAnimName();
 		wstring realAnimPath = skill->GetRealAnimPath();
+
+		if (L"" != realAnimName) {
+
+			m_pAnimator->LoadAnimation(realAnimPath, realAnimName);
+			Animation* skillAnim = m_pAnimator->FindAnimation(realAnimName);
+			skillAnim->SetMulScale(1.2f);
+			skillAnim->SetAllFrameOffset(Vec2(45.f, 0.f));
+		}
+	}*/
+
+	if (hero->GetJobName() == L"성전사") {
+
+		CSkill* skill1 = hero->GetCurSkills()[0];
+		wstring realAnimName = skill1->GetRealAnimName();
+		wstring realAnimPath = skill1->GetRealAnimPath();
+
+		if (L"" != realAnimName) {
+
+			m_pAnimator->LoadAnimation(realAnimPath, realAnimName);
+			Animation* skillAnim = m_pAnimator->FindAnimation(realAnimName);
+			skillAnim->SetMulScale(1.2f);
+			skillAnim->SetAllFrameOffset(Vec2(45.f, 0.f));
+		}
+
+		CSkill* skill2 = hero->GetCurSkills()[1];
+		realAnimName = skill2->GetRealAnimName();
+		realAnimPath = skill2->GetRealAnimPath();
+
+		if (L"" != realAnimName) {
+
+			m_pAnimator->LoadAnimation(realAnimPath, realAnimName);
+			Animation* skillAnim = m_pAnimator->FindAnimation(realAnimName);
+			skillAnim->SetMulScale(1.2f);
+			skillAnim->SetAllFrameOffset(Vec2(45.f, 0.f));
+		}
+
+		CSkill* skill3 = hero->GetCurSkills()[2];
+		realAnimName = skill3->GetRealAnimName();
+		realAnimPath = skill3->GetRealAnimPath();
+
+		if (L"" != realAnimName) {
+
+			m_pAnimator->LoadAnimation(realAnimPath, realAnimName);
+			Animation* skillAnim = m_pAnimator->FindAnimation(realAnimName);
+			skillAnim->SetMulScale(1.2f);
+			skillAnim->SetAllFrameOffset(Vec2(45.f, 0.f));
+		}
+
+		CSkill* skill4 = hero->GetCurSkills()[3];
+		realAnimName = skill4->GetRealAnimName();
+		realAnimPath = skill4->GetRealAnimPath();
+
+		if (L"" != realAnimName) {
+
+			m_pAnimator->LoadAnimation(realAnimPath, realAnimName);
+			Animation* skillAnim = m_pAnimator->FindAnimation(realAnimName);
+			skillAnim->SetMulScale(1.2f);
+			skillAnim->SetAllFrameOffset(Vec2(45.f, 230.f));
+		}
+
+	}
+	else if (hero->GetJobName() == L"노상강도") {
+		CSkill* skill1 = hero->GetCurSkills()[0];
+		wstring realAnimName = skill1->GetRealAnimName();
+		wstring realAnimPath = skill1->GetRealAnimPath();
+
+		if (L"" != realAnimName) {
+
+			m_pAnimator->LoadAnimation(realAnimPath, realAnimName);
+			Animation* skillAnim = m_pAnimator->FindAnimation(realAnimName);
+			skillAnim->SetMulScale(1.2f);
+			skillAnim->SetAllFrameOffset(Vec2(45.f, 0.f));
+		}
+
+		CSkill* skill2 = hero->GetCurSkills()[1];
+		realAnimName = skill2->GetRealAnimName();
+		realAnimPath = skill2->GetRealAnimPath();
+
+		if (L"" != realAnimName) {
+
+			m_pAnimator->LoadAnimation(realAnimPath, realAnimName);
+			Animation* skillAnim = m_pAnimator->FindAnimation(realAnimName);
+			skillAnim->SetMulScale(1.2f);
+			skillAnim->SetAllFrameOffset(Vec2(45.f, 0.f));
+		}
+
+		CSkill* skill3 = hero->GetCurSkills()[2];
+		realAnimName = skill3->GetRealAnimName();
+		realAnimPath = skill3->GetRealAnimPath();
+
+		if (L"" != realAnimName) {
+
+			m_pAnimator->LoadAnimation(realAnimPath, realAnimName);
+			Animation* skillAnim = m_pAnimator->FindAnimation(realAnimName);
+			skillAnim->SetMulScale(1.2f);
+			skillAnim->SetAllFrameOffset(Vec2(0.f, 170.f));
+		}
+
+		CSkill* skill4 = hero->GetCurSkills()[3];
+		realAnimName = skill4->GetRealAnimName();
+		realAnimPath = skill4->GetRealAnimPath();
 
 		if (L"" != realAnimName) {
 

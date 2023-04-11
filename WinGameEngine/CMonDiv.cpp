@@ -8,6 +8,7 @@
 #include "ResMgr.h"
 #include "Sound.h"
 #include "MEffectDiv.h"
+#include "MonAtEffect.h"
 
 
 CMonDiv::CMonDiv(CDarkMonster* _monster)
@@ -68,10 +69,11 @@ void CMonDiv::PlayCombatAnim()
 	m_pAnimator->Play(combatAnimName, true);
 }
 
-void CMonDiv::PlayAttackedAnim()
+void CMonDiv::PlayAttackedAnim(CSkill* _heroSkill)
 {
 	m_pAnimator->Play(monster->GetAttackedAnimName(), true);
 	effect->PlayDamagedAnim(3);
+	atEffect->PlayPskAttacked(_heroSkill);
 }
 
 void CMonDiv::PlayCurSkilByIdx(int _idx)
@@ -119,7 +121,7 @@ void CMonDiv::EnableAllChildUI(bool _enable)
 		for (int i = 0; i < vec.size(); i++) {
 			DivUI* div = dynamic_cast<DivUI*>(vec[i]);
 			if (div) {
-				if (div->GetName() == L"mEffect") {
+				if (div->GetName() == L"mEffect" || div->GetName() == L"mAtEffect") {
 					continue;
 				}
 				div->SetCanRend(_enable);

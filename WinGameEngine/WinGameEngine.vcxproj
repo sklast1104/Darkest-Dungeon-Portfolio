@@ -210,6 +210,7 @@
     <ClInclude Include="MapBtnClick.h" />
     <ClInclude Include="Mathf.h" />
     <ClInclude Include="MEffectDiv.h" />
+    <ClInclude Include="MonAtEffect.h" />
     <ClInclude Include="MonDivOnClick.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="PathMgr.h" />
@@ -329,6 +330,7 @@
     <ClCompile Include="MapBtnClick.cpp" />
     <ClCompile Include="Mathf.cpp" />
     <ClCompile Include="MEffectDiv.cpp" />
+    <ClCompile Include="MonAtEffect.cpp" />
     <ClCompile Include="MonDivOnClick.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="PathMgr.cpp" />

@@ -156,6 +156,8 @@ void CCrusader::InitSkill()
 	chargeAttack->SetGraySkillPath(L"resource\\heros\\crusader\\ab6_gray.png");
 	chargeAttack->GetSkillPos()[0] = true;
 	chargeAttack->GetSkillPos()[1] = true;
+	chargeAttack->GetSkillPos()[2] = true;
+	chargeAttack->GetSkillPos()[3] = true;
 
 	chargeAttack->GetSkillRange()[1] = true;
 	chargeAttack->GetSkillRange()[2] = true;
@@ -167,6 +169,12 @@ void CCrusader::InitSkill()
 
 	chargeAttack->SetSkillName(L"성스러운 돌격");
 	chargeAttack->SetAnimPath(L"resource\\animations\\hero\\Crusader\\Sprite\\crusader_attack_charge\\crusader.sprite.attack_charge-attack_charge.atlas");
+
+	chargeAttack->SetRealAnimName(L"holy_lance_cru_crusader");
+	chargeAttack->SetRealAnimPath(L"resource\\animations\\hero\\Crusader\\Sprite\\crusader.sprite.holy_lance-holy_lance.atlas");
+
+	/*chargeAttack->SetSoundName(L"denuSound");
+	chargeAttack->SetSoundPath(L"resource\\sound\\Heroes\\Crusader\\char_al_cru_zealousacc {6de675fd-595f-4da1-87d4-ac46c16747b6}.wav");*/
 
 	skillArray[5] = chargeAttack;
 

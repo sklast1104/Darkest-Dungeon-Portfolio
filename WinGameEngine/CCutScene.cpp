@@ -85,9 +85,9 @@ void CCutScene::Enter()
 			wstring soundName = hSkill->GetSoundName();
 			wstring soundPath = hSkill->GetSoundPath();
 
-			ResMgr::GetInst()->LoadSound(soundName, soundPath);
+			/*ResMgr::GetInst()->LoadSound(soundName, soundPath);
 			Sound* denuSound = ResMgr::GetInst()->FindSound(soundName);
-			denuSound->Play(false);
+			denuSound->Play(false);*/
 
 			monsters.push_back(monSquad->GetMonDivByIdx(monIdx));
 
@@ -95,7 +95,7 @@ void CCutScene::Enter()
 			// 렌더 y소팅
 			monSquad->MoveToBackRender(monIdx);
 			// 피격 애니메이션 재생
-			monsters[0]->PlayAttackedAnim();
+			monsters[0]->PlayAttackedAnim(hSkill);
 			// 피격 사운드 재생
 			monsters[0]->PlayMonAttackedSoud();
 			// 피 공격자는 피격 이펙트 재생
@@ -170,9 +170,9 @@ void CCutScene::Enter()
 			wstring soundName = hSkill->GetSoundName();
 			wstring soundPath = hSkill->GetSoundPath();
 
-			ResMgr::GetInst()->LoadSound(soundName, soundPath);
+			/*ResMgr::GetInst()->LoadSound(soundName, soundPath);
 			Sound* skilSound = ResMgr::GetInst()->FindSound(soundName);
-			skilSound->Play(false);
+			skilSound->Play(false);*/
 
 			// 화면 피 터지는 이펙트 재생
 			DivUI* bloodSplatLeftFx = (DivUI*)FindUIByName(pseudoUI, L"bloodSplatLeftFx");
@@ -205,7 +205,7 @@ void CCutScene::Enter()
 			}
 
 			for (int i = 0; i < monsters.size(); i++) {
-				monsters[i]->PlayAttackedAnim();
+				monsters[i]->PlayAttackedAnim(hSkill);
 				monsters[i]->PlayMonAttackedSoud();
 				// 여기서 사운드 재생
 				

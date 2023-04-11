@@ -21,6 +21,7 @@ void MEffectDiv::PlaySkillAnim(CSkill* skill)
 	}
 }
 
+// 플레이어 스킬을 받아서 스킬에 해당하는 피격 이펙트가 있으면 같이 재생시켜준다
 void MEffectDiv::PlayDamagedAnim(int damage)
 {
 	m_pAnimator->Play(L"bloodSplatter_monster", false);

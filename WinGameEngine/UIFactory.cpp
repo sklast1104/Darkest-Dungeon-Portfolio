@@ -49,6 +49,7 @@
 #include "HEffectDiv.h"
 #include "MEffectDiv.h"
 #include "DamageDiv.h"
+#include "MonAtEffect.h"
 
 DivUI* UIFactory::CreateTitle()
 {
@@ -848,7 +849,17 @@ CMonSquad* UIFactory::CreateMonSquadDiv()
 		monDiv->SetEffect(mEffect);
 		monDiv->AddChild(mEffect);
 
+		MonAtEffect* mAtEffect = new MonAtEffect;
+		mAtEffect->SetPos(Vec2(0.f, 0.f));
+		mAtEffect->SetScale(monDiv->GetScale());
+		mAtEffect->SetId(i);
+		mAtEffect->SetCamAffected(true);
+		mAtEffect->CanTarget(false);
+		mAtEffect->CreateAnimator(new AnimatorDK);
+		mAtEffect->SetName(L"mAtEffect");
 
+		monDiv->SetAtEffect(mAtEffect);
+		monDiv->AddChild(mAtEffect);
 
 		Vec2 overlaybase = Vec2(55.f, 535.f);
 

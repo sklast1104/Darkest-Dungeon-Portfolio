@@ -549,6 +549,9 @@
     <ClInclude Include="DamageDiv.h">
       <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
     </ClInclude>
+    <ClInclude Include="MonAtEffect.h">
+      <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -893,6 +896,9 @@
       <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
     </ClCompile>
     <ClCompile Include="DamageDiv.cpp">
+      <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="MonAtEffect.cpp">
       <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
     </ClCompile>
   </ItemGroup>
