@@ -5,15 +5,17 @@ class CDarkMonster;
 class CSkill;
 class CHero;
 
-class MonAtEffect :
+class HeroAtEffect :
 	public DivUI
 {
+
+
 private :
 
 public :
 
 	void InitAttackedAnim();
-	void PlayPskAttacked(CHero* _player, CSkill* _skil);
+	void PlayMskAttacked(CDarkMonster* _monster, CSkill* _skil);
 
 };
 

@@ -20,7 +20,9 @@ CHighwayMan::CHighwayMan()
 	armourPath = L"resource\\heros\\highwayman\\armour0.png";
 
 	curHp = 23;
+	curHp = 47;
 	hp = 23;
+	hp = 47;
 
 	curStress = 60;
 	stress = 200;
@@ -40,6 +42,7 @@ CHighwayMan::CHighwayMan()
 	//damageUpper = 30;
 	// 속도
 	speed = 5;
+	speed = 10;
 
 	InitSkill();
 }
@@ -78,6 +81,12 @@ void CHighwayMan::InitSkill()
 	evilBlade->SetSkillAnimName(L"사악한 칼질");
 	evilBlade->SetAnimPath(L"resource\\animations\\hero\\Highwayman\\Sprite\\highway_man_attack_slice\\highwayman.sprite.attack_slice-attack_slice.atlas");
 
+	evilBlade->SetRealAnimName(L"evil_blade_high_highwayman");
+	evilBlade->SetRealAnimPath(L"resource\\animations\\hero\\Highwayman\\Sprite\\highwayman.sprite.wicked_slice-wicked_slice.atlas");
+
+	evilBlade->SetSoundName(L"evil_blade_high_sound");
+	evilBlade->SetSoundPath(L"resource\\sound\\Heroes\\Highwayman\\char_al_hwy_wickedslice {81b03b1f-667e-4de7-a36e-f785322ca7e6}.wav");
+
 	skillArray[0] = evilBlade;
 
 	// 권총 사격 1
@@ -101,6 +110,15 @@ void CHighwayMan::InitSkill()
 	pistolShot->SetSkillAnimName(L"권총 사격");
 	pistolShot->SetAnimPath(L"resource\\animations\\hero\\Highwayman\\Sprite\\highway_man_attack_pistol\\highwayman.sprite.attack_pistol-attack_pistol.atlas");
 	pistolShot->SetOwnerJobName(L"노상강도");
+
+	pistolShot->SetRealAnimName(L"pistol_shot_high_highwayman");
+	pistolShot->SetRealAnimPath(L"resource\\animations\\hero\\Highwayman\\Sprite\\highwayman.sprite.pistol_shot-pistol_shot.atlas");
+
+	pistolShot->SetAttackedName(L"권총 피격 effect");
+	pistolShot->SetAttackedPath(L"resource\\animations\\hero\\Highwayman\\Sprite\\highwayman.sprite.pistol_shot_target-pistol_shot_target.atlas");
+
+	pistolShot->SetSoundName(L"pistol_shot_high_sound");
+	pistolShot->SetSoundPath(L"resource\\sound\\Heroes\\Highwayman\\char_al_hwy_grapeshot {bd02d1df-eeae-4378-828a-eafc9677513b}.wav");
 
 	skillArray[1] = pistolShot;
 
@@ -146,6 +164,10 @@ void CHighwayMan::InitSkill()
 	grapeShot->SetAttackedPath(L"resource\\animations\\hero\\Highwayman\\Sprite\\highwayman.sprite.grape_shot_blast_target-grape_shot_blast_target.atlas");
 	grapeShot->SetOwnerJobName(L"노상강도");
 
+	grapeShot->SetSoundName(L"grape_shot_high_sound");
+	grapeShot->SetSoundPath(L"resource\\sound\\Heroes\\Highwayman\\char_al_hwy_grapeshot {bd02d1df-eeae-4378-828a-eafc9677513b}.wav");
+
+
 	skillArray[3] = grapeShot;
 
 	// 추적탄
@@ -188,6 +210,12 @@ void CHighwayMan::InitSkill()
 
 	advanceAttack->SetSkillAnimName(L"결투가의 진격");
 	advanceAttack->SetAnimPath(L"resource\\animations\\hero\\Highwayman\\Sprite\\highway_man_attack_lunge\\highwayman.sprite.attack_lunge-attack_lunge.atlas");
+
+	advanceAttack->SetRealAnimName(L"advanced_attack_high_highwayman");
+	advanceAttack->SetRealAnimPath(L"resource\\animations\\hero\\Highwayman\\Sprite\\highwayman.sprite.duelist_advance-duelist_advance.atlas");
+
+	advanceAttack->SetSoundName(L"duelist_advance_high_sound");
+	advanceAttack->SetSoundPath(L"resource\\sound\\Heroes\\Highwayman\\char_al_hwy_duelistadvance {8ef282ac-edf7-43df-99e5-d9f8279b5583}.wav");
 
 	skillArray[5] = advanceAttack;
 

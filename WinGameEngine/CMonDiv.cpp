@@ -51,6 +51,96 @@ CMonDiv::CMonDiv(CDarkMonster* _monster)
 			}
 		}
 	}
+	else if (monster->GetName() == L"ÇØ°ñ ¹æ¾îº´") {
+		m_pAnimator->LoadAnimation(L"resource\\animations\\monster\\Bone Defender\\Sprite\\skeleton_defender.sprite.combat-combat.atlas", true, combatAnimName);
+		m_pAnimator->LoadAnimation(monster->GetAttackedAnimPath(), true, monster->GetAttackedAnimName());
+
+		Animation* combatAnim = m_pAnimator->FindAnimation(combatAnimName);
+		//float combatHeight = combatAnim->GetFrameHeight();
+		combatAnim->SetAllFrameOffset(Vec2(0.f, 180.f));
+		combatAnim->SetMulScale(1.1f);
+
+		Animation* attackedAnim = m_pAnimator->FindAnimation(monster->GetAttackedAnimName());
+		attackedAnim->SetAllFrameOffset(Vec2(0.f, 180.f));
+		attackedAnim->SetMulScale(1.4f);
+
+
+		for (int i = 0; i < 4; i++) {
+			CSkill* skill = monster->GetCurSkills()[i];
+
+			if (nullptr != skill) {
+				wstring skillName = skill->GetSkilAnimName();
+				wstring skillPath = skill->GetAnimPath();
+
+				m_pAnimator->LoadAnimation(skillPath, true, skillName);
+
+				Animation* skillAnim = m_pAnimator->FindAnimation(skillName);
+				float animHeight = skillAnim->GetFrameHeight();
+				skillAnim->SetAllFrameOffset(Vec2(-150.f, 170.f));
+				skillAnim->SetMulScale(1.3f);
+			}
+		}
+	}
+	else if (monster->GetName() == L"ÇØ°ñ ±Ã¼ö") {
+		m_pAnimator->LoadAnimation(L"resource\\animations\\monster\\Bone Arbalist\\Sprite\\skeleton_arbalist.sprite.combat-combat.atlas", true, combatAnimName);
+		m_pAnimator->LoadAnimation(monster->GetAttackedAnimPath(), true, monster->GetAttackedAnimName());
+
+		Animation* combatAnim = m_pAnimator->FindAnimation(combatAnimName);
+		//float combatHeight = combatAnim->GetFrameHeight();
+		combatAnim->SetAllFrameOffset(Vec2(-50.f, 180.f));
+		combatAnim->SetMulScale(1.1f);
+
+		Animation* attackedAnim = m_pAnimator->FindAnimation(monster->GetAttackedAnimName());
+		attackedAnim->SetAllFrameOffset(Vec2(0.f, 150.f));
+		attackedAnim->SetMulScale(1.3f);
+
+
+		for (int i = 0; i < 4; i++) {
+			CSkill* skill = monster->GetCurSkills()[i];
+
+			if (nullptr != skill) {
+				wstring skillName = skill->GetSkilAnimName();
+				wstring skillPath = skill->GetAnimPath();
+
+				m_pAnimator->LoadAnimation(skillPath, true, skillName);
+
+				Animation* skillAnim = m_pAnimator->FindAnimation(skillName);
+				float animHeight = skillAnim->GetFrameHeight();
+				skillAnim->SetAllFrameOffset(Vec2(-150.f, 170.f));
+				skillAnim->SetMulScale(1.3f);
+			}
+		}
+	}
+	else if (monster->GetName() == L"ÇØ°ñ º¸ÁÂ°ü") {
+		m_pAnimator->LoadAnimation(L"resource\\animations\\monster\\Bone Courtier\\Sprite\\skeleton_courtier.sprite.combat-combat.atlas", true, combatAnimName);
+		m_pAnimator->LoadAnimation(monster->GetAttackedAnimPath(), true, monster->GetAttackedAnimName());
+
+		Animation* combatAnim = m_pAnimator->FindAnimation(combatAnimName);
+		//float combatHeight = combatAnim->GetFrameHeight();
+		combatAnim->SetAllFrameOffset(Vec2(0.f, 180.f));
+		combatAnim->SetMulScale(1.1f);
+
+		Animation* attackedAnim = m_pAnimator->FindAnimation(monster->GetAttackedAnimName());
+		attackedAnim->SetAllFrameOffset(Vec2(0.f, 180.f));
+		attackedAnim->SetMulScale(1.4f);
+
+
+		for (int i = 0; i < 4; i++) {
+			CSkill* skill = monster->GetCurSkills()[i];
+
+			if (nullptr != skill) {
+				wstring skillName = skill->GetSkilAnimName();
+				wstring skillPath = skill->GetAnimPath();
+
+				m_pAnimator->LoadAnimation(skillPath, true, skillName);
+
+				Animation* skillAnim = m_pAnimator->FindAnimation(skillName);
+				float animHeight = skillAnim->GetFrameHeight();
+				skillAnim->SetAllFrameOffset(Vec2(-150.f, 170.f));
+				skillAnim->SetMulScale(1.3f);
+			}
+		}
+	}
 
 	//PlayCurSkilByIdx(0);
 	PlayCombatAnim();
@@ -69,11 +159,11 @@ void CMonDiv::PlayCombatAnim()
 	m_pAnimator->Play(combatAnimName, true);
 }
 
-void CMonDiv::PlayAttackedAnim(CSkill* _heroSkill)
+void CMonDiv::PlayAttackedAnim(CHero* _hero, CSkill* _skil)
 {
 	m_pAnimator->Play(monster->GetAttackedAnimName(), true);
 	effect->PlayDamagedAnim(3);
-	atEffect->PlayPskAttacked(_heroSkill);
+	atEffect->PlayPskAttacked(_hero, _skil);
 }
 
 void CMonDiv::PlayCurSkilByIdx(int _idx)
@@ -88,6 +178,10 @@ void CMonDiv::PlayCurSkilByIdx(int _idx)
 	skilSound->Play(false);
 
 	m_pAnimator->Play(animName, true);
+
+	if (nullptr != effect) {
+		effect->PlaySkillAnim(monster->GetCurSkills()[_idx]);
+	}
 }
 
 void CMonDiv::PlayMonAttackedSoud()

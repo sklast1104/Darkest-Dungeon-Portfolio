@@ -50,6 +50,11 @@
 #include "MEffectDiv.h"
 #include "DamageDiv.h"
 #include "MonAtEffect.h"
+#include "HeroAtEffect.h"
+#include "TorchGazeUI.h"
+#include "TorchAnimUI.h"
+#include "TorchCom.h"
+#include "TorchClick.h"
 
 DivUI* UIFactory::CreateTitle()
 {
@@ -595,16 +600,17 @@ DivUI* UIFactory::CreateInvItem(Vec2 _vPos, wstring _key, wstring _path, int _in
 	invItem->SetScale(Vec2(72.f, 144.f));
 	invItem->SetPos(_vPos);
 	invItem->CanTarget(true);
-	
+
 
 	if (SceneMgr::GetInst()->GetCurScene()->GetName() == L"Scene_Shop") {
 		invItem->InitOneMouseDown(new InvItemDown(invItem, _index));
 		invItem->InitOnMouseClick(new InvItemClick(invItem, _index));
 		invItem->InitOnMouseUp(new InvItemUp(invItem, _index));
 	}
-	else if (SceneMgr::GetInst()->GetCurScene()->GetName() == L"Scene_Droom") {
+	else if (SceneMgr::GetInst()->GetCurScene()->GetName() == L"Scene_Droom" || L"Scene_Path") {
 		invItem->InitOneMouseDown(new InvItemDown(invItem, _index));
 		invItem->InitOnMouseUp(new InvItemUp(invItem, _index));
+		invItem->InitOnMouseClick(new TorchClick(invItem, _index));
 	}
 
 	DivUI* invCount = new DivUI;
@@ -702,6 +708,19 @@ CSquadDiv* UIFactory::CreateSquadDiv()
 
 		hero->SetEffect(heroEffect);
 		hero->AddChild(heroEffect);
+
+		HeroAtEffect* hAtEffect = new HeroAtEffect;
+		hAtEffect->SetPos(Vec2(0.f, 0.f));
+		hAtEffect->SetScale(hero->GetScale());
+		hAtEffect->SetId(i);
+		hAtEffect->SetCamAffected(true);
+		hAtEffect->CanTarget(false);
+		hAtEffect->CreateAnimator(new AnimatorDK);
+		hAtEffect->SetName(L"hAtEffect");
+		hAtEffect->InitAttackedAnim();
+
+		hero->SetAtEffect(hAtEffect);
+		hero->AddChild(hAtEffect);
 
 		CSelectedOverlay* heroOverlay = new CSelectedOverlay;
 		heroOverlay->SetPos(Vec2(93.f, 515.f));
@@ -857,6 +876,7 @@ CMonSquad* UIFactory::CreateMonSquadDiv()
 		mAtEffect->CanTarget(false);
 		mAtEffect->CreateAnimator(new AnimatorDK);
 		mAtEffect->SetName(L"mAtEffect");
+		mAtEffect->InitAttackedAnim();
 
 		monDiv->SetAtEffect(mAtEffect);
 		monDiv->AddChild(mAtEffect);
@@ -1491,17 +1511,89 @@ DivUI* UIFactory::CreateRightBlood()
 	return bloodSplatRightFx;
 }
 
+TorchGazeUI* UIFactory::CraeteTorchGaze()
+{
+	TorchGazeUI* gazeUI = new TorchGazeUI;
+
+	float gazeX = (float)GameMgr::GetInst()->GetBright() / 100.f * 860.f;
+
+	gazeUI->SetScale(Vec2(gazeX, 10.f));
+	gazeUI->SetPos(Vec2(960.f, 90.f));
+	gazeUI->SetViewAffected(false);
+	gazeUI->SetName(L"gazeUI");
+
+	return gazeUI;
+}
+
 DivUI* UIFactory::CreateVignBg()
 {
 	DivUI* vignBg = new DivUI;
 	vignBg->SetScale(Vec2(1920.f, 720.f));
 	vignBg->InitImageModule(L"vignBg", L"resource\\Background\\vignBg2.png");
 	vignBg->SetPos(Vec2(0.f, 0.f));
-	vignBg->SetSrcAlpha(255);
 	vignBg->SetViewAffected(false);
+	vignBg->SetName(L"vignBg");
 	
+	GameMgr* mgr = GameMgr::GetInst();
+
+	float pctg = mgr->GetBright() / 100.f;
+
+	int vignVal = 255 - (255 * pctg);
+
+	if (vignVal > 255) vignVal = 255;
+
+	vignBg->SetSrcAlpha(vignVal);
 
 	return vignBg;
+}
+
+DivUI* UIFactory::CreateTorchUI()
+{
+	DivUI* torchUI = new DivUI;
+	torchUI->SetScale(Vec2(900.f, 188.f));
+	torchUI->SetPos(Vec2(960.f - 450.f, 0.f));
+	torchUI->InitImageModule(L"torch_top_panel", L"resource\\UI\\torch.png");
+	torchUI->SetViewAffected(false);
+
+	return torchUI;
+}
+
+DivUI* UIFactory::CreateTorchSystem()
+{
+	DivUI* torchSystem = new DivUI;
+	torchSystem->SetPos(Vec2(0.f, 0.f));
+	torchSystem->SetScale(Vec2(1920.f, 1080.f));
+	torchSystem->CanTarget(false);
+	torchSystem->SetViewAffected(false);
+	torchSystem->SetCanRend(true);
+	torchSystem->SetName(L"torchSystem");
+
+	TorchAnimUI* torch = new TorchAnimUI;
+	torch->SetScale(Vec2(100.f, 100.f));
+	torch->SetPos(Vec2(883.f, -45.f));
+	torch->CreateAnimator(new AnimatorDK);
+	torch->Init();
+	torch->PlayByLight();
+	torch->SetName(L"TorchAnimUI");
+	torch->SetCamAffected(false);
+	torch->SetViewAffected(false);
+
+	torchSystem->AddChild(torch);
+
+	TorchGazeUI* gazeUI = UIFactory::CraeteTorchGaze();
+
+	torchSystem->AddChild(gazeUI);
+
+	DivUI* torchUI = new DivUI;
+	torchUI->SetScale(Vec2(900.f, 188.f));
+	torchUI->SetPos(Vec2(960.f - 450.f, 0.f));
+	torchUI->InitImageModule(L"torch_top_panel", L"resource\\UI\\torch.png");
+	torchUI->SetViewAffected(false);
+	torchUI->InitOnMouseClick(new TorchCom(torch));
+
+	torchSystem->AddChild(torchUI);
+
+	return torchSystem;
 }
 
 void UIFactory::MakeBFSMap(DMapUI* mapPanel)

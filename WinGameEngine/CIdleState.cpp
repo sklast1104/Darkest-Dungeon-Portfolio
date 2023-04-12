@@ -75,14 +75,26 @@ void CIdleState::Update()
 	float player_x = pos.x;
 	
 	// 몬스터 스쿼드도 일정 
-	Vec2 monPos = mSquad->GetFinalPos();
-	mSquad->SetPos(hSquad->GetFinalPos() + Vec2(590.f, 0.f));
+	/*Vec2 monPos = mSquad->GetFinalPos();
+	mSquad->SetPos(hSquad->GetFinalPos() + Vec2(590.f, 0.f));*/
 
 	// 이 범위는 현 캐릭터 로스터에 따라 달라질 수는 있음
-	if (player_x >= 860.f && player_x <= 4100.f) {
+	/*if (player_x >= 860.f && player_x <= 4100.f) {
 
 		if (SceneMgr::GetInst()->GetCurScene()->GetName() == L"Scene_Path") {
 			Camera::GetInst()->SetCurLookAt(pos + Vec2(410.f, 370.f));
+		}
+	}*/
+
+	// 스쿼드 길이에 비례해야되는 로직 있음
+	Vec2 monPos = mSquad->GetFinalPos();
+	mSquad->SetPos(hSquad->GetFinalPos() + Vec2(790.f, 0.f));
+
+	
+	if (player_x >= 660.f && player_x <= 4100.f) {
+
+		if (SceneMgr::GetInst()->GetCurScene()->GetName() == L"Scene_Path") {
+			Camera::GetInst()->SetCurLookAt(pos + Vec2(610.f, 370.f));
 		}
 	}
 }

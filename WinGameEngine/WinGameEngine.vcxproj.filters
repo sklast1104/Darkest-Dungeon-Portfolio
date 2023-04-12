@@ -193,6 +193,12 @@
     <Filter Include="Engine\07.Component\03.Command\07. PathCom">
       <UniqueIdentifier>{15250a55-3b54-46ff-b490-90665925ac11}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\04.Object\UI\06. TorchUI">
+      <UniqueIdentifier>{4736a300-69ef-49fe-8a4c-317b6b70b08f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\07.Component\03.Command\08. TorchCom">
+      <UniqueIdentifier>{fd655e56-d262-40a4-88d8-95cba3ab1fcc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -552,6 +558,33 @@
     <ClInclude Include="MonAtEffect.h">
       <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
     </ClInclude>
+    <ClInclude Include="CBoneDefender.h">
+      <Filter>Engine\10.DataModel\02.Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="CBoneArbalist.h">
+      <Filter>Engine\10.DataModel\02.Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="HeroAtEffect.h">
+      <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
+    </ClInclude>
+    <ClInclude Include="CBoneCourtier.h">
+      <Filter>Engine\10.DataModel\02.Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="TorchGazeUI.h">
+      <Filter>Engine\04.Object\UI\06. TorchUI</Filter>
+    </ClInclude>
+    <ClInclude Include="TorchAnimUI.h">
+      <Filter>Engine\04.Object\UI\06. TorchUI</Filter>
+    </ClInclude>
+    <ClInclude Include="TorchCom.h">
+      <Filter>Engine\07.Component\03.Command\08. TorchCom</Filter>
+    </ClInclude>
+    <ClInclude Include="CDoctor.h">
+      <Filter>Engine\10.DataModel\01.Hero</Filter>
+    </ClInclude>
+    <ClInclude Include="TorchClick.h">
+      <Filter>Engine\04.Object\UI\06. TorchUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -900,6 +933,33 @@
     </ClCompile>
     <ClCompile Include="MonAtEffect.cpp">
       <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CBoneDefender.cpp">
+      <Filter>Engine\10.DataModel\02.Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="CBoneArbalist.cpp">
+      <Filter>Engine\10.DataModel\02.Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="HeroAtEffect.cpp">
+      <Filter>Engine\04.Object\UI\04. DungeonUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CBoneCourtier.cpp">
+      <Filter>Engine\10.DataModel\02.Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="TorchGazeUI.cpp">
+      <Filter>Engine\04.Object\UI\06. TorchUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TorchAnimUI.cpp">
+      <Filter>Engine\04.Object\UI\06. TorchUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TorchCom.cpp">
+      <Filter>Engine\07.Component\03.Command\08. TorchCom</Filter>
+    </ClCompile>
+    <ClCompile Include="CDoctor.cpp">
+      <Filter>Engine\10.DataModel\01.Hero</Filter>
+    </ClCompile>
+    <ClCompile Include="TorchClick.cpp">
+      <Filter>Engine\04.Object\UI\06. TorchUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

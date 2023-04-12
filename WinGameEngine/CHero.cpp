@@ -22,7 +22,7 @@ CHero::~CHero()
 		Safe_Delete<CSkill*>(skillArray[i]);
 	}
 
-	for (int i = 0; i < 4; i++) {
+	/*for (int i = 0; i < 4; i++) {
 		Safe_Delete<CSkill*>(curSkillArray[i]);
-	}
+	}*/
 }

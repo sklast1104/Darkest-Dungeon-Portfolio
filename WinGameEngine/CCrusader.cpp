@@ -79,6 +79,12 @@ void CCrusader::InitSkill()
 	powerAttack->SetSkillAnimName(L"강타");
 	powerAttack->SetAnimPath(L"resource\\animations\\hero\\Crusader\\Sprite\\crusader_attack_sword\\crusader.sprite.attack_sword-attack_sword.atlas");
 
+	powerAttack->SetRealAnimName(L"powerattack_anim_cru_crusader");
+	powerAttack->SetRealAnimPath(L"resource\\animations\\hero\\Crusader\\Sprite\\crusader.sprite.smite-smite.atlas");
+
+	powerAttack->SetSoundName(L"cru_power_attack_sound");
+	powerAttack->SetSoundPath(L"resource\\sound\\Heroes\\Crusader\\char_al_cru_smite {bff358c6-a158-40e9-8018-b64bc1e9c8fd}.wav");
+
 	skillArray[0] = powerAttack;
 
 	// 광신적 고발
@@ -173,8 +179,8 @@ void CCrusader::InitSkill()
 	chargeAttack->SetRealAnimName(L"holy_lance_cru_crusader");
 	chargeAttack->SetRealAnimPath(L"resource\\animations\\hero\\Crusader\\Sprite\\crusader.sprite.holy_lance-holy_lance.atlas");
 
-	/*chargeAttack->SetSoundName(L"denuSound");
-	chargeAttack->SetSoundPath(L"resource\\sound\\Heroes\\Crusader\\char_al_cru_zealousacc {6de675fd-595f-4da1-87d4-ac46c16747b6}.wav");*/
+	chargeAttack->SetSoundName(L"cru_chargeattack_sound");
+	chargeAttack->SetSoundPath(L"resource\\sound\\Heroes\\Crusader\\char_al_cry_holylance {d07d14b9-2929-4ff1-9174-be194ba85159}.wav");
 
 	skillArray[5] = chargeAttack;
 

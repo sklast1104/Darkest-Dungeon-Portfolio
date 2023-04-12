@@ -33,6 +33,7 @@
 #include "CRoom.h"
 #include "DMapUI.h"
 #include "AnimatorDK.h"
+#include "TorchGazeUI.h"
 
 Scene_Droom::Scene_Droom()
 	: firstVisit{true}
@@ -123,6 +124,8 @@ void Scene_Droom::Enter()
 
 #pragma endregion
 
+	
+
 #pragma region SkillTitle
 
 	// 비네트 효과
@@ -145,6 +148,10 @@ void Scene_Droom::Enter()
 	DivUI* bloodSplatRightFx = UIFactory::CreateRightBlood();
 
 	pseudoUI->AddChild(bloodSplatRightFx);
+
+	DivUI* torchSystem = UIFactory::CreateTorchSystem();
+
+	pseudoUI->AddChild(torchSystem);
 
 #pragma endregion
 

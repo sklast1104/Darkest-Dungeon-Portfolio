@@ -4,13 +4,18 @@
 #include "CHero.h"
 #include "CCrusader.h"
 #include "CHighwayMan.h"
+#include "CDoctor.h"
 
 #include "CBoneSoldier.h"
+#include "CBoneDefender.h"
+#include "CBoneArbalist.h"
+#include "CBoneCourtier.h"
 
 #include "CInvItem.h"
 #include "DarkestMachine.h"
 #include "CMap.h"
 #include "CNode.h"
+
 
 GameMgr::GameMgr() 
 	: moneyCnt{0}, bustCnt{0}
@@ -34,6 +39,7 @@ GameMgr::~GameMgr() {
 	
 	// 로스터들만 해제해 줌 스쿼드는 로스터에서 빌려쓰기때문에 약한 참조 관계
 	Safe_Delete_Vec<CHero*>(curHeros);
+	Safe_Delete_Vec<CDarkMonster*>(monTypes);
 
 	for (int i = 0; i < 16; i++) {
 		Safe_Delete<CItem*>(curItems[i]);
@@ -61,6 +67,9 @@ void GameMgr::init()
 	CHero* hMan = new CHighwayMan;
 	curHeros.push_back(hMan);
 
+	CHero* doctor = new CDoctor;
+	curHeros.push_back(doctor);
+
 	bustCnt = 16;
 	portraitCnt = 11;
 	certCnt = 2;
@@ -70,17 +79,40 @@ void GameMgr::init()
 
 	machine = new DarkestMachine;
 
+	CDarkMonster* mon1 = new CBoneDefender;
+	CDarkMonster* mon2 = new CBoneSoldier;
+	CDarkMonster* mon3 = new CBoneCourtier;
+	CDarkMonster* mon4 = new CBoneArbalist;
+
+	monSquad[0] = mon1;
+	monSquad[1] = mon2;
+	monSquad[2] = mon3;
+	monSquad[3] = mon4;
+
+
 	// 여기서 일단 임시로 스쿼드는 만들어 놓는데 나중에 지울것
-	for (int i = 0; i < 4; i++) {
-		CDarkMonster* boneSolider = new CBoneSoldier;
-		monSquad[i] = boneSolider;
-	}
+	//for (int i = 0; i < 2; i++) {
+	//	CDarkMonster* boneDefender = new CBoneSoldier;
+	//	monSquad[i] = boneDefender;
+	//}
+
+	//for (int i = 2; i < 4; i++) {
+	//	CDarkMonster* boneSolider = new CBoneCourtier;
+	//	monSquad[i] = boneSolider;
+	//}
 	
 	// 맵 초기화
 	map = new CMap;
 	map->DefineDefaultMap();
 
 	curNodeIdx = map->getStartRoom()->GetId();
+
+	monTypes.push_back(new CBoneSoldier);
+	monTypes.push_back(new CBoneDefender);
+	monTypes.push_back(new CBoneArbalist);
+	monTypes.push_back(new CBoneCourtier);
+
+	bright = 100;
 }
 
 CHero* GameMgr::FindHeroByName(const wstring& _heroName)

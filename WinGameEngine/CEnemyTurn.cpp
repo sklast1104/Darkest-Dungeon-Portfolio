@@ -65,7 +65,14 @@ void CEnemyTurn::Enter()
 	int heroIdx;
 	int sIdx;
 
-	for (int i = 0; i < 4; i++) {
+	// 그냥 첫번째 스킬 써라...
+	curSkil = mSkils[0];
+	sIdx = 0;
+	// 영웅 인덱스는 2~3번중에 하나 골라라...
+	heroIdx = rand() % 2 + 2;
+
+
+	/*for (int i = 0; i < 4; i++) {
 
 		CSkill* skil = mSkils[i];
 
@@ -83,7 +90,7 @@ void CEnemyTurn::Enter()
 				}
 			}
 		}
-	}
+	}*/
 
 	skilTitleUI =  (DivUI*)FindUIByName(pseudoUI, L"skilTitle");
 	wstring skilName = curSkil->GetSkillName();

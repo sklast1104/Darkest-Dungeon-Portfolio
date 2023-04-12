@@ -111,6 +111,7 @@ void Core::CreateBrushPen()
 {
 	m_arrBrush[(size_t)BRUSH_TYPE::HOLLOW] = (HBRUSH)GetStockObject(HOLLOW_BRUSH);
 	m_arrBrush[(size_t)BRUSH_TYPE::RED] = (HBRUSH)CreateSolidBrush(RGB(255, 0, 0));
+	m_arrBrush[(size_t)BRUSH_TYPE::ORANGE] = (HBRUSH)CreateSolidBrush(RGB(190, 74, 0));
 	m_arrBrush[(size_t)BRUSH_TYPE::BLACK] = (HBRUSH)GetStockObject(BLACK_BRUSH);
 
 	m_arrPen[(size_t)PEN_TYPE::RED] = CreatePen(PS_SOLID, 1, RGB(255, 0, 0));

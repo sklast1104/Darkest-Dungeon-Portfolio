@@ -8,6 +8,7 @@ class CSquadDiv;
 class CMonSquad;
 class CNode;
 class DMapUI;
+class TorchGazeUI;
 
 class UIFactory
 {
@@ -40,7 +41,9 @@ public :
 	static DivUI* CreateLeftBlood();
 	static DivUI* CreateRightBlood();
 	
+	static TorchGazeUI* CraeteTorchGaze();
 	static DivUI* CreateVignBg();
-
+	static DivUI* CreateTorchUI();
+	static DivUI* CreateTorchSystem();
 };
 

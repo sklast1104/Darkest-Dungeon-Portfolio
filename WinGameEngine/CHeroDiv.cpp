@@ -9,6 +9,7 @@
 #include "Scene.h"
 #include "CSkill.h"
 #include "HEffectDiv.h"
+#include "HeroAtEffect.h"
 
 CHeroDiv::CHeroDiv(CHero* _hero)
 	: hero{_hero}
@@ -130,6 +131,51 @@ CHeroDiv::CHeroDiv(CHero* _hero)
 
 		m_pAnimator->Play(idleAnimName, true);
 	}
+	else if (hero->GetJobName() == L"역병 의사") {
+
+		m_pAnimator->LoadAnimation(L"resource\\animations\\hero\\Doctor\\Sprite\\plague_doctor.sprite.idle-idle.atlas", idleAnimName);
+		m_pAnimator->LoadAnimation(L"resource\\animations\\hero\\Doctor\\Sprite\\plague_doctor.sprite.walk-walk.atlas", walkAnimName);
+		m_pAnimator->LoadAnimation(L"resource\\animations\\hero\\Doctor\\Sprite\\plague_doctor.sprite.combat-combat.atlas", combatAnimName);
+		m_pAnimator->LoadAnimation(L"resource\\animations\\hero\\Doctor\\Sprite\\plague_doctor.sprite.defend-defend.atlas", attackedAnimName);
+
+		Animation* idleAnim = m_pAnimator->FindAnimation(idleAnimName);
+		float idleHeight = idleAnim->GetFrameHeight();
+		idleAnim->SetAllFrameOffset(Vec2(0.f, heightFloat - idleHeight));
+		idleAnim->SetMulScale(1.1f);
+
+		Animation* walkAnim = m_pAnimator->FindAnimation(walkAnimName);
+		float walkHeight = walkAnim->GetFrameHeight();
+		walkAnim->SetAllFrameOffset(Vec2(0.f, heightFloat - walkHeight));
+		walkAnim->SetMulScale(1.1f);
+
+		Animation* combatAnim = m_pAnimator->FindAnimation(combatAnimName);
+		float combatHeight = combatAnim->GetFrameHeight();
+		combatAnim->SetAllFrameOffset(Vec2(0.f, heightFloat - combatHeight));
+		combatAnim->SetMulScale(1.1f);
+
+		Animation* attackedAnim = m_pAnimator->FindAnimation(attackedAnimName);
+		float attackedHeight = attackedAnim->GetFrameHeight();
+		attackedAnim->SetMulScale(1.2f);
+		attackedAnim->SetAllFrameOffset(Vec2(0.f, heightFloat - attackedHeight));
+
+		for (int i = 0; i < 4; i++) {
+			CSkill* skill = hero->GetCurSkills()[i];
+			wstring skillName = skill->GetSkilAnimName();
+			wstring skillPath = skill->GetAnimPath();
+
+			if (L"" != skillName) {
+				m_pAnimator->LoadAnimation(skillPath, skillName);
+
+				Animation* skillAnim = m_pAnimator->FindAnimation(skillName);
+				float animHeight = skillAnim->GetFrameHeight();
+				skillAnim->SetAllFrameOffset(Vec2(0.f, heightFloat - animHeight));
+				skillAnim->SetMulScale(1.2f);
+			}
+		}
+
+		m_pAnimator->Play(idleAnimName, true);
+
+	}
 }
 
 void CHeroDiv::CreateAnimator()
@@ -163,10 +209,11 @@ void CHeroDiv::PlayCurSkillByIdx(int _idx)
 	
 }
 
-void CHeroDiv::PlayAttackedAnim()
+void CHeroDiv::PlayAttackedAnim(CDarkMonster* _monster, CSkill* skill)
 {
 	m_pAnimator->Play(attackedAnimName, true);
 	effect->PlayDamagedAnim(3);
+	atEffect->PlayMskAttacked(_monster, skill);
 }
 
 void CHeroDiv::EnableOverlay(bool _isEnable)
@@ -222,7 +269,7 @@ void CHeroDiv::EnableAllChildUI(bool _enable)
 		for (int i = 0; i < vec.size(); i++) {
 			DivUI* div = dynamic_cast<DivUI*>(vec[i]);
 			if (div) {
-				if (div->GetName() == L"heroEffect") {
+				if (div->GetName() == L"heroEffect" || div->GetName() == L"hAtEffect") {
 					continue;
 				}
 				div->SetCanRend(_enable);

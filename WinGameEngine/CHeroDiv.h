@@ -4,6 +4,9 @@
 class CHero;
 class CSelectedOverlay;
 class HEffectDiv;
+class HeroAtEffect;
+class CDarkMonster;
+class CSkill;
 
 class CHeroDiv :
 	public DivUI
@@ -12,6 +15,7 @@ private :
 
 	CHero* hero;
 	HEffectDiv* effect;
+	HeroAtEffect* atEffect;
 	CSelectedOverlay* overlay;
 	DivUI* attackedOverlay;
 	DivUI* curHpBar;
@@ -32,9 +36,10 @@ public :
 	void PlayHeroWalkAnim();
 	void PlayHeroCombatAnim();
 	void PlayCurSkillByIdx(int _idx);
-	void PlayAttackedAnim();
+	void PlayAttackedAnim(CDarkMonster* _monster, CSkill* skill);
 
 	void SetEffect(HEffectDiv* _effect) { effect = _effect; }
+	void SetAtEffect(HeroAtEffect* _atEffect) { atEffect = _atEffect; }
 	HEffectDiv* GetEffect() { return effect; }
 
 	void EnableOverlay(bool _isEnable);

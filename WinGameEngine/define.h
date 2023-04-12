@@ -50,6 +50,7 @@ enum class BRUSH_TYPE {
 	HOLLOW,
 	RED,
 	BLACK,
+	ORANGE,
 	END
 };
 

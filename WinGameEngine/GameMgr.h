@@ -51,11 +51,19 @@ private :
 	// 멀티어텍 포커싱용
 	vector<int> mulMonIdx;
 
+	// 몬스터 종류별로 다 넣어놈 그냥
+	vector<CDarkMonster*> monTypes;
+
 	// 던전 맵
 	CMap* map;
 	int curNodeIdx;
 
+	// 촛불 밝기
+	int bright;
+
 public :
+
+	const vector<CDarkMonster*>& GetMonTypes() { return monTypes; }
 
 	void init();
 
@@ -133,6 +141,10 @@ public :
 	int GetCurNodeIdx() { return curNodeIdx; }
 
 	vector<int>& GetMulMonIdx() { return mulMonIdx;}
+
+	void SetBright(int _bright) { bright = _bright; }
+	int GetBright() { return bright; }
+
 public :
 	SINGLE(GameMgr);
 };

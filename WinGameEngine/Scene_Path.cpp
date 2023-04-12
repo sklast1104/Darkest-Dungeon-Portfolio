@@ -25,6 +25,9 @@
 #include "DMapUI.h"
 #include "DamageDiv.h"
 #include "CCutScene.h"
+#include "TorchGazeUI.h"
+#include "AnimatorDK.h"
+#include "TorchAnimUI.h"
 
 Scene_Path::Scene_Path()
 {
@@ -345,9 +348,10 @@ void Scene_Path::Enter()
 		}
 	}
 
+	DivUI* torchSystem = UIFactory::CreateTorchSystem();
 	
 
-	
+	pseudoUI->AddChild(torchSystem);
 
 #pragma endregion
 

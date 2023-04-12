@@ -7,6 +7,7 @@ class DivUI;
 class MEffectDiv;
 class MonAtEffect;
 class CSkill;
+class CHero;
 
 class CMonDiv :
 	public DivUI
@@ -29,7 +30,7 @@ public :
 
 	virtual void CreateAnimator() override;
 	void PlayCombatAnim();
-	void PlayAttackedAnim(CSkill* _heroSkill);
+	void PlayAttackedAnim(CHero* _hero, CSkill* _skil);
 	void PlayCurSkilByIdx(int _idx);
 	void PlayMonAttackedSoud();
 

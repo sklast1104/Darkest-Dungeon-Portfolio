@@ -45,6 +45,9 @@ CBoneSoldier::CBoneSoldier()
 	slash->SetSkillAnimName(L"¹¦Áö °¡¸£±â Attack");
 	slash->SetAnimPath(L"resource\\animations\\monster\\Bone Soldier\\Sprite\\attack\\bone_soldier_slash.atlas");
 
+	slash->SetRealAnimName(L"slash_bone_soldier");
+	slash->SetRealAnimPath(L"resource\\animations\\monster\\Bone Soldier\\Sprite\\skeleton_militia.sprite.sword_strike-sword_strike.atlas");
+
 	slash->SetSoundName(L"¹¦Áö °¡¸£±â Attack Sound");
 	slash->SetSoundPath(L"resource\\sound\\Monsters\\Ruins\\char_share_imp_sword {5ed21b31-fd03-41fd-85e5-727aef54b0c1}.wav");
 
