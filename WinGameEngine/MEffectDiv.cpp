@@ -89,4 +89,62 @@ void MEffectDiv::Init()
 			skillAnim->SetAllFrameOffset(Vec2(-300.f, 140.f));
 		}
 	}
+	else if (dMon->GetName() == L"¿¹¾ðÀÚ") {
+
+		CSkill* prophecy = dMon->GetCurSkills()[0];
+		wstring realAnimName = prophecy->GetRealAnimName();
+		wstring realAnimPath = prophecy->GetRealAnimPath();
+
+		if (L"" != realAnimName) {
+
+			m_pAnimator->LoadAnimation(realAnimPath, true, realAnimName);
+			Animation* skillAnim = m_pAnimator->FindAnimation(realAnimName);
+			skillAnim->SetMulScale(1.2f);
+			skillAnim->SetAllFrameOffset(Vec2(-420.f, -50.f));
+		}
+
+		CSkill* onEye = dMon->GetCurSkills()[2];
+		realAnimName = onEye->GetRealAnimName();
+		realAnimPath = onEye->GetRealAnimPath();
+
+		if (L"" != realAnimName) {
+
+			m_pAnimator->LoadAnimation(realAnimPath, true, realAnimName);
+			Animation* skillAnim = m_pAnimator->FindAnimation(realAnimName);
+			skillAnim->SetMulScale(1.2f);
+			skillAnim->SetAllFrameOffset(Vec2(-370.f, -50.f));
+		}
+
+		CSkill* prophet = dMon->GetCurSkills()[3];
+		realAnimName = prophet->GetRealAnimName();
+		realAnimPath = prophet->GetRealAnimPath();
+
+		if (L"" != realAnimName) {
+
+			m_pAnimator->LoadAnimation(realAnimPath, true, realAnimName);
+			Animation* skillAnim = m_pAnimator->FindAnimation(realAnimName);
+			skillAnim->SetMulScale(1.2f);
+			skillAnim->SetAllFrameOffset(Vec2(-190.f, 80.f));
+		}
+
+		//for (int i = 0; i < 4; i++) {
+
+		//	CSkill* skill1 = dMon->GetCurSkills()[i];
+
+		//	if (nullptr != skill1) {
+		//		wstring realAnimName = skill1->GetRealAnimName();
+		//		wstring realAnimPath = skill1->GetRealAnimPath();
+
+		//		if (L"" != realAnimName) {
+
+		//			m_pAnimator->LoadAnimation(realAnimPath, true, realAnimName);
+		//			Animation* skillAnim = m_pAnimator->FindAnimation(realAnimName);
+		//			skillAnim->SetMulScale(1.2f);
+		//			skillAnim->SetAllFrameOffset(Vec2(-420.f, -50.f));
+		//		}
+		//	}
+
+		//}
+
+	}
 }

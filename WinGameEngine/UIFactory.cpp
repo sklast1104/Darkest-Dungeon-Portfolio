@@ -722,6 +722,20 @@ CSquadDiv* UIFactory::CreateSquadDiv()
 		hero->SetAtEffect(hAtEffect);
 		hero->AddChild(hAtEffect);
 
+		DivUI* onYouOvl = new DivUI;
+		onYouOvl->SetPos(Vec2(0.f, 0.f));
+		onYouOvl->SetScale(hero->GetScale() + Vec2(40.f, 0.f));
+		onYouOvl->SetCamAffected(true);
+		onYouOvl->CanTarget(false);
+		onYouOvl->SetId(i);
+		onYouOvl->InitImageModule(L"rank_target", L"resource\\overay\\rank_target_enemy.png");
+		onYouOvl->SetCanRend(false);
+		onYouOvl->SetName(L"onYouOvl");
+
+		hero->SetOnYouOvl(onYouOvl);
+		hero->AddChild(onYouOvl);
+
+
 		CSelectedOverlay* heroOverlay = new CSelectedOverlay;
 		heroOverlay->SetPos(Vec2(93.f, 515.f));
 		heroOverlay->SetScale(Vec2(175.f, 72.f));
@@ -1492,6 +1506,7 @@ DivUI* UIFactory::CreateLeftBlood()
 	bloodSplatLeftFx->SetName(L"bloodSplatLeftFx");
 	bloodSplatLeftFx->SetViewAffected(false);
 	bloodSplatLeftFx->SetCanRend(false);
+	bloodSplatLeftFx->CanTarget(false);
 
 	return bloodSplatLeftFx;
 }
@@ -1507,6 +1522,7 @@ DivUI* UIFactory::CreateRightBlood()
 	bloodSplatRightFx->SetName(L"bloodSplatRightFx");
 	bloodSplatRightFx->SetViewAffected(false);
 	bloodSplatRightFx->SetCanRend(false);
+	bloodSplatRightFx->CanTarget(false);
 
 	return bloodSplatRightFx;
 }
@@ -1600,7 +1616,7 @@ void UIFactory::MakeBFSMap(DMapUI* mapPanel)
 {
 	Vec2 mapScale = mapPanel->GetScale();
 
-	Vec2 startCoord = Vec2(0.f, 0.f);
+	Vec2 startCoord = Vec2(-280.f, -150.f);
 	float yOffset = 36.f;
 	float xOffset = 36.f;
 

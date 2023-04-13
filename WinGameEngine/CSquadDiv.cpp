@@ -142,9 +142,23 @@ void CSquadDiv::EnableAttackedOverlay(int _idx)
 	heros[_idx - (4 - heros.size())]->EnableAttackedOverlay(true);
 }
 
+void CSquadDiv::EnableAllAttackedOverlay()
+{
+	for (int i = 0; i < heros.size(); i++) {
+		heros[i]->EnableAttackedOverlay(true);
+	}
+}
+
 void CSquadDiv::EnableAllCanTarget()
 {
 	for (int i = 0; i < heros.size(); i++) {
 		heros[i]->CanTarget(true);
+	}
+}
+
+void CSquadDiv::EnableAllOnYou(bool _isEnable)
+{
+	for (int i = 0; i < heros.size(); i++) {
+		heros[i]->EnableOnYouOvl(_isEnable);
 	}
 }

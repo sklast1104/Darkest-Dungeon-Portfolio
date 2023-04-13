@@ -56,8 +56,10 @@ public:
 	void EnableAllDivChildUI(bool _isEnable);
 
 	void EnableAttackedOverlay(int _idx);
+	void EnableAllAttackedOverlay();
 
 	void EnableAllCanTarget();
+	void EnableAllOnYou(bool _isEnable);
 
 	CLONE(CSquadDiv);
 	

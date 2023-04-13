@@ -14,6 +14,7 @@ private :
 
 	CMap* dMap;
 	bool firstVisit;
+	bool battleFlag;
 
 	// 테스트용 임시 변수
 	float elapseTime;

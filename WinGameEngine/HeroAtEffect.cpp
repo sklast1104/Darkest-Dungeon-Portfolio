@@ -49,4 +49,23 @@ void HeroAtEffect::PlayMskAttacked(CDarkMonster* _monster, CSkill* _skil)
 			m_pAnimator->GetCurAnimation()->SetFrame(0);
 		}
 	}
+	else if (L"예언자" == _monster->GetName()) {
+
+		wstring attackedAnimName = _skil->GetAttackedName();
+		wstring attackedAnimPath = _skil->GetAttackedPath();
+
+		if (_skil->GetSkillName() == L"폐허의 돌무더기") {
+			m_pAnimator->FindAnimation(attackedAnimName)->SetAllFrameOffset(Vec2(-150.f, -500.f));
+		}
+
+		if (_skil->GetSkillName() == L"설교") {
+			m_pAnimator->FindAnimation(attackedAnimName)->SetAllFrameOffset(Vec2(60.f, 270.f));
+		}
+
+		if (L"" != attackedAnimName) {
+			m_pAnimator->Play(attackedAnimName, false);
+			m_pAnimator->GetCurAnimation()->SetFrame(0);
+		}
+
+	}
 }

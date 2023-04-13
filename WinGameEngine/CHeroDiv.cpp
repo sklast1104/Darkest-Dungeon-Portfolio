@@ -285,3 +285,9 @@ void CHeroDiv::EnableSkill()
 	DivUI* skillContainer = (DivUI*)FindUIByName(pseudoUI, L"skillContainer");
 	skillContainer->updateValue();
 }
+
+void CHeroDiv::EnableOnYouOvl(bool _isEnable)
+{
+
+	onYouOvl->SetCanRend(_isEnable);
+}

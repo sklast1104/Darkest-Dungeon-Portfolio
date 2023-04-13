@@ -141,6 +141,77 @@ CMonDiv::CMonDiv(CDarkMonster* _monster)
 			}
 		}
 	}
+	else if (monster->GetName() == L"예언자") {
+
+		m_pAnimator->LoadAnimation(L"resource\\animations\\monster\\prophet\\prophet.sprite.combat-combat.atlas", true, combatAnimName);
+		m_pAnimator->LoadAnimation(monster->GetAttackedAnimPath(), true, monster->GetAttackedAnimName());
+
+		Animation* combatAnim = m_pAnimator->FindAnimation(combatAnimName);
+		//float combatHeight = combatAnim->GetFrameHeight();
+		combatAnim->SetAllFrameOffset(Vec2(-160.f, -30.f));
+		combatAnim->SetMulScale(1.1f);
+
+		Animation* attackedAnim = m_pAnimator->FindAnimation(monster->GetAttackedAnimName());
+		attackedAnim->SetAllFrameOffset(Vec2(-200.f, -200.f));
+		attackedAnim->SetMulScale(1.4f);
+
+
+		for (int i = 0; i < 4; i++) {
+			CSkill* skill = monster->GetCurSkills()[i];
+
+			if (nullptr != skill) {
+				wstring skillName = skill->GetSkilAnimName();
+				wstring skillPath = skill->GetAnimPath();
+
+				m_pAnimator->LoadAnimation(skillPath, true, skillName);
+
+				Animation* skillAnim = m_pAnimator->FindAnimation(skillName);
+				float animHeight = skillAnim->GetFrameHeight();
+				skillAnim->SetAllFrameOffset(Vec2(-150.f, -100.f));
+				skillAnim->SetMulScale(1.3f);
+			}
+		}
+
+	}
+	else if (monster->GetName() == L"나무 S") {
+		m_pAnimator->LoadAnimation(L"resource\\animations\\monster\\wood_small\\pew_small.sprite.realcombat-combat.atlas", true, combatAnimName);
+		m_pAnimator->LoadAnimation(monster->GetAttackedAnimPath(), true, monster->GetAttackedAnimName());
+
+		Animation* combatAnim = m_pAnimator->FindAnimation(combatAnimName);
+		//float combatHeight = combatAnim->GetFrameHeight();
+		combatAnim->SetAllFrameOffset(Vec2(0.f, 320.f));
+		combatAnim->SetMulScale(1.1f);
+
+		Animation* attackedAnim = m_pAnimator->FindAnimation(monster->GetAttackedAnimName());
+		attackedAnim->SetAllFrameOffset(Vec2(0.f, 280.f));
+		attackedAnim->SetMulScale(1.4f);
+	}
+	else if (monster->GetName() == L"나무 M") {
+		m_pAnimator->LoadAnimation(L"resource\\animations\\monster\\wood_medium\\pew_medium.sprite.realcombat-combat.atlas", true, combatAnimName);
+		m_pAnimator->LoadAnimation(monster->GetAttackedAnimPath(), true, monster->GetAttackedAnimName());
+
+		Animation* combatAnim = m_pAnimator->FindAnimation(combatAnimName);
+		//float combatHeight = combatAnim->GetFrameHeight();
+		combatAnim->SetAllFrameOffset(Vec2(0.f, 260.f));
+		combatAnim->SetMulScale(1.1f);
+
+		Animation* attackedAnim = m_pAnimator->FindAnimation(monster->GetAttackedAnimName());
+		attackedAnim->SetAllFrameOffset(Vec2(0.f, 220.f));
+		attackedAnim->SetMulScale(1.4f);
+	}
+	else if (monster->GetName() == L"나무 L") {
+		m_pAnimator->LoadAnimation(L"resource\\animations\\monster\\wood_large\\pew_large.sprite.combat-realcombat.atlas", true, combatAnimName);
+		m_pAnimator->LoadAnimation(monster->GetAttackedAnimPath(), true, monster->GetAttackedAnimName());
+
+		Animation* combatAnim = m_pAnimator->FindAnimation(combatAnimName);
+		//float combatHeight = combatAnim->GetFrameHeight();
+		combatAnim->SetAllFrameOffset(Vec2(0.f, 200.f));
+		combatAnim->SetMulScale(1.1f);
+
+		Animation* attackedAnim = m_pAnimator->FindAnimation(monster->GetAttackedAnimName());
+		attackedAnim->SetAllFrameOffset(Vec2(0.f, 160.f));
+		attackedAnim->SetMulScale(1.4f);
+	}
 
 	//PlayCurSkilByIdx(0);
 	PlayCombatAnim();

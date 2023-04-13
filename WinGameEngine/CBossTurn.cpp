@@ -1,49 +1,27 @@
 #include "stdafx.h"
-#include "CEnemyTurn.h"
-
-#include "DivUI.h"
+#include "CBossTurn.h"
+#include "GameMgr.h"
 #include "SceneMgr.h"
 #include "Scene.h"
-#include "GameMgr.h"
-
-#include "CSquadDiv.h"
+#include "DivUI.h"
 #include "CMonSquad.h"
-#include "CDarkMonster.h"
 #include "CSkill.h"
-
-#include "TimeMgr.h"
-#include "CCutScene.h"
-#include "DarkestMachine.h"
+#include "CDarkMonster.h"
 #include "ResMgr.h"
 #include "Sound.h"
+#include "CSquadDiv.h"
+#include "CCutScene.h"
+#include "TimeMgr.h"
+#include "DarkestMachine.h"
+#include "CWaitState.h"
 
-CEnemyTurn::CEnemyTurn()
-	: CState(L"CEnemyTurn")
-	, elapsedTime{0.f}, canCg{true}
+CBossTurn::CBossTurn()
+	: CState(L"CBossTurn")
+	, elapsedTime{0.f}, canCg{true}, skIndex{0}, predictStart{true}
 {
 }
 
-CEnemyTurn::~CEnemyTurn()
-{
-}
-
-bool isAvailSkil(CSkill* skil, int _idx) {
-
-	array<bool, 4>& pos = skil->GetSkillPos();
-
-	if (pos[_idx]) {
-		return true;
-	}
-
-	return false;
-}
-
-bool CanAttack(CSkill* skil, int _idx) {
-
-	return skil->GetSkillRange()[_idx];
-}
-
-void CEnemyTurn::Enter()
+void CBossTurn::Enter()
 {
 	GameMgr* mgr = GameMgr::GetInst();
 
@@ -65,13 +43,37 @@ void CEnemyTurn::Enter()
 	int heroIdx;
 	int sIdx;
 
-	// 그냥 첫번째 스킬 써라...
-	curSkil = mSkils[0];
-	sIdx = 0;
-	// 영웅 인덱스는 2~3번중에 하나 골라라...
-	heroIdx = rand() % 2 + 2;
+	heroIdx = rand() % 3 + 1;
 
-	skilTitleUI =  (DivUI*)FindUIByName(pseudoUI, L"skilTitle");
+	if (skIndex == 0) {
+
+		prevSelected = heroIdx;
+		CWaitState* wait = (CWaitState*)GetStateMachine()->GetState(L"CWaitState");
+		wait->SetOnEye(true, heroIdx);
+	}
+	else if (skIndex == 1) {
+
+		heroIdx = prevSelected;
+		CWaitState* wait = (CWaitState*)GetStateMachine()->GetState(L"CWaitState");
+		wait->SetOnEye(false, heroIdx);
+	}
+
+	// 영웅 인덱스는 2~3번중에 하나 골라라...
+	// 그냥 첫번째 스킬 써라...
+	curSkil = mSkils[skIndex];
+	sIdx = skIndex;
+
+
+	skIndex += 1;
+	if (skIndex > 3) skIndex = 0;
+	
+
+
+	
+
+	
+
+	skilTitleUI = (DivUI*)FindUIByName(pseudoUI, L"skilTitle");
 	wstring skilName = curSkil->GetSkillName();
 	skilTitleUI->InitTextModule(skilName, 40);
 	skilTitleUI->SetCanRend(true);
@@ -83,21 +85,31 @@ void CEnemyTurn::Enter()
 	pTitleSound->SetVolume(20.f);
 	pTitleSound->Play(false);
 
+	if (curSkil->GetMulti()) {
+		mgr->SetFocusIndex(heroIdx);
+		mgr->SetSIndex(sIdx);
+		
+		heroSquad->EnableAllAttackedOverlay();
+	}
+	else {
+		mgr->SetFocusIndex(heroIdx);
+		// 스킬 인덱스도 세팅
+		mgr->SetSIndex(sIdx);
+		heroSquad->EnableAttackedOverlay(heroIdx);
+	}
 
 	// 사용 가능한 스킬과 피격대상인 영웅을 찾았으므로 게임매니저에서 해당 영웅을 포커싱해주고
 	// 이떄 인덱스는 게임매니저인덱스(실제인덱스임)
-	mgr->SetFocusIndex(heroIdx);
-	// 스킬 인덱스도 세팅
-	mgr->SetSIndex(sIdx);
-	heroSquad->EnableAttackedOverlay(heroIdx);
+	
 
 	// 현재 위치에서 사용 가능한 스킬 바탕으로 스킬 인덱스를 지정해줌
 
 	// 시간을 기다린다음에 알아서 넘겨야됨
 	canCg = true;
+
 }
 
-void CEnemyTurn::Update()
+void CBossTurn::Update()
 {
 	elapsedTime += fDT;
 
@@ -112,14 +124,11 @@ void CEnemyTurn::Update()
 
 		ChangeState(GetStateMachine(), L"CCutScene");
 	}
-
 }
 
-void CEnemyTurn::Exit()
+void CBossTurn::Exit()
 {
 	skilTitleUI->SetCanRend(false);
 
 	elapsedTime = 0.f;
 }
-
-

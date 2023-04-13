@@ -23,12 +23,14 @@ private :
 	CHeroDiv* player;
 	//CMonDiv* monster;
 
+	vector<CHeroDiv*> players;
 	vector<CMonDiv*> monsters;
 
 	DamageDiv* heroDmgUI;
+	vector<DamageDiv*> heroDmgUIs;
 	vector<DamageDiv*> monDmgUIs;
 
-	bool isPlayerAttack;
+	bool _isPlayerAttack;
 	bool moveBack;
 
 	virtual void Enter() override;
@@ -43,12 +45,15 @@ public :
 	~CCutScene();
 
 	void SetHeroDmgUI(DamageDiv* ui) { heroDmgUI = ui; }
+	void AddHeroDmgUIs(DamageDiv* ui) { heroDmgUIs.push_back(ui); }
 	void AddMonDmgUIs(DamageDiv* ui) { monDmgUIs.push_back(ui);}
 
-	void IsPlayerAttack(bool _isPlayerAttack) { isPlayerAttack = _isPlayerAttack; }
+	void IsPlayerAttack(bool __isPlayerAttack) { _isPlayerAttack = __isPlayerAttack; }
 	vector<DamageDiv*>& GetDamageDivs() {
 		return monDmgUIs
 			;
 	}
+
+	vector<DamageDiv*>& GetHeroDamageDivs() { return heroDmgUIs; }
 };
 

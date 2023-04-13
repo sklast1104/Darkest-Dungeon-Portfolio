@@ -34,12 +34,15 @@
 #include "DMapUI.h"
 #include "AnimatorDK.h"
 #include "TorchGazeUI.h"
+#include "DamageDiv.h"
+#include "CCutScene.h"
 
 Scene_Droom::Scene_Droom()
 	: firstVisit{true}
 {
 	elapseTime = 0.f;
 	debug = true;
+	battleFlag = true;
 }
 
 Scene_Droom::~Scene_Droom()
@@ -63,6 +66,8 @@ void Scene_Droom::render(HDC _dc)
 
 void Scene_Droom::Enter()
 {
+	elapseTime = 0.f;
+	battleFlag = true;
 	// ¸Ê ÃÊ±âÈ­
 	dMap = GameMgr::GetInst()->GetMap();
 	CRoom* curRoom = (CRoom*)dMap->GetCurNode();
@@ -149,6 +154,67 @@ void Scene_Droom::Enter()
 
 	pseudoUI->AddChild(bloodSplatRightFx);
 
+	DamageDiv* damageLeftUI = new DamageDiv;
+	damageLeftUI->SetScale(Vec2(50.f, 50.f));
+	damageLeftUI->InitTextModule(11, 55);
+	damageLeftUI->SetPos(Vec2(600.f, 420.f));
+	damageLeftUI->SetCamAffected(false);
+	damageLeftUI->SetViewAffected(false);
+	damageLeftUI->SetTextColor(249, 29, 0);
+	damageLeftUI->SetBold(900);
+	damageLeftUI->SetCanRend(false);
+	damageLeftUI->SetOriginPos(Vec2(600.f, 370.f));
+	//damageLeftUI->StartMove();
+
+	CCutScene* cutSt = (CCutScene*)GameMgr::GetInst()->GetMachine()->GetState(L"CCutScene");
+	cutSt->SetHeroDmgUI(damageLeftUI);
+
+	AddObject(damageLeftUI, GROUP_TYPE::UI_OVER);
+
+	vector<DamageDiv*>& ddivs = cutSt->GetDamageDivs();
+	ddivs.clear();
+
+	if (ddivs.size() < 4) {
+		for (int i = 0; i < 4; i++) {
+			DamageDiv* damageRightUI = new DamageDiv;
+			damageRightUI->SetScale(Vec2(50.f, 50.f));
+			damageRightUI->InitTextModule(11, 55);
+			damageRightUI->SetPos(Vec2(1100.f + (i * 150.f), 420.f));
+			damageRightUI->SetCamAffected(false);
+			damageRightUI->SetViewAffected(false);
+			damageRightUI->SetTextColor(249, 29, 0);
+			damageRightUI->SetBold(900);
+			damageRightUI->SetCanRend(false);
+			damageRightUI->SetOriginPos(Vec2(1100.f + (i * 150.f), 420.f));
+			//damageLeftUI->StartMove();
+
+			cutSt->AddMonDmgUIs(damageRightUI);
+			AddObject(damageRightUI, GROUP_TYPE::UI_OVER);
+		}
+	}
+
+	vector<DamageDiv*>& hddivs = cutSt->GetHeroDamageDivs();
+	hddivs.clear();
+
+	if (hddivs.size() < 3) {
+		for (int i = 0; i < 3; i++) {
+			DamageDiv* damageRightUI = new DamageDiv;
+			damageRightUI->SetScale(Vec2(50.f, 50.f));
+			damageRightUI->InitTextModule(11, 55);
+			damageRightUI->SetPos(Vec2(1100.f + (i * 150.f), 420.f));
+			damageRightUI->SetCamAffected(false);
+			damageRightUI->SetViewAffected(false);
+			damageRightUI->SetTextColor(249, 29, 0);
+			damageRightUI->SetBold(900);
+			damageRightUI->SetCanRend(false);
+			damageRightUI->SetOriginPos(Vec2(600.f - (i * 150.f), 420.f));
+			//damageLeftUI->StartMove();
+
+			cutSt->AddHeroDmgUIs(damageRightUI);
+			AddObject(damageRightUI, GROUP_TYPE::UI_OVER);
+		}
+	}
+
 	DivUI* torchSystem = UIFactory::CreateTorchSystem();
 
 	pseudoUI->AddChild(torchSystem);
@@ -196,6 +262,12 @@ void Scene_Droom::update()
 {
 	elapseTime += fDT;
 
+	if (GameMgr::GetInst()->GetMap()->GetCurNode()->IsBattleNode() && elapseTime >= 2.f && battleFlag) {
+		battleFlag = false;
+
+		ChangeState(GameMgr::GetInst()->GetMachine(), L"CBStartState");
+
+	}
 
 	//if (elapseTime >= 1.f && debug) {
 	//	debug = false;

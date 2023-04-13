@@ -58,7 +58,7 @@ void SkillOnclick::Execute()
 		}
 	}
 	
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < mgr->GetMonSquadNum(); i++) {
 		((DivUI*)focusedMonOverlays[i])->SetCanRend(false);
 	}
 

@@ -24,14 +24,18 @@ private :
 	vector<Character> characterList;
 
 	// 영웅 스쿼드
-	CSquadDiv* heroSquad;
+	CSquadDiv* heroSquadDivs;
 
 	// 몬스터 스쿼드
 	CMonSquad* monSquad;
 
-
-
 	Character curTurnPlayer;
+
+	// 주시 상태인지
+	bool isOnEye;
+	// 주시 영웅 인덱스는 뭔지 (onEye 상태면 인덱스 오버레이를 켜주고 아니면 꺼준다)
+	int onEyeIdx;
+	// 
 
 	virtual void Enter() override;
 	virtual void Update() override;
@@ -44,5 +48,6 @@ public :
 	CWaitState();
 	~CWaitState();
 
+	void SetOnEye(bool _isOnEye, int _eyeIdx) { isOnEye = _isOnEye; onEyeIdx = _eyeIdx; }
 };
 

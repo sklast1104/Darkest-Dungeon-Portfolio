@@ -199,6 +199,9 @@
     <Filter Include="Engine\07.Component\03.Command\08. TorchCom">
       <UniqueIdentifier>{fd655e56-d262-40a4-88d8-95cba3ab1fcc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\10.DataModel\02.Monster\01. Boss">
+      <UniqueIdentifier>{811bfe1c-c68b-4e78-8d1a-0a277a9a934e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -585,6 +588,21 @@
     <ClInclude Include="TorchClick.h">
       <Filter>Engine\04.Object\UI\06. TorchUI</Filter>
     </ClInclude>
+    <ClInclude Include="CWoodS.h">
+      <Filter>Engine\10.DataModel\02.Monster\01. Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="CProphet.h">
+      <Filter>Engine\10.DataModel\02.Monster\01. Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="CBossTurn.h">
+      <Filter>Engine\08.Module\State\DarkestStates</Filter>
+    </ClInclude>
+    <ClInclude Include="CWoodM.h">
+      <Filter>Engine\10.DataModel\02.Monster\01. Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="CWoodL.h">
+      <Filter>Engine\10.DataModel\02.Monster\01. Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -960,6 +978,21 @@
     </ClCompile>
     <ClCompile Include="TorchClick.cpp">
       <Filter>Engine\04.Object\UI\06. TorchUI</Filter>
+    </ClCompile>
+    <ClCompile Include="CWoodS.cpp">
+      <Filter>Engine\10.DataModel\02.Monster\01. Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="CProphet.cpp">
+      <Filter>Engine\10.DataModel\02.Monster\01. Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="CBossTurn.cpp">
+      <Filter>Engine\08.Module\State\DarkestStates</Filter>
+    </ClCompile>
+    <ClCompile Include="CWoodM.cpp">
+      <Filter>Engine\10.DataModel\02.Monster\01. Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="CWoodL.cpp">
+      <Filter>Engine\10.DataModel\02.Monster\01. Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

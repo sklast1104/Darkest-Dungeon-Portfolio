@@ -8,6 +8,7 @@
 
 #include "CSquadDiv.h"
 #include "CMonSquad.h"
+#include "CHeroDiv.h"
 
 #include "GameMgr.h"
 #include "CDarkMonster.h"
@@ -16,6 +17,8 @@
 CWaitState::CWaitState()
 	: CState(L"CWaitState")
 	, elapsedTime{ 0.f }
+	, isOnEye{false}
+	, onEyeIdx{0}
 {
 }
 
@@ -30,7 +33,7 @@ bool compareSpeed(const Character& c1, const Character& c2) {
 void CWaitState::Enter()
 {
 	DivUI* pseudoUI = SceneMgr::GetInst()->GetCurScene()->GetPseudoUI();
-	heroSquad = (CSquadDiv*)FindUIByName(pseudoUI, L"CSquadDiv");
+	heroSquadDivs = (CSquadDiv*)FindUIByName(pseudoUI, L"CSquadDiv");
 	monSquad = (CMonSquad*)FindUIByName(pseudoUI, L"CMonSquad");
 
 	const array<CHero*, 4> heroSquad = GameMgr::GetInst()->GetSquad();
@@ -39,9 +42,24 @@ void CWaitState::Enter()
 	std::random_device rd;
 	std::mt19937 gen(rd());
 
+	// 기본적으로 모든 onYouOvl 끄는 작업 필요
+
+	heroSquadDivs->EnableAllOnYou(false);
+
+	if (isOnEye) {
+		int idx = onEyeIdx - 1;
+		heroSquadDivs->GetHeroDivByIdx(idx)->EnableOnYouOvl(true);
+	}
+
 	// 1부터 6까지 랜덤한 숫자 생성
 	std::uniform_int_distribution<int> dist(1, 6);
 	int num = dist(gen);
+
+	for (int i = 0; i < 4; i++) {
+		if (nullptr != monSquad[i] && monSquad[i]->GetMonType() == L"나무") {
+			monSquad[i]->SetCanTurn(false);
+		}
+	}
 
 	for (int i = 0; i < 4; i++) {
 
@@ -95,8 +113,15 @@ void CWaitState::Update()
 			monSquad[curTurnPlayer.index]->SetCanTurn(false);
 
 			GameMgr::GetInst()->SetMonFocusIdx(curTurnPlayer.index);
+			GameMgr* mgr = GameMgr::GetInst();
+			CDarkMonster* dMon = mgr->GetFocusedMonster();
 
-			ChangeState(GetStateMachine(), L"CEnemyTurn");
+			if (dMon->GetName() == L"예언자") {
+				ChangeState(GetStateMachine(), L"CBossTurn");
+			}
+			else {
+				ChangeState(GetStateMachine(), L"CEnemyTurn");
+			}
 		}
 	}
 }

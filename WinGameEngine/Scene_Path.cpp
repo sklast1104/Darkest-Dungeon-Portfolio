@@ -348,6 +348,28 @@ void Scene_Path::Enter()
 		}
 	}
 
+	vector<DamageDiv*>& hddivs = cutSt->GetHeroDamageDivs();
+	hddivs.clear();
+
+	if (hddivs.size() < 3) {
+		for (int i = 0; i < 3; i++) {
+			DamageDiv* damageRightUI = new DamageDiv;
+			damageRightUI->SetScale(Vec2(50.f, 50.f));
+			damageRightUI->InitTextModule(11, 55);
+			damageRightUI->SetPos(Vec2(1100.f + (i * 150.f), 420.f));
+			damageRightUI->SetCamAffected(false);
+			damageRightUI->SetViewAffected(false);
+			damageRightUI->SetTextColor(249, 29, 0);
+			damageRightUI->SetBold(900);
+			damageRightUI->SetCanRend(false);
+			damageRightUI->SetOriginPos(Vec2(600.f - (i * 150.f), 420.f));
+			//damageLeftUI->StartMove();
+
+			cutSt->AddHeroDmgUIs(damageRightUI);
+			AddObject(damageRightUI, GROUP_TYPE::UI_OVER);
+		}
+	}
+
 	DivUI* torchSystem = UIFactory::CreateTorchSystem();
 	
 

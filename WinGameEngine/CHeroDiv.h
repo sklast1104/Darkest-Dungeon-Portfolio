@@ -19,6 +19,7 @@ private :
 	CSelectedOverlay* overlay;
 	DivUI* attackedOverlay;
 	DivUI* curHpBar;
+	DivUI* onYouOvl;
 
 	wstring idleAnimName;
 	wstring walkAnimName;
@@ -47,6 +48,7 @@ public :
 	void SetOverlay(CSelectedOverlay* _overlay) { overlay = _overlay; }
 	void SetAttackedOverlay(DivUI* _overlay) { attackedOverlay = _overlay; }
 	void SetCurHpBar(DivUI* _hpBar) { curHpBar = _hpBar; }
+	void SetOnYouOvl(DivUI* _ovl) { onYouOvl = _ovl; }
 
 	void UpdateHpBar();
 
@@ -54,6 +56,7 @@ public :
 
 	void EnableSkill();
 	
+	void EnableOnYouOvl(bool _isEnable);
 
 	CLONE(CHeroDiv);
 };

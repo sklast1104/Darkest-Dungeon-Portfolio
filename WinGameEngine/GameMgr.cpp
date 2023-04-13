@@ -10,6 +10,10 @@
 #include "CBoneDefender.h"
 #include "CBoneArbalist.h"
 #include "CBoneCourtier.h"
+#include "CProphet.h"
+#include "CWoodS.h"
+#include "CWoodM.h"
+#include "CWoodL.h"
 
 #include "CInvItem.h"
 #include "DarkestMachine.h"
@@ -79,27 +83,18 @@ void GameMgr::init()
 
 	machine = new DarkestMachine;
 
-	CDarkMonster* mon1 = new CBoneDefender;
+	/*CDarkMonster* mon1 = new CBoneDefender;
 	CDarkMonster* mon2 = new CBoneSoldier;
 	CDarkMonster* mon3 = new CBoneCourtier;
 	CDarkMonster* mon4 = new CBoneArbalist;
-
+	
 	monSquad[0] = mon1;
 	monSquad[1] = mon2;
 	monSquad[2] = mon3;
 	monSquad[3] = mon4;
 
-
-	// 여기서 일단 임시로 스쿼드는 만들어 놓는데 나중에 지울것
-	//for (int i = 0; i < 2; i++) {
-	//	CDarkMonster* boneDefender = new CBoneSoldier;
-	//	monSquad[i] = boneDefender;
-	//}
-
-	//for (int i = 2; i < 4; i++) {
-	//	CDarkMonster* boneSolider = new CBoneCourtier;
-	//	monSquad[i] = boneSolider;
-	//}
+	CDarkMonster* mon5 = new CProphet;
+	monSquad[0] = mon5;*/
 	
 	// 맵 초기화
 	map = new CMap;
@@ -111,6 +106,15 @@ void GameMgr::init()
 	monTypes.push_back(new CBoneDefender);
 	monTypes.push_back(new CBoneArbalist);
 	monTypes.push_back(new CBoneCourtier);
+	monTypes.push_back(new CProphet);
+	monTypes.push_back(new CWoodS);
+	monTypes.push_back(new CWoodM);
+	monTypes.push_back(new CWoodL);
+
+	monSquad[0] = new CWoodS;
+	monSquad[1] = new CWoodM;
+	monSquad[2] = new CWoodL;
+	monSquad[3] = new CProphet;
 
 	bright = 100;
 }

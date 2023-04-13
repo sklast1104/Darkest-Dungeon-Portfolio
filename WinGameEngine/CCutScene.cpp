@@ -58,7 +58,7 @@ void CCutScene::Enter()
 	int skillIdx = mgr->GetSIndex();
 	int monIdx = mgr->GetMonFocusIdx();
 
-	if (isPlayerAttack) {
+	if (_isPlayerAttack) {
 		
 		CHero* chero = mgr->GetFocusedHero();
 		CSkill* hSkill = chero->GetCurSkills()[skillIdx];
@@ -78,11 +78,14 @@ void CCutScene::Enter()
 
 			monSquad->EnableAllDivChildUI(false);
 
-			player = heroSquad->GetHeroDivByIdx(heroIdx - (4 - heroSquad->GetSquadNum()));
+			players.push_back(heroSquad->GetHeroDivByIdx(heroIdx - (4 - heroSquad->GetSquadNum())));
+
+			//player = heroSquad->GetHeroDivByIdx(heroIdx - (4 - heroSquad->GetSquadNum()));
 			// 렌더 y소팅
 			heroSquad->MoveToBackRender(heroIdx);
 			// 현재 스킬 애니메이션 재생
-			player->PlayCurSkillByIdx(skillIdx);
+			//player->PlayCurSkillByIdx(skillIdx);
+			players[0]->PlayCurSkillByIdx(skillIdx);
 			// 스킬 사운드 재생
 
 			wstring soundName = hSkill->GetSoundName();
@@ -117,7 +120,8 @@ void CCutScene::Enter()
 			bloodSplatRightFx->GetAnimator()->GetCurAnimation()->SetFrame(0);
 
 			// 공격자랑 피격자 위치를 강제로 렌더화면 중앙쪽으로 고정시켜야됨..
-			Vec2 playerPos = player->GetPos();
+			//Vec2 playerPos = player->GetPos();
+			Vec2 playerPos = players[0]->GetPos();
 			Vec2 monPos = monsters[0]->GetPos();
 
 			int realIdx = monIdx;
@@ -167,9 +171,11 @@ void CCutScene::Enter()
 			heroSquad->DisableAllOverlay();
 			heroSquad->EnableAllDivChildUI(false);
 			monSquad->EnableAllDivChildUI(false);
-			player = heroSquad->GetHeroDivByIdx(heroIdx - (4 - heroSquad->GetSquadNum()));
+			players.push_back(heroSquad->GetHeroDivByIdx(heroIdx - (4 - heroSquad->GetSquadNum())));
+			//player = heroSquad->GetHeroDivByIdx(heroIdx - (4 - heroSquad->GetSquadNum()));
 			heroSquad->MoveToBackRender(heroIdx);
-			player->PlayCurSkillByIdx(skillIdx);
+			players[0]->PlayCurSkillByIdx(skillIdx);
+			//player->PlayCurSkillByIdx(skillIdx);
 			// 스킬 사운드 재생
 
 			wstring soundName = hSkill->GetSoundName();
@@ -262,6 +268,7 @@ void CCutScene::Enter()
 
 	}
 	else {
+
 		// 카메라 효과
 		ViewMgr::GetInst()->SetZoomRatio(1.3f);
 
@@ -292,54 +299,112 @@ void CCutScene::Enter()
 		bloodSplatRightFx->GetAnimator()->GetCurAnimation()->SetAllFrameDuration(0.14f);
 		bloodSplatRightFx->GetAnimator()->GetCurAnimation()->SetFrame(0);
 
-		// 몬스터 스쿼드 y소팅 해야함
-		heroSquad->MoveToBackRender(heroIdx);
-		monSquad->MoveToBackRender(monIdx);
-		monsters.push_back(monSquad->GetMonDivByIdx(monIdx));
-		monsters[0]->PlayCurSkilByIdx(skillIdx);
+		// 여기 위엔 공통효과
+		CDarkMonster* cMon = mgr->GetFocusedMonster();
+		CSkill* monSkil = cMon->GetCurSkills()[skillIdx];
 
-		CDarkMonster* monster = mgr->GetFocusedMonster();
-		CSkill* hSkill = monster->GetCurSkills()[skillIdx];
+		if (!monSkil->GetMulti()) {
 
-		player = heroSquad->GetHeroDivByIdx(heroIdx - (4 - heroSquad->GetSquadNum()));
-		player->PlayAttackedAnim(monster, monster->GetCurSkills()[skillIdx]);
+			// 몬스터 스쿼드 y소팅 해야함
+			heroSquad->MoveToBackRender(heroIdx);
+			monSquad->MoveToBackRender(monIdx);
+			monsters.push_back(monSquad->GetMonDivByIdx(monIdx));
+			monsters[0]->PlayCurSkilByIdx(skillIdx);
 
-		// 공격자랑 피격자 위치를 강제로 렌더화면 중앙쪽으로 고정시켜야됨..
-		Vec2 playerPos = player->GetPos();
-		Vec2 monPos = monsters[0]->GetPos();
+			CDarkMonster* monster = mgr->GetFocusedMonster();
+			CSkill* hSkill = monster->GetCurSkills()[skillIdx];
 
-		int realIdx = monIdx;
 
-		const array<CDarkMonster*, 4>& monSquad = mgr->GetMonSquad();
+			players.push_back(heroSquad->GetHeroDivByIdx(heroIdx - (4 - heroSquad->GetSquadNum())));
+			players[0]->PlayAttackedAnim(monster, monster->GetCurSkills()[skillIdx]);
+			//player = heroSquad->GetHeroDivByIdx(heroIdx - (4 - heroSquad->GetSquadNum()));
+			//player->PlayAttackedAnim(monster, monster->GetCurSkills()[skillIdx]);
 
-		for (int i = 0; i < monIdx; i++) {
-			if (nullptr != monSquad[i]) {
-				if (monSquad[i]->IsDead()) {
-					realIdx -= 1;
+			// 공격자랑 피격자 위치를 강제로 렌더화면 중앙쪽으로 고정시켜야됨..
+			//Vec2 playerPos = player->GetPos();
+			Vec2 playerPos = players[0]->GetPos();
+			Vec2 monPos = monsters[0]->GetPos();
+
+			int realIdx = monIdx;
+
+			const array<CDarkMonster*, 4>& monSquad = mgr->GetMonSquad();
+
+			for (int i = 0; i < monIdx; i++) {
+				if (nullptr != monSquad[i]) {
+					if (monSquad[i]->IsDead()) {
+						realIdx -= 1;
+					}
 				}
 			}
+
+			monsters[0]->SetPos(monsters[0]->GetPos() + Vec2(-150.f * realIdx, 0.f));
+
+			// 데미지 처리
+			CHero* chero = mgr->GetFocusedHero();
+			CDarkMonster* cMon = mgr->GetFocusedMonster();
+
+			//CSkill* hSkill = cMon->GetCurSkills()[skillIdx];
+
+			int monDmg = cMon->GetDamageLower();
+			monDmg = monDmg + monDmg * (hSkill->GetAttackRate() / 100.f);
+
+			// 데미지 애니메이션
+			heroDmgUI->InitTextModule(monDmg, 55);
+			heroDmgUI->StartMove();
+
+			chero->SetCurHp(chero->GetCurHp() - monDmg);
+
+			if (chero->GetCurHp() <= 0) {
+				chero->SetDead();
+				GameMgr::GetInst()->CheckCanTurn();
+			}
+
 		}
+		else {
 
-		monsters[0]->SetPos(monsters[0]->GetPos() + Vec2(-150.f * realIdx, 0.f));
+			heroSquad->MoveToBackRender(heroIdx);
+			monSquad->MoveToBackRender(monIdx);
+			monsters.push_back(monSquad->GetMonDivByIdx(monIdx));
+			monsters[0]->PlayCurSkilByIdx(skillIdx);
 
-		// 데미지 처리
-		CHero* chero = mgr->GetFocusedHero();
-		CDarkMonster* cMon = mgr->GetFocusedMonster();
+			CDarkMonster* monster = mgr->GetFocusedMonster();
+			CSkill* hSkill = monster->GetCurSkills()[skillIdx];
 
-		//CSkill* hSkill = cMon->GetCurSkills()[skillIdx];
+			// 어짜피 전부 전체공격 구현하기로 했으므로 그냥 플레이어 다 넣어 버리자
+			for (int i = 0; i < 3; i++) {
 
-		int monDmg = cMon->GetDamageLower();
-		monDmg = monDmg + monDmg * (hSkill->GetAttackRate() / 100.f);
+				players.push_back(heroSquad->GetHeroDivByIdx(i));
+				players[i]->PlayAttackedAnim(monster, monster->GetCurSkills()[skillIdx]);
+			}
 
-		// 데미지 애니메이션
-		heroDmgUI->InitTextModule(monDmg, 55);
-		heroDmgUI->StartMove();
+			monSquad->MoveToBackRender(monIdx);
 
-		chero->SetCurHp(chero->GetCurHp() - monDmg);
+			int realIdx = monIdx;
 
-		if (chero->GetCurHp() <= 0) {
-			chero->SetDead();
-			GameMgr::GetInst()->CheckCanTurn();
+			const array<CDarkMonster*, 4>& monSquad = mgr->GetMonSquad();
+
+			for (int i = 0; i < mgr->GetSquadNum(); i++) {
+				// 데미지 처리
+				CHero* chero = mgr->GetSquad()[i + 1];
+				CDarkMonster* cMon = mgr->GetFocusedMonster();
+
+				int monDmg = cMon->GetDamageLower();
+				monDmg = monDmg + monDmg * (hSkill->GetAttackRate() / 100.f);
+
+				heroDmgUIs[i]->InitTextModule(monDmg, 55);
+				heroDmgUIs[i]->StartMove();
+
+				// 데미지 애니메이션
+				/*heroDmgUI->InitTextModule(monDmg, 55);
+				heroDmgUI->StartMove();*/
+
+				chero->SetCurHp(chero->GetCurHp() - monDmg);
+
+				if (chero->GetCurHp() <= 0) {
+					chero->SetDead();
+					GameMgr::GetInst()->CheckCanTurn();
+				}
+			}
 		}
 	}
 
@@ -365,15 +430,17 @@ void CCutScene::Update()
 
 	if (elapsedTime <= 3.f) {
 
-		if (isPlayerAttack) {
+		if (_isPlayerAttack) {
 
 			// 상대좌표로 해야됨
-			Vec2 playerPos = player->GetPos();
+			//Vec2 playerPos = player->GetPos();
+			Vec2 playerPos = players[0]->GetPos();
 
 			float speed = 40.f;
 
-			player->SetPos(Vec2(playerPos.x + (fDT * speed), playerPos.y));
-			//player->GetEffect()->SetPos(Vec2(playerPos.x + (fDT * speed), playerPos.y));
+			
+			//player->SetPos(Vec2(playerPos.x + (fDT * speed), playerPos.y));
+			players[0]->SetPos(Vec2(playerPos.x + (fDT * speed), playerPos.y));
 
 			DivUI* pseudoUI = SceneMgr::GetInst()->GetCurScene()->GetPseudoUI();
 			pseudoUI->SendToBack(L"CSquadDiv");
@@ -389,11 +456,14 @@ void CCutScene::Update()
 			
 		}
 		else {
-			Vec2 playerPos = player->GetPos();
-
+			
 			float speed = 40.f;
 
-			player->SetPos(Vec2(playerPos.x + (fDT * -speed), playerPos.y));
+			for (int i = 0; i < players.size(); i++) {
+				Vec2 playerPos = players[i]->GetPos();
+
+				players[i]->SetPos(Vec2(playerPos.x + (fDT * -speed), playerPos.y));
+			}
 
 			for (int i = 0; i < monsters.size(); i++) {
 				Vec2 monPos = monsters[i]->GetPos();
@@ -412,10 +482,33 @@ void CCutScene::Update()
 
 void CCutScene::Exit()
 {
+	// 만약 죽었으면 여기서 렌더 꺼주자 그리고 죽은 유닛 처리는 wait한테 맡겨보자
+	GameMgr* mgr = GameMgr::GetInst();
+	int skillIdx = mgr->GetSIndex();
+
 	CRestoreState* state =  (CRestoreState *)GetStateMachine()->GetState(L"CRestoreState");
-	state->SetPlayer(player);
-	//state->SetMonster(monsters[0]);
+	//state->SetPlayer(players[0]);
+	//state->SetPlayer(player);
+	state->SetPlayers(players);
 	state->SetMonsters(monsters);
+	state->SetIsPlayers(_isPlayerAttack);
+
+	if (_isPlayerAttack) {
+
+		
+
+		CHero* chero = mgr->GetFocusedHero();
+		CSkill* hSkill = chero->GetCurSkills()[skillIdx];
+
+		state->SetCurSkil(hSkill);
+	}
+	else {
+
+		CDarkMonster* monster = mgr->GetFocusedMonster();
+		CSkill* mSkill = monster->GetCurSkills()[skillIdx];
+
+		state->SetCurSkil(mSkill);
+	}
 
 	elapsedTime = 0.f;
 
@@ -425,11 +518,13 @@ void CCutScene::Exit()
 		monsters[i]->UpdateHpBar();
 	}
 
-	
-	player->UpdateHpBar();
+	for (int i = 0; i < players.size(); i++) {
+		players[i]->UpdateHpBar();
+	}
 
-	// 만약 죽었으면 여기서 렌더 꺼주자 그리고 죽은 유닛 처리는 wait한테 맡겨보자
-	GameMgr* mgr = GameMgr::GetInst();
+	//player->UpdateHpBar();
+
+	
 
 	CHero* chero = mgr->GetFocusedHero();
 	CDarkMonster* cMon = mgr->GetFocusedMonster();
@@ -460,9 +555,8 @@ void CCutScene::Exit()
 		}
 	}
 
+	players.clear();
 	monsters.clear();
-
-	cout << player->GetEffect()->GetCanRend();
 
 	DivUI* pseudoUI = SceneMgr::GetInst()->GetCurScene()->GetPseudoUI();
 

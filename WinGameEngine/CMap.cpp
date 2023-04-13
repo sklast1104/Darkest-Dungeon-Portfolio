@@ -29,6 +29,7 @@ void CMap::DefineDefaultMap()
 	CRoom* root = new CRoom();
 	root->SetName(L"StartRoom");
 	root->InitStartRoom();
+	//root->MakeBattleNode();
 	nodeLists.push_back(root);
 
 	CRoom* rRoom = new CRoom();
@@ -37,30 +38,95 @@ void CMap::DefineDefaultMap()
 
 	MakeRightPath(root, rRoom);
 
-	CRoom* upRoom = new CRoom();
-	upRoom->InitRandomRoom();
-	nodeLists.push_back(upRoom);
-
-	MakeUpPath(root, upRoom);
-
-	CRoom* urRoom = new CRoom();
-	urRoom->InitRandomRoom();
-	nodeLists.push_back(urRoom);
-
-	MakeUpPath(rRoom, urRoom);
-	MakeRightPath(upRoom, urRoom);
-
-	CRoom* leftRoom = new CRoom();
-	leftRoom->InitRandomRoom();
-	nodeLists.push_back(leftRoom);
-
-	MakeLeftPath(root, leftRoom);
-
 	CRoom* botRoom = new CRoom();
 	botRoom->InitRandomRoom();
 	nodeLists.push_back(botRoom);
 
 	MakeDownPath(root, botRoom);
+
+	CRoom* bbRoom = new CRoom();
+	bbRoom->InitRandomRoom();
+	nodeLists.push_back(bbRoom);
+
+	MakeDownPath(botRoom, bbRoom);
+
+	CRoom* brRoom = new CRoom();
+	brRoom->InitRandomRoom();
+	nodeLists.push_back(brRoom);
+
+	MakeDownPath(rRoom, brRoom);
+	MakeRightPath(botRoom, brRoom);
+
+	CRoom* brbRoom = new CRoom();
+	brbRoom->InitRandomRoom();
+	nodeLists.push_back(brbRoom);
+
+	MakeDownPath(brRoom, brbRoom);
+
+	CRoom* rrRoom = new CRoom();
+	rrRoom->InitRandomRoom();
+	nodeLists.push_back(rrRoom);
+
+	MakeRightPath(brRoom, rrRoom);
+
+	CRoom* rrrRoom = new CRoom();
+	rrrRoom->InitRandomRoom();
+	nodeLists.push_back(rrrRoom);
+
+	MakeRightPath(rrRoom, rrrRoom);
+
+	CRoom* rruRoom = new CRoom();
+	rruRoom->InitRandomRoom();
+	nodeLists.push_back(rruRoom);
+
+	MakeUpPath(rrRoom, rruRoom);
+
+	CRoom* rrurRoom = new CRoom();
+	rrurRoom->InitRandomRoom();
+	nodeLists.push_back(rrurRoom);
+
+	MakeRightPath(rruRoom, rrurRoom);
+
+	CRoom* rrbRoom = new CRoom();
+	rrbRoom->InitRandomRoom();
+	nodeLists.push_back(rrbRoom);
+
+	MakeDownPath(rrRoom, rrbRoom);
+	
+	CRoom* rrbrRoom = new CRoom();
+	rrbrRoom->InitRandomRoom();
+	nodeLists.push_back(rrbrRoom);
+
+	MakeRightPath(rrbRoom, rrbrRoom);
+
+	CRoom* rrbrrRoom = new CRoom();
+	rrbrrRoom->InitRandomRoom();
+	rrbrrRoom->MakeBattleNode();
+	nodeLists.push_back(rrbrrRoom);
+
+	MakeRightPath(rrbrRoom, rrbrrRoom);
+
+
+	//CRoom* upRoom = new CRoom();
+	//upRoom->InitRandomRoom();
+	//nodeLists.push_back(upRoom);
+
+	//MakeUpPath(root, upRoom);
+
+	//CRoom* urRoom = new CRoom();
+	//urRoom->InitRandomRoom();
+	//nodeLists.push_back(urRoom);
+
+	//MakeUpPath(rRoom, urRoom);
+	//MakeRightPath(upRoom, urRoom);
+
+	//CRoom* leftRoom = new CRoom();
+	//leftRoom->InitRandomRoom();
+	//nodeLists.push_back(leftRoom);
+
+	//MakeLeftPath(root, leftRoom);
+
+	
 
 	startRoom = root;
 	curNode = startRoom;
@@ -502,7 +568,7 @@ void CMap::MakeRightPath(CRoom* left, CRoom* right)
 	// 2번째 통로를 전투 노드로 만듬
 	CPathNode* path2 = new CPathNode();
 	path2->SetDir(PATH_DIR::RIGHT);
-	path2->MakeBattleNode();
+	//path2->MakeBattleNode();
 	nodeLists.push_back(path2);
 
 	CPathNode* path3 = new CPathNode();

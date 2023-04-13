@@ -151,6 +151,7 @@
     <ClInclude Include="CBoneCourtier.h" />
     <ClInclude Include="CBoneDefender.h" />
     <ClInclude Include="CBoneSoldier.h" />
+    <ClInclude Include="CBossTurn.h" />
     <ClInclude Include="CBStartState.h" />
     <ClInclude Include="CCommand.h" />
     <ClInclude Include="CCrusader.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="CNode.h" />
     <ClInclude Include="CPathNode.h" />
     <ClInclude Include="CPlayerTurn.h" />
+    <ClInclude Include="CProphet.h" />
     <ClInclude Include="CQuest.h" />
     <ClInclude Include="CRestoreState.h" />
     <ClInclude Include="CRoom.h" />
@@ -184,6 +186,9 @@
     <ClInclude Include="CStMachine.h" />
     <ClInclude Include="CTurnPlayer.h" />
     <ClInclude Include="CWaitState.h" />
+    <ClInclude Include="CWoodL.h" />
+    <ClInclude Include="CWoodM.h" />
+    <ClInclude Include="CWoodS.h" />
     <ClInclude Include="DamageDiv.h" />
     <ClInclude Include="DarkestMachine.h" />
     <ClInclude Include="DMapUI.h" />
@@ -281,6 +286,7 @@
     <ClCompile Include="CBoneCourtier.cpp" />
     <ClCompile Include="CBoneDefender.cpp" />
     <ClCompile Include="CBoneSoldier.cpp" />
+    <ClCompile Include="CBossTurn.cpp" />
     <ClCompile Include="CBStartState.cpp" />
     <ClCompile Include="CCommand.cpp" />
     <ClCompile Include="CCrusader.cpp" />
@@ -303,6 +309,7 @@
     <ClCompile Include="CNode.cpp" />
     <ClCompile Include="CPathNode.cpp" />
     <ClCompile Include="CPlayerTurn.cpp" />
+    <ClCompile Include="CProphet.cpp" />
     <ClCompile Include="CQuest.cpp" />
     <ClCompile Include="CRestoreState.cpp" />
     <ClCompile Include="CRoom.cpp" />
@@ -314,6 +321,9 @@
     <ClCompile Include="CStMachine.cpp" />
     <ClCompile Include="CTurnPlayer.cpp" />
     <ClCompile Include="CWaitState.cpp" />
+    <ClCompile Include="CWoodL.cpp" />
+    <ClCompile Include="CWoodM.cpp" />
+    <ClCompile Include="CWoodS.cpp" />
     <ClCompile Include="DamageDiv.cpp" />
     <ClCompile Include="DarkestMachine.cpp" />
     <ClCompile Include="DMapUI.cpp" />
