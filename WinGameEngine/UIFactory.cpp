@@ -55,6 +55,7 @@
 #include "TorchAnimUI.h"
 #include "TorchCom.h"
 #include "TorchClick.h"
+#include "ForwardBtnEnter.h"
 
 DivUI* UIFactory::CreateTitle()
 {
@@ -261,6 +262,7 @@ DivUI* UIFactory::CreateBottomNavUI()
 	forwardBtn->InitTextModule(L"ÃâÁ¤", 35);
 	forwardBtn->SetTextColor(184, 29, 11);
 	forwardBtn->InitOnMouseClick(new ForwardBtnClick);
+	forwardBtn->InitOnMouseEnter(new ForwardBtnEnter);
 
 	bottomNavUI->AddChild(forwardBtn);
 
@@ -1405,6 +1407,7 @@ DivUI* UIFactory::CreateDungeonPanel()
 	inventoryPanel->SetName(L"shopInvPanel");
 	inventoryPanel->InitUpdateValue(new ShopInvUpdateVal(inventoryPanel));
 	inventoryPanel->SetViewAffected(false);
+	inventoryPanel->SetCanRend(false);
 
 	mainRightPanel->AddChild(inventoryPanel);
 
@@ -1431,7 +1434,7 @@ DivUI* UIFactory::CreateDungeonPanel()
 	mapPanel->SetScale(Vec2(720.f, 360.f));
 	mapPanel->SetPos(Vec2(0.f, 0.f));
 	mapPanel->InitImageModule(L"MAP_PANEL_KEY", L"resource\\panels\\panel_map.png");
-	mapPanel->SetCanRend(false);
+	mapPanel->SetCanRend(true);
 	mapPanel->CanTarget(false);
 	mapPanel->SetViewAffected(false);
 	mapPanel->SetName(L"mapPanel");

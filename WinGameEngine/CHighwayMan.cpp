@@ -99,12 +99,13 @@ void CHighwayMan::InitSkill()
 	pistolShot->GetSkillPos()[2] = true;
 
 	pistolShot->SetMultiAttack(false);
+	pistolShot->GetSkillRange()[0] = true;
 	pistolShot->GetSkillRange()[1] = true;
 	pistolShot->GetSkillRange()[2] = true;
 	pistolShot->GetSkillRange()[3] = true;
 
 	pistolShot->SetHitRate(85);
-	pistolShot->SetAttackRate(100);
+	pistolShot->SetAttackRate(300);
 	pistolShot->SetCritRate(7.5f);
 
 	pistolShot->SetSkillAnimName(L"±ÇÃÑ »ç°Ý");
@@ -132,7 +133,7 @@ void CHighwayMan::InitSkill()
 	zeroShot->GetSkillRange()[0] = true;
 
 	zeroShot->SetHitRate(95);
-	zeroShot->SetAttackRate(50);
+	zeroShot->SetAttackRate(100);
 	zeroShot->SetCritRate(5);
 
 	skillArray[2] = zeroShot;

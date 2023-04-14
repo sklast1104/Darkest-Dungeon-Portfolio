@@ -6,6 +6,8 @@
 #include "GameMgr.h"
 #include "SceneMgr.h"
 #include "Scene.h"
+#include "ResMgr.h"
+#include "Sound.h"
 
 SlotDown::SlotDown(DivUI* _heroPortrait, DivUI* _dragRenderer, int _slotIndex)
 	: heroPortrait{_heroPortrait}, dragRenderer{_dragRenderer}, slotIndex{_slotIndex}
@@ -18,6 +20,12 @@ SlotDown::~SlotDown()
 
 void SlotDown::Execute()
 {
+	ResMgr::GetInst()->LoadSound(L"slowDownSound", L"resource\\sound\\UI\\ui_shared\\ui_shr_button_click {aafbb3c0-f660-4aa1-b756-be47a979bafd}.wav");
+	Sound* downSound = ResMgr::GetInst()->FindSound(L"slowDownSound");
+
+	downSound->SetVolume(10.f);
+	downSound->Play(false);
+
 	DivUI* pseudoUI = SceneMgr::GetInst()->GetCurScene()->GetPseudoUI();
 	DivUI* sideNavUI = (DivUI*)FindUIByName((UI*)pseudoUI, L"heroSideNav");
 

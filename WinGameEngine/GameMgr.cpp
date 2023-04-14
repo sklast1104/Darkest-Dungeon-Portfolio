@@ -45,6 +45,11 @@ GameMgr::~GameMgr() {
 	Safe_Delete_Vec<CHero*>(curHeros);
 	Safe_Delete_Vec<CDarkMonster*>(monTypes);
 
+	Safe_Delete_Vec<CDarkMonster*>(squad1);
+	Safe_Delete_Vec<CDarkMonster*>(squad2);
+	Safe_Delete_Vec<CDarkMonster*>(squad3);
+	Safe_Delete_Vec<CDarkMonster*>(bossSquad);
+
 	for (int i = 0; i < 16; i++) {
 		Safe_Delete<CItem*>(curItems[i]);
 	}
@@ -52,14 +57,42 @@ GameMgr::~GameMgr() {
 	Safe_Delete(machine);
 
 	// 여기서 일단 임시로 몬스터 스쿼드 해제함
-	for (int i = 0; i < 4; i++) {
+	/*for (int i = 0; i < 4; i++) {
 		if (monSquad[i]) {
 			delete monSquad[i];
 			monSquad[i] = nullptr;
 		}
-	}
+	}*/
 
 	Safe_Delete<CMap*>(map);
+}
+
+void GameMgr::SetRandomSquad()
+{
+	int rVal = rand() % 3;
+
+	if (rVal == 0) {
+		for (int i = 0; i < 4; i++) {
+			monSquad[i] = squad1[i];
+		}
+	}
+	else if (rVal == 1) {
+		for (int i = 0; i < 4; i++) {
+			monSquad[i] = squad2[i];
+		}
+	}
+	else if (rVal == 2) {
+		for (int i = 0; i < 4; i++) {
+			monSquad[i] = squad3[i];
+		}
+	}
+}
+
+void GameMgr::SetBossSquad()
+{
+	for (int i = 0; i < 4; i++) {
+		monSquad[i] = bossSquad[i];
+	}
 }
 
 void GameMgr::init()
@@ -111,10 +144,34 @@ void GameMgr::init()
 	monTypes.push_back(new CWoodM);
 	monTypes.push_back(new CWoodL);
 
-	monSquad[0] = new CWoodS;
-	monSquad[1] = new CWoodM;
-	monSquad[2] = new CWoodL;
-	monSquad[3] = new CProphet;
+	//monSquad[0] = monTypes[5];
+	//monSquad[1] = monTypes[6];
+	//monSquad[2] = monTypes[7];
+	//monSquad[3] = monTypes[4];
+
+	squad1.push_back(new CBoneSoldier);
+	squad1.push_back(new CBoneSoldier);
+	squad1.push_back(new CBoneArbalist);
+	squad1.push_back(new CBoneArbalist);
+
+	squad2.push_back(new CBoneSoldier);
+	squad2.push_back(new CBoneSoldier);
+	squad2.push_back(new CBoneCourtier);
+	squad2.push_back(new CBoneArbalist);
+
+	squad3.push_back(new CBoneDefender);
+	squad3.push_back(new CBoneSoldier);
+	squad3.push_back(new CBoneCourtier);
+	squad3.push_back(new CBoneArbalist);
+
+	bossSquad.push_back(new CWoodS);
+	bossSquad.push_back(new CWoodM);
+	bossSquad.push_back(new CWoodL);
+	bossSquad.push_back(new CProphet);
+
+	for (int i = 0; i < 4; i++) {
+		monSquad[i] = squad3[i];
+	}
 
 	bright = 100;
 }

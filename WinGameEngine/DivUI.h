@@ -17,6 +17,7 @@ private :
 	bool canRendImg;
 	bool canRendTxt;
 	bool canRend;
+	bool wasMouseOver;
 
 protected :
 
@@ -25,6 +26,8 @@ protected :
 	CCommand* onMouseUp;
 	CCommand* onMouseDown;
 	CCommand* onMouseClick;
+	CCommand* onMouseEnter;
+	CCommand* onMouseExit;
 
 	CCommand* onUpdateValue;
 
@@ -66,6 +69,8 @@ public :
 	void InitOnMouseUp(CCommand* _onMouseUp) { onMouseUp = _onMouseUp; }
 	void InitOneMouseDown(CCommand* _onMouseDown) { onMouseDown = _onMouseDown; }
 	void InitOnMouseClick(CCommand* _onMouseClick) { onMouseClick = _onMouseClick; }
+	void InitOnMouseEnter(CCommand* _onMouseEnter) { onMouseEnter = _onMouseEnter; }
+	void InitOnMouseExit(CCommand* _onMouseExit) { onMouseExit = _onMouseExit; }
 
 	void InitUpdateValue(CCommand* _onUpdateValue) { onUpdateValue = _onUpdateValue; }
 

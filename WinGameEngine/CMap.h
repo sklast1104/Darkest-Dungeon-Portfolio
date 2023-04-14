@@ -14,6 +14,9 @@ private :
 
 	vector<CNode*> nodeLists;
 
+	vector<CNode*> rightNodes;
+	vector<CNode*> botNodes;
+
 public :
 
 	CMap();

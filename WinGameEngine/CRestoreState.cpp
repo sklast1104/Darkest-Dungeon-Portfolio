@@ -34,6 +34,8 @@ CRestoreState::~CRestoreState()
 
 void CRestoreState::Enter()
 {
+	monDead = false;
+
 	GameMgr* mgr = GameMgr::GetInst();
 
 	int heroIdx = mgr->GetFocusIndex() - (4 - mgr->GetSquadNum());
@@ -112,9 +114,38 @@ void CRestoreState::Enter()
 	}
 	else {
 
+		/*for (int i = 0; i < monsters.size(); i++) {
+			const array<CDarkMonster*, 4>& monSquad = mgr->GetMonSquad();
+
+			int realIdx = i;
+
+			for (int i = 0; i < monIdx; i++) {
+				if (nullptr != monSquad[i]) {
+					if (monSquad[i]->IsDead()) {
+						realIdx -= 1;
+					}
+				}
+			}
+
+			mEPos = Vec2(150.f * realIdx, 0.f);
+			mEPoses.push_back(mEPos);
+		}*/
+
+		/*for (int i = 0; i < monIdx; i++) {
+			const array<CDarkMonster*, 4>& monSquad = mgr->GetMonSquad();
+			if (nullptr != monSquad[i]) {
+				if (monSquad[i]->IsDead()) {
+					realIdx -= 1;
+				}
+			}
+		}*/
+
+		// 쳐맞는 애들만 몬스터에 들어오는데 중간에 죽으면 애매해짐
 
 		// 문제 생길 여지 있음 일단 스킵
 		for (int i = 0; i < monsters.size(); i++) {
+
+			if (monsters[i]->isDead()) { monDead = true; }
 
 			mEPos = Vec2(150.f * i, 0.f);
 			mEPoses.push_back(mEPos);
@@ -154,7 +185,7 @@ void CRestoreState::Update()
 		if (chero->IsDead()) {
 
 		}
-		else if (cMon->IsDead()) {
+		else if (cMon->IsDead() || monDead) {
 			ChangeState(GetStateMachine(), L"CMonDead");
 		}
 		else {

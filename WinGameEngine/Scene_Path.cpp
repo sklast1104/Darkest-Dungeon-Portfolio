@@ -54,6 +54,7 @@ void Scene_Path::render(HDC _dc)
 
 void Scene_Path::Enter()
 {
+	GameMgr::GetInst()->SetRandomSquad();
 	// PathDir이 Left일때만 빼고 전부 왼쪽노드가 우리가 온 방
 	/*if (paths[0]->GetDir() == PATH_DIR::LEFT) {
 		prevRoom = (CRoom*)paths[0]->GetRightNode();
@@ -310,7 +311,7 @@ void Scene_Path::Enter()
 	pseudoUI->AddChild(bloodSplatRightFx);
 
 	DamageDiv* damageLeftUI = new DamageDiv;
-	damageLeftUI->SetScale(Vec2(50.f, 50.f));
+	damageLeftUI->SetScale(Vec2(100.f, 50.f));
 	damageLeftUI->InitTextModule(11, 55);
 	damageLeftUI->SetPos(Vec2(600.f, 420.f));
 	damageLeftUI->SetCamAffected(false);
@@ -332,7 +333,7 @@ void Scene_Path::Enter()
 	if (ddivs.size() < 4) {
 		for (int i = 0; i < 4; i++) {
 			DamageDiv* damageRightUI = new DamageDiv;
-			damageRightUI->SetScale(Vec2(50.f, 50.f));
+			damageRightUI->SetScale(Vec2(100.f, 50.f));
 			damageRightUI->InitTextModule(11, 55);
 			damageRightUI->SetPos(Vec2(1100.f + (i * 150.f), 420.f));
 			damageRightUI->SetCamAffected(false);
@@ -354,7 +355,7 @@ void Scene_Path::Enter()
 	if (hddivs.size() < 3) {
 		for (int i = 0; i < 3; i++) {
 			DamageDiv* damageRightUI = new DamageDiv;
-			damageRightUI->SetScale(Vec2(50.f, 50.f));
+			damageRightUI->SetScale(Vec2(100.f, 50.f));
 			damageRightUI->InitTextModule(11, 55);
 			damageRightUI->SetPos(Vec2(1100.f + (i * 150.f), 420.f));
 			damageRightUI->SetCamAffected(false);

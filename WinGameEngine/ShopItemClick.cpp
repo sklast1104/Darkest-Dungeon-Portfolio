@@ -8,6 +8,8 @@
 #include "TextModule.h"
 #include "SceneMgr.h"
 #include "Scene_Shop.h"
+#include "ResMgr.h"
+#include "Sound.h"
 
 ShopItemClick::ShopItemClick(DivUI* _myItem, DivUI* _invPanel, int _itemCost)
 	: invPanel{_invPanel}, myItem{_myItem}
@@ -51,6 +53,12 @@ void ShopItemClick::sellShopItem()
 
 void ShopItemClick::Execute()
 {
+	ResMgr::GetInst()->LoadSound(L"buySound", L"resource\\sound\\UI\\ui_town\\ui_town_buy {e76da876-f6d8-4128-865f-933de737d4cd}.wav");
+	Sound* downSound = ResMgr::GetInst()->FindSound(L"buySound");
+
+	downSound->SetVolume(30.f);
+	downSound->Play(false);
+
 	// 클릭한 순간부터 아이템이 사져도 됨
 	if (mgr->GetMoney() >= itemCost) {
 

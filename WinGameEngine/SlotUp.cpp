@@ -6,6 +6,8 @@
 #include "CHero.h"
 #include "SceneMgr.h"
 #include "Scene.h"
+#include "ResMgr.h"
+#include "Sound.h"
 
 SlotUp::SlotUp(DivUI* _mySlot ,DivUI* _dragUI, int _slotIndex, DivUI* _slotContainer)
 	: dragUI{_dragUI}, mySlot{_mySlot}, slotIndex{_slotIndex}, slotContainer{_slotContainer}
@@ -14,6 +16,13 @@ SlotUp::SlotUp(DivUI* _mySlot ,DivUI* _dragUI, int _slotIndex, DivUI* _slotConta
 
 void SlotUp::Execute()
 {
+	// »ç¿îµå
+	ResMgr::GetInst()->LoadSound(L"slowUpSound", L"resource\\sound\\UI\\ui_shared\\ui_shr_button_click_enemy {ee5e5f86-bb29-469b-bc14-674765c230b8}.wav");
+	Sound* downSound = ResMgr::GetInst()->FindSound(L"slowUpSound");
+
+	downSound->SetVolume(10.f);
+	downSound->Play(false);
+
 	DivUI* pseudoUI = SceneMgr::GetInst()->GetCurScene()->GetPseudoUI();
 	DivUI* sideNavUI = (DivUI*)FindUIByName((UI*)pseudoUI, L"heroSideNav");
 

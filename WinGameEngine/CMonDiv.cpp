@@ -57,12 +57,12 @@ CMonDiv::CMonDiv(CDarkMonster* _monster)
 
 		Animation* combatAnim = m_pAnimator->FindAnimation(combatAnimName);
 		//float combatHeight = combatAnim->GetFrameHeight();
-		combatAnim->SetAllFrameOffset(Vec2(0.f, 180.f));
+		combatAnim->SetAllFrameOffset(Vec2(-40.f, 180.f));
 		combatAnim->SetMulScale(1.1f);
 
 		Animation* attackedAnim = m_pAnimator->FindAnimation(monster->GetAttackedAnimName());
-		attackedAnim->SetAllFrameOffset(Vec2(0.f, 180.f));
-		attackedAnim->SetMulScale(1.4f);
+		attackedAnim->SetAllFrameOffset(Vec2(-60.f, 180.f));
+		attackedAnim->SetMulScale(1.2f);
 
 
 		for (int i = 0; i < 4; i++) {

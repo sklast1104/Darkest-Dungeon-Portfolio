@@ -36,6 +36,7 @@
 #include "TorchGazeUI.h"
 #include "DamageDiv.h"
 #include "CCutScene.h"
+#include "Animation.h"
 
 Scene_Droom::Scene_Droom()
 	: firstVisit{true}
@@ -66,6 +67,14 @@ void Scene_Droom::render(HDC _dc)
 
 void Scene_Droom::Enter()
 {
+	if (GameMgr::GetInst()->GetMap()->GetCurNode()->IsBattleNode()) {
+		GameMgr::GetInst()->SetBossSquad();
+	}
+	else {
+		GameMgr::GetInst()->SetRandomSquad();
+	}
+
+	
 	elapseTime = 0.f;
 	battleFlag = true;
 	// 맵 초기화
@@ -155,7 +164,7 @@ void Scene_Droom::Enter()
 	pseudoUI->AddChild(bloodSplatRightFx);
 
 	DamageDiv* damageLeftUI = new DamageDiv;
-	damageLeftUI->SetScale(Vec2(50.f, 50.f));
+	damageLeftUI->SetScale(Vec2(100.f, 50.f));
 	damageLeftUI->InitTextModule(11, 55);
 	damageLeftUI->SetPos(Vec2(600.f, 420.f));
 	damageLeftUI->SetCamAffected(false);
@@ -177,7 +186,7 @@ void Scene_Droom::Enter()
 	if (ddivs.size() < 4) {
 		for (int i = 0; i < 4; i++) {
 			DamageDiv* damageRightUI = new DamageDiv;
-			damageRightUI->SetScale(Vec2(50.f, 50.f));
+			damageRightUI->SetScale(Vec2(100.f, 50.f));
 			damageRightUI->InitTextModule(11, 55);
 			damageRightUI->SetPos(Vec2(1100.f + (i * 150.f), 420.f));
 			damageRightUI->SetCamAffected(false);
@@ -199,7 +208,7 @@ void Scene_Droom::Enter()
 	if (hddivs.size() < 3) {
 		for (int i = 0; i < 3; i++) {
 			DamageDiv* damageRightUI = new DamageDiv;
-			damageRightUI->SetScale(Vec2(50.f, 50.f));
+			damageRightUI->SetScale(Vec2(100.f, 50.f));
 			damageRightUI->InitTextModule(11, 55);
 			damageRightUI->SetPos(Vec2(1100.f + (i * 150.f), 420.f));
 			damageRightUI->SetCamAffected(false);
@@ -239,6 +248,39 @@ void Scene_Droom::Enter()
 	mapPanel->EnableAllIndicator(false);
 	int curNodeId = GameMgr::GetInst()->GetMap()->GetCurNode()->GetId();
 	mapPanel->EnableIndibyIdx(curNodeId);
+
+	questContainer = new DivUI;
+	questContainer->CanTarget(false);
+	questContainer->SetPos(Vec2(0.f, 0.f));
+	questContainer->SetScale(Vec2(1920.f, 1080.f));
+	questContainer->SetCanRend(false);
+
+	AddObject(questContainer, GROUP_TYPE::FINAL);
+
+	DivUI* questCompleteTxt = new DivUI;
+	questCompleteTxt->SetPos(Vec2(960.f - 310.f, 100.f));
+	questCompleteTxt->SetScale(Vec2(619.f, 136.f));
+	questCompleteTxt->InitImageModule(L"skill_title_ui", L"resource\\panels\\quest_complete_choice_shared_frame.png");
+	questCompleteTxt->InitTextModule(L"API 원정 완료!", 40);
+	questCompleteTxt->SetTextColor(202, 186, 122);
+
+	questContainer->AddChild(questCompleteTxt);
+
+	DivUI* questComplete = new DivUI;
+	questComplete->SetPos(Vec2(960.f - (873.f / 2.f), 0.f));
+	questComplete->SetScale(Vec2(873.f, 873.f));
+	questComplete->CreateAnimator(new AnimatorDK);
+	questComplete->LoadAnimation(L"ending_Animation", L"resource\\animations\\quest\\quest_complete_crest.sprite-idle.atlas", true);
+	questComplete->GetAnimator()->FindAnimation(L"ending_Animation")->SetAllFrameDuration(199.f);
+
+	questContainer->AddChild(questComplete);
+
+	/*DivUI* questBack = new DivUI;
+	questBack->SetPos(Vec2(960.f - 310.f, 650.f));
+	questBack->SetScale(Vec2(619.f, 136.f));
+	questBack->InitImageModule(L"skill_title_ui", L"resource\\panels\\quest_complete_choice_shared_frame.png");
+
+	questContainer->AddChild(questBack);*/
 
 	// 씬에 처음 들어왔을때 아무 클릭도 안된상태면 계속 포커싱이 안되므로 임의의 포커싱을 강제로 줌
 	UIMgr::GetInst()->SetFocusedUI(pseudoUI);

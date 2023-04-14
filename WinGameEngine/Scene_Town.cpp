@@ -14,6 +14,7 @@
 #include "ResMgr.h"
 #include "Camera.h"
 #include "KeyMgr.h"
+#include "BuildingEnterCom.h"
 
 Scene_Town::Scene_Town()
 {
@@ -96,8 +97,9 @@ void Scene_Town::Enter()
 
 	// 설명 패널
 	DivUI* abbey_disc = UIFactory::CreateTownDiscUI(Vec2(884.f, 124.f), L"수도원", L"스트레스 해소");
+	abbey_disc->SetCanRend(false);
 
-	BtnBuilding* abbey = new BtnBuilding(new BuildingMouseOut(abbey_active, abbey_disc));
+	DivUI* abbey = new DivUI;
 	abbey->SetScale(Vec2(800.f, 987.f));
 	abbey->SetScale(abbey->GetScale() * 0.5f);
 	abbey->SetPos(Vec2(900.f, 150.f));
@@ -105,12 +107,13 @@ void Scene_Town::Enter()
 	abbey->InitImageModule(L"Darkest_Estate_abbey", L"resource\\estate\\abbey\\idle.png");
 	abbey->SetSrcAlpha(235);
 	abbey->InitOnMouseOver(new BuildingOverCom(abbey_active, abbey_disc));
+	abbey->InitOnMouseExit(new BuildingMouseOut(abbey_active, abbey_disc));
+	abbey->InitOnMouseEnter(new BuildingEnterCom);
 
 	pseudoUI->AddChild(abbey);
 	pseudoUI->AddChild(abbey_disc);
 
 	// 묘지
-
 	DivUI* graveyard = new DivUI;
 	graveyard->SetScale(Vec2(573.f, 289.f));
 	graveyard->SetScale(graveyard->GetScale() * 0.5f);
@@ -134,8 +137,9 @@ void Scene_Town::Enter()
 	pseudoUI->AddChild(sanitarium_active);
 
 	DivUI* sanitarium_disc = UIFactory::CreateTownDiscUI(Vec2(558.f, 184.f), L"요양원", L"기벽과 질병 치료");
+	sanitarium_disc->SetCanRend(false);
 
-	BtnBuilding* sanitarium = new BtnBuilding(new BuildingMouseOut(sanitarium_active, sanitarium_disc));
+	DivUI* sanitarium = new DivUI;
 	sanitarium->SetScale(Vec2(764.f, 965.f));
 	sanitarium->SetScale(sanitarium->GetScale() * 0.5f);
 	sanitarium->SetPos(Vec2(600.f, 270.f));
@@ -143,6 +147,8 @@ void Scene_Town::Enter()
 	sanitarium->InitImageModule(L"Darkest_Estate_Sanitarium", L"resource\\estate\\sanitarium\\idle.png");
 	sanitarium->SetSrcAlpha(235);
 	sanitarium->InitOnMouseOver(new BuildingOverCom(sanitarium_active, sanitarium_disc));
+	sanitarium->InitOnMouseEnter(new BuildingEnterCom);
+	sanitarium->InitOnMouseExit(new BuildingMouseOut(sanitarium_active, sanitarium_disc));
 
 	pseudoUI->AddChild(sanitarium);
 	pseudoUI->AddChild(sanitarium_disc);
@@ -160,8 +166,9 @@ void Scene_Town::Enter()
 	pseudoUI->AddChild(tavern_active);
 
 	DivUI* tavern_disc = UIFactory::CreateTownDiscUI(Vec2(328.f, 304.f), L"여관", L"스트레스 해소");
+	tavern_disc->SetCanRend(false);
 
-	BtnBuilding* tavern = new BtnBuilding(new BuildingMouseOut(tavern_active, tavern_disc));
+	DivUI* tavern = new DivUI;
 	tavern->SetScale(Vec2(770.f, 806.f));
 	tavern->SetScale(tavern->GetScale() * 0.5f);
 	tavern->SetPos(Vec2(350.f, 420.f));
@@ -169,6 +176,9 @@ void Scene_Town::Enter()
 	tavern->InitImageModule(L"Darkest_Estate_tavern", L"resource\\estate\\tavern\\idle.png");
 	tavern->SetSrcAlpha(235);
 	tavern->InitOnMouseOver(new BuildingOverCom(tavern_active, tavern_disc));
+	tavern->InitOnMouseExit(new BuildingMouseOut(tavern_active, tavern_disc));
+	tavern->InitOnMouseEnter(new BuildingEnterCom);
+
 
 	pseudoUI->AddChild(tavern);
 	pseudoUI->AddChild(tavern_disc);
@@ -186,8 +196,9 @@ void Scene_Town::Enter()
 	pseudoUI->AddChild(guild_active);
 
 	DivUI* guild_disc = UIFactory::CreateTownDiscUI(Vec2(1130.f, 254.f), L"길드", L"전투기술 강화");
+	guild_disc->SetCanRend(false);
 
-	BtnBuilding* guild = new BtnBuilding(new BuildingMouseOut(guild_active, guild_disc));
+	DivUI* guild = new DivUI;
 	guild->SetScale(Vec2(683.f, 693.f));
 	guild->SetScale(guild->GetScale() * 0.5f);
 	guild->SetPos(Vec2(1150.f, 420.f));
@@ -195,6 +206,8 @@ void Scene_Town::Enter()
 	guild->InitImageModule(L"Darkest_Estate_guild", L"resource\\estate\\guild\\idle.png");
 	guild->SetSrcAlpha(235);
 	guild->InitOnMouseOver(new BuildingOverCom(guild_active, guild_disc));
+	guild->InitOnMouseExit(new BuildingMouseOut(guild_active, guild_disc));
+	guild->InitOnMouseEnter(new BuildingEnterCom);
 
 	pseudoUI->AddChild(guild);
 	pseudoUI->AddChild(guild_disc);
@@ -212,8 +225,9 @@ void Scene_Town::Enter()
 	pseudoUI->AddChild(black_smith_active);
 
 	DivUI* black_smith_disc = UIFactory::CreateTownDiscUI(Vec2(1260.f, 420.f), L"대장간", L"무기와 갑옷 강화");
+	black_smith_disc->SetCanRend(false);
 
-	BtnBuilding* black_smith = new BtnBuilding(new BuildingMouseOut(black_smith_active, black_smith_disc));
+	DivUI* black_smith = new DivUI;
 	black_smith->SetScale(Vec2(703.f, 790.f));
 	black_smith->SetScale(black_smith->GetScale() * 0.5f);
 	black_smith->SetPos(Vec2(1310.f, 480.f));
@@ -221,6 +235,8 @@ void Scene_Town::Enter()
 	black_smith->InitImageModule(L"Darkest_Estate_black_smith", L"resource\\estate\\black_smith\\idle.png");
 	black_smith->SetSrcAlpha(235);
 	black_smith->InitOnMouseOver(new BuildingOverCom(black_smith_active, black_smith_disc));
+	black_smith->InitOnMouseExit(new BuildingMouseOut(black_smith_active, black_smith_disc));
+	black_smith->InitOnMouseEnter(new BuildingEnterCom);
 
 	pseudoUI->AddChild(black_smith);
 	pseudoUI->AddChild(black_smith_disc);
@@ -238,8 +254,9 @@ void Scene_Town::Enter()
 	pseudoUI->AddChild(nomad_wagon_active);
 
 	DivUI* nomad_wagon_disc = UIFactory::CreateTownDiscUI(Vec2(950.f, 520.f), L"유목민 마차", L"희귀 장신구 구입");
+	nomad_wagon_disc->SetCanRend(false);
 
-	BtnBuilding* nomad_wagon = new BtnBuilding(new BuildingMouseOut(nomad_wagon_active, nomad_wagon_disc));
+	DivUI* nomad_wagon = new DivUI;
 	nomad_wagon->SetScale(Vec2(489.f, 383.f));
 	nomad_wagon->SetScale(nomad_wagon->GetScale() * 0.5f);
 	nomad_wagon->SetPos(Vec2(1010.f, 680.f));
@@ -247,6 +264,8 @@ void Scene_Town::Enter()
 	nomad_wagon->InitImageModule(L"Darkest_Estate_nomad_wagon", L"resource\\estate\\nomad_wagon\\idle.png");
 	nomad_wagon->SetSrcAlpha(235);
 	nomad_wagon->InitOnMouseOver(new BuildingOverCom(nomad_wagon_active, nomad_wagon_disc));
+	nomad_wagon->InitOnMouseExit(new BuildingMouseOut(nomad_wagon_active, nomad_wagon_disc));
+	nomad_wagon->InitOnMouseEnter(new BuildingEnterCom);
 
 	pseudoUI->AddChild(nomad_wagon);
 	pseudoUI->AddChild(nomad_wagon_disc);
@@ -264,8 +283,9 @@ void Scene_Town::Enter()
 	pseudoUI->AddChild(stage_coach_active);
 
 	DivUI* stage_coach_disc = UIFactory::CreateTownDiscUI(Vec2(167.f, 490.f), L"역마차", L"새 영웅 고용");
+	stage_coach_disc->SetCanRend(false);
 
-	BtnBuilding* stage_coach = new BtnBuilding(new BuildingMouseOut(stage_coach_active, stage_coach_disc));
+	DivUI* stage_coach = new DivUI;
 	stage_coach->SetScale(Vec2(502.f, 357.f));
 	stage_coach->SetScale(stage_coach->GetScale() * 0.5f);
 	stage_coach->SetPos(Vec2(210.f, 660.f));
@@ -273,6 +293,8 @@ void Scene_Town::Enter()
 	stage_coach->InitImageModule(L"Darkest_Estate_stage_coach", L"resource\\estate\\stage_coach\\idle.png");
 	stage_coach->SetSrcAlpha(235);
 	stage_coach->InitOnMouseOver(new BuildingOverCom(stage_coach_active, stage_coach_disc));
+	stage_coach->InitOnMouseExit(new BuildingMouseOut(stage_coach_active, stage_coach_disc));
+	stage_coach->InitOnMouseEnter(new BuildingEnterCom);
 
 	pseudoUI->AddChild(stage_coach);
 	pseudoUI->AddChild(stage_coach_disc);

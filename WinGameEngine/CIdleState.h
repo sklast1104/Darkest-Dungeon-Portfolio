@@ -12,6 +12,7 @@ private :
 	CSquadDiv* hSquad;
 	CMonSquad* mSquad;
 	wstring sName;
+	bool gameEnd;
 
 	virtual void Enter() override;
 	virtual void Update() override;

@@ -126,7 +126,9 @@ void CMap::DefineDefaultMap()
 
 	//MakeLeftPath(root, leftRoom);
 
-	
+	rightNodes[2]->MakeBattleNode();
+	//botNodes[1]->MakeBattleNode();
+	botNodes[9]->MakeBattleNode();
 
 	startRoom = root;
 	curNode = startRoom;
@@ -564,20 +566,24 @@ void CMap::MakeRightPath(CRoom* left, CRoom* right)
 	CPathNode* path1 = new CPathNode();
 	path1->SetDir(PATH_DIR::RIGHT);
 	nodeLists.push_back(path1);
+	rightNodes.push_back(path1);
 
 	// 2번째 통로를 전투 노드로 만듬
 	CPathNode* path2 = new CPathNode();
 	path2->SetDir(PATH_DIR::RIGHT);
 	//path2->MakeBattleNode();
 	nodeLists.push_back(path2);
+	rightNodes.push_back(path2);
 
 	CPathNode* path3 = new CPathNode();
 	path3->SetDir(PATH_DIR::RIGHT);
 	nodeLists.push_back(path3);
+	rightNodes.push_back(path3);
 
 	CPathNode* path4 = new CPathNode();
 	path4->SetDir(PATH_DIR::RIGHT);
 	nodeLists.push_back(path4);
+	rightNodes.push_back(path4);
 
 	left->SetRightNode(path1);
 
@@ -636,18 +642,22 @@ void CMap::MakeDownPath(CRoom* up, CRoom* down)
 	CPathNode* upPath1 = new CPathNode();
 	upPath1->SetDir(PATH_DIR::BOTTOM);
 	nodeLists.push_back(upPath1);
+	botNodes.push_back(upPath1);
 
 	CPathNode* upPath2 = new CPathNode();
 	upPath2->SetDir(PATH_DIR::BOTTOM);
 	nodeLists.push_back(upPath2);
+	botNodes.push_back(upPath2);
 
 	CPathNode* upPath3 = new CPathNode();
 	upPath3->SetDir(PATH_DIR::BOTTOM);
 	nodeLists.push_back(upPath3);
+	botNodes.push_back(upPath3);
 
 	CPathNode* upPath4 = new CPathNode();
 	upPath4->SetDir(PATH_DIR::BOTTOM);
 	nodeLists.push_back(upPath4);
+	botNodes.push_back(upPath4);
 
 	up->SetDownNode(upPath1);
 

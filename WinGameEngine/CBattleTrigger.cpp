@@ -5,6 +5,7 @@
 #include "Camera.h"
 #include "ViewMgr.h"
 #include "Collider.h"
+#include "GameMgr.h"
 
 CBattleTrigger::CBattleTrigger()
 	: flag{true}
@@ -40,6 +41,8 @@ void CBattleTrigger::OnCollisionEnter(Collider* _pOther)
 {
 	if (flag && _pOther->GetObj()->GetName() == L"heroCol") {
 		flag = false;
+
+		//GameMgr::GetInst()->SetRandomSquad();
 
 		ChangeState(GameMgr::GetInst()->GetMachine(), L"CBStartState");
 

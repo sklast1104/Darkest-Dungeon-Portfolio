@@ -13,6 +13,8 @@
 #include "GameMgr.h"
 #include "CDarkMonster.h"
 #include "CHero.h"
+#include "CMap.h"
+#include "CNode.h"
 
 CWaitState::CWaitState()
 	: CState(L"CWaitState")
@@ -133,8 +135,7 @@ void CWaitState::Exit()
 	GameMgr::GetInst()->CheckCanTurn();
 
 	// 여기서 모든 히어로 스쿼드랑 몬스터 스쿼드 canTurn이 false면 다시 true로 만들어주자
-
-
+	
 }
 
 

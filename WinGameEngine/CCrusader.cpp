@@ -98,6 +98,8 @@ void CCrusader::InitSkill()
 	denunciation->SetMultiAttack(true);
 	denunciation->GetSkillRange()[0] = true;
 	denunciation->GetSkillRange()[1] = true;
+	denunciation->GetSkillRange()[2] = true;
+	denunciation->GetSkillRange()[3] = true;
 
 	denunciation->SetHitRate(85);
 	denunciation->SetAttackRate(-40);
@@ -119,8 +121,8 @@ void CCrusader::InitSkill()
 	stunAttack->SetSkillName(L"기절의 일격 1");
 	stunAttack->SetSkillPath(L"resource\\heros\\crusader\\ab3.png");
 	stunAttack->SetGraySkillPath(L"resource\\heros\\crusader\\ab3_gray.png");
-	stunAttack->GetSkillPos()[2] = true;
-	stunAttack->GetSkillPos()[3] = true;
+	//stunAttack->GetSkillPos()[2] = true;
+	//stunAttack->GetSkillPos()[3] = true;
 
 	stunAttack->GetSkillRange()[0] = true;
 	stunAttack->GetSkillRange()[1] = true;

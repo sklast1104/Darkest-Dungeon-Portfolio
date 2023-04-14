@@ -54,6 +54,12 @@ private :
 	// 몬스터 종류별로 다 넣어놈 그냥
 	vector<CDarkMonster*> monTypes;
 
+	vector<CDarkMonster*> squad1;
+	vector<CDarkMonster*> squad2;
+	vector<CDarkMonster*> squad3;
+
+	vector<CDarkMonster*> bossSquad;
+
 	// 던전 맵
 	CMap* map;
 	int curNodeIdx;
@@ -62,6 +68,9 @@ private :
 	int bright;
 
 public :
+
+	void SetRandomSquad();
+	void SetBossSquad();
 
 	const vector<CDarkMonster*>& GetMonTypes() { return monTypes; }
 

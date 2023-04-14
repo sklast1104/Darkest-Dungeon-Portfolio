@@ -34,6 +34,7 @@ private :
 
 	bool canCg;
 	bool isPlayer;
+	bool monDead;
 public :
 
 	CRestoreState();

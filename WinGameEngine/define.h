@@ -29,8 +29,9 @@ enum class GROUP_TYPE {
 	OBSTACLE,
 	PROJ_PLAYER,
 	PROJ_MONSTER,
-	UI = 30,
-	UI_OVER = 31,
+	UI = 29,
+	UI_OVER = 30,
+	FINAL = 31,
 	END = 32,
 };
 

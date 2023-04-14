@@ -11,6 +11,9 @@
 #include "TorchGazeUI.h"
 #include "TorchAnimUI.h"
 
+#include "ResMgr.h"
+#include "Sound.h"
+
 TorchClick::TorchClick(DivUI* _invItem, int _invIdx)
 	: invItem{_invItem}, invIdx{_invIdx}
 {
@@ -18,6 +21,12 @@ TorchClick::TorchClick(DivUI* _invItem, int _invIdx)
 
 void TorchClick::Execute()
 {
+	ResMgr::GetInst()->LoadSound(L"torchFire", L"resource\\sound\\Circus\\sfx\\ui_dun_pit_torch_start.wav");
+	Sound* clickSound = ResMgr::GetInst()->FindSound(L"torchFire");
+
+	clickSound->SetVolume(20.f);
+	clickSound->Play(false);
+
 	GameMgr* mgr = GameMgr::GetInst();
 
 	array<CItem*, 16>& inventory = mgr->GetInventory();

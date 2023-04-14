@@ -143,6 +143,7 @@
     <ClInclude Include="BtnMOver.h" />
     <ClInclude Include="BtnOutCom.h" />
     <ClInclude Include="BtnOverCom.h" />
+    <ClInclude Include="BuildingEnterCom.h" />
     <ClInclude Include="BuildingMouseOut.h" />
     <ClInclude Include="BuildingOverCom.h" />
     <ClInclude Include="Camera.h" />
@@ -197,6 +198,7 @@
     <ClInclude Include="DRendererUp.h" />
     <ClInclude Include="DroomUI.h" />
     <ClInclude Include="ForwardBtnClick.h" />
+    <ClInclude Include="ForwardBtnEnter.h" />
     <ClInclude Include="GameMgr.h" />
     <ClInclude Include="HEffectDiv.h" />
     <ClInclude Include="HeroAtEffect.h" />
@@ -278,6 +280,7 @@
     <ClCompile Include="BtnMOver.cpp" />
     <ClCompile Include="BtnOutCom.cpp" />
     <ClCompile Include="BtnOverCom.cpp" />
+    <ClCompile Include="BuildingEnterCom.cpp" />
     <ClCompile Include="BuildingMouseOut.cpp" />
     <ClCompile Include="BuildingOverCom.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -332,6 +335,7 @@
     <ClCompile Include="DRendererUp.cpp" />
     <ClCompile Include="DroomUI.cpp" />
     <ClCompile Include="ForwardBtnClick.cpp" />
+    <ClCompile Include="ForwardBtnEnter.cpp" />
     <ClCompile Include="GameMgr.cpp" />
     <ClCompile Include="HEffectDiv.cpp" />
     <ClCompile Include="HeroAtEffect.cpp" />

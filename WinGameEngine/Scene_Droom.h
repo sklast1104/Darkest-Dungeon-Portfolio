@@ -11,6 +11,7 @@ private :
 
 	DivUI* dragRenderer;
 	DivUI* itemDragger;
+	DivUI* questContainer;
 
 	CMap* dMap;
 	bool firstVisit;
@@ -38,5 +39,7 @@ public :
 	virtual void render(HDC _dc) override;
 	virtual void Enter() override;
 	virtual void update() override;
+
+	DivUI* GetQuestCon() { return questContainer; }
 };
 

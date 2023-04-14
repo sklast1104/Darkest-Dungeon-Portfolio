@@ -603,6 +603,12 @@
     <ClInclude Include="CWoodL.h">
       <Filter>Engine\10.DataModel\02.Monster\01. Boss</Filter>
     </ClInclude>
+    <ClInclude Include="BuildingEnterCom.h">
+      <Filter>Engine\07.Component\03.Command\02. TownSceneCom</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardBtnEnter.h">
+      <Filter>Engine\07.Component\03.Command\02. TownSceneCom</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -993,6 +999,12 @@
     </ClCompile>
     <ClCompile Include="CWoodL.cpp">
       <Filter>Engine\10.DataModel\02.Monster\01. Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildingEnterCom.cpp">
+      <Filter>Engine\07.Component\03.Command\02. TownSceneCom</Filter>
+    </ClCompile>
+    <ClCompile Include="ForwardBtnEnter.cpp">
+      <Filter>Engine\07.Component\03.Command\02. TownSceneCom</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

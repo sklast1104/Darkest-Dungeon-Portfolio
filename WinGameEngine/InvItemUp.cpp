@@ -6,6 +6,8 @@
 #include "Scene_Shop.h"
 #include "GameMgr.h"
 #include "CItem.h"
+#include "ResMgr.h"
+#include "Sound.h"
 
 InvItemUp::InvItemUp(DivUI* _myItem, int _index)
 	: scene{ SceneMgr::GetInst()->GetCurScene() }
@@ -15,6 +17,13 @@ InvItemUp::InvItemUp(DivUI* _myItem, int _index)
 
 void InvItemUp::Execute()
 {
+	// 사운드
+	ResMgr::GetInst()->LoadSound(L"slowUpSound", L"resource\\sound\\UI\\ui_shared\\ui_shr_button_click_enemy {ee5e5f86-bb29-469b-bc14-674765c230b8}.wav");
+	Sound* downSound = ResMgr::GetInst()->FindSound(L"slowUpSound");
+
+	downSound->SetVolume(10.f);
+	downSound->Play(false);
+
 	// 클릭이랑 업일때 둘다 이벤트 들어옴
 	DivUI* itemDragger = (DivUI*)FindUIByName((UI*)(scene->GetPseudoUI()), L"itemDragger");
 	DivUI* shopInvPanel = (DivUI*)FindUIByName((UI*)(scene->GetPseudoUI()), L"shopInvPanel");

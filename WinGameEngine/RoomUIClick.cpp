@@ -7,6 +7,8 @@
 #include "SceneMgr.h"
 #include "Scene.h"
 #include "Scene_Path.h"
+#include "ResMgr.h"
+#include "Sound.h"
 
 // 기본적으로 방에 있을때만 이벤트 등록된다는걸 가정한다
 // 게임매니저의 map의 현재 노드(방)의 아이디와 자신 노드를 비교한다
@@ -21,6 +23,12 @@ RoomUIClick::RoomUIClick(int _id)
 
 void RoomUIClick::Execute()
 {
+	ResMgr::GetInst()->LoadSound(L"roomUIClick", L"resource\\sound\\UI\\ui_dungeon\\ui_dun_buttonroom {13156b8a-7348-497a-97d1-2b56edeb80b8}.wav");
+	Sound* clickSound = ResMgr::GetInst()->FindSound(L"roomUIClick");
+
+	clickSound->SetVolume(20.f);
+	clickSound->Play(false);
+
 	CMap* map = GameMgr::GetInst()->GetMap();
 	// 
 	CRoom* curNode = (CRoom*)GameMgr::GetInst()->GetMap()->GetCurNode();

@@ -16,6 +16,7 @@ DivUI::DivUI()
 	, canRendTxt{false}
 	, canRend{true}
 	, id{0}
+	, wasMouseOver{false}
 {
 }
 
@@ -29,6 +30,8 @@ DivUI::~DivUI()
 	Safe_Delete<CCommand*>(onMouseUp);
 	Safe_Delete<CCommand*>(onMouseDown);
 	Safe_Delete<CCommand*>(onMouseClick);
+	Safe_Delete<CCommand*>(onMouseEnter);
+	Safe_Delete<CCommand*>(onMouseExit);
 	
 	Safe_Delete<CCommand*>(onUpdateValue);
 }
@@ -212,21 +215,54 @@ void DivUI::update()
 	Vec2 myScale = GetScale();
 	Vec2 finalPos = GetFinalPos();
 
+	bool isMouseOver = (finalPos.x <= mousePos.x && mousePos.x <= finalPos.x + myScale.x
+		&& finalPos.y <= mousePos.y && mousePos.y <= finalPos.y + myScale.y);
 
-	if (finalPos.x <= mousePos.x && mousePos.x <= finalPos.x + myScale.x
-		&& finalPos.y <= mousePos.y && mousePos.y <= finalPos.y + myScale.y) {
-		
+	if (isMouseOver && !wasMouseOver) {
+
+		wasMouseOver = true;
+		// 마우스 엔터 이벤트 호출!
+		if (nullptr != onMouseEnter) {
+			onMouseEnter->Execute();
+		}
+	}
+
+	if (!isMouseOver && wasMouseOver) {
+		wasMouseOver = false;
+		// 마우스 익시트 이벤트 호출!
+		if (nullptr != onMouseExit) {
+			onMouseExit->Execute();
+		}
+	}
+
+	if (isMouseOver) {
+		// 마우스 오버 이벤트 호출!
 		if (nullptr != onMouseOver) {
 			onMouseOver->Execute();
 		}
-
 	}
 	else {
-
+		// 마우스 낫 오버 이벤트 호출!
 		if (nullptr != onMouseOut) {
 			onMouseOut->Execute();
-		}		
+		}
 	}
+
+
+	//if (finalPos.x <= mousePos.x && mousePos.x <= finalPos.x + myScale.x
+	//	&& finalPos.y <= mousePos.y && mousePos.y <= finalPos.y + myScale.y) {
+	//	
+	//	if (nullptr != onMouseOver) {
+	//		onMouseOver->Execute();
+	//	}
+
+	//}
+	//else {
+
+	//	if (nullptr != onMouseOut) {
+	//		onMouseOut->Execute();
+	//	}		
+	//}
 }
 
 void DivUI::MouseOn()

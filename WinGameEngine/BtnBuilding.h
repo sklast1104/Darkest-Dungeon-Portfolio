@@ -16,7 +16,6 @@ public :
 	BtnBuilding(CCommand* _onMouseOut);
 	~BtnBuilding();
 
-	virtual void update() override;
 	virtual void MouseOn() override;
 
 };

@@ -7,8 +7,8 @@ CWoodS::CWoodS()
 	resPath = L"";
 	monsterType = L"³ª¹«";
 
-	curHp = 20;
-	maxHp = 20;
+	curHp = 12;
+	maxHp = 12;
 
 	avoidRate = 0;
 	shieldRate = 15;

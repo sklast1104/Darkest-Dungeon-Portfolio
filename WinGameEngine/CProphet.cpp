@@ -8,8 +8,8 @@ CProphet::CProphet()
 	resPath = L"";
 	monsterType = L"ºÒ°æ";
 
-	curHp = 258;
-	maxHp = 258;
+	curHp = 100;
+	maxHp = 100;
 
 	avoidRate = 0;
 	shieldRate = 15;

@@ -6,6 +6,9 @@
 #include "Scene.h"
 #include "TorchGazeUI.h"
 
+#include "ResMgr.h"
+#include "Sound.h"
+
 TorchCom::TorchCom(TorchAnimUI* _torchAnimUI)
 	: torchAnimUI(_torchAnimUI)
 {
@@ -14,6 +17,12 @@ TorchCom::TorchCom(TorchAnimUI* _torchAnimUI)
 
 void TorchCom::Execute()
 {
+	ResMgr::GetInst()->LoadSound(L"torchExit", L"resource\\sound\\Circus\\sfx\\ui_dun_pit_torch_end.wav");
+	Sound* clickSound = ResMgr::GetInst()->FindSound(L"torchExit");
+
+	clickSound->SetVolume(10.f);
+	clickSound->Play(false);
+
 	GameMgr* mgr = GameMgr::GetInst();
 
 	mgr->SetBright(mgr->GetBright() - 25);

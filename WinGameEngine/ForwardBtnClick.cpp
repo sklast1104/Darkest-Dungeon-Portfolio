@@ -5,9 +5,17 @@
 #include "SceneMgr.h"
 #include "GameMgr.h"
 #include "CMap.h"
+#include "ResMgr.h"
+#include "Sound.h"
 
 void ForwardBtnClick::Execute()
 {
+	ResMgr::GetInst()->LoadSound(L"forwardBtnClickSound", L"resource\\sound\\UI\\ui_shared\\ui_town_button_click.wav");
+	Sound* downSound = ResMgr::GetInst()->FindSound(L"forwardBtnClickSound");
+
+	downSound->SetVolume(30.f);
+	downSound->Play(false);
+
 	Scene* curScene = SceneMgr::GetInst()->GetCurScene();
 
 	if (curScene->GetName() == L"Scene_Town") {

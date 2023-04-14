@@ -12,10 +12,21 @@
 #include "Camera.h"
 #include "CMonSquad.h"
 
+#include "GameMgr.h"
+#include "CMap.h"
+#include "CNode.h"
+
+#include "Scene.h"
+#include "Scene_Droom.h"
+
+#include "ResMgr.h"
+#include "Sound.h"
+
 CIdleState::CIdleState()
 	: CState(L"CIdleState")
 	, hSquad{nullptr}
 	, mSquad{nullptr}
+	, gameEnd{false}
 {
 }
 
@@ -25,10 +36,30 @@ CIdleState::~CIdleState()
 
 void CIdleState::Enter()
 {
+	if (GameMgr::GetInst()->GetMap()->GetCurNode()->IsBattleNode()) {
+		int a = 3;
+
+		// 승리 사운드
+		// 원정 완료 사운드
+		// 
+		Scene_Droom* room =  (Scene_Droom*)SceneMgr::GetInst()->GetCurScene();
+		room->GetQuestCon()->SetCanRend(true);
+
+		// 사운드
+		ResMgr::GetInst()->LoadSound(L"VictoryBgm", L"resource\\sound\\General\\Combat_Level2_Victory {084a1a85-3721-4ea8-b92f-afbe1750c84f}.wav");
+		Sound* pTitleSound = ResMgr::GetInst()->FindSound(L"VictoryBgm");
+
+		pTitleSound->SetVolume(100.f);
+		pTitleSound->Play(false);
+	}
+
+
 	DivUI* pseudoUI = SceneMgr::GetInst()->GetCurScene()->GetPseudoUI();
 	CSquadDiv* squad = (CSquadDiv*)FindUIByName(pseudoUI, L"CSquadDiv");
 	squad->EnableAllCanTarget();
 	hSquad = squad;
+
+
 
 	// 몬스터 스쿼드 타겟은 꺼주고 BStart에서 스쿼드 타겟 켜줘야 한다
 	mSquad = (CMonSquad*)FindUIByName(pseudoUI, L"CMonSquad");
