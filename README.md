@@ -85,8 +85,7 @@ C++은 C#의 이벤트나 Javascript의 이벤트 핸들러와 같은 기능들�
   onMouseEnter는 Command 패턴의 객체 포인터이고 
   DivUI를 InitMouseEnter(new CCommand) 등으로 커맨드 객체를 초기화 해 다른 언어에서 지원하는 일급객체를 개념을 흉내내었고 UI를 쉽게 구현할 수 있게 된 것 같습니다
   
-  또한 클릭이벤트의 경우엔 UIMgr 클래스에서 따로 관리를 해주고 있습니다
-  UI 관련된 코드는 본 프로젝트의 DivUI, UI클래스와 UIMgr 클래스를 보시면 프로젝트의 핵심이 된 UI 코드를 확인해 보실 수 있습니다
+
   
   
   
